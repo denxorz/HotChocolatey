@@ -16,6 +16,8 @@ namespace ChocolateyMilk
         public bool IsInstalled { get { return !string.IsNullOrEmpty(InstalledVersion); } }
         public bool IsInstalledUpgradable { get { return IsInstalled && !string.IsNullOrEmpty(LatestVersion) && new Version(LatestVersion) > new Version(InstalledVersion); } }
 
+        public bool IsMarkedForInstallation { get; set; }
+
         public static ChocoItem FromInstalledString(string chocoOutput)
         {
             var tmp = chocoOutput.Split(ChocolateyController.Seperator);

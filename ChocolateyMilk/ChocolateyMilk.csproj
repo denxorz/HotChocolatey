@@ -39,6 +39,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -102,6 +104,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\approval-48.png" />
+    <Resource Include="Images\checkmark-48.png" />
+    <Resource Include="Images\settings-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\binoculars-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\synchronize-48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

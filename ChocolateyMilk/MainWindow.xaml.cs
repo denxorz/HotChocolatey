@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace ChocolateyMilk
 {
@@ -37,6 +38,11 @@ namespace ChocolateyMilk
             InitializeFilter();
 
             await Controller.GetVersion();
+            await Refresh();
+        }
+
+        private async Task Refresh()
+        {
             (await Controller.GetInstalled()).ForEach(Packages.Add);
             (await Controller.GetAvailable()).ForEach(Packages.Add);
         }
@@ -50,6 +56,16 @@ namespace ChocolateyMilk
         private void OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             Packages.ApplyFilter(Filter.Filter);
+        }
+
+        private async void OnRefreshClick(object sender, RoutedEventArgs e)
+        {
+            await Refresh();
+        }
+
+        private void OnMarkAllUpgradesClick(object sender, RoutedEventArgs e)
+        {
+            
         }
     }
 }
