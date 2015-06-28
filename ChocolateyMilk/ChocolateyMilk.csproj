@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="ChocoController.cs" />
     <Compile Include="ChocoItem.cs" />
+    <Compile Include="FilterFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

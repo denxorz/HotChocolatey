@@ -43,10 +43,7 @@ namespace ChocolateyMilk
 
         private void InitializeFilter()
         {
-            FilterSelections.Add(new NoFilter());
-            FilterSelections.Add(new InstalledFilter());
-            FilterSelections.Add(new InstalledUpgradableFilter());
-            FilterSelections.Add(new NotInstalledFilter());
+            FilterFactory.AvailableFilters.ForEach(FilterSelections.Add);
             Filter = FilterSelections[0];
         }
 
