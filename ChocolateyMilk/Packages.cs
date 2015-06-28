@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 
-namespace WpfApplication1
+namespace ChocolateyMilk
 {
     public class Packages
     {

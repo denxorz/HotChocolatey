@@ -2,7 +2,7 @@
 using System.Windows;
 using System.ComponentModel;
 
-namespace WpfApplication1
+namespace ChocolateyMilk
 {
     public partial class MainWindow : Window, INotifyPropertyChanged
     {

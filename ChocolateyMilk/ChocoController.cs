@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WpfApplication1
+namespace ChocolateyMilk
 {
     public class ChocolateyController
     {

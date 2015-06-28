@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WpfApplication1
+namespace ChocolateyMilk
 {
     public interface IFilter
     {

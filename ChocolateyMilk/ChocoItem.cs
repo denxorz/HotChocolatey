@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace WpfApplication1
+namespace ChocolateyMilk
 {
     public class ChocoItem : INotifyPropertyChanged
     {

@@ -1,11 +1,11 @@
-﻿<Window x:Class="WpfApplication1.MainWindow"
+﻿<Window x:Class="ChocolateyMilk.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApplication1"
+        xmlns:local="clr-namespace:ChocolateyMilk"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" Loaded="OnLoaded">
+        Title="Chocolatey Milk" Height="350" Width="525" Loaded="OnLoaded">
     <DockPanel>
         <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" VerticalAlignment="Top" DockPanel.Dock="Left" SelectionChanged="OnSelectionChanged"/>
         <ListBox ItemsSource="{Binding Controller.Output}" Height="100" VerticalAlignment="Bottom" DockPanel.Dock="Bottom"/>
