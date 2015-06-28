@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" Loaded="OnLoaded">
     <DockPanel>
-        <ListBox ItemsSource="{Binding Selections}" SelectedItem="{Binding Selection}" Width="200" VerticalAlignment="Top" DockPanel.Dock="Left" SelectionChanged="OnSelectionChanged"/>
+        <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" VerticalAlignment="Top" DockPanel.Dock="Left" SelectionChanged="OnSelectionChanged"/>
         <ListBox ItemsSource="{Binding Controller.Output}" Height="100" VerticalAlignment="Bottom" DockPanel.Dock="Bottom"/>
         <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" >
             <DataGrid.Columns>
