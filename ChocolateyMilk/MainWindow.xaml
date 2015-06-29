@@ -34,6 +34,12 @@
                         <Label Padding="0">Settings</Label>
                     </StackPanel>
                 </Button>
+                <ToggleButton Click="OnShowLoggingClick" IsChecked="{Binding Is}">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="Images/todo_list-48.png" Stretch="Uniform" Width="32" />
+                        <Label Padding="0">Logging</Label>
+                    </StackPanel>
+                </ToggleButton>
                 <Separator/>
                 <Button>
                     <StackPanel Orientation="Vertical">
@@ -50,7 +56,7 @@
         <DockPanel DockPanel.Dock="Left">
             <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" SelectionChanged="OnSelectionChanged" DockPanel.Dock="Left"/>
             <DockPanel DockPanel.Dock="Right">
-                <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" />
+                <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding LogVisibility}"/>
                 <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Binding="{Binding Selected}" Header="Selected" />

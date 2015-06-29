@@ -52,9 +52,29 @@ namespace ChocolateyMilk
             }
         }
 
+        public Visibility LogVisibility
+        {
+            get { return isLogVisible ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public bool IsLogVisible
+        {
+            get { return isLogVisible; }
+            set
+            {
+                if (isLogVisible != value)
+                {
+                    isLogVisible = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogVisible)));
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LogVisibility)));
+                }
+            }
+        }
+
         private IFilter selection;
         private bool isInProgress;
         private string statusText;
+        private bool isLogVisible;
 
         public MainWindow()
         {
@@ -103,6 +123,11 @@ namespace ChocolateyMilk
         private void OnMarkAllUpgradesClick(object sender, RoutedEventArgs e)
         {
             Packages.Items.Where(t => t.IsInstalledUpgradable).ToList().ForEach(t => t.IsMarkedForInstallation = true);
+        }
+
+        private void OnShowLoggingClick(object sender, RoutedEventArgs e)
+        {
+            IsLogVisible = !IsLogVisible;
         }
     }
 }
