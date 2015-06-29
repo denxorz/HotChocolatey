@@ -26,7 +26,35 @@ namespace ChocolateyMilk
             }
         }
 
+        public bool IsInProgress
+        {
+            get { return isInProgress; }
+            set
+            {
+                if (isInProgress != value)
+                {
+                    isInProgress = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsInProgress)));
+                }
+            }
+        }
+
+        public string StatusText
+        {
+            get { return statusText; }
+            set
+            {
+                if (statusText != value)
+                {
+                    statusText = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StatusText)));
+                }
+            }
+        }
+
         private IFilter selection;
+        private bool isInProgress;
+        private string statusText;
 
         public MainWindow()
         {
@@ -38,14 +66,21 @@ namespace ChocolateyMilk
         {
             InitializeFilter();
 
+            IsInProgress = true;
+            StatusText = "Getting version info";
             await Controller.GetVersion();
             await Refresh();
+            StatusText = "Ready";
+            IsInProgress = false;
         }
 
         private async Task Refresh()
         {
+            StatusText = "Scanning for installed packges";
             (await Controller.GetInstalled()).ForEach(Packages.Add);
+            StatusText = "Scanning for updates";
             (await Controller.GetUpgradable()).ForEach(Packages.Add);
+            StatusText = "Scanning for new packages";
             (await Controller.GetAvailable()).ForEach(Packages.Add);
         }
 
