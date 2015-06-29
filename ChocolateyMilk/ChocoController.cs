@@ -25,7 +25,12 @@ namespace ChocolateyMilk
 
         public async Task<List<ChocoItem>> GetAvailable()
         {
-            return (await Execute("list -r Atom")).Select(t => ChocoItem.FromAvailableString(t)).ToList();
+            return (await Execute("list -r")).Select(t => ChocoItem.FromAvailableString(t)).ToList();
+        }
+
+        public async Task<List<ChocoItem>> GetUpgradable()
+        {
+            return (await Execute("upgrade all -r --whatif")).Select(t => ChocoItem.FromUpdatableString(t)).ToList();
         }
 
         private async Task<List<string>> Execute(string arguments)

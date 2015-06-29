@@ -44,7 +44,7 @@
             </ToolBar>
         </ToolBarTray>
         <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" VerticalAlignment="Top" DockPanel.Dock="Left" SelectionChanged="OnSelectionChanged"/>
-        <ListBox ItemsSource="{Binding Controller.Output}" Height="100" VerticalAlignment="Bottom" DockPanel.Dock="Bottom"/>
+        <ListBox ItemsSource="{Binding Controller.Output}" Height="100" VerticalAlignment="Bottom" DockPanel.Dock="Bottom" />
         <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" >
             <DataGrid.Columns>
                 <DataGridCheckBoxColumn Binding="{Binding Selected}" Header="Selected" />

@@ -2,6 +2,7 @@
 using System.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ChocolateyMilk
 {
@@ -44,6 +45,7 @@ namespace ChocolateyMilk
         private async Task Refresh()
         {
             (await Controller.GetInstalled()).ForEach(Packages.Add);
+            (await Controller.GetUpgradable()).ForEach(Packages.Add);
             (await Controller.GetAvailable()).ForEach(Packages.Add);
         }
 
@@ -65,7 +67,7 @@ namespace ChocolateyMilk
 
         private void OnMarkAllUpgradesClick(object sender, RoutedEventArgs e)
         {
-            
+            Packages.Items.Where(t => t.IsInstalledUpgradable).ToList().ForEach(t => t.IsMarkedForInstallation = true);
         }
     }
 }
