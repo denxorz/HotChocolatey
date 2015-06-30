@@ -119,6 +119,7 @@ namespace ChocolateyMilk
 
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
         {
+            Packages.Clear();
             await Refresh();
         }
 

@@ -37,5 +37,11 @@ namespace ChocolateyMilk
                 Items.Add(item);
             }
         }
+
+        public void Clear()
+        {
+            Items.Clear();
+            packages.Clear();
+        }
     }
 }
