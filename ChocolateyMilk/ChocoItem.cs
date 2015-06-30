@@ -6,15 +6,11 @@ namespace ChocolateyMilk
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private string installedVersion;
-        private string latestVersion;
-        private bool isInstalledUpgradable;
-        private bool isMarkedForInstallation;
-        private bool isMarkedForUpgrade;
-
         public bool Selected { get; set; }
         public string Name { get; private set; }
 
+        public bool IsInstalled => InstalledVersion != null;
+        
         public string InstalledVersion
         {
             get { return installedVersion; }
@@ -40,8 +36,6 @@ namespace ChocolateyMilk
                 }
             }
         }
-
-        public bool IsInstalled { get { return InstalledVersion != null; } }
 
         public bool IsInstalledUpgradable
         {
@@ -81,6 +75,12 @@ namespace ChocolateyMilk
                 }
             }
         }
+
+        private string installedVersion;
+        private string latestVersion;
+        private bool isInstalledUpgradable;
+        private bool isMarkedForInstallation;
+        private bool isMarkedForUpgrade;
 
         public static ChocoItem FromInstalledString(string chocoOutput)
         {

@@ -12,9 +12,12 @@ namespace ChocolateyMilk
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChocolateyController Controller { get; } = new ChocolateyController();
-        public Packages Packages { get; } = new Packages();
-        public ObservableCollection<IFilter> FilterSelections { get; } = new ObservableCollection<IFilter>();
+        public ChocolateyController Controller => new ChocolateyController();
+        public Packages Packages => new Packages();
+        public ObservableCollection<IFilter> FilterSelections => new ObservableCollection<IFilter>();
+
+        public Visibility LogVisibility => isLogVisible ? Visibility.Visible : Visibility.Collapsed;
+
         public IFilter Filter
         {
             get { return selection; }
@@ -52,11 +55,6 @@ namespace ChocolateyMilk
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StatusText)));
                 }
             }
-        }
-
-        public Visibility LogVisibility
-        {
-            get { return isLogVisible ? Visibility.Visible : Visibility.Collapsed; }
         }
 
         public bool IsLogVisible
