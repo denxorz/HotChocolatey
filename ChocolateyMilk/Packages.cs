@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows.Data;
 
 namespace ChocolateyMilk
@@ -9,6 +10,8 @@ namespace ChocolateyMilk
     public class Packages
     {
         public ObservableCollection<ChocoItem> Items { get; } = new ObservableCollection<ChocoItem>();
+        public List<ChocoItem> MarkedForInstallation => Items.Where(t => t.IsMarkedForInstallation).ToList();
+
         private readonly Dictionary<string, ChocoItem> packages = new Dictionary<string, ChocoItem>();
         private readonly ICollectionView view;
 

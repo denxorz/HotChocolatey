@@ -10,6 +10,7 @@ namespace ChocolateyMilk
         private string latestVersion;
         private bool isInstalledUpgradable;
         private bool isMarkedForInstallation;
+        private bool isMarkedForUpgrade;
 
         public bool Selected { get; set; }
         public string Name { get; private set; }
@@ -64,6 +65,19 @@ namespace ChocolateyMilk
                 {
                     isMarkedForInstallation = value;
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsMarkedForInstallation)));
+                }
+            }
+        }
+
+        public bool IsMarkedForUpgrade
+        {
+            get { return isMarkedForUpgrade; }
+            set
+            {
+                if (isMarkedForUpgrade != value)
+                {
+                    isMarkedForUpgrade = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsMarkedForUpgrade)));
                 }
             }
         }

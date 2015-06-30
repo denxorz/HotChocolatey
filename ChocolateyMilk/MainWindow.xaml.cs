@@ -3,6 +3,8 @@ using System.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace ChocolateyMilk
 {
@@ -122,12 +124,34 @@ namespace ChocolateyMilk
 
         private void OnMarkAllUpgradesClick(object sender, RoutedEventArgs e)
         {
-            Packages.Items.Where(t => t.IsInstalledUpgradable).ToList().ForEach(t => t.IsMarkedForInstallation = true);
+            Packages.Items.Where(t => t.IsInstalledUpgradable).ToList().ForEach(t => t.IsMarkedForUpgrade = true);
         }
 
         private void OnShowLoggingClick(object sender, RoutedEventArgs e)
         {
             IsLogVisible = !IsLogVisible;
+        }
+
+        private async void OnApplyClick(object sender, RoutedEventArgs e)
+        {
+            IsInProgress = true;
+            StatusText = "Installing new packages";
+            await Controller.Install(Packages.MarkedForInstallation);
+            StatusText = "Ready";
+            IsInProgress = false;
+        }
+
+        private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DataGridCell cell = sender as DataGridCell;
+            if (!cell.IsEditing)
+            {
+                // enables editing on single click
+                if (!cell.IsFocused)
+                    cell.Focus();
+                if (!cell.IsSelected)
+                    cell.IsSelected = true;
+            }
         }
     }
 }

@@ -26,12 +26,18 @@ namespace ChocolateyMilk
         public async Task<List<ChocoItem>> GetAvailable()
         {
             // TODO: remove Atom (using for test speed)
-            return (await Execute("list Atom -r")).Select(t => ChocoItem.FromAvailableString(t)).ToList();
+            return (await Execute("list proc -r")).Select(t => ChocoItem.FromAvailableString(t)).ToList();
         }
 
         public async Task<List<ChocoItem>> GetUpgradable()
         {
             return (await Execute("upgrade all -r --whatif")).Select(t => ChocoItem.FromUpdatableString(t)).ToList();
+        }
+
+        public async Task Install(List<ChocoItem> markedForInstallation)
+        {
+            string aggregated = markedForInstallation.Select(t => t.Name).Aggregate((all, next) => next + ";" + all);
+           (await Execute($"install {aggregated} -r -y")).ToList();
         }
 
         private async Task<List<string>> Execute(string arguments)

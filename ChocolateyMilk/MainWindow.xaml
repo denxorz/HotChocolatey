@@ -21,7 +21,7 @@
                         <Label Padding="0">Mark all upgrades</Label>
                     </StackPanel>
                 </Button>
-                <Button>
+                <Button Click="OnApplyClick">
                     <StackPanel Orientation="Vertical">
                         <Image Source="Images/checkmark-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Apply</Label>
@@ -57,13 +57,18 @@
             <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" SelectionChanged="OnSelectionChanged" DockPanel.Dock="Left"/>
             <DockPanel DockPanel.Dock="Right">
                 <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding LogVisibility}"/>
-                <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="Column">
+                <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="Column" SelectionUnit="Cell">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridCell}">
+                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown" />
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Binding="{Binding Selected}" Header="Selected" />
-                        <DataGridCheckBoxColumn Binding="{Binding IsMarkedForInstallation}" Header="IsMarkedForInstallation"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Package" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding InstalledVersion}" Header="Installed version" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding LatestVersion}" Header="Latest version" IsReadOnly="True"/>
+                        <DataGridCheckBoxColumn Binding="{Binding Selected, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Selected" />
+                        <DataGridCheckBoxColumn Binding="{Binding IsMarkedForInstallation, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForInstallation"/>
+                        <DataGridTextColumn Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Package" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding InstalledVersion, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Installed version" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding LatestVersion, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Latest version" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>
