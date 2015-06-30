@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace ChocolateyMilk
 {
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -88,12 +88,12 @@ namespace ChocolateyMilk
         {
             InitializeFilter();
 
-            IsInProgress = true;
-            StatusText = "Getting version info";
-            await Controller.GetVersion();
-            await Refresh();
-            StatusText = "Ready";
-            IsInProgress = false;
+            using (new ProgressIndication(this))
+            {
+                StatusText = "Getting version info";
+                await Controller.GetVersion();
+                await Refresh();
+            }
         }
 
         private async Task Refresh()
@@ -112,15 +112,18 @@ namespace ChocolateyMilk
             Filter = FilterSelections[0];
         }
 
-        private void OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Packages.ApplyFilter(Filter.Filter);
         }
 
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
         {
-            Packages.Clear();
-            await Refresh();
+            using (new ProgressIndication(this))
+            {
+                Packages.Clear();
+                await Refresh();
+            }
         }
 
         private void OnMarkAllUpgradesClick(object sender, RoutedEventArgs e)
@@ -135,11 +138,11 @@ namespace ChocolateyMilk
 
         private async void OnApplyClick(object sender, RoutedEventArgs e)
         {
-            IsInProgress = true;
-            StatusText = "Installing new packages";
-            await Controller.Install(Packages.MarkedForInstallation);
-            StatusText = "Ready";
-            IsInProgress = false;
+            using (new ProgressIndication(this))
+            {
+                StatusText = "Installing new packages";
+                await Controller.Install(Packages.MarkedForInstallation);
+            }
         }
 
         private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
