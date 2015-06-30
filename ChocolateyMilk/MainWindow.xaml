@@ -57,7 +57,7 @@
             <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" SelectionChanged="OnSelectionChanged" DockPanel.Dock="Left"/>
             <DockPanel DockPanel.Dock="Right">
                 <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding LogVisibility}"/>
-                <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto">
+                <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="Column">
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Binding="{Binding Selected}" Header="Selected" />
                         <DataGridCheckBoxColumn Binding="{Binding IsMarkedForInstallation}" Header="IsMarkedForInstallation"/>
