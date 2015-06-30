@@ -12,6 +12,7 @@ namespace ChocolateyMilk
                 new InstalledUpgradableFilter(),
                 new NotInstalledFilter(),
                 new MarkedForInstallationFilter(),
+                new MarkedForUpgradeFilter(),
             };
 
 
@@ -42,7 +43,13 @@ namespace ChocolateyMilk
         private class MarkedForInstallationFilter : IFilter
         {
             public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForInstallation;
-            public override string ToString() => "IsMarkedForInstallation";
+            public override string ToString() => "Marked for installation";
+        }
+
+        private class MarkedForUpgradeFilter : IFilter
+        {
+            public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForUpgrade;
+            public override string ToString() => "Marked for upgrade";
         }
     }
 }

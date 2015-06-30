@@ -9,8 +9,9 @@ namespace ChocolateyMilk
 {
     public class Packages
     {
-        public ObservableCollection<ChocoItem> Items => new ObservableCollection<ChocoItem>();
+        public ObservableCollection<ChocoItem> Items { get; } = new ObservableCollection<ChocoItem>();
         public List<ChocoItem> MarkedForInstallation => Items.Where(t => t.IsMarkedForInstallation).ToList();
+        public List<ChocoItem> MarkedForUpgrade => Items.Where(t => t.IsMarkedForUpgrade).ToList();
 
         private readonly Dictionary<string, ChocoItem> packages = new Dictionary<string, ChocoItem>();
         private readonly ICollectionView view;

@@ -6,7 +6,6 @@ namespace ChocolateyMilk
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public bool Selected { get; set; }
         public string Name { get; private set; }
 
         public bool IsInstalled => InstalledVersion != null;
@@ -85,7 +84,7 @@ namespace ChocolateyMilk
         public static ChocoItem FromInstalledString(string chocoOutput)
         {
             var tmp = chocoOutput.Split(ChocolateyController.Seperator);
-            return new ChocoItem { Name = tmp[0], InstalledVersion = tmp[1], Selected = true };
+            return new ChocoItem { Name = tmp[0], InstalledVersion = tmp[1] };
         }
 
         public static ChocoItem FromAvailableString(string chocoOutput)

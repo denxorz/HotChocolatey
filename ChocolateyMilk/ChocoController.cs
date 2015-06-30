@@ -25,7 +25,7 @@ namespace ChocolateyMilk
 
         public async Task<List<ChocoItem>> GetAvailable()
         {
-            // TODO: remove Atom (using for test speed)
+            // TODO: remove proc (using for test speed)
             return (await Execute("list proc -r")).Select(t => ChocoItem.FromAvailableString(t)).ToList();
         }
 
@@ -34,10 +34,20 @@ namespace ChocolateyMilk
             return (await Execute("upgrade all -r --whatif")).Select(t => ChocoItem.FromUpdatableString(t)).ToList();
         }
 
-        public async Task Install(List<ChocoItem> markedForInstallation)
+        public async Task Install(List<ChocoItem> packages)
         {
-            string aggregated = markedForInstallation.Select(t => t.Name).Aggregate((all, next) => next + ";" + all);
-           (await Execute($"install {aggregated} -r -y")).ToList();
+            if (packages.Count == 0) return;
+            await Execute($"install {AggregatePackageNames(packages)} -r -y");
+            // TODO: check return state
+            packages.ForEach(t => t.IsMarkedForInstallation = false);
+        }
+
+        public async Task Upgrade(List<ChocoItem> packages)
+        {
+            if (packages.Count == 0) return;
+            await Execute($"upgrade {AggregatePackageNames(packages)} -r -y");
+            // TODO: check return state
+            packages.ForEach(t => t.IsMarkedForUpgrade = false);
         }
 
         private async Task<List<string>> Execute(string arguments)
@@ -61,5 +71,7 @@ namespace ChocolateyMilk
 
             return lines;
         }
+
+        private string AggregatePackageNames(List<ChocoItem> packages) => packages.Select(t => t.Name).Aggregate((all, next) => next + ";" + all);
     }
 }

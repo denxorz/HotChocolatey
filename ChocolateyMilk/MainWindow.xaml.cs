@@ -12,9 +12,9 @@ namespace ChocolateyMilk
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChocolateyController Controller => new ChocolateyController();
-        public Packages Packages => new Packages();
-        public ObservableCollection<IFilter> FilterSelections => new ObservableCollection<IFilter>();
+        public ChocolateyController Controller { get; } = new ChocolateyController();
+        public Packages Packages { get; } = new Packages();
+        public ObservableCollection<IFilter> FilterSelections { get; } = new ObservableCollection<IFilter>();
 
         public Visibility LogVisibility => isLogVisible ? Visibility.Visible : Visibility.Collapsed;
 
@@ -140,6 +140,11 @@ namespace ChocolateyMilk
             {
                 StatusText = "Installing new packages";
                 await Controller.Install(Packages.MarkedForInstallation);
+
+                StatusText = "Upgrading packages";
+                await Controller.Upgrade(Packages.MarkedForUpgrade);
+
+                // TODO : update versions
             }
         }
 
