@@ -50,6 +50,14 @@ namespace ChocolateyMilk
             packages.ForEach(t => t.IsMarkedForUpgrade = false);
         }
 
+        public async Task Uninstall(List<ChocoItem> packages)
+        {
+            if (packages.Count == 0) return;
+            await Execute($"uninstall {AggregatePackageNames(packages)} -r -y");
+            // TODO: check return state
+            packages.ForEach(t => t.IsMarkedForUninstall = false);
+        }
+
         private async Task<List<string>> Execute(string arguments)
         {
             Output.Add($"> choco {arguments}");

@@ -146,6 +146,9 @@ namespace ChocolateyMilk
                 StatusText = "Upgrading packages";
                 await Controller.Upgrade(Packages.MarkedForUpgrade);
 
+                StatusText = "Removing packages";
+                await Controller.Uninstall(Packages.MarkedForUninstall);
+
                 // TODO : update versions
             }
         }

@@ -9,6 +9,7 @@ namespace ChocolateyMilk
         public bool IsInstalledUpgradable { get; private set; }
         public bool IsMarkedForInstallation { get; set; }
         public bool IsMarkedForUpgrade { get; set; }
+        public bool IsMarkedForUninstall { get; set; }
 
         public bool IsInstalled => InstalledVersion != null;
 

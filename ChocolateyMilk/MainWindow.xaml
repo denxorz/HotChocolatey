@@ -66,6 +66,7 @@
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Binding="{Binding IsMarkedForUpgrade, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForUpgrade" />
                         <DataGridCheckBoxColumn Binding="{Binding IsMarkedForInstallation, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForInstallation"/>
+                        <DataGridCheckBoxColumn Binding="{Binding IsMarkedForUninstall, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForUninstall"/>
                         <DataGridTextColumn Binding="{Binding Name}" Header="Package" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding InstalledVersion}" Header="Installed version" IsReadOnly="True"/>
                         <DataGridTextColumn Binding="{Binding LatestVersion}" Header="Latest version" IsReadOnly="True"/>

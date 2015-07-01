@@ -13,6 +13,7 @@ namespace ChocolateyMilk
                 new NotInstalledFilter(),
                 new MarkedForInstallationFilter(),
                 new MarkedForUpgradeFilter(),
+                new MarkedForUninstallFilter(),
             };
 
 
@@ -50,6 +51,12 @@ namespace ChocolateyMilk
         {
             public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForUpgrade;
             public override string ToString() => "Marked for upgrade";
+        }
+
+        private class MarkedForUninstallFilter : IFilter
+        {
+            public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForUninstall;
+            public override string ToString() => "Marked for removal";
         }
     }
 }
