@@ -66,9 +66,9 @@
                     <DataGrid.Columns>
                         <DataGridCheckBoxColumn Binding="{Binding IsMarkedForUpgrade, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForUpgrade" />
                         <DataGridCheckBoxColumn Binding="{Binding IsMarkedForInstallation, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForInstallation"/>
-                        <DataGridTextColumn Binding="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Package" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding InstalledVersion, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Installed version" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding LatestVersion, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="Latest version" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Package" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding InstalledVersion}" Header="Installed version" IsReadOnly="True"/>
+                        <DataGridTextColumn Binding="{Binding LatestVersion}" Header="Latest version" IsReadOnly="True"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </DockPanel>

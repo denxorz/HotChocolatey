@@ -1,85 +1,16 @@
-﻿using System.ComponentModel;
-
+﻿
 namespace ChocolateyMilk
 {
-    public class ChocoItem : INotifyPropertyChanged
+    public class ChocoItem : NotifyPropertyChangedImplementation
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public string Name { get; private set; }
+        public string InstalledVersion { get; private set; }
+        public string LatestVersion { get; private set; }
+        public bool IsInstalledUpgradable { get; private set; }
+        public bool IsMarkedForInstallation { get; set; }
+        public bool IsMarkedForUpgrade { get; set; }
 
         public bool IsInstalled => InstalledVersion != null;
-        
-        public string InstalledVersion
-        {
-            get { return installedVersion; }
-            private set
-            {
-                if (installedVersion != value)
-                {
-                    installedVersion = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(InstalledVersion)));
-                }
-            }
-        }
-
-        public string LatestVersion
-        {
-            get { return latestVersion; }
-            private set
-            {
-                if (latestVersion != value)
-                {
-                    latestVersion = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LatestVersion)));
-                }
-            }
-        }
-
-        public bool IsInstalledUpgradable
-        {
-            get { return isInstalledUpgradable; }
-            private set
-            {
-                if (isInstalledUpgradable != value)
-                {
-                    isInstalledUpgradable = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsInstalledUpgradable)));
-                }
-            }
-        }
-
-        public bool IsMarkedForInstallation
-        {
-            get { return isMarkedForInstallation; }
-            set
-            {
-                if (isMarkedForInstallation != value)
-                {
-                    isMarkedForInstallation = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsMarkedForInstallation)));
-                }
-            }
-        }
-
-        public bool IsMarkedForUpgrade
-        {
-            get { return isMarkedForUpgrade; }
-            set
-            {
-                if (isMarkedForUpgrade != value)
-                {
-                    isMarkedForUpgrade = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsMarkedForUpgrade)));
-                }
-            }
-        }
-
-        private string installedVersion;
-        private string latestVersion;
-        private bool isInstalledUpgradable;
-        private bool isMarkedForInstallation;
-        private bool isMarkedForUpgrade;
 
         public static ChocoItem FromInstalledString(string chocoOutput)
         {
@@ -115,3 +46,4 @@ namespace ChocolateyMilk
         }
     }
 }
+
