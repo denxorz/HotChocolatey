@@ -1,8 +1,13 @@
 ﻿
+using System.ComponentModel;
+
 namespace ChocolateyMilk
 {
-    public class ChocoItem : NotifyPropertyChangedImplementation
+    [Magic]
+    public class ChocoItem : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        
         public string Name { get; private set; }
         public string InstalledVersion { get; private set; }
         public string LatestVersion { get; private set; }
@@ -45,6 +50,8 @@ namespace ChocolateyMilk
 
             IsInstalledUpgradable = item.IsInstalledUpgradable;
         }
+
+        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
 

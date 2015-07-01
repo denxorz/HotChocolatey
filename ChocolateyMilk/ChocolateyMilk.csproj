@@ -69,7 +69,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="BaseNotifyPropertyChanged.cs" />
     <Compile Include="ChocoController.cs" />
     <Compile Include="ChocoItem.cs" />
     <Compile Include="FilterFactory.cs" />

@@ -8,6 +8,7 @@ using System.Windows.Controls;
 
 namespace ChocolateyMilk
 {
+    [Magic]
     public partial class MainWindow : Window, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -18,44 +19,9 @@ namespace ChocolateyMilk
 
         public Visibility LogVisibility => isLogVisible ? Visibility.Visible : Visibility.Collapsed;
 
-        public IFilter Filter
-        {
-            get { return selection; }
-            set
-            {
-                if (selection != value)
-                {
-                    selection = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Filter)));
-                }
-            }
-        }
-
-        public bool IsInProgress
-        {
-            get { return isInProgress; }
-            set
-            {
-                if (isInProgress != value)
-                {
-                    isInProgress = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsInProgress)));
-                }
-            }
-        }
-
-        public string StatusText
-        {
-            get { return statusText; }
-            set
-            {
-                if (statusText != value)
-                {
-                    statusText = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(StatusText)));
-                }
-            }
-        }
+        public IFilter Filter { get; set; }
+        public bool IsInProgress { get; set; }
+        public string StatusText { get; set; }
 
         public bool IsLogVisible
         {
@@ -65,15 +31,11 @@ namespace ChocolateyMilk
                 if (isLogVisible != value)
                 {
                     isLogVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLogVisible)));
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LogVisibility)));
                 }
             }
         }
 
-        private IFilter selection;
-        private bool isInProgress;
-        private string statusText;
         private bool isLogVisible;
 
         public MainWindow()
@@ -165,5 +127,7 @@ namespace ChocolateyMilk
                     cell.IsSelected = true;
             }
         }
+
+        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
