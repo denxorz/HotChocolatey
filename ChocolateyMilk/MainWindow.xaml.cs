@@ -100,8 +100,10 @@ namespace ChocolateyMilk
             (await Controller.GetInstalled()).ForEach(Packages.Add);
             StatusText = "Scanning for updates";
             (await Controller.GetUpgradable()).ForEach(Packages.Add);
-            StatusText = "Scanning for new packages";
-            (await Controller.GetAvailable()).ForEach(Packages.Add);
+
+            // TODO : decide if this can be done without paging?
+            //StatusText = "Scanning for new packages";
+            //(await Controller.GetAvailable()).ForEach(Packages.Add);
         }
 
         private void InitializeFilter()
