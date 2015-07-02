@@ -8,6 +8,9 @@
         Title="Chocolatey Milk" Icon="Hot Chocolate-50.ico"
         Height="600" Width="800" 
         Loaded="OnLoaded">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
+    </Window.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar>
@@ -36,17 +39,21 @@
                         <Label Padding="0">Settings</Label>
                     </StackPanel>
                 </Button>
-                <ToggleButton Click="OnShowLoggingClick" IsChecked="{Binding Is}">
+                <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="Images/todo_list-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Logging</Label>
                     </StackPanel>
                 </ToggleButton>
                 <Separator/>
-                <Button>
+                <Button Click="OnSearchClick" Width="160">
                     <StackPanel Orientation="Vertical">
                         <Image Source="Images/binoculars-48.png" Stretch="Uniform" Width="32" />
-                        <Label Padding="0">Search</Label>
+                        <!-- from http://stackoverflow.com/a/28634583 -->
+                        <Grid Background="White" Width="150"  >
+                            <TextBlock Margin="5,2" MinWidth="50" Text="Search..." Foreground="LightSteelBlue" Visibility="{Binding ElementName=txtSearchBox, Path=Text.IsEmpty, Converter={StaticResource Bool2Visibility}}" />
+                            <TextBox MinWidth="50" Name="txtSearchBox" Background="Transparent" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
+                        </Grid>
                     </StackPanel>
                 </Button>
             </ToolBar>
@@ -58,7 +65,7 @@
         <DockPanel DockPanel.Dock="Left">
             <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" SelectionChanged="OnSelectionChanged" DockPanel.Dock="Left"/>
             <DockPanel DockPanel.Dock="Right">
-                <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding LogVisibility}"/>
+                <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
                 <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="Column" SelectionUnit="Cell">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridCell}">

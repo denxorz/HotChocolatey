@@ -30,10 +30,9 @@ namespace ChocolateyMilk
             return result.Output.Select(t => ChocoItem.FromInstalledString(t)).ToList();
         }
 
-        public async Task<List<ChocoItem>> GetAvailable()
+        public async Task<List<ChocoItem>> GetAvailable(string name)
         {
-            // TODO: remove proc (using for test speed)
-            var result = await Execute("list proc -r");
+            var result = await Execute($"list {name} -r");
             result.ThrowIfNotSucceeded();
 
             return result.Output.Select(t => ChocoItem.FromAvailableString(t)).ToList();

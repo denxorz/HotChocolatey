@@ -18,26 +18,11 @@ namespace ChocolateyMilk
         public Packages Packages { get; } = new Packages();
         public ObservableCollection<IFilter> FilterSelections { get; } = new ObservableCollection<IFilter>();
 
-        public Visibility LogVisibility => isLogVisible ? Visibility.Visible : Visibility.Collapsed;
-
         public IFilter Filter { get; set; }
         public bool IsInProgress { get; set; }
         public string StatusText { get; set; }
-
-        public bool IsLogVisible
-        {
-            get { return isLogVisible; }
-            set
-            {
-                if (isLogVisible != value)
-                {
-                    isLogVisible = value;
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(LogVisibility)));
-                }
-            }
-        }
-
-        private bool isLogVisible;
+        public string SearchText { get; set; }
+        public bool IsLogVisible { get; set; }
 
         public MainWindow()
         {
@@ -104,11 +89,6 @@ namespace ChocolateyMilk
             Packages.Items.Where(t => t.IsInstalledUpgradable).ToList().ForEach(t => t.IsMarkedForUpgrade = true);
         }
 
-        private void OnShowLoggingClick(object sender, RoutedEventArgs e)
-        {
-            IsLogVisible = !IsLogVisible;
-        }
-
         private async void OnApplyClick(object sender, RoutedEventArgs e)
         {
             using (new ProgressIndication(this))
@@ -130,6 +110,15 @@ namespace ChocolateyMilk
                 }
 
                 await Refresh();
+            }
+        }
+
+        private async void OnSearchClick(object sender, RoutedEventArgs e)
+        {
+            using (new ProgressIndication(this))
+            {
+                StatusText = "Searching for packages";
+                (await Controller.GetAvailable(SearchText)).ForEach(Packages.Add);
             }
         }
 
