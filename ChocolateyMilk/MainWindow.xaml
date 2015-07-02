@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ChocolateyMilk"
         mc:Ignorable="d"
-        Title="Chocolatey Milk" Height="600" Width="800" Loaded="OnLoaded">
+        Title="Chocolatey Milk" Icon="Hot Chocolate-50.ico"
+        Height="600" Width="800" 
+        Loaded="OnLoaded">
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar>
