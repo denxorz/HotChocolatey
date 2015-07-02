@@ -15,69 +15,94 @@ namespace ChocolateyMilk
 
         public async Task<Version> GetVersion()
         {
-            return new Version((await Execute(string.Empty))[0].Replace("Chocolatey v", string.Empty));
+            var result = await Execute(string.Empty);
+
+            if (result.ExitCode != 1) throw new ChocoExecutionException(result);
+
+            return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
         public async Task<List<ChocoItem>> GetInstalled()
         {
-            return (await Execute("list -l -r")).Select(t => ChocoItem.FromInstalledString(t)).ToList();
+            var result = await Execute("list -l -r");
+            result.ThrowIfNotSucceeded();
+
+            return result.Output.Select(t => ChocoItem.FromInstalledString(t)).ToList();
         }
 
         public async Task<List<ChocoItem>> GetAvailable()
         {
             // TODO: remove proc (using for test speed)
-            return (await Execute("list proc -r")).Select(t => ChocoItem.FromAvailableString(t)).ToList();
+            var result = await Execute("list proc -r");
+            result.ThrowIfNotSucceeded();
+
+            return result.Output.Select(t => ChocoItem.FromAvailableString(t)).ToList();
         }
 
         public async Task<List<ChocoItem>> GetUpgradable()
         {
-            return (await Execute("upgrade all -r --whatif")).Select(t => ChocoItem.FromUpdatableString(t)).ToList();
+            var result = await Execute("upgrade all -r --whatif");
+            result.ThrowIfNotSucceeded();
+
+            return result.Output.Select(t => ChocoItem.FromUpdatableString(t)).ToList();
         }
 
-        public async Task Install(List<ChocoItem> packages)
+        public async Task<bool> Install(List<ChocoItem> packages)
         {
-            if (packages.Count == 0) return;
-            await Execute($"install {AggregatePackageNames(packages)} -r -y");
-            // TODO: check return state
+            if (packages.Count == 0) return true;
+
+            var result = await Execute($"install {AggregatePackageNames(packages)} -r -y");
+
+            if (!result.Succeeded) return false;
+
             packages.ForEach(t => t.IsMarkedForInstallation = false);
+            return true;
         }
 
-        public async Task Upgrade(List<ChocoItem> packages)
+        public async Task<bool> Upgrade(List<ChocoItem> packages)
         {
-            if (packages.Count == 0) return;
-            await Execute($"upgrade {AggregatePackageNames(packages)} -r -y");
-            // TODO: check return state
+            if (packages.Count == 0) return true;
+
+            var result = await Execute($"upgrade {AggregatePackageNames(packages)} -r -y");
+
+            if (!result.Succeeded) return false;
+
             packages.ForEach(t => t.IsMarkedForUpgrade = false);
+            return true;
         }
 
-        public async Task Uninstall(List<ChocoItem> packages)
+        public async Task<bool> Uninstall(List<ChocoItem> packages)
         {
-            if (packages.Count == 0) return;
-            await Execute($"uninstall {AggregatePackageNames(packages)} -r -y");
-            // TODO: check return state
+            if (packages.Count == 0) return true;
+
+            var result = await Execute($"uninstall {AggregatePackageNames(packages)} -r -y");
+
+            if (!result.Succeeded) return false;
+
             packages.ForEach(t => t.IsMarkedForUninstall = false);
+            return true;
         }
 
-        private async Task<List<string>> Execute(string arguments)
+        private async Task<ChocolateyResult> Execute(string arguments)
         {
             Output.Add($"> choco {arguments}");
 
-            Process compiler = new Process();
-            compiler.StartInfo.FileName = "choco";
-            compiler.StartInfo.Arguments = arguments;
-            compiler.StartInfo.UseShellExecute = false;
-            compiler.StartInfo.RedirectStandardOutput = true;
-            compiler.StartInfo.CreateNoWindow = true;
-            compiler.Start();
+            Process choco = new Process();
+            choco.StartInfo.FileName = "choco";
+            choco.StartInfo.Arguments = arguments;
+            choco.StartInfo.UseShellExecute = false;
+            choco.StartInfo.RedirectStandardOutput = true;
+            choco.StartInfo.CreateNoWindow = true;
+            choco.Start();
 
-            string output = await compiler.StandardOutput.ReadToEndAsync();
+            string output = await choco.StandardOutput.ReadToEndAsync();
 
-            compiler.WaitForExit();
+            choco.WaitForExit();
 
-            List<string> lines = output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            lines.ForEach(Output.Add);
+            var result = new ChocolateyResult(output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList(), choco.ExitCode, arguments);
+            result.Output.ForEach(Output.Add);
 
-            return lines;
+            return result;
         }
 
         private string AggregatePackageNames(List<ChocoItem> packages) => packages.Select(t => t.Name).Aggregate((all, next) => next + ";" + all);

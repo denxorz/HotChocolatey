@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Controls;
+using System;
 
 namespace ChocolateyMilk
 {
@@ -51,7 +52,17 @@ namespace ChocolateyMilk
             using (new ProgressIndication(this))
             {
                 StatusText = "Getting version info";
-                await Controller.GetVersion();
+
+                try
+                {
+                    await Controller.GetVersion();
+                }
+                catch (Win32Exception)
+                {
+                    MessageBox.Show("Choco not installed?", "ChocolateyMilk Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
                 await Refresh();
             }
         }
@@ -103,15 +114,22 @@ namespace ChocolateyMilk
             using (new ProgressIndication(this))
             {
                 StatusText = "Installing new packages";
-                await Controller.Install(Packages.MarkedForInstallation);
+                bool installResult = await Controller.Install(Packages.MarkedForInstallation);
 
                 StatusText = "Upgrading packages";
-                await Controller.Upgrade(Packages.MarkedForUpgrade);
+                bool upgradingResult = await Controller.Upgrade(Packages.MarkedForUpgrade);
 
                 StatusText = "Removing packages";
-                await Controller.Uninstall(Packages.MarkedForUninstall);
+                bool uninstallResult = await Controller.Uninstall(Packages.MarkedForUninstall);
 
-                // TODO : update versions
+                if (!installResult || !upgradingResult || !uninstallResult)
+                {
+                    MessageBox.Show($"Apply failed.{Environment.NewLine}Installing:{installResult}{Environment.NewLine}Upgrading:{upgradingResult}{Environment.NewLine}Removing:{uninstallResult}", 
+                        "ChocolateyMilk Error", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                }
+
+                await Refresh();
             }
         }
 

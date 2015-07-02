@@ -70,7 +70,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ChocoController.cs" />
+    <Compile Include="ChocoExecutionException.cs" />
     <Compile Include="ChocoItem.cs" />
+    <Compile Include="ChocolateyResult.cs" />
     <Compile Include="FilterFactory.cs" />
     <Compile Include="IFilter.cs" />
     <Compile Include="MagicAttribute.cs" />
