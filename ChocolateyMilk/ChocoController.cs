@@ -11,8 +11,6 @@ namespace ChocolateyMilk
     {
         public const char Seperator = '|';
 
-        public ObservableCollection<string> Output { get; } = new ObservableCollection<string>();
-
         public async Task<Version> GetVersion()
         {
             var result = await Execute(string.Empty);
@@ -48,11 +46,18 @@ namespace ChocolateyMilk
 
         public async Task<bool> Install(List<ChocoItem> packages)
         {
+            string packagesToInstall = AggregatePackageNames(packages);
+            Log.Info($"{nameof(Install)}: {packagesToInstall}");
+
             if (packages.Count == 0) return true;
 
-            var result = await Execute($"install {AggregatePackageNames(packages)} -r -y");
+            var result = await Execute($"install {packagesToInstall} -r -y");
 
-            if (!result.Succeeded) return false;
+            if (!result.Succeeded)
+            {
+                Log.Error($"{nameof(Install)} failed for the following packages: {packagesToInstall}");
+                return false;
+            }
 
             packages.ForEach(t => t.IsMarkedForInstallation = false);
             return true;
@@ -60,11 +65,18 @@ namespace ChocolateyMilk
 
         public async Task<bool> Upgrade(List<ChocoItem> packages)
         {
+            string packagesToUpgrade = AggregatePackageNames(packages);
+            Log.Info($"{nameof(Upgrade)}: {packagesToUpgrade}");
+
             if (packages.Count == 0) return true;
 
-            var result = await Execute($"upgrade {AggregatePackageNames(packages)} -r -y");
+            var result = await Execute($"upgrade {packagesToUpgrade} -r -y");
 
-            if (!result.Succeeded) return false;
+            if (!result.Succeeded)
+            {
+                Log.Error($"{nameof(Upgrade)} failed for the following packages: {packagesToUpgrade}");
+                return false;
+            }
 
             packages.ForEach(t => t.IsMarkedForUpgrade = false);
             return true;
@@ -72,11 +84,18 @@ namespace ChocolateyMilk
 
         public async Task<bool> Uninstall(List<ChocoItem> packages)
         {
+            string packagesToUninstall = AggregatePackageNames(packages);
+            Log.Info($"{nameof(Uninstall)}: {packagesToUninstall}");
+
             if (packages.Count == 0) return true;
 
-            var result = await Execute($"uninstall {AggregatePackageNames(packages)} -r -y");
+            var result = await Execute($"uninstall {packagesToUninstall} -r -y");
 
-            if (!result.Succeeded) return false;
+            if (!result.Succeeded)
+            {
+                Log.Error($"{nameof(Uninstall)} failed for the following packages: {packagesToUninstall}");
+                return false;
+            }
 
             packages.ForEach(t => t.IsMarkedForUninstall = false);
             return true;
@@ -84,7 +103,7 @@ namespace ChocolateyMilk
 
         private async Task<ChocolateyResult> Execute(string arguments)
         {
-            Output.Add($"> choco {arguments}");
+            Log.Info($">> choco {arguments}");
 
             Process choco = new Process();
             choco.StartInfo.FileName = "choco";
@@ -99,7 +118,7 @@ namespace ChocolateyMilk
             choco.WaitForExit();
 
             var result = new ChocolateyResult(output.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList(), choco.ExitCode, arguments);
-            result.Output.ForEach(Output.Add);
+            result.Output.ForEach(t => Log.Info($"> {t}"));
 
             return result;
         }

@@ -42,6 +42,10 @@
     <ApplicationIcon>Hot Chocolate-50.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -76,8 +80,10 @@
     <Compile Include="ChocoExecutionException.cs" />
     <Compile Include="ChocoItem.cs" />
     <Compile Include="ChocolateyResult.cs" />
+    <Compile Include="Diagnostics.cs" />
     <Compile Include="FilterFactory.cs" />
     <Compile Include="IFilter.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="MagicAttribute.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

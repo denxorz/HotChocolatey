@@ -6,6 +6,8 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System;
+using System.Reflection;
+using System.Collections.Specialized;
 
 namespace ChocolateyMilk
 {
@@ -16,6 +18,7 @@ namespace ChocolateyMilk
 
         public ChocolateyController Controller { get; } = new ChocolateyController();
         public Packages Packages { get; } = new Packages();
+        public Diagnostics Diagnostics { get; } = new Diagnostics();
         public ObservableCollection<IFilter> FilterSelections { get; } = new ObservableCollection<IFilter>();
 
         public IFilter Filter { get; set; }
@@ -28,6 +31,12 @@ namespace ChocolateyMilk
         {
             InitializeComponent();
             DataContext = this;
+
+            ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
+
+            Log.ResetSettings(true, true, true, Diagnostics);
+            Log.Info("---");
+            Log.Info($"Version:{Assembly.GetCallingAssembly().GetName().Version} MachineName:{Environment.MachineName} OSVersion:{Environment.OSVersion} Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
@@ -40,10 +49,12 @@ namespace ChocolateyMilk
 
                 try
                 {
-                    await Controller.GetVersion();
+                    var result = await Controller.GetVersion();
+                    Log.Info($"Chocolatey version: {result}");
                 }
-                catch (Win32Exception)
+                catch (Win32Exception ex)
                 {
+                    Log.Error($"Choco not installed? Message: {ex.Message}");
                     MessageBox.Show("Choco not installed?", "ChocolateyMilk Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
@@ -54,6 +65,8 @@ namespace ChocolateyMilk
 
         private async Task Refresh()
         {
+            Log.Info(nameof(Refresh));
+
             StatusText = "Scanning for installed packges";
             (await Controller.GetInstalled()).ForEach(Packages.Add);
             StatusText = "Scanning for updates";
@@ -104,9 +117,8 @@ namespace ChocolateyMilk
 
                 if (!installResult || !upgradingResult || !uninstallResult)
                 {
-                    MessageBox.Show($"Apply failed.{Environment.NewLine}Installing:{installResult}{Environment.NewLine}Upgrading:{upgradingResult}{Environment.NewLine}Removing:{uninstallResult}", 
+                    MessageBox.Show($"Apply failed.{Environment.NewLine}Installing:{installResult}{Environment.NewLine}Upgrading:{upgradingResult}{Environment.NewLine}Removing:{uninstallResult}",
                         "ChocolateyMilk Error", MessageBoxButton.OK, MessageBoxImage.Error);
-
                 }
 
                 await Refresh();
@@ -115,6 +127,8 @@ namespace ChocolateyMilk
 
         private async void OnSearchClick(object sender, RoutedEventArgs e)
         {
+            Log.Info($"Searching for: {SearchText}");
+
             using (new ProgressIndication(this))
             {
                 StatusText = "Searching for packages";
@@ -132,6 +146,14 @@ namespace ChocolateyMilk
                     cell.Focus();
                 if (!cell.IsSelected)
                     cell.IsSelected = true;
+            }
+        }
+
+        private void OnLoggingListViewCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                loggingListBox.ScrollIntoView(e.NewItems[0]);
             }
         }
 

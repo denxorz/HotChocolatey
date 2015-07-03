@@ -67,7 +67,7 @@
         <DockPanel DockPanel.Dock="Left">
             <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" SelectionChanged="OnSelectionChanged" DockPanel.Dock="Left"/>
             <DockPanel DockPanel.Dock="Right">
-                <ListBox ItemsSource="{Binding Controller.Output}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
+                <ListBox x:Name="loggingListBox" ItemsSource="{Binding Diagnostics.Logging}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
                 <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="Column" SelectionUnit="Cell">
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridCell}">
