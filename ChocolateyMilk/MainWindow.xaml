@@ -33,12 +33,14 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
+                <!-- TODO : issue #4 settings: 
                 <Button>
                     <StackPanel Orientation="Vertical">
                         <Image Source="Images/settings-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Settings</Label>
                     </StackPanel>
                 </Button>
+                -->
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Vertical">
                         <Image Source="Images/todo_list-48.png" Stretch="Uniform" Width="32" />
