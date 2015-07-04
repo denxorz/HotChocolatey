@@ -1,6 +1,6 @@
-﻿using System;
+﻿using NuGet;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +10,13 @@ namespace ChocolateyMilk
     public class ChocolateyController
     {
         public const char Seperator = '|';
+        private PackageRepositoryFactory packageRepository = new PackageRepositoryFactory();
+        private IPackageRepository repo;
+
+        public ChocolateyController()
+        {
+            repo = packageRepository.CreateRepository("https://chocolatey.org/api/v2/");
+        }
 
         public async Task<Version> GetVersion()
         {
@@ -30,10 +37,7 @@ namespace ChocolateyMilk
 
         public async Task<List<ChocoItem>> GetAvailable(string name)
         {
-            var result = await Execute($"list {name} -r");
-            result.ThrowIfNotSucceeded();
-
-            return result.Output.Select(t => ChocoItem.FromAvailableString(t)).ToList();
+            return repo.GetPackages().Where(p => p.Title.Contains(name) && p.IsLatestVersion).ToList().Select(t => ChocoItem.FromPackage(t)).ToList();
         }
 
         public async Task<List<ChocoItem>> GetUpgradable()

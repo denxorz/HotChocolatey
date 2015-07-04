@@ -1,5 +1,7 @@
 ﻿
+using System;
 using System.ComponentModel;
+using NuGet;
 
 namespace ChocolateyMilk
 {
@@ -34,6 +36,11 @@ namespace ChocolateyMilk
         {
             var tmp = chocoOutput.Split(ChocolateyController.Seperator);
             return new ChocoItem { Name = tmp[0], InstalledVersion = tmp[1], LatestVersion = tmp[2], IsInstalledUpgradable = tmp[1] != tmp[2] };
+        }
+
+        public static ChocoItem FromPackage(IPackage package)
+        {
+            return new ChocoItem { Name = package.Id, LatestVersion = package.Version.ToString() };
         }
 
         internal void Update(ChocoItem item)
