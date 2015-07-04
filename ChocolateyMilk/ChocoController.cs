@@ -9,7 +9,7 @@ namespace ChocolateyMilk
 {
     public class ChocolateyController
     {
-        public const char Seperator = '|';
+        private const char Seperator = '|';
         private PackageRepositoryFactory packageRepository = new PackageRepositoryFactory();
         private IPackageRepository repo;
 
@@ -32,12 +32,21 @@ namespace ChocolateyMilk
             var result = await Execute("list -l -r");
             result.ThrowIfNotSucceeded();
 
-            return result.Output.Select(t => ChocoItem.FromInstalledString(t)).ToList();
+            return await Task.Run(() => result.Output.Select(t =>
+            {
+                var tmp = t.Split(Seperator);
+                return ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), tmp[1]);
+            }).ToList());
         }
 
         public async Task<List<ChocoItem>> GetAvailable(string name)
         {
-            return repo.GetPackages().Where(p => p.Title.Contains(name) && p.IsLatestVersion).ToList().Select(t => ChocoItem.FromPackage(t)).ToList();
+            return (await GetPackages(name)).Select(t => ChocoItem.FromPackage(t)).ToList();
+        }
+
+        public async Task<List<IPackage>> GetPackages(string name)
+        {
+            return await Task.Run(() => repo.GetPackages().Where(p => p.Title.Contains(name) && p.IsLatestVersion).ToList());
         }
 
         public async Task<List<ChocoItem>> GetUpgradable()
@@ -45,7 +54,11 @@ namespace ChocolateyMilk
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
 
-            return result.Output.Select(t => ChocoItem.FromUpdatableString(t)).ToList();
+            return await Task.Run(() => result.Output.Select(t =>
+            {
+                var tmp = t.Split(Seperator);
+                return ChocoItem.FromUpdatableString(repo.FindPackage(tmp[0]), tmp[1], tmp[2]);
+            }).ToList());
         }
 
         public async Task<bool> Install(List<ChocoItem> packages)

@@ -10,7 +10,9 @@ namespace ChocolateyMilk
     {
         public event PropertyChangedEventHandler PropertyChanged;
         
-        public string Name { get; private set; }
+        public IPackage Package { get; }
+
+        public string Name => Package.Id;
         public string InstalledVersion { get; private set; }
         public string LatestVersion { get; private set; }
         public bool IsInstalledUpgradable { get; private set; }
@@ -20,27 +22,24 @@ namespace ChocolateyMilk
 
         public bool IsInstalled => InstalledVersion != null;
 
-        public static ChocoItem FromInstalledString(string chocoOutput)
+        public ChocoItem(IPackage package)
         {
-            var tmp = chocoOutput.Split(ChocolateyController.Seperator);
-            return new ChocoItem { Name = tmp[0], InstalledVersion = tmp[1] };
+            Package = package;
         }
 
-        public static ChocoItem FromAvailableString(string chocoOutput)
+        public static ChocoItem FromInstalledString(IPackage package, string version)
         {
-            var tmp = chocoOutput.Split(ChocolateyController.Seperator);
-            return new ChocoItem { Name = tmp[0], LatestVersion = tmp[1] };
-        }
-
-        public static ChocoItem FromUpdatableString(string chocoOutput)
-        {
-            var tmp = chocoOutput.Split(ChocolateyController.Seperator);
-            return new ChocoItem { Name = tmp[0], InstalledVersion = tmp[1], LatestVersion = tmp[2], IsInstalledUpgradable = tmp[1] != tmp[2] };
+            return new ChocoItem(package) { InstalledVersion = version };
         }
 
         public static ChocoItem FromPackage(IPackage package)
         {
-            return new ChocoItem { Name = package.Id, LatestVersion = package.Version.ToString() };
+            return new ChocoItem(package);
+        }
+
+        public static ChocoItem FromUpdatableString(IPackage package, string installedVersion, string latestVersion)
+        {
+            return new ChocoItem(package) { InstalledVersion = installedVersion, LatestVersion = latestVersion, IsInstalledUpgradable = installedVersion != latestVersion };
         }
 
         internal void Update(ChocoItem item)
