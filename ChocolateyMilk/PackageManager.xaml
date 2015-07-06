@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="ChocolateyMilk.PackageManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ChocolateyMilk"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500" Loaded="OnLoaded" BorderThickness="1" BorderBrush="#4C808080">
+    <DockPanel>
+        <Border DockPanel.Dock="Top" BorderBrush="#4C808080" BorderThickness="0,0,0,1">
+        <UniformGrid Rows="1" MaxWidth="600" HorizontalAlignment="Left" Margin="15">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="2" VerticalAlignment="Center">Filter:</TextBlock>
+                <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" SelectionChanged="OnFilterSelectionChanged"></ComboBox>
+            </StackPanel>
+            <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">Include prerelease</CheckBox>
+            <TextBox Margin="2" Width="150">Search</TextBox>
+        </UniformGrid>
+        </Border>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="5" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" SelectionChanged="OnSelectionChanged">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#4C808080" BorderThickness="0,0,1,1" Width="{Binding ActualWidth, ElementName=PackagesListView}">
+                                <local:PackageListItem DataContext="{Binding}" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ListView>
+            </ScrollViewer>
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
+            <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" />
+        </Grid>
+    </DockPanel>
+</UserControl>

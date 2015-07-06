@@ -22,9 +22,9 @@ namespace ChocolateyMilk
             view = CollectionViewSource.GetDefaultView(Items);
         }
 
-        public void ApplyFilter(Predicate<object> filter)
+        public void ApplyFilter(IFilter filter)
         {
-            view.Filter = filter;
+            view.Filter = filter.Filter;
         }
 
         public void Add(ChocoItem item)

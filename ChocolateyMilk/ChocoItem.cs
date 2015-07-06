@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using NuGet;
+using System.IO;
 
 namespace ChocolateyMilk
 {
@@ -19,6 +20,12 @@ namespace ChocolateyMilk
         public bool IsMarkedForInstallation { get; set; }
         public bool IsMarkedForUpgrade { get; set; }
         public bool IsMarkedForUninstall { get; set; }
+
+        public string Title => Package.Title;
+        public Uri Ico => Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? new Uri("/ChocolateyMilk;component/Images/chocolateyicon.gif", UriKind.Relative) : Package.IconUrl;
+        public bool IsPreRelease => !Package.IsReleaseVersion();
+        public string Summary => Package.Summary;
+        public string Description => Package.Description;
 
         public bool IsInstalled => InstalledVersion != null;
 

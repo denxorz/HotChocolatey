@@ -64,26 +64,6 @@
             <TextBlock Width="180" Text="{Binding StatusText}"/>
             <ProgressBar Width="180" Height="18" IsIndeterminate="{Binding IsInProgress}" />
         </StatusBar>
-        <DockPanel DockPanel.Dock="Left">
-            <ListBox ItemsSource="{Binding FilterSelections}" SelectedItem="{Binding Filter}" Width="200" SelectionChanged="OnSelectionChanged" DockPanel.Dock="Left"/>
-            <DockPanel DockPanel.Dock="Right">
-                <ListBox x:Name="loggingListBox" ItemsSource="{Binding Diagnostics.Logging}" Height="100" DockPanel.Dock="Bottom" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
-                <DataGrid ItemsSource="{Binding Packages.Items}" AutoGenerateColumns="False" AlternatingRowBackground="Lavender" AlternationCount="2" DockPanel.Dock="Top" Height="Auto" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" HeadersVisibility="Column" SelectionUnit="Cell">
-                    <DataGrid.Resources>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="DataGridCell_PreviewMouseLeftButtonDown" />
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridCheckBoxColumn Binding="{Binding IsMarkedForUpgrade, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForUpgrade" />
-                        <DataGridCheckBoxColumn Binding="{Binding IsMarkedForInstallation, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForInstallation"/>
-                        <DataGridCheckBoxColumn Binding="{Binding IsMarkedForUninstall, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Header="IsMarkedForUninstall"/>
-                        <DataGridTextColumn Binding="{Binding Name}" Header="Package" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding InstalledVersion}" Header="Installed version" IsReadOnly="True"/>
-                        <DataGridTextColumn Binding="{Binding LatestVersion}" Header="Latest version" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </DockPanel>
-        </DockPanel>
+        <local:PackageManager x:Name="PackageManager" Margin="5"/>
     </DockPanel>
 </Window>

@@ -19,9 +19,7 @@ namespace ChocolateyMilk
         public ChocolateyController Controller { get; } = new ChocolateyController();
         public Packages Packages { get; } = new Packages();
         public Diagnostics Diagnostics { get; } = new Diagnostics();
-        public ObservableCollection<IFilter> FilterSelections { get; } = new ObservableCollection<IFilter>();
 
-        public IFilter Filter { get; set; }
         public bool IsInProgress { get; set; }
         public string StatusText { get; set; }
         public string SearchText { get; set; }
@@ -32,7 +30,7 @@ namespace ChocolateyMilk
             InitializeComponent();
             DataContext = this;
 
-            ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
+        // TODO :    ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
 
             Log.ResetSettings(true, true, true, Diagnostics);
             Log.Info("---");
@@ -41,7 +39,7 @@ namespace ChocolateyMilk
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            InitializeFilter();
+            PackageManager.Packages = Packages;
 
             using (new ProgressIndication(this))
             {
@@ -70,22 +68,11 @@ namespace ChocolateyMilk
             StatusText = "Scanning for installed packges";
             (await Controller.GetInstalled()).ForEach(Packages.Add);
             StatusText = "Scanning for updates";
-            (await Controller.GetUpgradable()).ForEach(Packages.Add);
+          // TODO :  (await Controller.GetUpgradable()).ForEach(Packages.Add);
 
             // TODO : decide if this can be done without paging?
             //StatusText = "Scanning for new packages";
             //(await Controller.GetAvailable()).ForEach(Packages.Add);
-        }
-
-        private void InitializeFilter()
-        {
-            FilterFactory.AvailableFilters.ForEach(FilterSelections.Add);
-            Filter = FilterSelections[0];
-        }
-
-        private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            Packages.ApplyFilter(Filter.Filter);
         }
 
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
@@ -153,7 +140,7 @@ namespace ChocolateyMilk
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                loggingListBox.ScrollIntoView(e.NewItems[0]);
+             // TODO :   loggingListBox.ScrollIntoView(e.NewItems[0]);
             }
         }
 
