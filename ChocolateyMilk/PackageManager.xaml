@@ -6,16 +6,19 @@
              xmlns:local="clr-namespace:ChocolateyMilk"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Loaded="OnLoaded" BorderThickness="1" BorderBrush="#4C808080">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
+    </UserControl.Resources>
     <DockPanel>
         <Border DockPanel.Dock="Top" BorderBrush="#4C808080" BorderThickness="0,0,0,1">
-        <UniformGrid Rows="1" MaxWidth="600" HorizontalAlignment="Left" Margin="15">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="2" VerticalAlignment="Center">Filter:</TextBlock>
-                <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" SelectionChanged="OnFilterSelectionChanged"></ComboBox>
-            </StackPanel>
-            <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">Include prerelease</CheckBox>
-            <TextBox Margin="2" Width="150">Search</TextBox>
-        </UniformGrid>
+            <UniformGrid Rows="1" MaxWidth="600" HorizontalAlignment="Left" Margin="15">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="2" VerticalAlignment="Center">Filter:</TextBlock>
+                    <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" SelectionChanged="OnFilterSelectionChanged"></ComboBox>
+                </StackPanel>
+                <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">Include prerelease</CheckBox>
+                <TextBox Margin="2" Width="150">Search</TextBox>
+            </UniformGrid>
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -23,7 +26,21 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <StackPanel Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}">
+                <ProgressBar Height="10" Width="200" HorizontalAlignment="Center" Margin="5" IsIndeterminate="True" />
+                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="100" Text="Loading..." Margin="5" />
+            </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ScrollViewer.Style>
+                    <Style TargetType="{x:Type ScrollViewer}">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsInProgress}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ScrollViewer.Style>
                 <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" SelectionChanged="OnSelectionChanged">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>

@@ -60,10 +60,6 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        <StatusBar Height="24" DockPanel.Dock="Bottom">
-            <TextBlock Width="180" Text="{Binding StatusText}"/>
-            <ProgressBar Width="180" Height="18" IsIndeterminate="{Binding IsInProgress}" />
-        </StatusBar>
         <local:PackageManager x:Name="PackageManager" Margin="5"/>
     </DockPanel>
 </Window>

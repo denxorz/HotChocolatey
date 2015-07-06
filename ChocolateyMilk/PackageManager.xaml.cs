@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,12 +7,15 @@ using System.Windows.Controls;
 namespace ChocolateyMilk
 {
     [Magic]
-    public partial class PackageManager : UserControl
+    public partial class PackageManager : UserControl, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ObservableCollection<IFilter> Filters { get; } = new ObservableCollection<IFilter>();
         public IFilter Filter { get; set; }
         public Packages Packages { get; set; }
         public ChocoItem SelectedPackage { get; set; }
+        public bool IsInProgress { get; set; }
 
         public PackageManager()
         {
@@ -50,5 +53,7 @@ namespace ChocolateyMilk
         {
             PackageControl.Package = SelectedPackage;
         }
+
+        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

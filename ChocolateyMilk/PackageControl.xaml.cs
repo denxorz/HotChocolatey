@@ -1,10 +1,13 @@
-﻿using System.Windows.Controls;
+﻿using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace ChocolateyMilk
 {
     [Magic]
-    public partial class PackageControl : UserControl
+    public partial class PackageControl : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ChocoItem Package
         {
             get { return package; }
@@ -21,5 +24,7 @@ namespace ChocolateyMilk
         {
             InitializeComponent();
         }
+
+        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }

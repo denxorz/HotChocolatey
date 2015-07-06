@@ -7,7 +7,6 @@ namespace ChocolateyMilk
         public interface IProgressIndicator
         {
             bool IsInProgress { set; }
-            string StatusText { set; }
         }
 
         // TODO: should this include a static stack, so it can be used inside itself?
@@ -16,6 +15,8 @@ namespace ChocolateyMilk
 
         public ProgressIndication(IProgressIndicator indicator)
         {
+            Log.Info("ProgressIndication.ctor");
+
             this.indicator = indicator;
             this.indicator.IsInProgress = true;
         }
@@ -23,7 +24,7 @@ namespace ChocolateyMilk
         void IDisposable.Dispose()
         {
             indicator.IsInProgress = false;
-            indicator.StatusText = "Ready";
+            Log.Info("ProgressIndication.Dispose");
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Collections.Specialized;
 namespace ChocolateyMilk
 {
     [Magic]
-    public partial class MainWindow : Window, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -20,8 +20,6 @@ namespace ChocolateyMilk
         public Packages Packages { get; } = new Packages();
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
-        public bool IsInProgress { get; set; }
-        public string StatusText { get; set; }
         public string SearchText { get; set; }
         public bool IsLogVisible { get; set; }
 
@@ -30,7 +28,7 @@ namespace ChocolateyMilk
             InitializeComponent();
             DataContext = this;
 
-        // TODO :    ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
+            // TODO :    ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
 
             Log.ResetSettings(true, true, true, Diagnostics);
             Log.Info("---");
@@ -41,10 +39,8 @@ namespace ChocolateyMilk
         {
             PackageManager.Packages = Packages;
 
-            using (new ProgressIndication(this))
+            using (new ProgressIndication(PackageManager))
             {
-                StatusText = "Getting version info";
-
                 try
                 {
                     var result = await Controller.GetVersion();
@@ -65,19 +61,16 @@ namespace ChocolateyMilk
         {
             Log.Info(nameof(Refresh));
 
-            StatusText = "Scanning for installed packges";
             (await Controller.GetInstalled()).ForEach(Packages.Add);
-            StatusText = "Scanning for updates";
-          // TODO :  (await Controller.GetUpgradable()).ForEach(Packages.Add);
+            // TODO :  (await Controller.GetUpgradable()).ForEach(Packages.Add);
 
             // TODO : decide if this can be done without paging?
-            //StatusText = "Scanning for new packages";
             //(await Controller.GetAvailable()).ForEach(Packages.Add);
         }
 
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
         {
-            using (new ProgressIndication(this))
+            using (new ProgressIndication(PackageManager))
             {
                 Packages.Clear();
                 await Refresh();
@@ -91,15 +84,10 @@ namespace ChocolateyMilk
 
         private async void OnApplyClick(object sender, RoutedEventArgs e)
         {
-            using (new ProgressIndication(this))
+            using (new ProgressIndication(PackageManager))
             {
-                StatusText = "Installing new packages";
                 bool installResult = await Controller.Install(Packages.MarkedForInstallation);
-
-                StatusText = "Upgrading packages";
                 bool upgradingResult = await Controller.Upgrade(Packages.MarkedForUpgrade);
-
-                StatusText = "Removing packages";
                 bool uninstallResult = await Controller.Uninstall(Packages.MarkedForUninstall);
 
                 if (!installResult || !upgradingResult || !uninstallResult)
@@ -116,9 +104,8 @@ namespace ChocolateyMilk
         {
             Log.Info($"Searching for: {SearchText}");
 
-            using (new ProgressIndication(this))
+            using (new ProgressIndication(PackageManager))
             {
-                StatusText = "Searching for packages";
                 (await Controller.GetAvailable(SearchText)).ForEach(Packages.Add);
             }
         }
@@ -140,7 +127,7 @@ namespace ChocolateyMilk
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-             // TODO :   loggingListBox.ScrollIntoView(e.NewItems[0]);
+                // TODO :   loggingListBox.ScrollIntoView(e.NewItems[0]);
             }
         }
 
