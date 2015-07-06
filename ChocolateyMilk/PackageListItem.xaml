@@ -10,10 +10,10 @@
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </UserControl.Resources>
     <Grid>
-        <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top" FontSize="9.333" FontStyle="Italic" Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}"/>
-        <TextBlock Margin="82,10,40,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBlock Margin="82,31,40,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis"/>
-        <Image Height="16" Margin="0,22,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16"/>
+        <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico}" />
+        <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top" FontSize="9.333" FontStyle="Italic" Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
+        <TextBlock Margin="82,10,40,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" FontWeight="Bold" TextTrimming="WordEllipsis" />
+        <TextBlock Margin="82,31,40,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
+        <Image Height="16" Margin="0,22,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" />
     </Grid>
 </UserControl>

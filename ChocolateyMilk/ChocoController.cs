@@ -32,11 +32,13 @@ namespace ChocolateyMilk
             var result = await Execute("list -l -r");
             result.ThrowIfNotSucceeded();
 
-            return await Task.Run(() => result.Output.Select(t =>
-            {
-                var tmp = t.Split(Seperator);
-                return ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), tmp[1]);
-            }).ToList());
+            var tasks = result.Output.Select(t =>
+                {
+                    var tmp = t.Split(Seperator);
+                    return Task.Run(() => ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), tmp[1]));
+                }).ToList();
+
+            return (await Task.WhenAll(tasks)).ToList();
         }
 
         public async Task<List<ChocoItem>> GetAvailable(string name)
