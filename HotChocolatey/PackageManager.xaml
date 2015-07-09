@@ -27,8 +27,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}">
-                <ProgressBar Height="10" Width="200" HorizontalAlignment="Center" Margin="5" IsIndeterminate="True" />
-                <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" Width="100" Text="Loading..." Margin="5" />
+                <ProgressBar Height="10" IsIndeterminate="True" HorizontalAlignment="Center" Width="200" Margin="0,20,0,0" />
+                <TextBlock Text="Loading..." HorizontalAlignment="Center" Width="200" Margin="0,5,0,0" TextAlignment="Center" />
             </StackPanel>
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <ScrollViewer.Style>
