@@ -92,7 +92,6 @@ namespace HotChocolatey
                 return false;
             }
 
-            packages.ForEach(t => t.IsMarkedForInstallation = false);
             return true;
         }
 
@@ -111,7 +110,6 @@ namespace HotChocolatey
                 return false;
             }
 
-            packages.ForEach(t => t.IsMarkedForUpgrade = false);
             return true;
         }
 
@@ -130,7 +128,6 @@ namespace HotChocolatey
                 return false;
             }
 
-            packages.ForEach(t => t.IsMarkedForUninstall = false);
             return true;
         }
 

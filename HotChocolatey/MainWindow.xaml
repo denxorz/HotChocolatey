@@ -20,16 +20,10 @@
                         <Label Padding="0">Refresh</Label>
                     </StackPanel>
                 </Button>
-                <Button Click="OnMarkAllUpgradesClick">
+                <Button>
                     <StackPanel Orientation="Vertical">
                         <Image Source="Images/approval-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Mark all upgrades</Label>
-                    </StackPanel>
-                </Button>
-                <Button Click="OnApplyClick">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="Images/checkmark-48.png" Stretch="Uniform" Width="32" />
-                        <Label Padding="0">Apply</Label>
                     </StackPanel>
                 </Button>
                 <Separator/>

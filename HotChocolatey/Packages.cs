@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -10,11 +9,7 @@ namespace HotChocolatey
     public class Packages
     {
         public ObservableCollection<ChocoItem> Items { get; } = new ObservableCollection<ChocoItem>();
-        public List<ChocoItem> MarkedForInstallation => Items.Where(t => t.IsMarkedForInstallation).ToList();
-        public List<ChocoItem> MarkedForUpgrade => Items.Where(t => t.IsMarkedForUpgrade).ToList();
-        public List<ChocoItem> MarkedForUninstall => Items.Where(t => t.IsMarkedForUninstall).ToList();
 
-        private readonly Dictionary<string, ChocoItem> packages = new Dictionary<string, ChocoItem>();
         private readonly ICollectionView view;
 
         public Packages()
@@ -29,21 +24,37 @@ namespace HotChocolatey
 
         public void Add(ChocoItem item)
         {
-            if (packages.ContainsKey(item.Name))
-            {
-                packages[item.Name].Update(item);
-            }
-            else
-            {
-                packages.Add(item.Name, item);
-                Items.Add(item);
-            }
+            Items.Remove(Items.FirstOrDefault(t => t.Package.Id == item.Package.Id));
+            Items.Add(item);
+            Sort();
         }
 
         public void Clear()
         {
             Items.Clear();
-            packages.Clear();
+        }
+
+        /// <summary>
+        /// Based on http://stackoverflow.com/a/1945701/2471080
+        /// </summary>
+        private void Sort()
+        {
+            List<ChocoItem> sorted = Items.OrderBy(x => x.Title).ToList();
+
+            int ptr = 0;
+            while (ptr < sorted.Count)
+            {
+                if (!Items[ptr].Equals(sorted[ptr]))
+                {
+                    ChocoItem t = Items[ptr];
+                    Items.RemoveAt(ptr);
+                    Items.Insert(sorted.IndexOf(t), t);
+                }
+                else
+                {
+                    ptr++;
+                }
+            }
         }
     }
 }

@@ -77,29 +77,6 @@ namespace HotChocolatey
             }
         }
 
-        private void OnMarkAllUpgradesClick(object sender, RoutedEventArgs e)
-        {
-            Packages.Items.Where(t => t.IsInstalledUpgradable).ToList().ForEach(t => t.IsMarkedForUpgrade = true);
-        }
-
-        private async void OnApplyClick(object sender, RoutedEventArgs e)
-        {
-            using (new ProgressIndication(PackageManager))
-            {
-                bool installResult = await Controller.Install(Packages.MarkedForInstallation);
-                bool upgradingResult = await Controller.Upgrade(Packages.MarkedForUpgrade);
-                bool uninstallResult = await Controller.Uninstall(Packages.MarkedForUninstall);
-
-                if (!installResult || !upgradingResult || !uninstallResult)
-                {
-                    MessageBox.Show($"Apply failed.{Environment.NewLine}Installing:{installResult}{Environment.NewLine}Upgrading:{upgradingResult}{Environment.NewLine}Removing:{uninstallResult}",
-                        "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-
-                await Refresh();
-            }
-        }
-
         private async void OnSearchClick(object sender, RoutedEventArgs e)
         {
             Log.Info($"Searching for: {SearchText}");

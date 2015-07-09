@@ -11,9 +11,6 @@ namespace HotChocolatey
                 new InstalledFilter(),
                 new InstalledUpgradableFilter(),
                 new NotInstalledFilter(),
-                new MarkedForInstallationFilter(),
-                new MarkedForUpgradeFilter(),
-                new MarkedForUninstallFilter(),
             };
 
 
@@ -31,32 +28,14 @@ namespace HotChocolatey
 
         private class InstalledUpgradableFilter : IFilter
         {
-            public Predicate<object> Filter => t => (t as ChocoItem).IsInstalledUpgradable;
-            public override string ToString() => "Installed (upgradable)";
+            public Predicate<object> Filter => t => (t as ChocoItem).IsUpgradable;
+            public override string ToString() => "Upgradable";
         }
 
         private class NotInstalledFilter : IFilter
         {
             public Predicate<object> Filter => t => !(t as ChocoItem).IsInstalled;
             public override string ToString() => "Not installed";
-        }
-
-        private class MarkedForInstallationFilter : IFilter
-        {
-            public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForInstallation;
-            public override string ToString() => "Marked for installation";
-        }
-
-        private class MarkedForUpgradeFilter : IFilter
-        {
-            public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForUpgrade;
-            public override string ToString() => "Marked for upgrade";
-        }
-
-        private class MarkedForUninstallFilter : IFilter
-        {
-            public Predicate<object> Filter => t => (t as ChocoItem).IsMarkedForUninstall;
-            public override string ToString() => "Marked for removal";
         }
     }
 }
