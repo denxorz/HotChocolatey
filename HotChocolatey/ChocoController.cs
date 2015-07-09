@@ -38,12 +38,18 @@ namespace HotChocolatey
                     return Task.Run(() => ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), tmp[1]));
                 }).ToList();
 
-            return (await Task.WhenAll(tasks)).ToList();
+            var packages = (await Task.WhenAll(tasks)).ToList();
+            packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+
+            return packages;
         }
 
         public async Task<List<ChocoItem>> GetAvailable(string name)
         {
-            return (await GetPackages(name)).Select(t => ChocoItem.FromPackage(t)).ToList();
+            var packages = (await GetPackages(name)).Select(t => ChocoItem.FromPackage(t)).ToList();
+            packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+
+            return packages;
         }
 
         public async Task<List<IPackage>> GetPackages(string name)
@@ -51,16 +57,24 @@ namespace HotChocolatey
             return await Task.Run(() => repo.GetPackages().Where(p => p.Title.Contains(name) && p.IsLatestVersion).ToList());
         }
 
+        public async Task<List<SemanticVersion>> GetVersions(string id)
+        {
+            return await Task.Run(() => repo.GetPackages().Where(p => p.Id == id).ToList().Select(p => p.Version).OrderByDescending(p => p.Version).ToList());
+        }
+
         public async Task<List<ChocoItem>> GetUpgradable()
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
 
-            return await Task.Run(() => result.Output.Select(t =>
-            {
-                var tmp = t.Split(Seperator);
-                return ChocoItem.FromUpdatableString(repo.FindPackage(tmp[0]), tmp[1], tmp[2]);
-            }).ToList());
+            var packages = await Task.Run(() => result.Output.Select(t =>
+             {
+                 var tmp = t.Split(Seperator);
+                 return ChocoItem.FromUpdatableString(repo.FindPackage(tmp[0]), tmp[1], tmp[2]);
+             }).ToList());
+            packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+
+            return packages;
         }
 
         public async Task<bool> Install(List<ChocoItem> packages)

@@ -8,21 +8,12 @@ namespace HotChocolatey
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChocoItem Package
-        {
-            get { return package; }
-            set
-            {
-                package = value;
-                DataContext = package;
-            }
-        }
-
-        private ChocoItem package;
+        public ChocoItem Package { get; set; }
 
         public PackageControl()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

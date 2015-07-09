@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using NuGet;
 using System.IO;
+using System.Collections.Generic;
 
 namespace HotChocolatey
 {
@@ -20,6 +21,8 @@ namespace HotChocolatey
         public bool IsMarkedForInstallation { get; set; }
         public bool IsMarkedForUpgrade { get; set; }
         public bool IsMarkedForUninstall { get; set; }
+        public List<SemanticVersion> Versions { get; set; }
+
 
         public string Title => Package.Title;
         public Uri Ico => Package.IconUrl == null || Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? noIconUri : Package.IconUrl;
