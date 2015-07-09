@@ -52,7 +52,7 @@
                 </ListView>
             </ScrollViewer>
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" />
+            <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" Visibility="{Binding Path=HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" />
         </Grid>
     </DockPanel>
 </UserControl>

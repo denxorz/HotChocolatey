@@ -17,6 +17,8 @@ namespace HotChocolatey
         public ChocoItem SelectedPackage { get; set; }
         public bool IsInProgress { get; set; }
 
+        public bool HasSelectedPackage => SelectedPackage != null;
+
         public PackageManager()
         {
             InitializeComponent();
@@ -45,7 +47,7 @@ namespace HotChocolatey
         {
             if (SelectedPackage == null)
             {
-                SelectedPackage = Packages.Items.First();
+                SelectedPackage = Packages.Items.FirstOrDefault();
             }
         }
 
