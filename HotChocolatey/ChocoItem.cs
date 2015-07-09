@@ -22,12 +22,14 @@ namespace HotChocolatey
         public bool IsMarkedForUninstall { get; set; }
 
         public string Title => Package.Title;
-        public Uri Ico => Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative) : Package.IconUrl;
+        public Uri Ico => Package.IconUrl == null || Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? noIconUri : Package.IconUrl;
         public bool IsPreRelease => !Package.IsReleaseVersion();
         public string Summary => Package.Summary;
         public string Description => Package.Description;
 
         public bool IsInstalled => InstalledVersion != null;
+
+        private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative);
 
         public ChocoItem(IPackage package)
         {
