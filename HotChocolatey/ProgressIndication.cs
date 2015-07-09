@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     public class ProgressIndication : IDisposable
     {

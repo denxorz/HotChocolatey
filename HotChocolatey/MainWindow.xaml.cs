@@ -9,7 +9,7 @@ using System;
 using System.Reflection;
 using System.Collections.Specialized;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     [Magic]
     public partial class MainWindow : Window, INotifyPropertyChanged
@@ -49,7 +49,7 @@ namespace ChocolateyMilk
                 catch (Win32Exception ex)
                 {
                     Log.Error($"Choco not installed? Message: {ex.Message}");
-                    MessageBox.Show("Choco not installed?", "ChocolateyMilk Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -93,7 +93,7 @@ namespace ChocolateyMilk
                 if (!installResult || !upgradingResult || !uninstallResult)
                 {
                     MessageBox.Show($"Apply failed.{Environment.NewLine}Installing:{installResult}{Environment.NewLine}Upgrading:{upgradingResult}{Environment.NewLine}Removing:{uninstallResult}",
-                        "ChocolateyMilk Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
 
                 await Refresh();

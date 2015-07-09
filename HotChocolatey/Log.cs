@@ -4,7 +4,7 @@ using log4net.Config;
 using log4net.Layout;
 using System.Collections.Generic;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     static class Log
     {

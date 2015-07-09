@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     [Magic]
     public partial class PackageManager : UserControl, INotifyPropertyChanged, ProgressIndication.IProgressIndicator

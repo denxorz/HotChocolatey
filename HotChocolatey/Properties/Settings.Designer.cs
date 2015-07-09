@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ChocolateyMilk.Properties {
+namespace HotChocolatey.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

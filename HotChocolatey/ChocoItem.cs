@@ -4,7 +4,7 @@ using System.ComponentModel;
 using NuGet;
 using System.IO;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     [Magic]
     public class ChocoItem : INotifyPropertyChanged
@@ -22,7 +22,7 @@ namespace ChocolateyMilk
         public bool IsMarkedForUninstall { get; set; }
 
         public string Title => Package.Title;
-        public Uri Ico => Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? new Uri("/ChocolateyMilk;component/Images/chocolateyicon.gif", UriKind.Relative) : Package.IconUrl;
+        public Uri Ico => Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative) : Package.IconUrl;
         public bool IsPreRelease => !Package.IsReleaseVersion();
         public string Summary => Package.Summary;
         public string Description => Package.Description;

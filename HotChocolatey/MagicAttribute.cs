@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     /// <summary>
     /// Does INotifyPropertyChanged magic http://kindofmagic.codeplex.com/

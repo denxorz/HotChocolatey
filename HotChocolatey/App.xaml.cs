@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     public partial class App : Application
     {

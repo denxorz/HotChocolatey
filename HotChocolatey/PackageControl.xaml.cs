@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Windows.Controls;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     [Magic]
     public partial class PackageControl : UserControl, INotifyPropertyChanged

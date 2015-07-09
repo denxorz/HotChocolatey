@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     public class ChocolateyController
     {

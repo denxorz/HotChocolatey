@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ChocolateyMilk
+namespace HotChocolatey
 {
     public static class FilterFactory
     {
