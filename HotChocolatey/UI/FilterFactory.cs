@@ -1,7 +1,8 @@
-﻿using System;
+﻿using HotChocolatey.Logic;
+using System;
 using System.Collections.Generic;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     public static class FilterFactory
     {

@@ -1,10 +1,11 @@
-﻿using System.Collections.ObjectModel;
+﻿using HotChocolatey.Logic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     [Magic]
     public partial class PackageManager : UserControl, INotifyPropertyChanged, ProgressIndication.IProgressIndicator

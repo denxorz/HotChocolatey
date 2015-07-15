@@ -1,9 +1,9 @@
-﻿<Window x:Class="HotChocolatey.MainWindow"
+﻿<Window x:Class="HotChocolatey.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HotChocolatey"
+        xmlns:local="clr-namespace:HotChocolatey.UI"
         mc:Ignorable="d"
         Title="Hot Chocolatey" Icon="Hot Chocolate-50.ico"
         Height="600" Width="800" 
@@ -16,13 +16,13 @@
             <ToolBar>
                 <Button Click="OnRefreshClick">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="Images/synchronize-48.png" Stretch="Uniform" Width="32" />
+                        <Image Source="../Images/synchronize-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Refresh</Label>
                     </StackPanel>
                 </Button>
                 <Button>
                     <StackPanel Orientation="Vertical">
-                        <Image Source="Images/approval-48.png" Stretch="Uniform" Width="32" />
+                        <Image Source="../Images/approval-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Mark all upgrades</Label>
                     </StackPanel>
                 </Button>
@@ -30,21 +30,21 @@
                 <!-- TODO : issue #4 settings: 
                 <Button>
                     <StackPanel Orientation="Vertical">
-                        <Image Source="Images/settings-48.png" Stretch="Uniform" Width="32" />
+                        <Image Source="../Images/settings-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Settings</Label>
                     </StackPanel>
                 </Button>
                 -->
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="Images/todo_list-48.png" Stretch="Uniform" Width="32" />
+                        <Image Source="../Images/todo_list-48.png" Stretch="Uniform" Width="32" />
                         <Label Padding="0">Logging</Label>
                     </StackPanel>
                 </ToggleButton>
                 <Separator/>
                 <Button Click="OnSearchClick" Width="160">
                     <StackPanel Orientation="Vertical">
-                        <Image Source="Images/binoculars-48.png" Stretch="Uniform" Width="32" />
+                        <Image Source="../Images/binoculars-48.png" Stretch="Uniform" Width="32" />
                         <!-- from http://stackoverflow.com/a/28634583 -->
                         <Grid Background="White" Width="150"  >
                             <TextBlock Margin="5,2" MinWidth="50" Text="Search..." Foreground="LightSteelBlue" Visibility="{Binding ElementName=txtSearchBox, Path=Text.IsEmpty, Converter={StaticResource Bool2Visibility}}" />

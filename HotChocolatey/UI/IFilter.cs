@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     public interface IFilter
     {

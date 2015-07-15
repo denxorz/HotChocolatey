@@ -39,7 +39,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Hot Chocolate-50.ico</ApplicationIcon>
+    <ApplicationIcon>UI\Hot Chocolate-50.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -141,56 +141,56 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="ActionFactory.cs" />
+    <Compile Include="Logic\ActionFactory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ChocoController.cs" />
-    <Compile Include="ChocoExecutionException.cs" />
-    <Compile Include="ChocoItem.cs" />
-    <Compile Include="ChocolateyResult.cs" />
-    <Compile Include="Diagnostics.cs" />
-    <Compile Include="FilterChangedEventArgs.cs" />
-    <Compile Include="FilterFactory.cs" />
-    <Compile Include="IFilter.cs" />
-    <Compile Include="IAction.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="MagicAttribute.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Logic\ChocoController.cs" />
+    <Compile Include="Logic\ChocoExecutionException.cs" />
+    <Compile Include="Logic\ChocoItem.cs" />
+    <Compile Include="Logic\ChocolateyResult.cs" />
+    <Compile Include="UI\Diagnostics.cs" />
+    <Compile Include="UI\FilterChangedEventArgs.cs" />
+    <Compile Include="UI\FilterFactory.cs" />
+    <Compile Include="UI\IFilter.cs" />
+    <Compile Include="Logic\IAction.cs" />
+    <Compile Include="Utility\Log.cs" />
+    <Compile Include="UI\MagicAttribute.cs" />
+    <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="PackageControl.xaml">
+    <Page Include="UI\PackageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PackageListItem.xaml">
+    <Page Include="UI\PackageListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="PackageManager.xaml">
+    <Page Include="UI\PackageManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ObservableCollectionEx.cs" />
-    <Compile Include="PackageControl.xaml.cs">
+    <Compile Include="Utility\ObservableCollectionEx.cs" />
+    <Compile Include="UI\PackageControl.xaml.cs">
       <DependentUpon>PackageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PackageListItem.xaml.cs">
+    <Compile Include="UI\PackageListItem.xaml.cs">
       <DependentUpon>PackageListItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PackageManager.xaml.cs">
+    <Compile Include="UI\PackageManager.xaml.cs">
       <DependentUpon>PackageManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Packages.cs" />
-    <Compile Include="ProgressIndication.cs" />
+    <Compile Include="Logic\Packages.cs" />
+    <Compile Include="UI\ProgressIndication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -234,7 +234,7 @@
     <Resource Include="Images\todo_list-48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Hot Chocolate-50.ico" />
+    <Resource Include="UI\Hot Chocolate-50.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\chocolateyicon.gif" />

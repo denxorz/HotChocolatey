@@ -1,13 +1,15 @@
-﻿using System.Windows;
-using System.ComponentModel;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows.Controls;
+﻿using HotChocolatey.Logic;
+using HotChocolatey.Utility;
 using System;
-using System.Reflection;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     [Magic]
     public partial class MainWindow : Window, INotifyPropertyChanged

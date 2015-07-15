@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HotChocolatey
+namespace HotChocolatey.Logic
 {
     public struct ChocolateyResult
     {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using NuGet;
+﻿using NuGet;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace HotChocolatey
+namespace HotChocolatey.Logic
 {
     internal class ActionFactory
     {

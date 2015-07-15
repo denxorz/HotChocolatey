@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace HotChocolatey
+namespace HotChocolatey.Utility
 {
     /// <summary>
     /// http://codeblog.vurdalakov.net/2013/06/fast-addrange-method-for-observablecollection.html

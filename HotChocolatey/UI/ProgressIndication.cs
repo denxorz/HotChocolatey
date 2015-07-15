@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     public class ProgressIndication : IDisposable
     {
@@ -15,16 +15,13 @@ namespace HotChocolatey
 
         public ProgressIndication(IProgressIndicator indicator)
         {
-            Log.Info("ProgressIndication.ctor");
-
             this.indicator = indicator;
             this.indicator.IsInProgress = true;
         }
 
-        void IDisposable.Dispose()
+        public void Dispose()
         {
             indicator.IsInProgress = false;
-            Log.Info("ProgressIndication.Dispose");
         }
     }
 }

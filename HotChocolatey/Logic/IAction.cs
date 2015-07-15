@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace HotChocolatey
+namespace HotChocolatey.Logic
 {
     public interface IAction
     {

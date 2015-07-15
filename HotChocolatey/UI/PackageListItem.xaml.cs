@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     public partial class PackageListItem : UserControl
     {

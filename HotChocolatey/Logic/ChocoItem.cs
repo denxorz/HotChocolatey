@@ -1,13 +1,12 @@
-﻿
+﻿using NuGet;
 using System;
-using System.ComponentModel;
-using NuGet;
-using System.IO;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.IO;
 
-namespace HotChocolatey
+namespace HotChocolatey.Logic
 {
-    [Magic]
+    [UI.Magic]
     public class ChocoItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

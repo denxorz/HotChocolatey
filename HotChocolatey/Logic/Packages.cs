@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using HotChocolatey.UI;
+using HotChocolatey.Utility;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 
-namespace HotChocolatey
+namespace HotChocolatey.Logic
 {
     public class Packages
     {

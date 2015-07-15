@@ -4,7 +4,7 @@ using log4net.Config;
 using log4net.Layout;
 using System.Collections.Generic;
 
-namespace HotChocolatey
+namespace HotChocolatey.Utility
 {
     static class Log
     {
@@ -14,7 +14,7 @@ namespace HotChocolatey
         /// http://stackoverflow.com/questions/16336917/can-you-configure-log4net-in-code-instead-of-using-a-config-file
         /// http://stackoverflow.com/questions/885378/log4net-pure-code-configuration-with-filter-in-c-sharp
         /// </summary>
-        public static void ResetSettings(bool toLog, bool toConsole, bool toDiagnostics, Diagnostics diagnostics)
+        public static void ResetSettings(bool toLog, bool toConsole, bool toDiagnostics, UI.Diagnostics diagnostics)
         {
             List<IAppender> appenders = new List<IAppender>();
 

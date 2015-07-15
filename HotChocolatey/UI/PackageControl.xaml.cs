@@ -1,10 +1,12 @@
-﻿using NuGet;
+﻿using HotChocolatey.Logic;
+using NuGet;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     [Magic]
     public partial class PackageControl : UserControl, INotifyPropertyChanged
@@ -25,6 +27,8 @@ namespace HotChocolatey
                     PackageAction = package.Actions.First();
                     PackageVersion = PackageAction.Versions.First();
                 }
+
+                Raise();
             }
         }
 
@@ -38,6 +42,9 @@ namespace HotChocolatey
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        [MethodImpl(MethodImplOptions.NoInlining)] // to preserve method call 
+        protected static void Raise() { }
 
         private async void OnActionButtonClick(object sender, RoutedEventArgs e)
         {

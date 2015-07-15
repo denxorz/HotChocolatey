@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Threading;
 
-namespace HotChocolatey
+namespace HotChocolatey.UI
 {
     [Magic]
     public class Diagnostics : IAppender
