@@ -110,6 +110,7 @@
       <HintPath>..\packages\NuGet.Versioning.1.0.7\lib\portable-net40+win\NuGet.Versioning.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -141,6 +142,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UI\SearchEventArgs.cs" />
+    <Compile Include="Utility\SearchTextBox.cs" />
     <Page Include="UI\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -174,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UI\PackageManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,9 +232,6 @@
     <Resource Include="Images\settings-48.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\binoculars-48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\synchronize-48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -238,6 +242,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\chocolateyicon.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\26\Delete Sign-26.png" />
+    <Resource Include="Images\26\Search-26.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />

@@ -42,18 +42,8 @@
                     </StackPanel>
                 </ToggleButton>
                 <Separator/>
-                <Button Click="OnSearchClick" Width="160">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/binoculars-48.png" Stretch="Uniform" Width="32" />
-                        <!-- from http://stackoverflow.com/a/28634583 -->
-                        <Grid Background="White" Width="150"  >
-                            <TextBlock Margin="5,2" MinWidth="50" Text="Search..." Foreground="LightSteelBlue" Visibility="{Binding ElementName=txtSearchBox, Path=Text.IsEmpty, Converter={StaticResource Bool2Visibility}}" />
-                            <TextBox MinWidth="50" Name="txtSearchBox" Background="Transparent" Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
-                        </Grid>
-                    </StackPanel>
-                </Button>
             </ToolBar>
         </ToolBarTray>
-        <local:PackageManager x:Name="PackageManager" Margin="5"/>
+        <local:PackageManager x:Name="PackageManager" Margin="5" Searched="OnSearchClick"/>
     </DockPanel>
 </Window>

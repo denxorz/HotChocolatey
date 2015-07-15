@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotChocolatey.UI"
+             xmlns:utility="clr-namespace:HotChocolatey.Utility"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500" Loaded="OnLoaded" BorderThickness="1" BorderBrush="#4C808080">
     <UserControl.Resources>
@@ -17,7 +18,7 @@
                     <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" SelectionChanged="OnFilterSelectionChanged"></ComboBox>
                 </StackPanel>
                 <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center">Include prerelease</CheckBox>
-                <TextBox Margin="2" Width="150">Search</TextBox>
+                <utility:SearchTextBox Margin="2" Width="150" Search="OnSearch" />
             </UniformGrid>
         </Border>
         <Grid>

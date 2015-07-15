@@ -20,7 +20,6 @@ namespace HotChocolatey.UI
         public Packages Packages { get; } = new Packages();
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
-        public string SearchText { get; set; }
         public bool IsLogVisible { get; set; }
 
         public MainWindow()
@@ -72,13 +71,21 @@ namespace HotChocolatey.UI
             }
         }
 
-        private async void OnSearchClick(object sender, RoutedEventArgs e)
+        private async void OnSearchClick(object sender, SearchEventArgs e)
         {
-            Log.Info($"Searching for: {SearchText}");
+            Log.Info($"Searching for: {e.SearchText}");
 
             using (new ProgressIndication(PackageManager))
             {
-                (await Controller.GetAvailable(SearchText)).ForEach(Packages.Add);
+                if (string.IsNullOrWhiteSpace(e.SearchText))
+                {
+                    await Refresh();
+                }
+                else
+                {
+                    Packages.Clear();
+                    (await Controller.GetAvailable(e.SearchText)).ForEach(Packages.Add);
+                }
             }
         }
 

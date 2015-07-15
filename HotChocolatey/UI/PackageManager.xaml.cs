@@ -1,4 +1,6 @@
 ﻿using HotChocolatey.Logic;
+using HotChocolatey.Utility;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace HotChocolatey.UI
     public partial class PackageManager : UserControl, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<SearchEventArgs> Searched;
 
         public ObservableCollection<IFilter> Filters { get; } = new ObservableCollection<IFilter>();
         public IFilter Filter { get; set; }
@@ -55,6 +58,11 @@ namespace HotChocolatey.UI
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PackageControl.Package = SelectedPackage;
+        }
+
+        private void OnSearch(object sender, SearchEventArgs e)
+        {
+            Searched?.Invoke(this, e);
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
