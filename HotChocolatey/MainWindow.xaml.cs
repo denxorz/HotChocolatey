@@ -1,8 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Windows;
+﻿using System.Windows;
 using System.ComponentModel;
 using System.Threading.Tasks;
-using System.Linq;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System;
@@ -62,7 +60,7 @@ namespace HotChocolatey
             Log.Info(nameof(Refresh));
 
             (await Controller.GetInstalled()).ForEach(Packages.Add);
-            // TODO :  (await Controller.GetUpgradable()).ForEach(Packages.Add);
+            (await Controller.GetUpgradable()).ForEach(Packages.Add);
 
             // TODO : decide if this can be done without paging?
             //(await Controller.GetAvailable()).ForEach(Packages.Add);

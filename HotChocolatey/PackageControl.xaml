@@ -15,11 +15,11 @@
             <TextBlock Margin="47,16,10,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" FontSize="18.667" TextTrimming="WordEllipsis" />
             <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Action:" VerticalAlignment="Top" FontWeight="Bold" />
             <TextBlock HorizontalAlignment="Left" Margin="147,59,0,0" TextWrapping="Wrap" Text="Version:" VerticalAlignment="Top" FontWeight="Bold" />
-            <ComboBox HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Actions}" SelectedItem="{Binding PackageAction}" />
-            <ComboBox HorizontalAlignment="Left" Margin="147,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Versions}" SelectedItem="{Binding PackageVersion}" />
+            <ComboBox HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Actions}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=PackageAction}" />
+            <ComboBox HorizontalAlignment="Left" Margin="147,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=PackageAction.Versions}" SelectedItem="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=PackageVersion}" />
             <TextBlock HorizontalAlignment="Left" Margin="10,116,0,0" TextWrapping="Wrap" Text="Installed version:" VerticalAlignment="Top" Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"/>
             <TextBlock HorizontalAlignment="Left" Margin="112,116,0,0" TextWrapping="Wrap" Text="{Binding InstalledVersion}" VerticalAlignment="Top" Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"/>
-            <Button Content="Upgrade" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" />
+            <Button Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=PackageAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Click="OnActionButtonClick" />
             <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
             <TextBlock HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" FontWeight="Bold" />
             <TextBlock Margin="10,220,10,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" />

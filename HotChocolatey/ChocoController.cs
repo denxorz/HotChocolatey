@@ -35,11 +35,12 @@ namespace HotChocolatey
             var tasks = result.Output.Select(t =>
                 {
                     var tmp = t.Split(Seperator);
-                    return Task.Run(() => ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), tmp[1]));
+                    return Task.Run(() => ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1])));
                 }).ToList();
 
             var packages = (await Task.WhenAll(tasks)).ToList();
             packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
 
             return packages;
         }
@@ -48,6 +49,7 @@ namespace HotChocolatey
         {
             var packages = (await GetPackages(name)).Select(t => ChocoItem.FromPackage(t)).ToList();
             packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
 
             return packages;
         }
@@ -70,61 +72,54 @@ namespace HotChocolatey
             var packages = await Task.Run(() => result.Output.Select(t =>
              {
                  var tmp = t.Split(Seperator);
-                 return ChocoItem.FromUpdatableString(repo.FindPackage(tmp[0]), tmp[1], tmp[2]);
+                 return ChocoItem.FromUpdatableString(repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1]), new SemanticVersion(tmp[2]));
              }).ToList());
             packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
 
             return packages;
         }
 
-        public async Task<bool> Install(List<ChocoItem> packages)
+        public async Task<bool> Install(ChocoItem package, SemanticVersion specificVersion = null)
         {
-            string packagesToInstall = AggregatePackageNames(packages);
-            Log.Info($"{nameof(Install)}: {packagesToInstall}");
+            Log.Info($"{nameof(Install)}: {package.Name} version:{specificVersion}");
 
-            if (packages.Count == 0) return true;
-
-            var result = await Execute($"install {packagesToInstall} -r -y");
+            var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
+            var result = await Execute($"install -r -y {package.Name} {version}");
 
             if (!result.Succeeded)
             {
-                Log.Error($"{nameof(Install)} failed for the following packages: {packagesToInstall}");
+                Log.Error($"{nameof(Install)} failed for the following package: {package.Name}");
                 return false;
             }
 
             return true;
         }
 
-        public async Task<bool> Upgrade(List<ChocoItem> packages)
+        public async Task<bool> Upgrade(ChocoItem package)
         {
-            string packagesToUpgrade = AggregatePackageNames(packages);
-            Log.Info($"{nameof(Upgrade)}: {packagesToUpgrade}");
+            Log.Info($"{nameof(Upgrade)}: {package.Name}");
 
-            if (packages.Count == 0) return true;
-
-            var result = await Execute($"upgrade {packagesToUpgrade} -r -y");
+            var result = await Execute($"upgrade -r -y {package.Name}");
 
             if (!result.Succeeded)
             {
-                Log.Error($"{nameof(Upgrade)} failed for the following packages: {packagesToUpgrade}");
+                Log.Error($"{nameof(Upgrade)} failed for the following package: {package.Name}");
                 return false;
             }
 
             return true;
         }
 
-        public async Task<bool> Uninstall(List<ChocoItem> packages)
+        public async Task<bool> Uninstall(ChocoItem package)
         {
-            string packagesToUninstall = AggregatePackageNames(packages);
-            Log.Info($"{nameof(Uninstall)}: {packagesToUninstall}");
+            Log.Info($"{nameof(Uninstall)}: {package.Name}");
 
-            if (packages.Count == 0) return true;
-
-            var result = await Execute($"uninstall {packagesToUninstall} -r -y");
+            var result = await Execute($"uninstall -r -y {package.Name}");
 
             if (!result.Succeeded)
             {
-                Log.Error($"{nameof(Uninstall)} failed for the following packages: {packagesToUninstall}");
+                Log.Error($"{nameof(Uninstall)} failed for the following package: {package.Name}");
                 return false;
             }
 

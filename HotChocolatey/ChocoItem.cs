@@ -15,11 +15,12 @@ namespace HotChocolatey
         public IPackage Package { get; }
 
         public string Name => Package.Id;
-        public string InstalledVersion { get; private set; }
-        public string LatestVersion { get; private set; }
+        public SemanticVersion InstalledVersion { get; private set; }
+        public SemanticVersion LatestVersion { get; private set; }
         public bool IsUpgradable { get; private set; }
         public List<SemanticVersion> Versions { get; set; }
 
+        public List<IAction> Actions { get; set; }
 
         public string Title => Package.Title;
         public Uri Ico => Package.IconUrl == null || Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? noIconUri : Package.IconUrl;
@@ -36,7 +37,7 @@ namespace HotChocolatey
             Package = package;
         }
 
-        public static ChocoItem FromInstalledString(IPackage package, string version)
+        public static ChocoItem FromInstalledString(IPackage package, SemanticVersion version)
         {
             return new ChocoItem(package) { InstalledVersion = version };
         }
@@ -46,7 +47,7 @@ namespace HotChocolatey
             return new ChocoItem(package);
         }
 
-        public static ChocoItem FromUpdatableString(IPackage package, string installedVersion, string latestVersion)
+        public static ChocoItem FromUpdatableString(IPackage package, SemanticVersion installedVersion, SemanticVersion latestVersion)
         {
             return new ChocoItem(package) { InstalledVersion = installedVersion, LatestVersion = latestVersion, IsUpgradable = installedVersion != latestVersion };
         }

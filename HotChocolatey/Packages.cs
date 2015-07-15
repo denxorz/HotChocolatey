@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
@@ -8,7 +7,7 @@ namespace HotChocolatey
 {
     public class Packages
     {
-        public ObservableCollection<ChocoItem> Items { get; } = new ObservableCollection<ChocoItem>();
+        public ObservableCollectionEx<ChocoItem> Items { get; } = new ObservableCollectionEx<ChocoItem>();
 
         private readonly ICollectionView view;
 
@@ -25,13 +24,26 @@ namespace HotChocolatey
         public void Add(ChocoItem item)
         {
             Items.Remove(Items.FirstOrDefault(t => t.Package.Id == item.Package.Id));
-            Items.Add(item);
-            Sort();
+            AddSorted(item);
         }
 
         public void Clear()
         {
             Items.Clear();
+        }
+
+        /// <summary>
+        /// Based on http://stackoverflow.com/a/16839559/2471080
+        /// </summary>
+        public void AddSorted(ChocoItem item)
+        {
+            var comparer = Comparer< ChocoItem>.Create((x, y) => x.Title.CompareTo(y.Title));
+
+            int i = 0;
+            while (i < Items.Count && comparer.Compare(Items[i], item) < 0)
+                i++;
+
+            Items.Insert(i, item);
         }
 
         /// <summary>

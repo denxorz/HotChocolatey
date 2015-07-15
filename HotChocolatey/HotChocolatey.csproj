@@ -145,6 +145,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="ActionFactory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -157,6 +158,7 @@
     <Compile Include="FilterChangedEventArgs.cs" />
     <Compile Include="FilterFactory.cs" />
     <Compile Include="IFilter.cs" />
+    <Compile Include="IAction.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="MagicAttribute.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -177,6 +179,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ObservableCollectionEx.cs" />
     <Compile Include="PackageControl.xaml.cs">
       <DependentUpon>PackageControl.xaml</DependentUpon>
     </Compile>
