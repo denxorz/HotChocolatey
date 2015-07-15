@@ -27,28 +27,10 @@ namespace HotChocolatey
             return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
-        public async Task<List<ChocoItem>> GetInstalled()
-        {
-            var result = await Execute("list -l -r");
-            result.ThrowIfNotSucceeded();
-
-            var tasks = result.Output.Select(t =>
-                {
-                    var tmp = t.Split(Seperator);
-                    return Task.Run(() => ChocoItem.FromInstalledString(repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1])));
-                }).ToList();
-
-            var packages = (await Task.WhenAll(tasks)).ToList();
-            packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
-
-            return packages;
-        }
-
         public async Task<List<ChocoItem>> GetAvailable(string name)
         {
-            var packages = (await GetPackages(name)).Select(t => ChocoItem.FromPackage(t)).ToList();
-            packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
+            var packages = (await GetPackages(name)).Select(t => new ChocoItem(t)).ToList();
+            await Task.WhenAll(packages.Select(UpdatePackageVersion));
             packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
 
             return packages;
@@ -64,19 +46,21 @@ namespace HotChocolatey
             return await Task.Run(() => repo.GetPackages().Where(p => p.Id == id).ToList().Select(p => p.Version).OrderByDescending(p => p.Version).ToList());
         }
 
-        public async Task<List<ChocoItem>> GetUpgradable()
+        public async Task<List<ChocoItem>> GetInstalled()
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
 
-            var packages = await Task.Run(() => result.Output.Select(t =>
-             {
-                 var tmp = t.Split(Seperator);
-                 return ChocoItem.FromUpdatableString(repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1]), new SemanticVersion(tmp[2]));
-             }).ToList());
-            packages.ForEach(async t => t.Versions = await GetVersions(t.Package.Id));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
+            var tasks = result.Output.Select(t =>
+            {
+                var tmp = t.Split(Seperator);
+                return Task.Run(() => new ChocoItem(repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1]), new SemanticVersion(tmp[2])));
+            }).ToList();
 
+            var packages = (await Task.WhenAll(tasks)).ToList();
+
+            await Task.WhenAll(packages.Select(UpdatePackageVersion));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
             return packages;
         }
 
@@ -146,6 +130,11 @@ namespace HotChocolatey
             result.Output.ForEach(t => Log.Info($"> {t}"));
 
             return result;
+        }
+
+        private async Task UpdatePackageVersion(ChocoItem package)
+        {
+            package.Versions = await GetVersions(package.Package.Id);
         }
 
         private string AggregatePackageNames(List<ChocoItem> packages) => packages.Select(t => t.Name).Aggregate((all, next) => next + ";" + all);

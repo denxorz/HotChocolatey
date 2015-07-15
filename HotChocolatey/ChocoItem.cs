@@ -11,7 +11,7 @@ namespace HotChocolatey
     public class ChocoItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public IPackage Package { get; }
 
         public string Name => Package.Id;
@@ -37,19 +37,12 @@ namespace HotChocolatey
             Package = package;
         }
 
-        public static ChocoItem FromInstalledString(IPackage package, SemanticVersion version)
+        public ChocoItem(IPackage package, SemanticVersion installedVersion, SemanticVersion latestVersion)
+            : this(package)
         {
-            return new ChocoItem(package) { InstalledVersion = version };
-        }
-
-        public static ChocoItem FromPackage(IPackage package)
-        {
-            return new ChocoItem(package);
-        }
-
-        public static ChocoItem FromUpdatableString(IPackage package, SemanticVersion installedVersion, SemanticVersion latestVersion)
-        {
-            return new ChocoItem(package) { InstalledVersion = installedVersion, LatestVersion = latestVersion, IsUpgradable = installedVersion != latestVersion };
+            InstalledVersion = installedVersion;
+            LatestVersion = latestVersion;
+            IsUpgradable = installedVersion != latestVersion;
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

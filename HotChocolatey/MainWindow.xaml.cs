@@ -58,19 +58,14 @@ namespace HotChocolatey
         private async Task Refresh()
         {
             Log.Info(nameof(Refresh));
-
+            Packages.Clear();
             (await Controller.GetInstalled()).ForEach(Packages.Add);
-            (await Controller.GetUpgradable()).ForEach(Packages.Add);
-
-            // TODO : decide if this can be done without paging?
-            //(await Controller.GetAvailable()).ForEach(Packages.Add);
         }
 
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
         {
             using (new ProgressIndication(PackageManager))
             {
-                Packages.Clear();
                 await Refresh();
             }
         }
