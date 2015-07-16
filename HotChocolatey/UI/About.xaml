@@ -1,0 +1,32 @@
+﻿<Window x:Class="HotChocolatey.UI.About"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HotChocolatey.UI"
+        mc:Ignorable="d"
+        Title="About" Height="500" Width="700">
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="63" Margin="78,10,0,0" VerticalAlignment="Top" Width="63" Source="/HotChocolatey;component/Images/android/100/add_column-48.png"/>
+        <TextBlock Margin="162,10,111,0" TextWrapping="Wrap" Text="Hot chocolatey" VerticalAlignment="Top" Height="63" FontSize="48"/>
+        <TextBlock Margin="78,78,111,0" TextWrapping="Wrap" Text="Visual Studio 2015 inspired, unofficial, interface for the Windows package manager Chocolatey." VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Left" Margin="78,99,0,0" TextWrapping="Wrap" Text="Build by Denxorz" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="317,99,0,0" TextWrapping="Wrap" Text="https://gitlab.com/jjb3/HotChocolatey" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="78,157,0,0" VerticalAlignment="Top" Width="48" Source="/HotChocolatey;component/Images/chocolateyicon.gif"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,144,0,0" TextWrapping="Wrap" Text="Based on / thanks to" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,168,0,0" TextWrapping="Wrap" Text="Chocolatey" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,184,0,0" TextWrapping="Wrap" Text="https://chocolatey.org/" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="78,210,0,0" VerticalAlignment="Top" Width="48" Source="/HotChocolatey;component/Images/android/100/I Love Icons8-100.png"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="78,263,0,0" VerticalAlignment="Top" Width="48" Source="/HotChocolatey;component/Images/nugetlogo.jpg"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,221,0,0" TextWrapping="Wrap" Text="Icons8" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,277,0,0" TextWrapping="Wrap" Text="NuGet" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,237,0,0" TextWrapping="Wrap" Text="https://icons8.com/" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,293,0,0" TextWrapping="Wrap" Text="https://www.nuget.org/" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="43" Margin="83,321,0,0" VerticalAlignment="Top" Width="43" Source="/HotChocolatey;component/Images/visualstudiologo.png" />
+        <TextBlock HorizontalAlignment="Left" Margin="131,327,0,0" TextWrapping="Wrap" Text="Visual Studio 2015" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,343,0,0" TextWrapping="Wrap" Text="https://www.visualstudio.com/" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="78,369,0,0" VerticalAlignment="Top" Width="48" Source="/HotChocolatey;component/Images/Log4net.png" />
+        <TextBlock HorizontalAlignment="Left" Margin="131,380,0,0" TextWrapping="Wrap" Text="Apache log4net" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="131,396,0,0" TextWrapping="Wrap" Text="https://logging.apache.org/log4net/" VerticalAlignment="Top"/>
+    </Grid>
+</Window>

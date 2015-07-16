@@ -126,5 +126,11 @@ namespace HotChocolatey.UI
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+        private void OnAboutButtonClick(object sender, RoutedEventArgs e)
+        {
+            var about = new About();
+            about.ShowDialog();
+        }
     }
 }

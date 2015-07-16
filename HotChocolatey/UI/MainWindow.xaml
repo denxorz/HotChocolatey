@@ -34,7 +34,7 @@
                     </StackPanel>
                 </ToggleButton>
                 <Separator/>
-                <Button>
+                <Button Click="OnAboutButtonClick">
                     <Image Source="../Images/24/about-24.png" Stretch="Uniform" Width="24" />
                 </Button>
             </ToolBar>
