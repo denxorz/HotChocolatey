@@ -13,7 +13,7 @@
     </Window.Resources>
     <DockPanel>
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
-            <ToolBar>
+            <ToolBar Loaded="OnToolBarLoaded">
                 <Button Click="OnRefreshClick">
                     <Image Source="../Images/24/synchronize-24.png" Stretch="Uniform" Width="24" />
                 </Button>
