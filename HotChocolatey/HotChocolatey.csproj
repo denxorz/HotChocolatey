@@ -227,17 +227,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\approval-48.png" />
-    <Resource Include="Images\checkmark-48.png" />
-    <Resource Include="Images\settings-48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\synchronize-48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\todo_list-48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="UI\Hot Chocolate-50.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -250,6 +239,13 @@
   <ItemGroup>
     <Resource Include="Images\download-48.png" />
     <Resource Include="Images\ok-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\24\about-24.png" />
+    <Resource Include="Images\24\list-24.png" />
+    <Resource Include="Images\24\multiple_inputs-24.png" />
+    <Resource Include="Images\24\settings-24.png" />
+    <Resource Include="Images\24\synchronize-24.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />

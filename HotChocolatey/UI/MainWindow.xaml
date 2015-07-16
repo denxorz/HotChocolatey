@@ -15,33 +15,28 @@
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar>
                 <Button Click="OnRefreshClick">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/synchronize-48.png" Stretch="Uniform" Width="32" />
-                        <Label Padding="0">Refresh</Label>
-                    </StackPanel>
+                    <Image Source="../Images/24/synchronize-24.png" Stretch="Uniform" Width="24" />
                 </Button>
                 <Button>
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/approval-48.png" Stretch="Uniform" Width="32" />
-                        <Label Padding="0">Mark all upgrades</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/24/multiple_inputs-24.png" Stretch="Uniform" Width="24" />
+                        <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <!-- TODO : issue #4 settings: 
                 <Button>
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/settings-48.png" Stretch="Uniform" Width="32" />
-                        <Label Padding="0">Settings</Label>
-                    </StackPanel>
+                    <Image Source="../Images/24/settings-24.png" Stretch="Uniform" Width="24" />
                 </Button>
-                -->
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
-                    <StackPanel Orientation="Vertical">
-                        <Image Source="../Images/todo_list-48.png" Stretch="Uniform" Width="32" />
-                        <Label Padding="0">Logging</Label>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/24/list-24.png" Stretch="Uniform" Width="24" />
+                        <Label Padding="0" VerticalAlignment="Center">Logging</Label>
                     </StackPanel>
                 </ToggleButton>
                 <Separator/>
+                <Button>
+                    <Image Source="../Images/24/about-24.png" Stretch="Uniform" Width="24" />
+                </Button>
             </ToolBar>
         </ToolBarTray>
         <local:PackageManager x:Name="PackageManager" Margin="5" Searched="OnSearchClick"/>
