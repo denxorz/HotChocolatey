@@ -11,7 +11,6 @@ namespace HotChocolatey.UI
                 new NoFilter(),
                 new InstalledFilter(),
                 new InstalledUpgradableFilter(),
-                new NotInstalledFilter(),
             };
 
 
@@ -30,13 +29,7 @@ namespace HotChocolatey.UI
         private class InstalledUpgradableFilter : IFilter
         {
             public Predicate<object> Filter => t => (t as ChocoItem).IsUpgradable;
-            public override string ToString() => "Upgradable";
-        }
-
-        private class NotInstalledFilter : IFilter
-        {
-            public Predicate<object> Filter => t => !(t as ChocoItem).IsInstalled;
-            public override string ToString() => "Not installed";
+            public override string ToString() => "Upgradable available";
         }
     }
 }
