@@ -247,6 +247,10 @@
     <Resource Include="Images\26\Delete Sign-26.png" />
     <Resource Include="Images\26\Search-26.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\download-48.png" />
+    <Resource Include="Images\ok-48.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

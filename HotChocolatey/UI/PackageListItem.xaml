@@ -14,6 +14,20 @@
         <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top" FontSize="9.333" FontStyle="Italic" Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
         <TextBlock Margin="82,10,40,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" FontWeight="Bold" TextTrimming="WordEllipsis" />
         <TextBlock Margin="82,31,40,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
-        <Image Height="16" Margin="0,22,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" />
+        <Image Height="16" Margin="0,22,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16" >
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="{x:Null}" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsInstalled}" Value="True">
+                            <Setter Property="Source" Value="../Images/ok-48.png" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsUpgradable}" Value="True">
+                            <Setter Property="Source" Value="../Images/download-48.png" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
     </Grid>
 </UserControl>
