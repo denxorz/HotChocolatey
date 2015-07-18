@@ -146,9 +146,16 @@
     <Compile Include="UI\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\AboutItem.xaml.cs">
+      <DependentUpon>AboutItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SearchEventArgs.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
     <Page Include="UI\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\AboutItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
