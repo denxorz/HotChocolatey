@@ -2,83 +2,86 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER">
-            <Component Id="HotChocolatey.exe" Guid="{CEC245B0-AFBC-4C94-889E-8B7ED7B76236}">
+            <Component Id="HotChocolatey.exe" Guid="*">
                 <File Id="HotChocolatey.exe" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe" />
             </Component>
-            <Component Id="HotChocolatey.exe.config" Guid="{FDC2717A-8B0C-4EB1-A2CC-45D389E0DF9B}">
+            <Component Id="HotChocolatey.exe.config" Guid="*">
                 <File Id="HotChocolatey.exe.config" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe.config" />
             </Component>
             
-            <Component Id="log4net.dll" Guid="{E75CEA52-02D6-4A73-B7D4-2C4D652AD10F}">
+            
+            
+            
+            <Component Id="log4net.dll" Guid="*">
                 <File Id="log4net.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\log4net.dll" />
             </Component>
             
-            <Component Id="Microsoft.Web.XmlTransform.dll" Guid="{5E7901CB-77C9-4908-83A3-0B7B032BCEC2}">
+            <Component Id="Microsoft.Web.XmlTransform.dll" Guid="*">
                 <File Id="Microsoft.Web.XmlTransform.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Microsoft.Web.XmlTransform.dll" />
             </Component>
-            <Component Id="Newtonsoft.Json.dll" Guid="{6126772A-946A-4C8B-A970-940D7DACD07E}">
+            <Component Id="Newtonsoft.Json.dll" Guid="*">
                 <File Id="Newtonsoft.Json.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Newtonsoft.Json.dll" />
             </Component>
             
-            <Component Id="NuGet.Client.BaseTypes.dll" Guid="{C0922E3F-BC80-4EB1-A8F1-F392599BFE1E}">
+            <Component Id="NuGet.Client.BaseTypes.dll" Guid="*">
                 <File Id="NuGet.Client.BaseTypes.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Client.BaseTypes.dll" />
             </Component>
             
-            <Component Id="NuGet.Client.dll" Guid="{D9B59FDE-97C5-42A7-8944-81080A01E785}">
+            <Component Id="NuGet.Client.dll" Guid="*">
                 <File Id="NuGet.Client.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Client.dll" />
             </Component>
-            <Component Id="NuGet.Client.V2.dll" Guid="{784DF3EF-EC8E-4F4C-9BED-D8F70763E055}">
+            <Component Id="NuGet.Client.V2.dll" Guid="*">
                 <File Id="NuGet.Client.V2.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Client.V2.dll" />
             </Component>
-            <Component Id="NuGet.Client.V2.VisualStudio.dll" Guid="{3DF358BC-32E8-462C-8B33-F6F404082920}">
+            <Component Id="NuGet.Client.V2.VisualStudio.dll" Guid="*">
                 <File Id="NuGet.Client.V2.VisualStudio.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Client.V2.VisualStudio.dll" />
             </Component>
             
             
-            <Component Id="NuGet.Client.V3.VisualStudio.dll" Guid="{3F7DA2F9-D650-4EDF-A53A-5BAE873D0159}">
+            <Component Id="NuGet.Client.V3.VisualStudio.dll" Guid="*">
                 <File Id="NuGet.Client.V3.VisualStudio.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Client.V3.VisualStudio.dll" />
             </Component>
             
-            <Component Id="NuGet.Client.VisualStudio.dll" Guid="{EABE69C8-F953-49CE-AE92-4FF69AD54E07}">
+            <Component Id="NuGet.Client.VisualStudio.dll" Guid="*">
                 <File Id="NuGet.Client.VisualStudio.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Client.VisualStudio.dll" />
             </Component>
             
             
-            <Component Id="NuGet.Configuration.dll" Guid="{9564EB32-6DA4-4DEF-B24D-44B735FD81FF}">
+            <Component Id="NuGet.Configuration.dll" Guid="*">
                 <File Id="NuGet.Configuration.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Configuration.dll" />
             </Component>
-            <Component Id="NuGet.Core.dll" Guid="{1F4D1001-221A-4FC5-A5D7-47939294AA90}">
+            <Component Id="NuGet.Core.dll" Guid="*">
                 <File Id="NuGet.Core.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Core.dll" />
             </Component>
-            <Component Id="NuGet.Data.dll" Guid="{7A239A4D-7F33-4DD5-8166-2DC865109F33}">
+            <Component Id="NuGet.Data.dll" Guid="*">
                 <File Id="NuGet.Data.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Data.dll" />
             </Component>
             
-            <Component Id="NuGet.Frameworks.dll" Guid="{CFEFE75B-9B35-420C-9E5E-57A750A6F96F}">
+            <Component Id="NuGet.Frameworks.dll" Guid="*">
                 <File Id="NuGet.Frameworks.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Frameworks.dll" />
             </Component>
             
-            <Component Id="NuGet.Packaging.dll" Guid="{5EB629BE-E559-4783-B113-ABF2B1C13405}">
+            <Component Id="NuGet.Packaging.dll" Guid="*">
                 <File Id="NuGet.Packaging.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Packaging.dll" />
             </Component>
             
-            <Component Id="NuGet.PackagingCore.dll" Guid="{B8466450-880F-4B08-B523-EAE59B454B90}">
+            <Component Id="NuGet.PackagingCore.dll" Guid="*">
                 <File Id="NuGet.PackagingCore.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.PackagingCore.dll" />
             </Component>
             
-            <Component Id="NuGet.Resolver.dll" Guid="{A962FD03-76F7-4BCA-AC5C-A7D83EFDE691}">
+            <Component Id="NuGet.Resolver.dll" Guid="*">
                 <File Id="NuGet.Resolver.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Resolver.dll" />
             </Component>
             
-            <Component Id="NuGet.Versioning.dll" Guid="{748B2A92-E70D-4321-AA0A-EC80CDD2C229}">
+            <Component Id="NuGet.Versioning.dll" Guid="*">
                 <File Id="NuGet.Versioning.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Versioning.dll" />
             </Component>
             
-            <Component Id="System.Net.Http.Extensions.dll" Guid="{C274CBE8-0260-4A8E-B88E-47730A8E8B12}">
+            <Component Id="System.Net.Http.Extensions.dll" Guid="*">
                 <File Id="System.Net.Http.Extensions.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\System.Net.Http.Extensions.dll" />
             </Component>
             
-            <Component Id="System.Net.Http.Primitives.dll" Guid="{8846694D-6336-4184-8D27-2872386463CB}">
+            <Component Id="System.Net.Http.Primitives.dll" Guid="*">
                 <File Id="System.Net.Http.Primitives.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\System.Net.Http.Primitives.dll" />
             </Component>
             
@@ -88,6 +91,9 @@
         <ComponentGroup Id="ProductComponents">
             <ComponentRef Id="HotChocolatey.exe" />
             <ComponentRef Id="HotChocolatey.exe.config" />
+            
+            
+            
             
             <ComponentRef Id="log4net.dll" />
             
