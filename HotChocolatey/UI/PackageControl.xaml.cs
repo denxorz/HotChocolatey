@@ -27,6 +27,7 @@ namespace HotChocolatey.UI
                     PackageAction = package.Actions.First();
                     PackageVersion = PackageAction.Versions.First();
                 }
+                HasPackage = package != null;
 
                 Raise();
             }
@@ -34,6 +35,7 @@ namespace HotChocolatey.UI
 
         public IAction PackageAction { get; set; }
         public SemanticVersion PackageVersion { get; set; }
+        public bool HasPackage { get; private set; }
 
         public PackageControl()
         {
