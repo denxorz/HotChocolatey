@@ -2,7 +2,9 @@
 using log4net.Appender;
 using log4net.Config;
 using log4net.Layout;
+using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace HotChocolatey.Utility
 {
@@ -26,7 +28,7 @@ namespace HotChocolatey.Utility
             {
                 var roller = new RollingFileAppender();
                 roller.AppendToFile = true;
-                roller.File = @"log.txt";
+                roller.File = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "HotChocolatey", "log.txt");
                 roller.Layout = patternLayout;
                 roller.MaxSizeRollBackups = 5;
                 roller.MaximumFileSize = "10MB";
