@@ -5,16 +5,32 @@ VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolatey", "HotChocolatey\HotChocolatey.csproj", "{620962C6-EA19-4728-9716-529EA838EA26}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{620962C6-EA19-4728-9716-529EA838EA26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{620962C6-EA19-4728-9716-529EA838EA26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620962C6-EA19-4728-9716-529EA838EA26}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{620962C6-EA19-4728-9716-529EA838EA26}.Debug|x86.Build.0 = Debug|Any CPU
 		{620962C6-EA19-4728-9716-529EA838EA26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{620962C6-EA19-4728-9716-529EA838EA26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620962C6-EA19-4728-9716-529EA838EA26}.Release|x86.ActiveCfg = Release|Any CPU
+		{620962C6-EA19-4728-9716-529EA838EA26}.Release|x86.Build.0 = Release|Any CPU
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Debug|Any CPU.Build.0 = Debug|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Debug|x86.ActiveCfg = Debug|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Debug|x86.Build.0 = Debug|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Release|Any CPU.ActiveCfg = Release|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Release|Any CPU.Build.0 = Release|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Release|x86.ActiveCfg = Release|x86
+		{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

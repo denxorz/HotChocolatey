@@ -277,6 +277,9 @@
   <ItemGroup>
     <Resource Include="Images\Log4net.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\wixlogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

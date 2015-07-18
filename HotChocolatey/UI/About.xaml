@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HotChocolatey.UI"
         mc:Ignorable="d"
         Title="About" Icon="Hot Chocolate-50.ico" 
-        Height="480" Width="803" ResizeMode="NoResize" 
+        Height="555" Width="803" ResizeMode="NoResize" 
         WindowStartupLocation="CenterOwner">
     <Grid>
         <Image HorizontalAlignment="Left" Height="63" Margin="78,10,0,0" VerticalAlignment="Top" Width="63" Source="/HotChocolatey;component/Images/android/100/add_column-48.png"/>
@@ -17,10 +17,11 @@
 
         <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,130,0,0" IconSource="/HotChocolatey;component/Images/android/100/add_column-48.png" Title="Hot chocolatey" Website="https://gitlab.com/jjb3/HotChocolatey/" License=""/>
         <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,225,0,0" IconSource="/HotChocolatey;component/Images/chocolateyicon.gif" Title="Chocolatey" Website="https://chocolatey.org/" License="http://www.apache.org/licenses/LICENSE-2.0"/>
-        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,225,-6,0" IconSource="/HotChocolatey;component/Images/android/100/I Love Icons8-100.png" Title="Icons8" Website="https://icons8.com/" License="https://icons8.com/good-boy-license/"/>
-        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,290,0,0" IconSource="/HotChocolatey;component/Images/nugetlogo.jpg" Title="NuGet" Website="https://www.nuget.org/" License="https://nuget.codeplex.com/license"/>
-        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,290,-6,0" IconSource="/HotChocolatey;component/Images/visualstudiologo.png" Title="Visual Studio 2015" Website="https://www.visualstudio.com/" License=""/>
-        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,357,0,0" IconSource="/HotChocolatey;component/Images/Log4net.png" Title="Apache log4net" Website="https://logging.apache.org/log4net/" License="http://logging.apache.org/log4net/license.html"/>
-        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,355,-6,0" IconSource="/HotChocolatey;component/Images/nugetlogo.jpg" Title="KindOfMagic" Website="https://github.com/demigor/kindofmagic" License=""/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,225,0,0" IconSource="/HotChocolatey;component/Images/android/100/I Love Icons8-100.png" Title="Icons8" Website="https://icons8.com/" License="https://icons8.com/good-boy-license/"/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,295,0,0" IconSource="/HotChocolatey;component/Images/nugetlogo.jpg" Title="NuGet" Website="https://www.nuget.org/" License="https://nuget.codeplex.com/license"/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,295,0,0" IconSource="/HotChocolatey;component/Images/visualstudiologo.png" Title="Visual Studio 2015" Website="https://www.visualstudio.com/" License=""/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,365,0,0" IconSource="/HotChocolatey;component/Images/Log4net.png" Title="Apache log4net" Website="https://logging.apache.org/log4net/" License="http://logging.apache.org/log4net/license.html"/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,365,0,0" IconSource="/HotChocolatey;component/Images/nugetlogo.jpg" Title="KindOfMagic" Website="https://github.com/demigor/kindofmagic" License=""/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,435,0,0" IconSource="/HotChocolatey;component/Images/wixlogo.png" Title="Wix toolset" Website="http://wixtoolset.org/" License="http://wixtoolset.org/about/license/"/>
     </Grid>
 </Window>
