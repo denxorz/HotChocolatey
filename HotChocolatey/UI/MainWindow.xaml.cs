@@ -130,6 +130,7 @@ namespace HotChocolatey.UI
         private void OnAboutButtonClick(object sender, RoutedEventArgs e)
         {
             var about = new About();
+            about.Owner = this;
             about.ShowDialog();
         }
     }
