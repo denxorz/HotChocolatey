@@ -12,7 +12,7 @@ using System.Windows.Input;
 namespace HotChocolatey.UI
 {
     [Magic]
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,6 +21,26 @@ namespace HotChocolatey.UI
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
         public bool IsLogVisible { get; set; }
+        public bool IsUserAllowedToExecuteActions { get; set; } = true;
+
+        bool ProgressIndication.IProgressIndicator.IsInProgress
+        {
+            set
+            {
+                IsUserAllowedToExecuteActions = !value;
+                if (!value)
+                {
+                    Dispatcher.BeginInvoke(new Action(async () =>
+                        {
+                            using (new ProgressIndication(PackageManager))
+                            {
+                                await Refresh();
+                            }
+                        }));
+
+                }
+            }
+        }
 
         public MainWindow()
         {
@@ -78,7 +98,7 @@ namespace HotChocolatey.UI
         {
             Log.Info(nameof(Refresh));
             Packages.Clear();
-            (await Controller.GetInstalled()).ForEach(Packages.Add);
+            (await Controller.GetInstalled(this)).ForEach(Packages.Add);
         }
 
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
@@ -102,7 +122,7 @@ namespace HotChocolatey.UI
                 else
                 {
                     Packages.Clear();
-                    (await Controller.GetAvailable(e.SearchText)).ForEach(Packages.Add);
+                    (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
                 }
             }
         }

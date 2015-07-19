@@ -11,7 +11,7 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </Window.Resources>
-    <DockPanel>
+    <DockPanel IsEnabled="{Binding IsUserAllowedToExecuteActions}">
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar Loaded="OnToolBarLoaded">
                 <Button Click="OnRefreshClick">

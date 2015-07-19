@@ -28,11 +28,11 @@ namespace HotChocolatey.Logic
             return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
-        public async Task<List<ChocoItem>> GetAvailable(string name)
+        public async Task<List<ChocoItem>> GetAvailable(string name, UI.ProgressIndication.IProgressIndicator progressIndicator)
         {
             var packages = (await GetPackages(name)).Select(t => new ChocoItem(t)).ToList();
             await Task.WhenAll(packages.Select(UpdatePackageVersion));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
 
             return packages;
         }
@@ -47,7 +47,7 @@ namespace HotChocolatey.Logic
             return await Task.Run(() => repo.GetPackages().Where(p => p.Id == id).ToList().Select(p => p.Version).OrderByDescending(p => p.Version).ToList());
         }
 
-        public async Task<List<ChocoItem>> GetInstalled()
+        public async Task<List<ChocoItem>> GetInstalled(UI.ProgressIndication.IProgressIndicator progressIndicator)
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
@@ -61,7 +61,7 @@ namespace HotChocolatey.Logic
             var packages = (await Task.WhenAll(tasks)).ToList();
 
             await Task.WhenAll(packages.Select(UpdatePackageVersion));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
             return packages;
         }
 
