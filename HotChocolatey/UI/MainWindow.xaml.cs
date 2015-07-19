@@ -36,23 +36,26 @@ namespace HotChocolatey.UI
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
-            PackageManager.Packages = Packages;
-
-            using (new ProgressIndication(PackageManager))
+            if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                try
-                {
-                    var result = await Controller.GetVersion();
-                    Log.Info($"Chocolatey version: {result}");
-                }
-                catch (Win32Exception ex)
-                {
-                    Log.Error($"Choco not installed? Message: {ex.Message}");
-                    MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
+                PackageManager.Packages = Packages;
 
-                await Refresh();
+                using (new ProgressIndication(PackageManager))
+                {
+                    try
+                    {
+                        var result = await Controller.GetVersion();
+                        Log.Info($"Chocolatey version: {result}");
+                    }
+                    catch (Win32Exception ex)
+                    {
+                        Log.Error($"Choco not installed? Message: {ex.Message}");
+                        MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                    }
+
+                    await Refresh();
+                }
             }
         }
 

@@ -41,10 +41,13 @@ namespace HotChocolatey.UI
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
-            InitializeFilter();
-            DataContext = this;
+            if (!DesignerProperties.GetIsInDesignMode(this))
+            {
+                InitializeFilter();
+                DataContext = this;
 
-            Packages.Items.CollectionChanged += OnPackagesCollectionChanged;
+                Packages.Items.CollectionChanged += OnPackagesCollectionChanged;
+            }
         }
 
         private void OnPackagesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
