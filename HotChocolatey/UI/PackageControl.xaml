@@ -21,9 +21,20 @@
             <TextBlock HorizontalAlignment="Left" Margin="112,116,0,0" TextWrapping="Wrap" Text="{Binding InstalledVersion}" VerticalAlignment="Top" Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"/>
             <Button Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=PackageAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Click="OnActionButtonClick" />
             <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,199,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" FontWeight="Bold" />
-            <TextBlock Margin="10,220,10,0" TextWrapping="Wrap" Text="{Binding Description}" VerticalAlignment="Top" />
-            <Grid HorizontalAlignment="Left" Margin="10,0,0,10" Width="363" Height="121" VerticalAlignment="Bottom" />
+            <TextBlock Margin="10,199,10,141" TextWrapping="Wrap" Text="Description" FontWeight="Bold" />
+            <TextBlock Margin="10,220,10,151" TextWrapping="Wrap" Text="{Binding Description}" />
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,120" TextWrapping="Wrap" Text="Author(s):" FontWeight="Bold" Height="16" VerticalAlignment="Bottom"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,99" TextWrapping="Wrap" Text="License:" VerticalAlignment="Bottom" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,78" TextWrapping="Wrap" Text="Downloads:" VerticalAlignment="Bottom" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,57" TextWrapping="Wrap" Text="Project URL:" VerticalAlignment="Bottom" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,36" TextWrapping="Wrap" Text="Tags:" VerticalAlignment="Bottom" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,0,0,15" TextWrapping="Wrap" Text="Dependencies:" VerticalAlignment="Bottom" FontWeight="Bold"/>
+            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,120" Text="{Binding Package.Authors}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,99" Text="{Binding Package.LicenseUrl}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,78" Text="{Binding Package.DownloadCount}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,57" Text="{Binding Package.ProjectUrl}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,36" Text="{Binding Package.Tags}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,15" Text="{Binding Package.Dependencies}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

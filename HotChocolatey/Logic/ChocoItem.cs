@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 
 namespace HotChocolatey.Logic
 {
@@ -26,6 +27,13 @@ namespace HotChocolatey.Logic
         public bool IsPreRelease => !Package.IsReleaseVersion();
         public string Summary => Package.Summary;
         public string Description => Package.Description;
+
+        public string Authors => Package.Authors.Aggregate((total, next) => total + ", " + next);
+        public string LicenseUrl => Package.LicenseUrl.ToString();
+        public int DownloadCount => Package.DownloadCount;
+        public string ProjectUrl => Package.ProjectUrl.ToString();
+        public string Tags => Package.Tags;
+        public string Dependencies => string.Empty; // TODO
 
         public bool IsInstalled => InstalledVersion != null;
 
