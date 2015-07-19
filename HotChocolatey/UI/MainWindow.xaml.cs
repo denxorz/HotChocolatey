@@ -48,7 +48,7 @@ namespace HotChocolatey.UI
             InitializeComponent();
             DataContext = this;
 
-            // TODO :    ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
+            ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
 
             Log.ResetSettings(true, true, true, Diagnostics);
             Log.Info("---");
@@ -145,7 +145,7 @@ namespace HotChocolatey.UI
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                // TODO :   loggingListBox.ScrollIntoView(e.NewItems[0]);
+                loggingListBox.ScrollIntoView(e.NewItems[0]);
             }
         }
 

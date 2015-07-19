@@ -24,7 +24,7 @@
                     </StackPanel>
                 </Button>
                 <Separator/>
-                <Button>
+                <Button IsEnabled="False">
                     <Image Source="../Images/24/settings-24.png" Stretch="Uniform" Width="24" />
                 </Button>
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
@@ -39,6 +39,7 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
+        <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
         <local:PackageManager x:Name="PackageManager" Margin="5" Searched="OnSearchClick"/>
     </DockPanel>
 </Window>
