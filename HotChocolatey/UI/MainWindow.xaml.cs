@@ -3,12 +3,10 @@ using HotChocolatey.Utility;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace HotChocolatey.UI
 {
@@ -38,7 +36,6 @@ namespace HotChocolatey.UI
                                 await Refresh();
                             }
                         }));
-
                 }
             }
         }
@@ -129,19 +126,6 @@ namespace HotChocolatey.UI
             }
         }
 
-        private void DataGridCell_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DataGridCell cell = sender as DataGridCell;
-            if (!cell.IsEditing)
-            {
-                // enables editing on single click
-                if (!cell.IsFocused)
-                    cell.Focus();
-                if (!cell.IsSelected)
-                    cell.IsSelected = true;
-            }
-        }
-
         private void OnLoggingListViewCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
@@ -167,8 +151,11 @@ namespace HotChocolatey.UI
 
                 foreach (var package in Packages.Items)
                 {
-                    // TODO : check for errors
-                    await Controller.Upgrade(package);
+                    if (!await Controller.Upgrade(package))
+                    {
+                        // TODO : provide some sensible text to the user
+                        Log.Error($"Upgrade failed for package:{package.Title}");
+                    }
                 }
             }
         }
