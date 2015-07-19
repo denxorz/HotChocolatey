@@ -98,6 +98,7 @@ namespace HotChocolatey.UI
         private async Task Refresh()
         {
             Log.Info(nameof(Refresh));
+            PackageManager.ClearSearchText();
             Packages.Clear();
             (await Controller.GetInstalled(this)).ForEach(Packages.Add);
         }

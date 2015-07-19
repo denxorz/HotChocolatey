@@ -18,7 +18,7 @@
                     <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" SelectionChanged="OnFilterSelectionChanged"></ComboBox>
                 </StackPanel>
                 <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">Include prerelease</CheckBox> <!-- TODO -->
-                <utility:SearchTextBox Margin="2" Width="150" Search="OnSearch" />
+                <utility:SearchTextBox x:Name="SearchTextBox" Margin="2" Width="150" Search="OnSearch" />
             </UniformGrid>
         </Border>
         <Grid>

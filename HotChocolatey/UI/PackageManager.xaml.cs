@@ -28,6 +28,11 @@ namespace HotChocolatey.UI
             InitializeComponent();
         }
 
+        public void ClearSearchText()
+        {
+            SearchTextBox.Clear();
+        }
+
         private void InitializeFilter()
         {
             FilterFactory.AvailableFilters.ForEach(Filters.Add);
