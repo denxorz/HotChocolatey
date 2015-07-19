@@ -3,6 +3,7 @@ using HotChocolatey.Utility;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
@@ -155,6 +156,20 @@ namespace HotChocolatey.UI
             var about = new About();
             about.Owner = this;
             about.ShowDialog();
+        }
+
+        private async void UpgradeAllClick(object sender, RoutedEventArgs e)
+        {
+            using (new ProgressIndication(this))
+            {
+                Packages.ApplyFilter(FilterFactory.UpgradeFilter);
+
+                foreach (var package in Packages.Items)
+                {
+                    // TODO : check for errors
+                    await Controller.Upgrade(package);
+                }
+            }
         }
     }
 }

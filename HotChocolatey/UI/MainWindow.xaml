@@ -17,7 +17,7 @@
                 <Button Click="OnRefreshClick">
                     <Image Source="../Images/24/synchronize-24.png" Stretch="Uniform" Width="24" />
                 </Button>
-                <Button>
+                <Button Click="UpgradeAllClick">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Images/24/multiple_inputs-24.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>

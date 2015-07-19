@@ -13,6 +13,7 @@ namespace HotChocolatey.UI
                 new InstalledUpgradableFilter(),
             };
 
+        public static IFilter UpgradeFilter => new InstalledUpgradableFilter();
 
         private class NoFilter : IFilter
         {
