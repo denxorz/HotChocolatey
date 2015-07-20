@@ -31,7 +31,7 @@ namespace HotChocolatey.Logic
         public string Authors => Package.Authors.Aggregate((total, next) => total + ", " + next);
         public string LicenseUrl => Package.LicenseUrl?.ToString();
         public int DownloadCount => Package.DownloadCount;
-        public string ProjectUrl => Package.ProjectUrl.ToString();
+        public string ProjectUrl => Package.ProjectUrl?.ToString();
         public string Tags => Package.Tags;
         public string Dependencies => string.Empty; // TODO
 
