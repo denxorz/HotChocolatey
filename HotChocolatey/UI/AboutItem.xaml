@@ -4,12 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotChocolatey.UI"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="300" Height="79">
     <Grid>
         <Image HorizontalAlignment="Left" Height="48" VerticalAlignment="Top" Width="48" Source="{Binding IconSource}" Margin="0,9,0,0"/>
         <TextBlock HorizontalAlignment="Left" Margin="53,10,0,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top"/>
-        <TextBlock Margin="53,26,10,0" TextWrapping="Wrap" VerticalAlignment="Top"><Hyperlink Click="OnLinkClicked"><TextBlock Text="{Binding Website}" /></Hyperlink></TextBlock>
-        <TextBlock Margin="53,42,10,0" TextWrapping="Wrap" VerticalAlignment="Top"><Hyperlink Click="OnLinkClicked"><TextBlock Text="{Binding License}" /></Hyperlink></TextBlock>
+        <local:LinkTextBlock Margin="53,26,10,0" VerticalAlignment="Top" NavigationUrl="{Binding Website, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+        <local:LinkTextBlock Margin="53,42,10,0" VerticalAlignment="Top" NavigationUrl="{Binding License, RelativeSource={RelativeSource AncestorType=UserControl}}" />
     </Grid>
 </UserControl>

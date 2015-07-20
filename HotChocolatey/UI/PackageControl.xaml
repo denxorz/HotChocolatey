@@ -30,9 +30,9 @@
             <TextBlock HorizontalAlignment="Left" Margin="10,0,0,36" TextWrapping="Wrap" Text="Tags:" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,0,0,15" TextWrapping="Wrap" Text="Dependencies:" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <TextBlock HorizontalAlignment="Left" Margin="97,0,0,120" Text="{Binding Package.Authors}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
-            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,99" Text="{Binding Package.LicenseUrl}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <local:LinkTextBlock HorizontalAlignment="Left" Margin="97,0,0,93" NavigationUrl="{Binding Package.LicenseUrl, RelativeSource={RelativeSource AncestorType=UserControl}}" VerticalAlignment="Bottom"/>
             <TextBlock HorizontalAlignment="Left" Margin="97,0,0,78" Text="{Binding Package.DownloadCount}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
-            <TextBlock HorizontalAlignment="Left" Margin="97,0,0,57" Text="{Binding Package.ProjectUrl}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
+            <local:LinkTextBlock HorizontalAlignment="Left" Margin="97,0,0,51" NavigationUrl="{Binding Package.ProjectUrl, RelativeSource={RelativeSource AncestorType=UserControl}}" VerticalAlignment="Bottom"/>
             <TextBlock HorizontalAlignment="Left" Margin="97,0,0,36" Text="{Binding Package.Tags}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
             <TextBlock HorizontalAlignment="Left" Margin="97,0,0,15" Text="{Binding Package.Dependencies}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis"/>
         </Grid>

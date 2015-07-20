@@ -27,14 +27,14 @@ namespace HotChocolatey.UI
                 nameof(Website),
                 typeof(string),
                 typeof(AboutItem),
-                new PropertyMetadata("http://denxorz.nl"));
+                new PropertyMetadata("https://gitlab.com/jjb3/HotChocolatey"));
 
         public static DependencyProperty LicenseProperty =
             DependencyProperty.Register(
                 nameof(License),
                 typeof(string),
                 typeof(AboutItem),
-                new PropertyMetadata("http://denxorz.nl"));
+                new PropertyMetadata("https://gitlab.com/jjb3/HotChocolatey"));
 
         public ImageSource IconSource
         {
@@ -64,11 +64,6 @@ namespace HotChocolatey.UI
         {
             InitializeComponent();
             DataContext = this;
-        }
-
-        private void OnLinkClicked(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start(Website);
         }
     }
 }
