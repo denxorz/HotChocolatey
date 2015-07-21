@@ -270,9 +270,6 @@
     <Resource Include="Images\24\synchronize-24.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\android\100\add_column-48.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\android\100\I Love Icons8-100.png" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +283,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\wixlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\android\100\Hot Chocolate-100.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />
