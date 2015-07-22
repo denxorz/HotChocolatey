@@ -13,13 +13,18 @@ Hot chocolatey is a graphical user interface (GUI) for Chocolatey.
 
 
 Features
+=======
+
 Hot chocolatey currently has only a few basic features.
 
-Show installed packages
-Show available updates
-Search for packages
-Show package information
-Install/Update/Uninstall packages
+* Show installed packages
+* Show available updates
+* Search for packages
+* Show package information
+* Install/Update/Uninstall packages
+
+Install location
+=======
 
 Hot Chocolatey will be installed on it's default location %ProgramFiles(x86)%\HotChocolatey\.
     </description>
