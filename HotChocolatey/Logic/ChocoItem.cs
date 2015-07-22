@@ -22,7 +22,7 @@ namespace HotChocolatey.Logic
 
         public List<IAction> Actions { get; set; }
 
-        public string Title => Package.Title;
+        public string Title => string.IsNullOrWhiteSpace(Package.Title) ? Package.Id : Package.Title;
         public Uri Ico => Package.IconUrl == null || Path.GetExtension(Package.IconUrl.ToString()) == ".svg" ? noIconUri : Package.IconUrl;
         public bool IsPreRelease => !Package.IsReleaseVersion();
         public string Summary => Package.Summary;
