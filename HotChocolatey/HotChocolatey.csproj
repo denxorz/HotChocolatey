@@ -152,6 +152,9 @@
     <Compile Include="UI\LinkTextBlock.xaml.cs">
       <DependentUpon>LinkTextBlock.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\MainWindowViewModel.cs" />
+    <Compile Include="UI\PackageControlViewModel.cs" />
+    <Compile Include="UI\PackageManagerViewModel.cs" />
     <Compile Include="UI\SearchEventArgs.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
     <Page Include="UI\About.xaml">

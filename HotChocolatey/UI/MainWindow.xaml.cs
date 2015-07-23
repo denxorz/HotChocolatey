@@ -1,79 +1,25 @@
-﻿using HotChocolatey.Logic;
-using HotChocolatey.Utility;
-using System;
-using System.Collections.Specialized;
+﻿using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace HotChocolatey.UI
 {
-    [Magic]
-    public partial class MainWindow : Window, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
+    public partial class MainWindow : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public ChocolateyController Controller { get; } = new ChocolateyController();
-        public Packages Packages { get; } = new Packages();
-        public Diagnostics Diagnostics { get; } = new Diagnostics();
-
-        public bool IsLogVisible { get; set; }
-        public bool IsUserAllowedToExecuteActions { get; set; } = true;
-
-        bool ProgressIndication.IProgressIndicator.IsInProgress
-        {
-            set
-            {
-                IsUserAllowedToExecuteActions = !value;
-                if (!value)
-                {
-                    Dispatcher.BeginInvoke(new Action(async () =>
-                        {
-                            using (new ProgressIndication(PackageManager))
-                            {
-                                await Refresh();
-                            }
-                        }));
-                }
-            }
-        }
+        private MainWindowViewModel ViewModel => DataContext as MainWindowViewModel; // TODO : MVVM ?
 
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
-
             ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
-
-            Log.ResetSettings(true, true, true, Diagnostics);
-            Log.Info("---");
-            Log.Info($"Version:{Assembly.GetCallingAssembly().GetName().Version} MachineName:{Environment.MachineName} OSVersion:{Environment.OSVersion} Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         }
 
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                PackageManager.Packages = Packages;
-
-                using (new ProgressIndication(PackageManager))
-                {
-                    try
-                    {
-                        var result = await Controller.GetVersion();
-                        Log.Info($"Chocolatey version: {result}");
-                    }
-                    catch (Win32Exception ex)
-                    {
-                        Log.Error($"Choco not installed? Message: {ex.Message}");
-                        MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        return;
-                    }
-
-                    await Refresh();
-                }
+                await ViewModel.Loaded();
             }
         }
 
@@ -92,38 +38,9 @@ namespace HotChocolatey.UI
             }
         }
 
-        private async Task Refresh()
-        {
-            Log.Info(nameof(Refresh));
-            PackageManager.ClearSearchText();
-            Packages.Clear();
-            (await Controller.GetInstalled(this)).ForEach(Packages.Add);
-        }
-
         private async void OnRefreshClick(object sender, RoutedEventArgs e)
         {
-            using (new ProgressIndication(PackageManager))
-            {
-                await Refresh();
-            }
-        }
-
-        private async void OnSearchClick(object sender, SearchEventArgs e)
-        {
-            Log.Info($"Searching for: {e.SearchText}");
-
-            using (new ProgressIndication(PackageManager))
-            {
-                if (string.IsNullOrWhiteSpace(e.SearchText))
-                {
-                    await Refresh();
-                }
-                else
-                {
-                    Packages.Clear();
-                    (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
-                }
-            }
+            await ViewModel.RefreshClicked();
         }
 
         private void OnLoggingListViewCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -134,30 +51,14 @@ namespace HotChocolatey.UI
             }
         }
 
-        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
         private void OnAboutButtonClick(object sender, RoutedEventArgs e)
         {
-            var about = new About();
-            about.Owner = this;
-            about.ShowDialog();
+            ViewModel.AboutClicked(this);
         }
 
         private async void UpgradeAllClick(object sender, RoutedEventArgs e)
         {
-            using (new ProgressIndication(this))
-            {
-                Packages.ApplyFilter(FilterFactory.UpgradeFilter);
-
-                foreach (var package in Packages.Items)
-                {
-                    if (!await Controller.Upgrade(package))
-                    {
-                        // TODO : provide some sensible text to the user
-                        Log.Error($"Upgrade failed for package:{package.Title}");
-                    }
-                }
-            }
+            await ViewModel.UpgradeAllClicked();
         }
     }
 }

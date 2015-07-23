@@ -1,78 +1,40 @@
-﻿using HotChocolatey.Logic;
-using HotChocolatey.Utility;
-using System;
-using System.Collections.ObjectModel;
+﻿using HotChocolatey.Utility;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
 namespace HotChocolatey.UI
 {
-    [Magic]
-    public partial class PackageManager : UserControl, INotifyPropertyChanged, ProgressIndication.IProgressIndicator
+    public partial class PackageManager : UserControl
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler<SearchEventArgs> Searched;
-
-        public ObservableCollection<IFilter> Filters { get; } = new ObservableCollection<IFilter>();
-        public IFilter Filter { get; set; }
-        public Packages Packages { get; set; }
-        public ChocoItem SelectedPackage { get; set; }
-        public bool IsInProgress { get; set; }
-
-        public bool HasSelectedPackage => SelectedPackage != null;
+        private PackageManagerViewModel ViewModel => DataContext as PackageManagerViewModel; // TODO : MVVM ?
 
         public PackageManager()
         {
             InitializeComponent();
         }
 
-        public void ClearSearchText()
-        {
-            SearchTextBox.Clear();
-        }
-
-        private void InitializeFilter()
-        {
-            FilterFactory.AvailableFilters.ForEach(Filters.Add);
-            Filter = Filters.First();
-        }
-
         private void OnFilterSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Packages.ApplyFilter(Filter);
+            ViewModel.FilterSelectionChanged();
         }
 
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             if (!DesignerProperties.GetIsInDesignMode(this))
             {
-                InitializeFilter();
-                DataContext = this;
-
-                Packages.Items.CollectionChanged += OnPackagesCollectionChanged;
-            }
-        }
-
-        private void OnPackagesCollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if (SelectedPackage == null)
-            {
-                SelectedPackage = Packages.Items.FirstOrDefault();
+                ViewModel.Loaded();
             }
         }
 
         private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PackageControl.Package = SelectedPackage;
+            ViewModel.SelectionChanged();
         }
 
         private void OnSearch(object sender, SearchEventArgs e)
         {
-            Searched?.Invoke(this, e);
+            ViewModel.Search(e);
         }
-
-        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
     }
 }
