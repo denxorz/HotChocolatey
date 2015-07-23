@@ -1,4 +1,5 @@
 ﻿using HotChocolatey.Utility;
+using HotChocolatey.ViewModel;
 using NuGet;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace HotChocolatey.Logic
             return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
-        public async Task<List<ChocoItem>> GetAvailable(string name, UI.ProgressIndication.IProgressIndicator progressIndicator)
+        public async Task<List<ChocoItem>> GetAvailable(string name, ProgressIndication.IProgressIndicator progressIndicator)
         {
             var packages = (await GetPackages(name)).Select(t => new ChocoItem(t)).ToList();
             await Task.WhenAll(packages.Select(UpdatePackageVersion));
@@ -47,7 +48,7 @@ namespace HotChocolatey.Logic
             return await Task.Run(() => repo.GetPackages().Where(p => p.Id == id).ToList().Select(p => p.Version).OrderByDescending(p => p.Version).ToList());
         }
 
-        public async Task<List<ChocoItem>> GetInstalled(UI.ProgressIndication.IProgressIndicator progressIndicator)
+        public async Task<List<ChocoItem>> GetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();

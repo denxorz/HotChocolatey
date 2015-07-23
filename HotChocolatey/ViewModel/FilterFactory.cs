@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.ViewModel
 {
     public static class FilterFactory
     {

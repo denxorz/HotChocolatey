@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.ViewModel
 {
     /// <summary>
     /// Does INotifyPropertyChanged magic http://kindofmagic.codeplex.com/

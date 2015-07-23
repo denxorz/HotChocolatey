@@ -1,4 +1,5 @@
-﻿using NuGet;
+﻿using HotChocolatey.ViewModel;
+using NuGet;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ namespace HotChocolatey.Logic
 {
     internal class ActionFactory
     {
-        internal static List<IAction> Generate(ChocolateyController controller, ChocoItem chocoItem, UI.ProgressIndication.IProgressIndicator progressIndicator)
+        internal static List<IAction> Generate(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
         {
             var actions = new List<IAction>();
 
@@ -32,9 +33,9 @@ namespace HotChocolatey.Logic
         {
             private ChocolateyController controller;
             private ChocoItem chocoItem;
-            private UI.ProgressIndication.IProgressIndicator progressIndicator;
+            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public InstallAction(ChocolateyController controller, ChocoItem chocoItem, UI.ProgressIndication.IProgressIndicator progressIndicator)
+            public InstallAction(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
             {
                 this.controller = controller;
                 this.chocoItem = chocoItem;
@@ -46,7 +47,7 @@ namespace HotChocolatey.Logic
 
             async Task IAction.Execute(SemanticVersion specificVersion)
             {
-                using (new UI.ProgressIndication(progressIndicator))
+                using (new ProgressIndication(progressIndicator))
                 {
                     await controller.Install(chocoItem, specificVersion);
                 }
@@ -62,9 +63,9 @@ namespace HotChocolatey.Logic
         {
             private ChocolateyController controller;
             private ChocoItem chocoItem;
-            private UI.ProgressIndication.IProgressIndicator progressIndicator;
+            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public UninstallAction(ChocolateyController controller, ChocoItem chocoItem, UI.ProgressIndication.IProgressIndicator progressIndicator)
+            public UninstallAction(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
             {
                 this.controller = controller;
                 this.chocoItem = chocoItem;
@@ -76,7 +77,7 @@ namespace HotChocolatey.Logic
 
             async Task IAction.Execute(SemanticVersion specificVersion)
             {
-                using (new UI.ProgressIndication(progressIndicator))
+                using (new ProgressIndication(progressIndicator))
                 {
                     await controller.Uninstall(chocoItem);
                 }
@@ -92,9 +93,9 @@ namespace HotChocolatey.Logic
         {
             private ChocolateyController controller;
             private ChocoItem chocoItem;
-            private UI.ProgressIndication.IProgressIndicator progressIndicator;
+            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public UpgradeAction(ChocolateyController controller, ChocoItem chocoItem, UI.ProgressIndication.IProgressIndicator progressIndicator)
+            public UpgradeAction(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
             {
                 this.controller = controller;
                 this.chocoItem = chocoItem;
@@ -106,7 +107,7 @@ namespace HotChocolatey.Logic
  
             async Task IAction.Execute(SemanticVersion specificVersion)
             {
-                using (new UI.ProgressIndication(progressIndicator))
+                using (new ProgressIndication(progressIndicator))
                 {
                     await controller.Upgrade(chocoItem);
                 }

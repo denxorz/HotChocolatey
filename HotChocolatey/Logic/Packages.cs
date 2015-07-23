@@ -1,5 +1,5 @@
-﻿using HotChocolatey.UI;
-using HotChocolatey.Utility;
+﻿using HotChocolatey.Utility;
+using HotChocolatey.ViewModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;

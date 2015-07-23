@@ -1,4 +1,5 @@
-﻿using NuGet;
+﻿using HotChocolatey.ViewModel;
+using NuGet;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Linq;
 
 namespace HotChocolatey.Logic
 {
-    [UI.Magic]
+    [Magic]
     public class ChocoItem : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

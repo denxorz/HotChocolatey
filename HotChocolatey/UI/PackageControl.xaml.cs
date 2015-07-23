@@ -5,7 +5,7 @@ namespace HotChocolatey.UI
 {
     public partial class PackageControl : UserControl
     {
-        private PackageControlViewModel ViewModel => DataContext as PackageControlViewModel; // TODO : MVVM ?
+        private ViewModel.PackageControlViewModel ViewModel => DataContext as ViewModel.PackageControlViewModel; // TODO : MVVM ?
         
         public PackageControl()
         {

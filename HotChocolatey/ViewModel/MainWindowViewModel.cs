@@ -1,4 +1,5 @@
 ﻿using HotChocolatey.Logic;
+using HotChocolatey.UI;
 using HotChocolatey.Utility;
 using System;
 using System.ComponentModel;
@@ -7,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.ViewModel
 {
     [Magic]
     public class MainWindowViewModel : INotifyPropertyChanged, ProgressIndication.IProgressIndicator

@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.ViewModel
 {
     [Magic]
     public partial class PackageControlViewModel : INotifyPropertyChanged

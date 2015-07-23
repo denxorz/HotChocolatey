@@ -7,7 +7,7 @@ namespace HotChocolatey.UI
 {
     public partial class MainWindow : Window
     {
-        private MainWindowViewModel ViewModel => DataContext as MainWindowViewModel; // TODO : MVVM ?
+        private ViewModel.MainWindowViewModel ViewModel => DataContext as ViewModel.MainWindowViewModel; // TODO : MVVM ?
 
         public MainWindow()
         {

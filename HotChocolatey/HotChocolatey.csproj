@@ -152,10 +152,9 @@
     <Compile Include="UI\LinkTextBlock.xaml.cs">
       <DependentUpon>LinkTextBlock.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\MainWindowViewModel.cs" />
-    <Compile Include="UI\PackageControlViewModel.cs" />
-    <Compile Include="UI\PackageManagerViewModel.cs" />
-    <Compile Include="UI\SearchEventArgs.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\PackageControlViewModel.cs" />
+    <Compile Include="ViewModel\PackageManagerViewModel.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
     <Page Include="UI\About.xaml">
       <SubType>Designer</SubType>
@@ -182,13 +181,13 @@
     <Compile Include="Logic\ChocoExecutionException.cs" />
     <Compile Include="Logic\ChocoItem.cs" />
     <Compile Include="Logic\ChocolateyResult.cs" />
-    <Compile Include="UI\Diagnostics.cs" />
-    <Compile Include="UI\FilterChangedEventArgs.cs" />
-    <Compile Include="UI\FilterFactory.cs" />
-    <Compile Include="UI\IFilter.cs" />
+    <Compile Include="ViewModel\Diagnostics.cs" />
+    <Compile Include="ViewModel\FilterChangedEventArgs.cs" />
+    <Compile Include="ViewModel\FilterFactory.cs" />
+    <Compile Include="ViewModel\IFilter.cs" />
     <Compile Include="Logic\IAction.cs" />
     <Compile Include="Utility\Log.cs" />
-    <Compile Include="UI\MagicAttribute.cs" />
+    <Compile Include="ViewModel\MagicAttribute.cs" />
     <Compile Include="UI\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -222,7 +221,7 @@
       <DependentUpon>PackageManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="Logic\Packages.cs" />
-    <Compile Include="UI\ProgressIndication.cs" />
+    <Compile Include="ViewModel\ProgressIndication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

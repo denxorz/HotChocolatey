@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.ViewModel
 {
     [Magic]
     public partial class PackageManagerViewModel : INotifyPropertyChanged, ProgressIndication.IProgressIndicator
