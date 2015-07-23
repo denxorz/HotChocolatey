@@ -5,7 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 
-namespace HotChocolatey.Logic
+namespace HotChocolatey.Model
 {
     public class Packages
     {

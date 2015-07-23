@@ -4,7 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.View
 {
     public partial class AboutItem : UserControl
     {

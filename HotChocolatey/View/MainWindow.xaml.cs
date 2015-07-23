@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace HotChocolatey.UI
+namespace HotChocolatey.View
 {
     public partial class MainWindow : Window
     {

@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
-namespace HotChocolatey.Logic
+namespace HotChocolatey.Model
 {
     [Magic]
     public class ChocoItem : INotifyPropertyChanged

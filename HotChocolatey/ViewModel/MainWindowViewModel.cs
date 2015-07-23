@@ -1,6 +1,6 @@
-﻿using HotChocolatey.Logic;
-using HotChocolatey.UI;
+﻿using HotChocolatey.Model;
 using HotChocolatey.Utility;
+using HotChocolatey.View;
 using System;
 using System.ComponentModel;
 using System.Reflection;

@@ -7,7 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HotChocolatey.Logic
+namespace HotChocolatey.Model
 {
     public class ChocolateyController
     {

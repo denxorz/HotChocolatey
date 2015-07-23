@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HotChocolatey.Logic
+namespace HotChocolatey.Model
 {
     public class ChocoExecutionException : Exception
     {

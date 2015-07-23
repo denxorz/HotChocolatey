@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HotChocolatey.Logic
+namespace HotChocolatey.Model
 {
     internal class ActionFactory
     {

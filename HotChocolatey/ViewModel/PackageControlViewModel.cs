@@ -1,4 +1,4 @@
-﻿using HotChocolatey.Logic;
+﻿using HotChocolatey.Model;
 using NuGet;
 using System.ComponentModel;
 using System.Linq;

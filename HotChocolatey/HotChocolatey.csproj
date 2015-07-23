@@ -39,7 +39,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>UI\Hot Chocolate-50.ico</ApplicationIcon>
+    <ApplicationIcon>View\Hot Chocolate-50.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -143,64 +143,64 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UI\About.xaml.cs">
+    <Compile Include="View\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\AboutItem.xaml.cs">
+    <Compile Include="View\AboutItem.xaml.cs">
       <DependentUpon>AboutItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\LinkTextBlock.xaml.cs">
+    <Compile Include="View\LinkTextBlock.xaml.cs">
       <DependentUpon>LinkTextBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PackageControlViewModel.cs" />
     <Compile Include="ViewModel\PackageManagerViewModel.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
-    <Page Include="UI\About.xaml">
+    <Page Include="View\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\AboutItem.xaml">
+    <Page Include="View\AboutItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\LinkTextBlock.xaml">
+    <Page Include="View\LinkTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Logic\ActionFactory.cs" />
+    <Compile Include="Model\ActionFactory.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Logic\ChocoController.cs" />
-    <Compile Include="Logic\ChocoExecutionException.cs" />
-    <Compile Include="Logic\ChocoItem.cs" />
-    <Compile Include="Logic\ChocolateyResult.cs" />
+    <Compile Include="Model\ChocoController.cs" />
+    <Compile Include="Model\ChocoExecutionException.cs" />
+    <Compile Include="Model\ChocoItem.cs" />
+    <Compile Include="Model\ChocolateyResult.cs" />
     <Compile Include="ViewModel\Diagnostics.cs" />
     <Compile Include="ViewModel\FilterChangedEventArgs.cs" />
     <Compile Include="ViewModel\FilterFactory.cs" />
     <Compile Include="ViewModel\IFilter.cs" />
-    <Compile Include="Logic\IAction.cs" />
+    <Compile Include="Model\IAction.cs" />
     <Compile Include="Utility\Log.cs" />
     <Compile Include="ViewModel\MagicAttribute.cs" />
-    <Compile Include="UI\MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="UI\PackageControl.xaml">
+    <Page Include="View\PackageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\PackageListItem.xaml">
+    <Page Include="View\PackageListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UI\PackageManager.xaml">
+    <Page Include="View\PackageManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,16 +211,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utility\ObservableCollectionEx.cs" />
-    <Compile Include="UI\PackageControl.xaml.cs">
+    <Compile Include="View\PackageControl.xaml.cs">
       <DependentUpon>PackageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\PackageListItem.xaml.cs">
+    <Compile Include="View\PackageListItem.xaml.cs">
       <DependentUpon>PackageListItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UI\PackageManager.xaml.cs">
+    <Compile Include="View\PackageManager.xaml.cs">
       <DependentUpon>PackageManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Logic\Packages.cs" />
+    <Compile Include="Model\Packages.cs" />
     <Compile Include="ViewModel\ProgressIndication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -251,7 +251,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="UI\Hot Chocolate-50.ico" />
+    <Resource Include="View\Hot Chocolate-50.ico" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\chocolateyicon.gif" />

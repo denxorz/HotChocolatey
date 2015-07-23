@@ -1,4 +1,5 @@
-﻿using HotChocolatey.ViewModel;
+﻿using HotChocolatey.View;
+using HotChocolatey.ViewModel;
 using System.Windows;
 
 namespace HotChocolatey
@@ -7,7 +8,7 @@ namespace HotChocolatey
     {
         private void OnStartup(object sender, StartupEventArgs e)
         {
-            UI.MainWindow view = new UI.MainWindow();
+            MainWindow view = new MainWindow();
             view.DataContext = new MainWindowViewModel();
             view.Show();
         }
