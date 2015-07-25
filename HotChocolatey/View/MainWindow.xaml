@@ -6,18 +6,17 @@
         xmlns:local="clr-namespace:HotChocolatey.View"
         mc:Ignorable="d"
         Title="Hot Chocolatey" Icon="Hot Chocolate-50.ico"
-        Height="600" Width="800" 
-        Loaded="OnLoaded">
+        Height="600" Width="800">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </Window.Resources>
     <DockPanel IsEnabled="{Binding IsUserAllowedToExecuteActions}">
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar Loaded="OnToolBarLoaded">
-                <Button Click="OnRefreshClick">
+                <Button Command="{Binding RefreshCommand}">
                     <Image Source="../Images/24/synchronize-24.png" Stretch="Uniform" Width="24" />
                 </Button>
-                <Button Click="UpgradeAllClick">
+                <Button Command="{Binding UpgradeAllCommand}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Images/24/multiple_inputs-24.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>

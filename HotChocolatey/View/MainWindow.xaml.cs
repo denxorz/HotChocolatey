@@ -1,5 +1,4 @@
 ﻿using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -7,20 +6,10 @@ namespace HotChocolatey.View
 {
     public partial class MainWindow : Window
     {
-        private ViewModel.MainWindowViewModel ViewModel => DataContext as ViewModel.MainWindowViewModel; // TODO : MVVM ?
-
         public MainWindow()
         {
             InitializeComponent();
             ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
-        }
-
-        private async void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            if (!DesignerProperties.GetIsInDesignMode(this))
-            {
-                await ViewModel.Loaded();
-            }
         }
 
         private void OnToolBarLoaded(object sender, RoutedEventArgs e)
@@ -38,11 +27,6 @@ namespace HotChocolatey.View
             }
         }
 
-        private async void OnRefreshClick(object sender, RoutedEventArgs e)
-        {
-            await ViewModel.RefreshClicked();
-        }
-
         private void OnLoggingListViewCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
@@ -53,12 +37,9 @@ namespace HotChocolatey.View
 
         private void OnAboutButtonClick(object sender, RoutedEventArgs e)
         {
-            ViewModel.AboutClicked(this);
-        }
-
-        private async void UpgradeAllClick(object sender, RoutedEventArgs e)
-        {
-            await ViewModel.UpgradeAllClicked();
+            var about = new About();
+            about.Owner = this;
+            about.ShowDialog();
         }
     }
 }

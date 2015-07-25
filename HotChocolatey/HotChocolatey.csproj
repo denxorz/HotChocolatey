@@ -143,6 +143,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
+    <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
+    <Compile Include="ViewModel\Ginnivan\CommandExtensions.cs" />
+    <Compile Include="ViewModel\Ginnivan\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Ginnivan\DelegateCommand{T}.cs" />
+    <Compile Include="ViewModel\Ginnivan\IAsyncCommand.cs" />
+    <Compile Include="ViewModel\Ginnivan\IAsyncCommand{T}.cs" />
+    <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
     <Compile Include="View\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>

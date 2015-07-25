@@ -1,10 +1,10 @@
 ﻿using HotChocolatey.Model;
+using HotChocolatey.ViewModel.Ginnivan;
 using NuGet;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace HotChocolatey.ViewModel
 {
@@ -37,7 +37,14 @@ namespace HotChocolatey.ViewModel
         public SemanticVersion PackageVersion { get; set; }
         public bool HasPackage { get; private set; }
 
-        public async Task ActionClicked()
+        public AwaitableDelegateCommand ActionCommand { get; }
+
+        public PackageControlViewModel()
+        {
+            ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
+        }
+
+        private async Task ExecuteActionCommand()
         {
             await PackageAction.Execute(PackageVersion);
         }
@@ -46,10 +53,5 @@ namespace HotChocolatey.ViewModel
 
         [MethodImpl(MethodImplOptions.NoInlining)] // to preserve method call 
         protected static void Raise() { }
-
-        private async void OnActionButtonClick(object sender, RoutedEventArgs e)
-        {
-            await PackageAction.Execute(PackageVersion);
-        }
     }
 }

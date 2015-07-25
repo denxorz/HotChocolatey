@@ -1,12 +1,13 @@
 ﻿using HotChocolatey.Model;
 using HotChocolatey.Utility;
-using HotChocolatey.View;
+using HotChocolatey.ViewModel.Ginnivan;
 using System;
 using System.ComponentModel;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 
 namespace HotChocolatey.ViewModel
 {
@@ -23,6 +24,9 @@ namespace HotChocolatey.ViewModel
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
 
         public PackageManagerViewModel PackageManagerViewModel { get; } = new PackageManagerViewModel();
+
+        public AwaitableDelegateCommand RefreshCommand { get; }
+        public AwaitableDelegateCommand UpgradeAllCommand { get; }
 
         bool ProgressIndication.IProgressIndicator.IsInProgress
         {
@@ -48,12 +52,18 @@ namespace HotChocolatey.ViewModel
             Log.Info("---");
             Log.Info($"Version:{Assembly.GetCallingAssembly().GetName().Version} MachineName:{Environment.MachineName} OSVersion:{Environment.OSVersion} Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
+            RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
+            UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
+
+            Application.Current.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(async () => { await Loaded(); }));
+
             PackageManagerViewModel.Searched += OnSearched;
         }
 
         public async Task Loaded()
         {
             PackageManagerViewModel.Packages = Packages;
+            PackageManagerViewModel.Load();
 
             using (new ProgressIndication(PackageManagerViewModel))
             {
@@ -73,8 +83,7 @@ namespace HotChocolatey.ViewModel
             }
         }
 
-
-        public async Task RefreshClicked()
+        private async Task ExecuteRefreshCommand()
         {
             using (new ProgressIndication(PackageManagerViewModel))
             {
@@ -82,14 +91,7 @@ namespace HotChocolatey.ViewModel
             }
         }
 
-        public void AboutClicked(Window owner)
-        {
-            var about = new About();
-            about.Owner = owner;
-            about.ShowDialog();
-        }
-
-        public async Task UpgradeAllClicked()
+        private async Task ExecuteUpgradeAllCommand()
         {
             using (new ProgressIndication(this))
             {

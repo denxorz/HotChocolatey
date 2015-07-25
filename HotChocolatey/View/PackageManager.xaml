@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:HotChocolatey.View"
              xmlns:utility="clr-namespace:HotChocolatey.Utility"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="500" Loaded="OnLoaded" BorderThickness="1" BorderBrush="#4C808080">
+             d:DesignHeight="300" d:DesignWidth="500"
+             BorderThickness="1" BorderBrush="#4C808080" DataContextChanged="UserControl_DataContextChanged">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </UserControl.Resources>
@@ -15,7 +16,7 @@
             <UniformGrid Rows="1" MaxWidth="600" HorizontalAlignment="Left" Margin="15">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Margin="2" VerticalAlignment="Center">Filter:</TextBlock>
-                    <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" SelectionChanged="OnFilterSelectionChanged"></ComboBox>
+                    <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" />
                 </StackPanel>
                 <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">Include prerelease</CheckBox> <!-- TODO -->
                 <utility:SearchTextBox x:Name="SearchTextBox" Margin="2" Width="150" Search="OnSearch" />
@@ -42,7 +43,7 @@
                         </Style.Triggers>
                     </Style>
                 </ScrollViewer.Style>
-                <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" SelectionChanged="OnSelectionChanged">
+                <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="#4C808080" BorderThickness="0,0,1,1" Width="{Binding ActualWidth, ElementName=PackagesListView}">
