@@ -18,7 +18,8 @@
                     <TextBlock Margin="2" VerticalAlignment="Center">Filter:</TextBlock>
                     <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" />
                 </StackPanel>
-                <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">Include prerelease</CheckBox> <!-- TODO -->
+                <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">Include prerelease</CheckBox>
+                <!-- TODO -->
                 <utility:SearchTextBox x:Name="SearchTextBox" Margin="2" Width="150" Search="OnSearch" />
             </UniformGrid>
         </Border>
@@ -32,9 +33,9 @@
                 <ProgressBar Height="10" IsIndeterminate="True" HorizontalAlignment="Center" Width="200" Margin="0,20,0,0" />
                 <TextBlock Text="Loading..." HorizontalAlignment="Center" Width="200" Margin="0,5,0,0" TextAlignment="Center" />
             </StackPanel>
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ScrollViewer.Style>
-                    <Style TargetType="{x:Type ScrollViewer}">
+            <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.Style>
+                    <Style TargetType="{x:Type ListView}">
                         <Setter Property="Visibility" Value="Visible" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding IsInProgress}" Value="True">
@@ -42,17 +43,16 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ScrollViewer.Style>
-                <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderBrush="#4C808080" BorderThickness="0,0,1,1" Width="{Binding ActualWidth, ElementName=PackagesListView}">
-                                <local:PackageListItem DataContext="{Binding}" />
-                            </Border>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ListView>
-            </ScrollViewer>
+                </ListView.Style>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">
+                            <local:PackageListItem DataContext="{Binding}" />
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ListView>
+
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" Visibility="{Binding Path=HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" DataContext="{Binding PackageControlViewModel}" />
         </Grid>
