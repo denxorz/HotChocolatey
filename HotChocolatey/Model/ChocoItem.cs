@@ -34,7 +34,7 @@ namespace HotChocolatey.Model
         public int DownloadCount => Package.DownloadCount;
         public string ProjectUrl => Package.ProjectUrl?.ToString();
         public string Tags => Package.Tags;
-        public string Dependencies => string.Empty; // TODO
+        public string Dependencies => string.Empty; // TODO : issue #27
 
         public bool IsInstalled => InstalledVersion != null;
 

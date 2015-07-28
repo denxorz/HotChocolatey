@@ -18,8 +18,8 @@
                     <TextBlock Margin="2" VerticalAlignment="Center">Filter:</TextBlock>
                     <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" />
                 </StackPanel>
+                <!-- TODO : issue #29 -->
                 <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">Include prerelease</CheckBox>
-                <!-- TODO -->
                 <utility:SearchTextBox x:Name="SearchTextBox" Margin="2" Width="150" Search="OnSearch" />
             </UniformGrid>
         </Border>
