@@ -29,10 +29,7 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackPanel Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}">
-                <ProgressBar Height="10" IsIndeterminate="True" HorizontalAlignment="Center" Width="200" Margin="0,20,0,0" />
-                <TextBlock Text="Loading..." HorizontalAlignment="Center" Width="200" Margin="0,5,0,0" TextAlignment="Center" />
-            </StackPanel>
+            <local:ProgressIndicatorView Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}" />
             <local:ListViewWithScrollViewerProperty x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <local:ListViewWithScrollViewerProperty.Style>
                     <Style TargetType="{x:Type ListView}">

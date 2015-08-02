@@ -165,6 +165,9 @@
     <Compile Include="ViewModel\PackageControlViewModel.cs" />
     <Compile Include="ViewModel\PackageManagerViewModel.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
+    <Compile Include="View\ProgressIndicatorView.xaml.cs">
+      <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -214,6 +217,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProgressIndicatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
