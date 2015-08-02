@@ -14,24 +14,28 @@ namespace HotChocolatey.View
                 {
                     Decorator border = VisualTreeHelper.GetChild(this, 0) as Decorator;
                     return border.Child as ScrollViewer;
-                }catch
-                {
-                    return null; 
                 }
-               // return FindScrollViewer(this);
-              // return GetTemplateChild("ScrollViewer") as ScrollViewer;
+                catch
+                {
+                    return null;
+                }
             }
         }
 
         private ScrollViewer FindScrollViewer(DependencyObject d)
         {
             if (d is ScrollViewer)
+            {
                 return d as ScrollViewer;
+            }
 
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(d); i++)
             {
                 var sw = FindScrollViewer(VisualTreeHelper.GetChild(d, i));
-                if (sw != null) return sw;
+                if (sw != null)
+                {
+                    return sw;
+                }
             }
             return null;
         }
