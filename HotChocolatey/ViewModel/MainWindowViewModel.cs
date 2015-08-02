@@ -17,7 +17,7 @@ namespace HotChocolatey.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ChocolateyController Controller { get; } = new ChocolateyController();
-        public Packages Packages { get; } = new Packages();
+        public Packages Packages { get; }
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
         public bool IsLogVisible { get; set; }
@@ -55,15 +55,21 @@ namespace HotChocolatey.ViewModel
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
 
+            Packages = new Packages(Controller, this);
+
             Application.Current.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(async () => { await Loaded(); }));
 
             PackageManagerViewModel.Searched += OnSearched;
+            PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
         }
 
         public async Task Loaded()
         {
             PackageManagerViewModel.Packages = Packages;
-            PackageManagerViewModel.Load();
+            PackageManagerViewModel.Load(Controller);
+
+            // TODO : wait for this somewhere?
+            var loadInstalled = Controller.GetInstalled(this);
 
             using (new ProgressIndication(PackageManagerViewModel))
             {
@@ -95,7 +101,7 @@ namespace HotChocolatey.ViewModel
         {
             using (new ProgressIndication(this))
             {
-                Packages.ApplyFilter(FilterFactory.UpgradeFilter);
+                await Packages.ApplyFilter(FilterFactory.BuildUpgradeFilter(Controller));
 
                 foreach (var package in Packages.Items)
                 {
@@ -121,9 +127,14 @@ namespace HotChocolatey.ViewModel
                 else
                 {
                     Packages.Clear();
-                    (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
+                  //  (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
                 }
             }
+        }
+
+        private async void OnScrolledToBottom(object sender, EventArgs e)
+        {
+            await Packages.GetMore();
         }
 
         private async Task Refresh()
@@ -131,7 +142,7 @@ namespace HotChocolatey.ViewModel
             Log.Info(nameof(Refresh));
             PackageManagerViewModel.ClearSearchText();
             Packages.Clear();
-            (await Controller.GetInstalled(this)).ForEach(Packages.Add);
+            await Packages.GetMore();
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

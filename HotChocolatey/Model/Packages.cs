@@ -3,6 +3,7 @@ using HotChocolatey.ViewModel;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace HotChocolatey.Model
@@ -13,20 +14,48 @@ namespace HotChocolatey.Model
 
         private readonly ICollectionView view;
 
-        public Packages()
+        private IPackageList packageList;
+        private ChocolateyController controller;
+        private ProgressIndication.IProgressIndicator progressIndicator;
+
+        public Packages(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
         {
+            this.controller = controller;
+            this.progressIndicator = progressIndicator;
+
             view = CollectionViewSource.GetDefaultView(Items);
         }
 
-        public void ApplyFilter(IFilter filter)
+        public async Task GetMore()
         {
-            view.Filter = filter.Filter;
+            if (packageList == null)
+            {
+                await ApplyPackageList(new AllPackageList(controller, progressIndicator));
+            }
+
+            if (packageList.HasMore)
+            {
+                (await packageList.GetMore(20)).ToList().ForEach(Add);
+            }
         }
 
-        public void Add(ChocoItem item)
+        public async Task ApplyFilter(IFilter filter)
+        {
+            await ApplyPackageList(filter.CreatePackageList());
+        }
+
+        public async Task ApplyPackageList(IPackageList list)
+        {
+            Clear();
+            packageList = list;
+            await packageList.Refresh();
+        }
+
+        private void Add(ChocoItem item)
         {
             Items.Remove(Items.FirstOrDefault(t => t.Package.Id == item.Package.Id));
-            AddSorted(item);
+            //AddSorted(item);
+            Items.Add(item);
         }
 
         public void Clear()

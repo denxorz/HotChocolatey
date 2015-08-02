@@ -7,7 +7,7 @@
              xmlns:utility="clr-namespace:HotChocolatey.Utility"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="500"
-             BorderThickness="1" BorderBrush="#4C808080" DataContextChanged="UserControl_DataContextChanged">
+             BorderThickness="1" BorderBrush="#4C808080" DataContextChanged="OnDataContextChanged">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </UserControl.Resources>
@@ -33,8 +33,8 @@
                 <ProgressBar Height="10" IsIndeterminate="True" HorizontalAlignment="Center" Width="200" Margin="0,20,0,0" />
                 <TextBlock Text="Loading..." HorizontalAlignment="Center" Width="200" Margin="0,5,0,0" TextAlignment="Center" />
             </StackPanel>
-            <ListView x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListView.Style>
+            <local:ListViewWithScrollViewerProperty x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <local:ListViewWithScrollViewerProperty.Style>
                     <Style TargetType="{x:Type ListView}">
                         <Setter Property="Visibility" Value="Visible" />
                         <Style.Triggers>
@@ -43,7 +43,7 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </ListView.Style>
+                </local:ListViewWithScrollViewerProperty.Style>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">
@@ -51,7 +51,7 @@
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-            </ListView>
+            </local:ListViewWithScrollViewerProperty>
 
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
             <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" Visibility="{Binding Path=HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" DataContext="{Binding PackageControlViewModel}" />

@@ -9,16 +9,154 @@ using System.Threading.Tasks;
 
 namespace HotChocolatey.Model
 {
+    public interface IPackageList
+    {
+        bool HasMore { get; }
+        Task Refresh();
+        Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems);
+    }
+
+    public class InstalledPackageList : IPackageList
+    {
+        private readonly ChocolateyController controller;
+
+        private List<ChocoItem> packages = new List<ChocoItem>();
+        private int skipped;
+
+        public bool HasMore => packages.Count > skipped;
+
+        public InstalledPackageList(ChocolateyController controller)
+        {
+            this.controller = controller;
+        }
+
+        public async Task Refresh()
+        {
+            skipped = 0;
+            packages = controller.InstalledPackages;
+        }
+
+        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
+        {
+            var tmp = packages.Skip(skipped).Take(numberOfItems);
+            skipped += numberOfItems;
+            return tmp;
+        }
+    }
+
+    public class UpgradablePackageList : IPackageList
+    {
+        private readonly ChocolateyController controller;
+
+        private List<ChocoItem> packages = new List<ChocoItem>();
+        private int skipped;
+
+        public bool HasMore => packages.Count > skipped;
+
+        public UpgradablePackageList(ChocolateyController controller)
+        {
+            this.controller = controller;
+        }
+
+        public async Task Refresh()
+        {
+            skipped = 0;
+            packages = controller.InstalledPackages.Where(t => t.IsUpgradable).ToList();
+        }
+
+        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
+        {
+            var tmp = packages.Skip(skipped).Take(numberOfItems);
+            skipped += numberOfItems;
+            return tmp;
+        }
+    }
+
+    public class SearchResultPackageList : IPackageList
+    {
+        private readonly ChocolateyController controller;
+        private readonly ProgressIndication.IProgressIndicator progressIndicator;
+        private readonly string searchText;
+
+        private IOrderedQueryable<IPackage> query;
+        private int skipped;
+        private int total;
+
+        public bool HasMore => total > skipped;
+
+        public SearchResultPackageList(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator, string searchText)
+        {
+            this.controller = controller;
+            this.progressIndicator = progressIndicator;
+            this.searchText = searchText;
+        }
+
+        public async Task Refresh()
+        {
+            skipped = 0;
+            query = await Task.Run(() => controller.Repo.GetPackages().Where(p => p.Title.Contains(searchText) && p.IsLatestVersion).OrderByDescending(p => p.DownloadCount));
+            total = await Task.Run(() => query.Count());
+        }
+
+        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
+        {
+            var tmp = query.Skip(skipped).Take(numberOfItems).ToList();
+            skipped += numberOfItems;
+
+            var packages = tmp.Select(t => new ChocoItem(t)).ToList();
+            await Task.WhenAll(packages.Select(controller.UpdatePackageVersion));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(controller, t, progressIndicator));
+
+            return packages;
+        }
+    }
+
+    public class AllPackageList : IPackageList
+    {
+        private readonly ChocolateyController controller;
+        private readonly ProgressIndication.IProgressIndicator progressIndicator;
+
+        private IOrderedQueryable<IPackage> query;
+        private int skipped;
+        private int total;
+
+        public bool HasMore => total > skipped;
+
+        public AllPackageList(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
+        {
+            this.controller = controller;
+            this.progressIndicator = progressIndicator;
+        }
+
+        public Task Refresh()
+        {
+            skipped = 0;
+            return Task.Run(() =>
+                {
+                    query = controller.Repo.GetPackages().Where(p => p.IsLatestVersion).OrderByDescending(p => p.DownloadCount);
+                    total = query.Count();
+                });
+        }
+
+        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
+        {
+            var tmp = query.Skip(skipped).Take(numberOfItems).ToList();
+            skipped += numberOfItems;
+
+            var packages = tmp.Select(t => new ChocoItem(t)).ToList();
+            await Task.WhenAll(packages.Select(controller.UpdatePackageVersion));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(controller, t, progressIndicator));
+
+            return packages;
+        }
+    }
+
     public class ChocolateyController
     {
         private const char Seperator = '|';
-        private PackageRepositoryFactory packageRepository = new PackageRepositoryFactory();
-        private IPackageRepository repo;
 
-        public ChocolateyController()
-        {
-            repo = packageRepository.CreateRepository("https://chocolatey.org/api/v2/");
-        }
+        public IPackageRepository Repo { get; } = new PackageRepositoryFactory().CreateRepository("https://chocolatey.org/api/v2/");
+        public List<ChocoItem> InstalledPackages { get; private set; } = new List<ChocoItem>();
 
         public async Task<Version> GetVersion()
         {
@@ -29,26 +167,7 @@ namespace HotChocolatey.Model
             return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
-        public async Task<List<ChocoItem>> GetAvailable(string name, ProgressIndication.IProgressIndicator progressIndicator)
-        {
-            var packages = (await GetPackages(name)).Select(t => new ChocoItem(t)).ToList();
-            await Task.WhenAll(packages.Select(UpdatePackageVersion));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
-
-            return packages;
-        }
-
-        public async Task<List<IPackage>> GetPackages(string name)
-        {
-            return await Task.Run(() => repo.GetPackages().Where(p => p.Title.Contains(name) && p.IsLatestVersion).ToList());
-        }
-
-        public async Task<List<SemanticVersion>> GetVersions(string id)
-        {
-            return await Task.Run(() => repo.GetPackages().Where(p => p.Id == id).ToList().Select(p => p.Version).OrderByDescending(p => p.Version).ToList());
-        }
-
-        public async Task<List<ChocoItem>> GetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
+        public async Task GetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
@@ -56,14 +175,18 @@ namespace HotChocolatey.Model
             var tasks = result.Output.Select(t =>
             {
                 var tmp = t.Split(Seperator);
-                return Task.Run(() => new ChocoItem(repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1]), new SemanticVersion(tmp[2])));
+                return Task.Run(() => new ChocoItem(Repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1]), new SemanticVersion(tmp[2])));
             }).ToList();
 
-            var packages = (await Task.WhenAll(tasks)).ToList();
+            InstalledPackages = (await Task.WhenAll(tasks)).ToList();
 
-            await Task.WhenAll(packages.Select(UpdatePackageVersion));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
-            return packages;
+            await Task.WhenAll(InstalledPackages.Select(UpdatePackageVersion));
+            InstalledPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
+        }
+
+        public async Task<List<SemanticVersion>> GetVersions(string id)
+        {
+            return await Task.Run(() => Repo.GetPackages().Where(p => p.Id == id).ToList().Select(p => p.Version).OrderByDescending(p => p.Version).ToList());
         }
 
         public async Task<bool> Install(ChocoItem package, SemanticVersion specificVersion = null)
@@ -112,7 +235,7 @@ namespace HotChocolatey.Model
             return true;
         }
 
-        private async Task<ChocolateyResult> Execute(string arguments)
+        public async Task<ChocolateyResult> Execute(string arguments)
         {
             Log.Info($">> choco {arguments}");
 
@@ -134,11 +257,9 @@ namespace HotChocolatey.Model
             return result;
         }
 
-        private async Task UpdatePackageVersion(ChocoItem package)
+        public async Task UpdatePackageVersion(ChocoItem package)
         {
             package.Versions = await GetVersions(package.Package.Id);
         }
-
-        private string AggregatePackageNames(List<ChocoItem> packages) => packages.Select(t => t.Name).Aggregate((all, next) => next + ";" + all);
     }
 }

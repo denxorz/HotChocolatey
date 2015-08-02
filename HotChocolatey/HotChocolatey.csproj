@@ -151,6 +151,7 @@
     <Compile Include="ViewModel\Ginnivan\IAsyncCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\IAsyncCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
+    <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
     <Compile Include="View\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
     </Compile>

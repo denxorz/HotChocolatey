@@ -5,8 +5,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows;
-using System.Windows.Threading;
 
 namespace HotChocolatey.ViewModel
 {
@@ -16,18 +14,11 @@ namespace HotChocolatey.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public event EventHandler<SearchEventArgs> Searched;
+        public event EventHandler ScrolledToBottom;
 
         public ObservableCollection<IFilter> Filters { get; } = new ObservableCollection<IFilter>();
 
-        public IFilter Filter
-        {
-            get { return selectedFilter; }
-            set
-            {
-                selectedFilter = value;
-                Packages.ApplyFilter(Filter);
-            }
-        }
+        public IFilter Filter { get; set; }
 
         public ChocoItem SelectedPackage
         {
@@ -48,12 +39,23 @@ namespace HotChocolatey.ViewModel
 
         public Action ClearSearchBox { get; set; }
 
-        private IFilter selectedFilter;
         private ChocoItem selectedPackage;
 
-        private void InitializeFilter()
+        public PackageManagerViewModel()
         {
-            FilterFactory.AvailableFilters.ForEach(Filters.Add);
+            PropertyChanged += async (s, e) =>
+                {
+                    if (e.PropertyName == nameof(Filter))
+                    {
+                        await Packages.ApplyFilter(Filter);
+                        await Packages.GetMore();
+                    }
+                };
+        }
+
+        private void InitializeFilter(ChocolateyController controller)
+        {
+            FilterFactory.BuildFilters(controller, this).ForEach(Filters.Add);
             Filter = Filters.First();
         }
 
@@ -62,15 +64,20 @@ namespace HotChocolatey.ViewModel
             ClearSearchBox?.Invoke();
         }
 
-        public void Load()
+        public void Load(ChocolateyController controller)
         {
-            InitializeFilter();
+            InitializeFilter(controller);
             Packages.Items.CollectionChanged += OnPackagesCollectionChanged;
         }
 
         public void Search(SearchEventArgs e)
         {
             Searched?.Invoke(this, e);
+        }
+
+        public void OnScrolledToBottom(object sender, EventArgs e)
+        {
+            ScrolledToBottom?.Invoke(this, EventArgs.Empty);
         }
 
         private void OnPackagesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
