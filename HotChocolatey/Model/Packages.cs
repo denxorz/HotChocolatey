@@ -44,7 +44,7 @@ namespace HotChocolatey.Model
             await ApplyPackageList(filter.CreatePackageList());
         }
 
-        public async Task ApplyPackageList(IPackageList list)
+        private async Task ApplyPackageList(IPackageList list)
         {
             Clear();
             packageList = list;

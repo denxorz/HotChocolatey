@@ -33,7 +33,7 @@ namespace HotChocolatey.Model
         public async Task Refresh()
         {
             skipped = 0;
-            packages = controller.InstalledPackages;
+            packages = (await controller.InstalledPackages.GetPackages());
         }
 
         public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
@@ -61,7 +61,7 @@ namespace HotChocolatey.Model
         public async Task Refresh()
         {
             skipped = 0;
-            packages = controller.InstalledPackages.Where(t => t.IsUpgradable).ToList();
+            packages = (await controller.InstalledPackages.GetPackages()).Where(t => t.IsUpgradable).ToList();
         }
 
         public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
@@ -128,14 +128,11 @@ namespace HotChocolatey.Model
             this.progressIndicator = progressIndicator;
         }
 
-        public Task Refresh()
+        public async Task Refresh()
         {
             skipped = 0;
-            return Task.Run(() =>
-                {
-                    query = controller.Repo.GetPackages().Where(p => p.IsLatestVersion).OrderByDescending(p => p.DownloadCount);
-                    total = query.Count();
-                });
+            await Task.Run(() => query = controller.Repo.GetPackages().Where(p => p.IsLatestVersion).OrderByDescending(p => p.DownloadCount))
+                      .ContinueWith(task => total = query.Count());
         }
 
         public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
@@ -151,12 +148,27 @@ namespace HotChocolatey.Model
         }
     }
 
+    public class InstalledPackages
+    {
+        private Task<List<ChocoItem>> loadingTask;
+
+        public InstalledPackages(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
+        {
+            loadingTask = controller.GetInstalled(progressIndicator);
+        }
+
+        public async Task<List<ChocoItem>> GetPackages()
+        {
+            return await loadingTask;
+        }
+    }
+
     public class ChocolateyController
     {
         private const char Seperator = '|';
 
         public IPackageRepository Repo { get; } = new PackageRepositoryFactory().CreateRepository("https://chocolatey.org/api/v2/");
-        public List<ChocoItem> InstalledPackages { get; private set; } = new List<ChocoItem>();
+        public InstalledPackages InstalledPackages { get; private set; }
 
         public async Task<Version> GetVersion()
         {
@@ -167,7 +179,12 @@ namespace HotChocolatey.Model
             return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
-        public async Task GetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
+        public void StartGetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
+        {
+            InstalledPackages = new InstalledPackages(this, progressIndicator);
+        }
+
+        public async Task<List<ChocoItem>> GetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
@@ -178,10 +195,11 @@ namespace HotChocolatey.Model
                 return Task.Run(() => new ChocoItem(Repo.FindPackage(tmp[0]), new SemanticVersion(tmp[1]), new SemanticVersion(tmp[2])));
             }).ToList();
 
-            InstalledPackages = (await Task.WhenAll(tasks)).ToList();
+            var installedPackages = (await Task.WhenAll(tasks)).ToList();
 
-            await Task.WhenAll(InstalledPackages.Select(UpdatePackageVersion));
-            InstalledPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
+            await Task.WhenAll(installedPackages.Select(UpdatePackageVersion));
+            installedPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
+            return installedPackages;
         }
 
         public async Task<List<SemanticVersion>> GetVersions(string id)

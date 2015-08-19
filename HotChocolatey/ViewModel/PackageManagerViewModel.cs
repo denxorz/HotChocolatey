@@ -47,8 +47,11 @@ namespace HotChocolatey.ViewModel
                 {
                     if (e.PropertyName == nameof(Filter))
                     {
-                        await Packages.ApplyFilter(Filter);
-                        await Packages.GetMore();
+                        using (new ProgressIndication(this))
+                        {
+                            await Packages.ApplyFilter(Filter);
+                            await Packages.GetMore();
+                        }
                     }
                 };
         }

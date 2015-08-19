@@ -7,7 +7,6 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 
 namespace HotChocolatey.ViewModel
 {
@@ -56,36 +55,29 @@ namespace HotChocolatey.ViewModel
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
 
             Packages = new Packages(Controller, this);
-
-            Application.Current.Dispatcher.Invoke(DispatcherPriority.ApplicationIdle, new Action(async () => { await Loaded(); }));
-
-            PackageManagerViewModel.Searched += OnSearched;
-            PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
         }
 
         public async Task Loaded()
         {
             PackageManagerViewModel.Packages = Packages;
             PackageManagerViewModel.Load(Controller);
+            PackageManagerViewModel.Searched += OnSearched;
+            PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
 
             // TODO : wait for this somewhere?
+            Controller.StartGetInstalled(this);
             var loadInstalled = Controller.GetInstalled(this);
 
-            using (new ProgressIndication(PackageManagerViewModel))
+            try
             {
-                try
-                {
-                    var result = await Controller.GetVersion();
-                    Log.Info($"Chocolatey version: {result}");
-                }
-                catch (Win32Exception ex)
-                {
-                    Log.Error($"Choco not installed? Message: {ex.Message}");
-                    MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                await Refresh();
+                var result = await Controller.GetVersion();
+                Log.Info($"Chocolatey version: {result}");
+            }
+            catch (Win32Exception ex)
+            {
+                Log.Error($"Choco not installed? Message: {ex.Message}");
+                MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
         }
 
@@ -127,7 +119,7 @@ namespace HotChocolatey.ViewModel
                 else
                 {
                     Packages.Clear();
-                  //  (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
+                    //  (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
                 }
             }
         }

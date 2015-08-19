@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HotChocolatey.View"
         mc:Ignorable="d"
         Title="Hot Chocolatey" Icon="Hot Chocolate-50.ico"
-        Height="600" Width="800">
+        Height="600" Width="800" Loaded="OnLoaded">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </Window.Resources>
