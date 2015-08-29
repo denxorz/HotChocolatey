@@ -64,9 +64,7 @@ namespace HotChocolatey.ViewModel
             PackageManagerViewModel.Searched += OnSearched;
             PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
 
-            // TODO : wait for this somewhere?
             Controller.StartGetInstalled(this);
-            var loadInstalled = Controller.GetInstalled(this);
 
             try
             {
