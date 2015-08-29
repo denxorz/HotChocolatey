@@ -15,7 +15,7 @@ namespace HotChocolatey.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChocolateyController Controller { get; } = new ChocolateyController();
+        public ChocolateyController Controller { get; }
         public Packages Packages { get; }
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
@@ -55,6 +55,7 @@ namespace HotChocolatey.ViewModel
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
 
             Packages = new Packages(Controller, this);
+            Controller = new ChocolateyController(this);
         }
 
         public async Task Loaded()
@@ -64,7 +65,7 @@ namespace HotChocolatey.ViewModel
             PackageManagerViewModel.Searched += OnSearched;
             PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
 
-            Controller.StartGetInstalled(this);
+            Controller.StartGetInstalled();
 
             try
             {

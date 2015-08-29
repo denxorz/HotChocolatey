@@ -1,5 +1,4 @@
-﻿using HotChocolatey.ViewModel;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace HotChocolatey.Model
@@ -8,9 +7,9 @@ namespace HotChocolatey.Model
     {
         private Task<List<ChocoItem>> loadingTask;
 
-        public InstalledPackageLoader(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
+        public InstalledPackageLoader(ChocolateyController controller)
         {
-            loadingTask = controller.GetInstalled(progressIndicator);
+            loadingTask = controller.GetInstalled();
         }
 
         public async Task<List<ChocoItem>> GetPackages()

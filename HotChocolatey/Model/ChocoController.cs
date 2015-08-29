@@ -16,6 +16,13 @@ namespace HotChocolatey.Model
         public IPackageRepository Repo { get; } = new PackageRepositoryFactory().CreateRepository("https://chocolatey.org/api/v2/");
         public InstalledPackageLoader InstalledPackages { get; private set; }
 
+        private readonly ProgressIndication.IProgressIndicator actionIndicator;
+
+        public ChocolateyController(ProgressIndication.IProgressIndicator actionIndicator)
+        {
+            this.actionIndicator = actionIndicator;
+        }
+
         public async Task<Version> GetVersion()
         {
             var result = await Execute(string.Empty);
@@ -25,12 +32,12 @@ namespace HotChocolatey.Model
             return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
         }
 
-        public void StartGetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
+        public void StartGetInstalled()
         {
-            InstalledPackages = new InstalledPackageLoader(this, progressIndicator);
+            InstalledPackages = new InstalledPackageLoader(this);
         }
 
-        public async Task<List<ChocoItem>> GetInstalled(ProgressIndication.IProgressIndicator progressIndicator)
+        public async Task<List<ChocoItem>> GetInstalled()
         {
             var result = await Execute("upgrade all -r --whatif");
             result.ThrowIfNotSucceeded();
@@ -44,7 +51,7 @@ namespace HotChocolatey.Model
             var installedPackages = (await Task.WhenAll(tasks)).ToList();
 
             await Task.WhenAll(installedPackages.Select(UpdatePackageVersion));
-            installedPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, progressIndicator));
+            installedPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, actionIndicator));
             return installedPackages;
         }
 
