@@ -145,6 +145,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Model\AllPackageList.cs" />
     <Compile Include="Model\InstalledPackageList.cs" />
     <Compile Include="Model\InstalledPackageLoader.cs" />

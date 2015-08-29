@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project DefaultTargets="BuildChocolateyPackage" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <BaseDirectory>$(MSBuildProjectDirectory)</BaseDirectory>
+    <Configuration Condition="'$(Configuration)'==''" >Release</Configuration>
+    <Platform Condition="'$(Platform)'==''" >AnyCPU</Platform>
+    <BuildDirectory>$(BaseDirectory)\.build</BuildDirectory>
+    <BuildDirectoryFull>$(BuildDirectory)\$(Platform)\$(Configuration)</BuildDirectoryFull>
+    <PackageDirectory>$(BuildDirectory)\Packages</PackageDirectory>
+    <SolutionFile>$(BaseDirectory)\HotChocolatey.sln</SolutionFile>
+    <MSBuildCommunityTasksPath>$(MSBuildExtensionsPath)\MSBuildCommunityTasks\</MSBuildCommunityTasksPath>
+    <NuSpecFileName>hot-chocolatey.nuspec</NuSpecFileName>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+
+
+  <Target Name="Build">
+    <Message Importance="High" Text="Building $(Configuration)|$(Platform)" />
+    <MSBuild Projects="$(SolutionFile)" Targets="Build" />
+  </Target>
+
+
+  <Target Name="BuildChocolateyPackage">
+    <CallTarget Targets="UpdateVersion;Build;UpdateNuSpecVersion" />
+    <Exec Command="cpack" WorkingDirectory="$(PackageDirectory)" />
+  </Target>
+
+
+  <Target Name="UpdateVersion">
+    <PropertyGroup>
+      <VersionNumber>$([System.IO.File]::ReadAllText(version.txt))</VersionNumber>
+      <CurrentMonthDay>$([System.DateTime]::Now.ToString(MMdd))</CurrentMonthDay>
+    </PropertyGroup>
+
+    <AssemblyInfo CodeLanguage="CS"
+                  OutputFile="VersionInfo.cs"
+                  AssemblyVersion="$(VersionNumber).$(CurrentMonthDay)"
+                  AssemblyFileVersion="$(VersionNumber).$(CurrentMonthDay)" />
+  </Target>
+
+  
+  <Target Name="UpdateNuSpecVersion">
+    <CreateItem Include="$(BaseDirectory)\ChocolateyPackage\hot-chocolatey\**\*.*">
+      <Output TaskParameter="Include" ItemName="NuGetFiles" />
+    </CreateItem>
+
+    <Copy SourceFiles="@(NuGetFiles)"
+        DestinationFiles="@(NuGetFiles->'$(PackageDirectory)\%(RecursiveDir)%(Filename)%(Extension)')" />
+
+    <GetAssemblyIdentity AssemblyFiles="$(BuildDirectoryFull)\HotChocolatey.exe">
+      <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
+    </GetAssemblyIdentity>
+
+    <XmlUpdate Prefix="nu"
+               Namespace="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd"
+               XmlFileName="$(PackageDirectory)\$(NuspecFileName)"
+               XPath="/nu:package/nu:metadata/nu:version"
+               Value="%(AsmInfo.Version)" />
+
+    <XmlUpdate Prefix="nu"
+           Namespace="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd"
+           XmlFileName="$(PackageDirectory)\$(NuspecFileName)"
+           XPath="/nu:package/nu:metadata/nu:releaseNotes"
+           Value="$([System.IO.File]::ReadAllText(releasenotes.txt))" />
+  </Target>
+
+</Project>

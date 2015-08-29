@@ -9,9 +9,6 @@
                 <File Id="HotChocolatey.exe.config" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe.config" />
             </Component>
             
-            
-            
-            
             <Component Id="log4net.dll" Guid="*">
                 <File Id="log4net.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\log4net.dll" />
             </Component>
@@ -91,9 +88,6 @@
         <ComponentGroup Id="ProductComponents">
             <ComponentRef Id="HotChocolatey.exe" />
             <ComponentRef Id="HotChocolatey.exe.config" />
-            
-            
-            
             
             <ComponentRef Id="log4net.dll" />
             

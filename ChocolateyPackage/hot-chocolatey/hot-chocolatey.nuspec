@@ -4,7 +4,7 @@
   <metadata>
     <id>hot-chocolatey</id>
     <title>Hot Chocolatey</title>
-    <version>1.0.0.20150722</version>
+    <version>0.0.0.0</version>
     <authors>denxorz</authors>
     <owners>denxorz</owners>
     <summary>A GUI for Chocolatey</summary>
@@ -41,7 +41,7 @@ Hot Chocolatey will be installed on it's default location %ProgramFiles(x86)%\Ho
     <dependencies>
       <dependency id="chocolatey" version="0.9.9" />
     </dependencies>
-    <releaseNotes>Initial version</releaseNotes>
+    <releaseNotes>Test version</releaseNotes>
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
