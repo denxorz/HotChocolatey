@@ -12,14 +12,14 @@
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <OutputPath>$(SolutionDir)\.build\$(Platform)\$(Configuration)\</OutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(OutputName)\</BaseIntermediateOutputPath>
     <DefineConstants>Debug</DefineConstants>
     <SuppressIces>ICE61</SuppressIces>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <OutputPath>$(SolutionDir)\.build\$(Platform)\$(Configuration)\</OutputPath>
+    <BaseIntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(OutputName)\</BaseIntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Include="Filter.xslt" />
@@ -52,7 +52,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir)HotChocolatey\bin\$(ConfigurationName)" -t "$(ProjectDir)Filter.xslt" -var var.HotChocolatey.TargetDir -cg ProductComponents -template fragment -ag -suid -scom -sfrag -sreg -srd -ke -out "$(ProjectDir)Files.wxs" -dr INSTALLFOLDER</PreBuildEvent>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir).build\AnyCPU\$(ConfigurationName)" -t "$(ProjectDir)Filter.xslt" -var var.HotChocolatey.TargetDir -cg ProductComponents -template fragment -ag -suid -scom -sfrag -sreg -srd -ke -out "$(ProjectDir)Files.wxs" -dr INSTALLFOLDER</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
