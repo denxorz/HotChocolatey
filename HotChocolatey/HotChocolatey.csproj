@@ -283,38 +283,49 @@
     <Resource Include="Images\chocolateyicon.gif" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\26\Delete Sign-26.png" />
-    <Resource Include="Images\26\Search-26.png" />
+    <Resource Include="Images\Delete Sign-26.png" />
+    <Resource Include="Images\Search-26.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\download-48.png" />
-    <Resource Include="Images\ok-48.png" />
+    <Resource Include="Images\Logos\I Love Icons8-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\24\about-24.png" />
-    <Resource Include="Images\24\list-24.png" />
-    <Resource Include="Images\24\multiple_inputs-24.png" />
-    <Resource Include="Images\24\settings-24.png" />
-    <Resource Include="Images\24\synchronize-24.png" />
+    <Resource Include="Images\Logos\nugetlogo.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\android\100\I Love Icons8-100.png" />
+    <Resource Include="Images\Logos\visualstudiologo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\nugetlogo.jpg" />
+    <Resource Include="Images\Logos\Log4net.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\visualstudiologo.png" />
+    <Resource Include="Images\Logos\wixlogo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Log4net.png" />
+    <Resource Include="Images\Logos\Hot Chocolate-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\wixlogo.png" />
+    <Resource Include="Images\Download-26.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\android\100\Hot Chocolate-100.png" />
+    <Resource Include="Images\Ok-26.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\About-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Multiple Inputs-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Page Overview -26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Settings 3-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Refresh-26.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

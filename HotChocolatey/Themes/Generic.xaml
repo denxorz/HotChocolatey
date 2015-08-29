@@ -83,7 +83,7 @@
                                        Height="15" 
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"
-                                       Source="pack://application:,,,/HotChocolatey;component/Images/26/Search-26.png" />   
+                                       Source="pack://application:,,,/HotChocolatey;component/Images/Search-26.png" />   
                             </Border>
                         </Grid>
                     </Border>
@@ -104,7 +104,7 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="Source"
                                     TargetName="SearchIcon"
-                                    Value="pack://application:,,,/HotChocolatey;component/Images/26/Delete%20Sign-26.png" />
+                                    Value="pack://application:,,,/HotChocolatey;component/Images/Delete%20Sign-26.png" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
