@@ -1,14 +1,13 @@
 ﻿using HotChocolatey.Model;
-using System;
 using System.Collections.Generic;
 
 namespace HotChocolatey.ViewModel
 {
     public static class FilterFactory
     {
-        public static List<IFilter> BuildFilters(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator) => new List<IFilter>
+        public static List<IFilter> BuildFilters(ChocolateyController controller) => new List<IFilter>
             {
-                new NoFilter(controller, progressIndicator),
+                new NoFilter(controller),
                 new InstalledFilter(controller),
                 new InstalledUpgradableFilter(controller),
             };
@@ -18,16 +17,14 @@ namespace HotChocolatey.ViewModel
         private class NoFilter : IFilter
         {
             private ChocolateyController controller;
-            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public NoFilter(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
+            public NoFilter(ChocolateyController controller)
             {
                 this.controller = controller;
-                this.progressIndicator = progressIndicator;
             }
 
             public override string ToString() => "All";
-            public IPackageList CreatePackageList() => new AllPackageList(controller, progressIndicator);
+            public IPackageList CreatePackageList() => new AllPackageList(controller);
         }
 
         private class InstalledFilter : IFilter

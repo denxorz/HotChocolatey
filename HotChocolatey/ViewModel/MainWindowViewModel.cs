@@ -15,14 +15,14 @@ namespace HotChocolatey.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChocolateyController Controller { get; }
+        public ChocolateyController Controller { get; } = new ChocolateyController();
         public Packages Packages { get; }
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
         public bool IsLogVisible { get; set; }
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
 
-        public PackageManagerViewModel PackageManagerViewModel { get; } = new PackageManagerViewModel();
+        public PackageManagerViewModel PackageManagerViewModel { get; }
 
         public AwaitableDelegateCommand RefreshCommand { get; }
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
@@ -54,8 +54,8 @@ namespace HotChocolatey.ViewModel
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
 
-            Packages = new Packages(Controller, this);
-            Controller = new ChocolateyController(this);
+            PackageManagerViewModel = new PackageManagerViewModel(this);
+            Packages = new Packages(Controller);
         }
 
         public async Task Loaded()

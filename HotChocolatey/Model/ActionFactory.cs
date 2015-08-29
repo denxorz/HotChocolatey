@@ -1,5 +1,4 @@
-﻿using HotChocolatey.ViewModel;
-using NuGet;
+﻿using NuGet;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,7 +7,7 @@ namespace HotChocolatey.Model
 {
     internal class ActionFactory
     {
-        internal static List<IAction> Generate(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
+        internal static List<IAction> Generate(ChocolateyController controller, ChocoItem chocoItem)
         {
             var actions = new List<IAction>();
 
@@ -16,14 +15,14 @@ namespace HotChocolatey.Model
             {
                 if (chocoItem.IsUpgradable)
                 {
-                    actions.Add(new UpgradeAction(controller, chocoItem, progressIndicator));
+                    actions.Add(new UpgradeAction(controller, chocoItem));
                 }
 
-                actions.Add(new UninstallAction(controller, chocoItem, progressIndicator));
+                actions.Add(new UninstallAction(controller, chocoItem));
             }
             else
             {
-                actions.Add(new InstallAction(controller, chocoItem, progressIndicator));
+                actions.Add(new InstallAction(controller, chocoItem));
             }
 
             return actions;
@@ -33,13 +32,11 @@ namespace HotChocolatey.Model
         {
             private ChocolateyController controller;
             private ChocoItem chocoItem;
-            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public InstallAction(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
+            public InstallAction(ChocolateyController controller, ChocoItem chocoItem)
             {
                 this.controller = controller;
                 this.chocoItem = chocoItem;
-                this.progressIndicator = progressIndicator;
             }
 
             public string Name { get; } = "Install";
@@ -47,10 +44,7 @@ namespace HotChocolatey.Model
 
             async Task IAction.Execute(SemanticVersion specificVersion)
             {
-                using (new ProgressIndication(progressIndicator))
-                {
-                    await controller.Install(chocoItem, specificVersion);
-                }
+                await controller.Install(chocoItem, specificVersion);
             }
 
             public override string ToString()
@@ -63,13 +57,11 @@ namespace HotChocolatey.Model
         {
             private ChocolateyController controller;
             private ChocoItem chocoItem;
-            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public UninstallAction(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
+            public UninstallAction(ChocolateyController controller, ChocoItem chocoItem)
             {
                 this.controller = controller;
                 this.chocoItem = chocoItem;
-                this.progressIndicator = progressIndicator;
             }
 
             public string Name { get; } = "Uninstall";
@@ -77,10 +69,7 @@ namespace HotChocolatey.Model
 
             async Task IAction.Execute(SemanticVersion specificVersion)
             {
-                using (new ProgressIndication(progressIndicator))
-                {
-                    await controller.Uninstall(chocoItem);
-                }
+                await controller.Uninstall(chocoItem);
             }
 
             public override string ToString()
@@ -93,24 +82,19 @@ namespace HotChocolatey.Model
         {
             private ChocolateyController controller;
             private ChocoItem chocoItem;
-            private ProgressIndication.IProgressIndicator progressIndicator;
 
-            public UpgradeAction(ChocolateyController controller, ChocoItem chocoItem, ProgressIndication.IProgressIndicator progressIndicator)
+            public UpgradeAction(ChocolateyController controller, ChocoItem chocoItem)
             {
                 this.controller = controller;
                 this.chocoItem = chocoItem;
-                this.progressIndicator = progressIndicator;
             }
 
             public string Name { get; } = "Upgrade";
-            public List<SemanticVersion> Versions =>  chocoItem.Versions.Where(t => t > chocoItem.InstalledVersion).ToList();
- 
+            public List<SemanticVersion> Versions => chocoItem.Versions.Where(t => t > chocoItem.InstalledVersion).ToList();
+
             async Task IAction.Execute(SemanticVersion specificVersion)
             {
-                using (new ProgressIndication(progressIndicator))
-                {
-                    await controller.Upgrade(chocoItem);
-                }
+                await controller.Upgrade(chocoItem);
             }
 
             public override string ToString()

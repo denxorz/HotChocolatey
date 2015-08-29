@@ -13,6 +13,7 @@ namespace HotChocolatey.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private readonly ProgressIndication.IProgressIndicator installIndicator;
         private ChocoItem package;
 
         public ChocoItem Package
@@ -39,14 +40,18 @@ namespace HotChocolatey.ViewModel
 
         public AwaitableDelegateCommand ActionCommand { get; }
 
-        public PackageControlViewModel()
+        public PackageControlViewModel(ProgressIndication.IProgressIndicator installIndicator)
         {
+            this.installIndicator = installIndicator;
             ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
         }
 
         private async Task ExecuteActionCommand()
         {
-            await PackageAction.Execute(PackageVersion);
+            using (new ProgressIndication(installIndicator))
+            {
+                await PackageAction.Execute(PackageVersion);
+            }
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

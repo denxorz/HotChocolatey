@@ -9,7 +9,6 @@ namespace HotChocolatey.Model
     public class AllPackageList : IPackageList
     {
         private readonly ChocolateyController controller;
-        private readonly ProgressIndication.IProgressIndicator progressIndicator;
 
         private IOrderedQueryable<IPackage> query;
         private int skipped;
@@ -18,10 +17,9 @@ namespace HotChocolatey.Model
 
         public bool HasMore => total > skipped;
 
-        public AllPackageList(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
+        public AllPackageList(ChocolateyController controller)
         {
             this.controller = controller;
-            this.progressIndicator = progressIndicator;
         }
 
         public async Task Refresh()
@@ -42,7 +40,7 @@ namespace HotChocolatey.Model
 
             var packages = tmp.Select(t => new ChocoItem(t)).ToList();
             await Task.WhenAll(packages.Select(controller.UpdatePackageVersion));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(controller, t, progressIndicator));
+            packages.ForEach(t => t.Actions = ActionFactory.Generate(controller, t));
 
             return packages;
         }

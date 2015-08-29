@@ -35,14 +35,15 @@ namespace HotChocolatey.ViewModel
 
         public bool HasSelectedPackage => SelectedPackage != null;
 
-        public PackageControlViewModel PackageControlViewModel { get; } = new PackageControlViewModel();
+        public PackageControlViewModel PackageControlViewModel { get; }
 
         public Action ClearSearchBox { get; set; }
 
         private ChocoItem selectedPackage;
 
-        public PackageManagerViewModel()
+        public PackageManagerViewModel(ProgressIndication.IProgressIndicator installIndicator)
         {
+            PackageControlViewModel = new PackageControlViewModel(installIndicator);
             PropertyChanged += async (s, e) =>
                 {
                     if (e.PropertyName == nameof(Filter))
@@ -58,7 +59,7 @@ namespace HotChocolatey.ViewModel
 
         private void InitializeFilter(ChocolateyController controller)
         {
-            FilterFactory.BuildFilters(controller, this).ForEach(Filters.Add);
+            FilterFactory.BuildFilters(controller).ForEach(Filters.Add);
             Filter = Filters.First();
         }
 

@@ -1,5 +1,4 @@
 ﻿using HotChocolatey.Utility;
-using HotChocolatey.ViewModel;
 using NuGet;
 using System;
 using System.Collections.Generic;
@@ -15,13 +14,6 @@ namespace HotChocolatey.Model
 
         public IPackageRepository Repo { get; } = new PackageRepositoryFactory().CreateRepository("https://chocolatey.org/api/v2/");
         public InstalledPackageLoader InstalledPackages { get; private set; }
-
-        private readonly ProgressIndication.IProgressIndicator actionIndicator;
-
-        public ChocolateyController(ProgressIndication.IProgressIndicator actionIndicator)
-        {
-            this.actionIndicator = actionIndicator;
-        }
 
         public async Task<Version> GetVersion()
         {
@@ -51,7 +43,7 @@ namespace HotChocolatey.Model
             var installedPackages = (await Task.WhenAll(tasks)).ToList();
 
             await Task.WhenAll(installedPackages.Select(UpdatePackageVersion));
-            installedPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t, actionIndicator));
+            installedPackages.ForEach(t => t.Actions = ActionFactory.Generate(this, t));
             return installedPackages;
         }
 

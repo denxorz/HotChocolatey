@@ -1,10 +1,7 @@
 ﻿using HotChocolatey.Utility;
 using HotChocolatey.ViewModel;
-using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Data;
-using System;
 
 namespace HotChocolatey.Model
 {
@@ -12,25 +9,19 @@ namespace HotChocolatey.Model
     {
         public ObservableCollectionEx<ChocoItem> Items { get; } = new ObservableCollectionEx<ChocoItem>();
 
-        private readonly ICollectionView view;
-
         private IPackageList packageList;
         private ChocolateyController controller;
-        private ProgressIndication.IProgressIndicator progressIndicator;
 
-        public Packages(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator)
+        public Packages(ChocolateyController controller)
         {
             this.controller = controller;
-            this.progressIndicator = progressIndicator;
-
-            view = CollectionViewSource.GetDefaultView(Items);
         }
 
         public async Task GetMore()
         {
             if (packageList == null)
             {
-                await ApplyPackageList(new AllPackageList(controller, progressIndicator));
+                await ApplyPackageList(new AllPackageList(controller));
             }
 
             if (packageList.HasMore)
