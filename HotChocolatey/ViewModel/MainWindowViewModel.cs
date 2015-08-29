@@ -51,6 +51,10 @@ namespace HotChocolatey.ViewModel
             Log.Info("---");
             Log.Info($"Version:{Assembly.GetCallingAssembly().GetName().Version} MachineName:{Environment.MachineName} OSVersion:{Environment.OSVersion} Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
+#if !DEBUG
+            Application.Current.DispatcherUnhandledException += (s, e) => Log.Error("DispatcherUnhandledException: {0}", e.Exception);
+#endif
+
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
 
