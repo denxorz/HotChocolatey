@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System;
 
 namespace HotChocolatey.Model
 {
@@ -36,6 +37,13 @@ namespace HotChocolatey.Model
             {
                 (await packageList.GetMore(20)).ToList().ForEach(Add);
             }
+        }
+
+        public async Task ApplySearch(string searchText)
+        {
+            await packageList.ApplySearch(searchText);
+            Clear();
+            await GetMore();
         }
 
         public async Task ApplyFilter(IFilter filter)

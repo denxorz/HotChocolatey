@@ -14,6 +14,7 @@ namespace HotChocolatey.Model
         bool HasMore { get; }
         Task Refresh();
         Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems);
+        Task ApplySearch(string searchFor);
     }
 
     public class InstalledPackageList : IPackageList
@@ -22,6 +23,7 @@ namespace HotChocolatey.Model
 
         private List<ChocoItem> packages = new List<ChocoItem>();
         private int skipped;
+        private string searchFor;
 
         public bool HasMore => packages.Count > skipped;
 
@@ -38,9 +40,16 @@ namespace HotChocolatey.Model
 
         public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
         {
-            var tmp = packages.Skip(skipped).Take(numberOfItems);
+            var searchedPackages = string.IsNullOrWhiteSpace(searchFor) ? packages : packages.Where(p => p.Title.Contains(searchFor));
+            var tmp = searchedPackages.Skip(skipped).Take(numberOfItems);
             skipped += numberOfItems;
             return tmp;
+        }
+
+        public async Task ApplySearch(string searchFor)
+        {
+            this.searchFor = searchFor;
+            skipped = 0;
         }
     }
 
@@ -50,6 +59,7 @@ namespace HotChocolatey.Model
 
         private List<ChocoItem> packages = new List<ChocoItem>();
         private int skipped;
+        private string searchFor;
 
         public bool HasMore => packages.Count > skipped;
 
@@ -66,48 +76,16 @@ namespace HotChocolatey.Model
 
         public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
         {
-            var tmp = packages.Skip(skipped).Take(numberOfItems);
+            var searchedPackages = string.IsNullOrWhiteSpace(searchFor) ? packages : packages.Where(p => p.Title.Contains(searchFor));
+            var tmp = searchedPackages.Skip(skipped).Take(numberOfItems);
             skipped += numberOfItems;
             return tmp;
         }
-    }
 
-    public class SearchResultPackageList : IPackageList
-    {
-        private readonly ChocolateyController controller;
-        private readonly ProgressIndication.IProgressIndicator progressIndicator;
-        private readonly string searchText;
-
-        private IOrderedQueryable<IPackage> query;
-        private int skipped;
-        private int total;
-
-        public bool HasMore => total > skipped;
-
-        public SearchResultPackageList(ChocolateyController controller, ProgressIndication.IProgressIndicator progressIndicator, string searchText)
+        public async Task ApplySearch(string searchFor)
         {
-            this.controller = controller;
-            this.progressIndicator = progressIndicator;
-            this.searchText = searchText;
-        }
-
-        public async Task Refresh()
-        {
+            this.searchFor = searchFor;
             skipped = 0;
-            query = await Task.Run(() => controller.Repo.GetPackages().Where(p => p.Title.Contains(searchText) && p.IsLatestVersion).OrderByDescending(p => p.DownloadCount));
-            total = await Task.Run(() => query.Count());
-        }
-
-        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
-        {
-            var tmp = query.Skip(skipped).Take(numberOfItems).ToList();
-            skipped += numberOfItems;
-
-            var packages = tmp.Select(t => new ChocoItem(t)).ToList();
-            await Task.WhenAll(packages.Select(controller.UpdatePackageVersion));
-            packages.ForEach(t => t.Actions = ActionFactory.Generate(controller, t, progressIndicator));
-
-            return packages;
         }
     }
 
@@ -119,6 +97,7 @@ namespace HotChocolatey.Model
         private IOrderedQueryable<IPackage> query;
         private int skipped;
         private int total;
+        private string searchFor;
 
         public bool HasMore => total > skipped;
 
@@ -131,8 +110,12 @@ namespace HotChocolatey.Model
         public async Task Refresh()
         {
             skipped = 0;
-            await Task.Run(() => query = controller.Repo.GetPackages().Where(p => p.IsLatestVersion).OrderByDescending(p => p.DownloadCount))
-                      .ContinueWith(task => total = query.Count());
+            await Task.Run(() =>
+            {
+                var baseQuery = GetBaseQuery();
+                var includeSearch = string.IsNullOrWhiteSpace(searchFor) ? baseQuery : baseQuery.Where(t => t.Title.Contains(searchFor));
+                query = includeSearch.OrderByDescending(p => p.DownloadCount);
+            }).ContinueWith(task => total = query.Count());
         }
 
         public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
@@ -145,6 +128,18 @@ namespace HotChocolatey.Model
             packages.ForEach(t => t.Actions = ActionFactory.Generate(controller, t, progressIndicator));
 
             return packages;
+        }
+
+        public async Task ApplySearch(string searchFor)
+        {
+            this.searchFor = searchFor;
+            skipped = 0;
+            await Refresh();
+        }
+
+        private IQueryable<IPackage> GetBaseQuery()
+        {
+            return controller.Repo.GetPackages().Where(p => p.IsLatestVersion);
         }
     }
 

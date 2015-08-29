@@ -110,15 +110,7 @@ namespace HotChocolatey.ViewModel
 
             using (new ProgressIndication(PackageManagerViewModel))
             {
-                if (string.IsNullOrWhiteSpace(e.SearchText))
-                {
-                    await Refresh();
-                }
-                else
-                {
-                    Packages.Clear();
-                    //  (await Controller.GetAvailable(e.SearchText, this)).ForEach(Packages.Add);
-                }
+                await Packages.ApplySearch(e.SearchText);
             }
         }
 
