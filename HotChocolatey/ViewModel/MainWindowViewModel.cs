@@ -69,8 +69,6 @@ namespace HotChocolatey.ViewModel
             PackageManagerViewModel.Searched += OnSearched;
             PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
 
-            Controller.StartGetInstalled();
-
             try
             {
                 var result = await Controller.GetVersion();
@@ -82,6 +80,8 @@ namespace HotChocolatey.ViewModel
                 MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
+
+            Controller.StartGetInstalled();
         }
 
         private async Task ExecuteRefreshCommand()
