@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HotChocolatey.View"
+             xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="400">
     <UserControl.Resources>
@@ -22,7 +23,7 @@
             <Button Content="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.PackageAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}, Path=DataContext.ActionCommand}" />
             <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
             <TextBlock Margin="10,199,10,141" TextWrapping="Wrap" Text="Description" FontWeight="Bold" />
-            <TextBlock Margin="10,220,10,151" TextWrapping="Wrap" Text="{Binding Description}" />
+            <wpf:HtmlPanel Margin="10,220,10,151" Text="{Binding DescriptionAsHtml}" SnapsToDevicePixels="True" BaseStylesheet="*{font-family:&quot;Segoe UI&quot;;font-size:9pt;} p{margin-top:0;}; h3{font-family:&quot;Segoe UI&quot;;font-size:9pt;}"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,0,0,120" TextWrapping="Wrap" Text="Author(s):" FontWeight="Bold" Height="16" VerticalAlignment="Bottom"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,0,0,99" TextWrapping="Wrap" Text="License:" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <TextBlock HorizontalAlignment="Left" Margin="10,0,0,78" TextWrapping="Wrap" Text="Downloads:" VerticalAlignment="Bottom" FontWeight="Bold"/>

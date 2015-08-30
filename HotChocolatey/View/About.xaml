@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HotChocolatey.View"
         mc:Ignorable="d"
         Title="About" Icon="Hot Chocolate-50.ico" 
-        Height="555" Width="803" ResizeMode="NoResize" 
+        Height="600" Width="803" ResizeMode="NoResize" 
         WindowStartupLocation="CenterOwner">
     <Grid>
         <Image HorizontalAlignment="Left" Height="63" Margin="78,10,0,0" VerticalAlignment="Top" Width="63" Source="/HotChocolatey;component/Images/Logos/Hot Chocolate-100.png"/>
@@ -23,5 +23,7 @@
         <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,365,0,0" IconSource="/HotChocolatey;component/Images/Logos/Log4net.png" Title="Apache log4net" Website="https://logging.apache.org/log4net/" License="http://logging.apache.org/log4net/license.html"/>
         <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,365,0,0" IconSource="/HotChocolatey;component/Images/Logos/nugetlogo.jpg" Title="KindOfMagic" Website="https://github.com/demigor/kindofmagic" License=""/>
         <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,435,0,0" IconSource="/HotChocolatey;component/Images/Logos/wixlogo.png" Title="Wix toolset" Website="http://wixtoolset.org/" License="http://wixtoolset.org/about/license/"/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,435,0,0" IconSource="/HotChocolatey;component/Images/Logos/nugetlogo.jpg" Title="MarkdownSharp" Website="https://code.google.com/p/markdownsharp/" License="http://www.opensource.org/licenses/mit-license.php"/>
+        <local:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,505,0,0" IconSource="/HotChocolatey;component/Images/Logos/nugetlogo.jpg" Title="HTML-Renderer" Website="https://htmlrenderer.codeplex.com/" License="https://htmlrenderer.codeplex.com/license"/>
     </Grid>
 </Window>

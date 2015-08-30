@@ -38,6 +38,11 @@ namespace HotChocolatey.Model
 
         public bool IsInstalled => InstalledVersion != null;
 
+        public string DescriptionAsHtml
+        {
+            get { return new MarkdownSharp.Markdown().Transform(Package.Description); }
+        }
+
         private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative);
 
         public ChocoItem(IPackage package)
