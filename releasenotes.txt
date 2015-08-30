@@ -1,3 +1,4 @@
 Changes in 2.0.0
 * All-filter is now working
 * Improved progress information
+* Markdown support in description

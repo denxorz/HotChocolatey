@@ -9,9 +9,22 @@
                 <File Id="HotChocolatey.exe.config" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe.config" />
             </Component>
             
+            <Component Id="HtmlRenderer.dll" Guid="*">
+                <File Id="HtmlRenderer.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HtmlRenderer.dll" />
+            </Component>
+            
+            <Component Id="HtmlRenderer.WPF.dll" Guid="*">
+                <File Id="HtmlRenderer.WPF.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HtmlRenderer.WPF.dll" />
+            </Component>
+            
             <Component Id="log4net.dll" Guid="*">
                 <File Id="log4net.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\log4net.dll" />
             </Component>
+            
+            <Component Id="MarkdownSharp.dll" Guid="*">
+                <File Id="MarkdownSharp.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\MarkdownSharp.dll" />
+            </Component>
+            
             
             <Component Id="Microsoft.Web.XmlTransform.dll" Guid="*">
                 <File Id="Microsoft.Web.XmlTransform.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Microsoft.Web.XmlTransform.dll" />
@@ -89,7 +102,14 @@
             <ComponentRef Id="HotChocolatey.exe" />
             <ComponentRef Id="HotChocolatey.exe.config" />
             
+            <ComponentRef Id="HtmlRenderer.dll" />
+            
+            <ComponentRef Id="HtmlRenderer.WPF.dll" />
+            
             <ComponentRef Id="log4net.dll" />
+            
+            <ComponentRef Id="MarkdownSharp.dll" />
+            
             
             <ComponentRef Id="Microsoft.Web.XmlTransform.dll" />
             <ComponentRef Id="Newtonsoft.Json.dll" />

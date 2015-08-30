@@ -2,7 +2,7 @@
 
 $packageName = 'hot-chocolatey'
 $registryUninstallerKeyName = 'hot-chocolatey'
-$msiProductCodeGuid = 'http://hotchocolatey.jjb3.nl/releases/1.0.0.20150722/Setup%20Hot%20Chocolatey.msi'
+$msiProductCodeGuid = 'http://hotchocolatey.jjb3.nl/releases/__version__/Setup%20Hot%20Chocolatey.msi'
 $shouldUninstall = $true
 
 $local_key     = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Uninstall\$registryUninstallerKeyName"

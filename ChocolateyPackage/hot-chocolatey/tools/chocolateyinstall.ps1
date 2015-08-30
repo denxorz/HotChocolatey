@@ -2,7 +2,7 @@
 
 $packageName = 'hot-chocolatey'
 $toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url = 'http://hotchocolatey.jjb3.nl/releases/1.0.0.20150722/Setup%20Hot%20Chocolatey.msi'
+$url = 'http://hotchocolatey.jjb3.nl/releases/__version__/Setup%20Hot%20Chocolatey.msi'
 
 $packageArgs = @{
   packageName   = $packageName

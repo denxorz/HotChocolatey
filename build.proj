@@ -53,6 +53,10 @@
       <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
     </GetAssemblyIdentity>
 
+    <FileUpdate Files="$(PackageDirectory)\tools\chocolateyinstall.ps1;$(PackageDirectory)\tools\chocolateyuninstall.ps1"
+                Regex="__version__"
+                ReplacementText="%(AsmInfo.Version)" />
+
     <XmlUpdate Prefix="nu"
                Namespace="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd"
                XmlFileName="$(PackageDirectory)\$(NuspecFileName)"
