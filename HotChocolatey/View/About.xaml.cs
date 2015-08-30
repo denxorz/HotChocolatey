@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Reflection;
+using System.Windows;
 
 namespace HotChocolatey.View
 {
@@ -7,6 +8,7 @@ namespace HotChocolatey.View
         public About()
         {
             InitializeComponent();
+            versionTextBlock.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();
         }
     }
 }
