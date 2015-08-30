@@ -15,13 +15,13 @@ namespace HotChocolatey.Model
         public IPackageRepository Repo { get; } = new PackageRepositoryFactory().CreateRepository("https://chocolatey.org/api/v2/");
         public InstalledPackageLoader InstalledPackages { get; private set; }
 
-        public async Task<Version> GetVersion()
+        public async Task<string> GetVersion()
         {
             var result = await Execute(string.Empty);
 
             if (result.ExitCode != 1) throw new ChocoExecutionException(result);
 
-            return new Version(result.Output.First().Replace("Chocolatey v", string.Empty));
+            return result.Output.First().Replace("Chocolatey v", string.Empty);
         }
 
         public void StartGetInstalled()

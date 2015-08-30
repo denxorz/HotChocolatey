@@ -71,8 +71,7 @@ namespace HotChocolatey.ViewModel
 
             try
             {
-                var result = await Controller.GetVersion();
-                Log.Info($"Chocolatey version: {result}");
+                Log.Info($"Chocolatey version: {await Controller.GetVersion()}");
             }
             catch (Win32Exception ex)
             {
