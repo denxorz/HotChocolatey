@@ -15,7 +15,15 @@
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
 
+  <Target Name="Clean">
+    <MSBuild Projects="$(SolutionFile)" Targets="Clean" />
 
+    <CreateItem Include="$(BuildDirectory)\**\*.*">
+      <Output TaskParameter="Include" ItemName="FilesToClean" />
+    </CreateItem>
+    <Delete Files="@(FilesToClean)" TreatErrorsAsWarnings="true" />
+  </Target> 
+  
   <Target Name="Build">
     <Message Importance="High" Text="Building $(Configuration)|$(Platform)" />
     <MSBuild Projects="$(SolutionFile)" Targets="Build" />
@@ -23,7 +31,7 @@
 
 
   <Target Name="BuildChocolateyPackage">
-    <CallTarget Targets="UpdateVersion;Build;UpdateNuSpecVersion" />
+    <CallTarget Targets="Clean;UpdateVersion;Build;UpdateNuSpecVersion" />
     <Exec Command="cpack" WorkingDirectory="$(PackageDirectory)" />
   </Target>
 
