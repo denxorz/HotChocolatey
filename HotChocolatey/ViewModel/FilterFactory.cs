@@ -24,7 +24,7 @@ namespace HotChocolatey.ViewModel
             }
 
             public override string ToString() => "All";
-            public IPackageList CreatePackageList() => new AllPackageList(controller);
+            public PackageListBase CreatePackageList() => new AllPackageList(controller);
         }
 
         private class InstalledFilter : IFilter
@@ -37,7 +37,7 @@ namespace HotChocolatey.ViewModel
             }
 
             public override string ToString() => "Installed";
-            public IPackageList CreatePackageList() => new InstalledPackageList(controller);
+            public PackageListBase CreatePackageList() => new InstalledPackageList(controller);
         }
 
         private class InstalledUpgradableFilter : IFilter
@@ -50,7 +50,7 @@ namespace HotChocolatey.ViewModel
             }
 
             public override string ToString() => "Upgradable available";
-            public IPackageList CreatePackageList() => new UpgradablePackageList(controller);
+            public PackageListBase CreatePackageList() => new UpgradablePackageList(controller);
         }
     }
 }

@@ -9,7 +9,7 @@ namespace HotChocolatey.Model
     {
         public ObservableCollectionEx<ChocoItem> Items { get; } = new ObservableCollectionEx<ChocoItem>();
 
-        private IPackageList packageList;
+        private PackageListBase packageList;
         private ChocolateyController controller;
 
         public Packages(ChocolateyController controller)
@@ -42,7 +42,7 @@ namespace HotChocolatey.Model
             await ApplyPackageList(filter.CreatePackageList());
         }
 
-        private async Task ApplyPackageList(IPackageList list)
+        private async Task ApplyPackageList(PackageListBase list)
         {
             Clear();
             packageList = list;

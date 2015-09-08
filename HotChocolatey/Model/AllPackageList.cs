@@ -1,39 +1,36 @@
-﻿using HotChocolatey.ViewModel;
-using NuGet;
+﻿using NuGet;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace HotChocolatey.Model
 {
-    public class AllPackageList : IPackageList
+    public class AllPackageList : PackageListBase
     {
         private readonly ChocolateyController controller;
 
         private IOrderedQueryable<IPackage> query;
-        private int skipped;
         private int total;
-        private string searchFor;
 
-        public bool HasMore => total > skipped;
+        public override bool HasMore => total > skipped;
 
         public AllPackageList(ChocolateyController controller)
         {
             this.controller = controller;
         }
 
-        public async Task Refresh()
+        public override async Task Refresh()
         {
             skipped = 0;
             await Task.Run(() =>
             {
                 var baseQuery = GetBaseQuery();
-                var includeSearch = string.IsNullOrWhiteSpace(searchFor) ? baseQuery : baseQuery.Where(t => t.Title.Contains(searchFor));
+                var includeSearch = string.IsNullOrWhiteSpace(searchFor) ? baseQuery : baseQuery.Where(t => t.Tags.ToLower().Contains(searchFor) || t.Title.ToLower().Contains(searchFor));
                 query = includeSearch.OrderByDescending(p => p.DownloadCount);
             }).ContinueWith(task => total = query.Count());
         }
 
-        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
+        public override async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
         {
             var tmp = query.Skip(skipped).Take(numberOfItems).ToList();
             skipped += numberOfItems;
@@ -45,10 +42,9 @@ namespace HotChocolatey.Model
             return packages;
         }
 
-        public async Task ApplySearch(string searchFor)
+        public override async Task ApplySearch(string searchFor)
         {
-            this.searchFor = searchFor;
-            skipped = 0;
+            await base.ApplySearch(searchFor);
             await Refresh();
         }
 

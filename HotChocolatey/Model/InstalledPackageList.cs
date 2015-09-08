@@ -4,39 +4,31 @@ using System.Threading.Tasks;
 
 namespace HotChocolatey.Model
 {
-    public class InstalledPackageList : IPackageList
+    public class InstalledPackageList : PackageListBase
     {
         private readonly ChocolateyController controller;
 
         private List<ChocoItem> packages = new List<ChocoItem>();
-        private int skipped;
-        private string searchFor;
 
-        public bool HasMore => packages.Count > skipped;
+        public override bool HasMore => packages.Count > skipped;
 
         public InstalledPackageList(ChocolateyController controller)
         {
             this.controller = controller;
         }
 
-        public async Task Refresh()
+        public override async Task Refresh()
         {
             skipped = 0;
             packages = (await controller.InstalledPackages.GetPackages());
         }
 
-        public async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
+        public override async Task<IEnumerable<ChocoItem>> GetMore(int numberOfItems)
         {
-            var searchedPackages = string.IsNullOrWhiteSpace(searchFor) ? packages : packages.Where(p => p.Title.Contains(searchFor));
+            var searchedPackages = string.IsNullOrWhiteSpace(searchFor) ? packages : packages.Where(p => PackageSearchComparer(p, searchFor));
             var tmp = searchedPackages.Skip(skipped).Take(numberOfItems);
             skipped += numberOfItems;
             return tmp;
-        }
-
-        public async Task ApplySearch(string searchFor)
-        {
-            this.searchFor = searchFor;
-            skipped = 0;
         }
     }
 }

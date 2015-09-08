@@ -163,7 +163,7 @@
     <Compile Include="Model\AllPackageList.cs" />
     <Compile Include="Model\InstalledPackageList.cs" />
     <Compile Include="Model\InstalledPackageLoader.cs" />
-    <Compile Include="Model\IPackageList.cs" />
+    <Compile Include="Model\PackageListBase.cs" />
     <Compile Include="Model\UpgradablePackageList.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
