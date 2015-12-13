@@ -45,7 +45,7 @@ namespace HotChocolatey.View
         private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-           await (DataContext as ViewModel.MainWindowViewModel).Loaded();
+            await (DataContext as ViewModel.MainWindowViewModel).Loaded();
         }
     }
 }

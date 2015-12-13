@@ -1,134 +1,171 @@
 ﻿using HotChocolatey.Model;
 using HotChocolatey.Utility;
 using HotChocolatey.ViewModel.Ginnivan;
+using NuGet;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace HotChocolatey.ViewModel
 {
     [Magic]
-    public class MainWindowViewModel : INotifyPropertyChanged, ProgressIndication.IProgressIndicator
+    class MainWindowViewModel : INotifyPropertyChanged
     {
+        private readonly PackageRepo packageRepo = new PackageRepo();
+        private readonly NuGetExecutor nugetExecutor = new NuGetExecutor();
+        private readonly ChocoExecutor chocoExecutor;
+
+        private string searchText = string.Empty;
+
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ChocolateyController Controller { get; } = new ChocolateyController();
-        public Packages Packages { get; }
-        public Diagnostics Diagnostics { get; } = new Diagnostics();
+        public Action ClearSearchBox { get; internal set; }
 
-        public bool IsLogVisible { get; set; }
-        public bool IsUserAllowedToExecuteActions { get; set; } = true;
+        public ObservableCollectionEx<IPackageDisplayType> Filters { get; } = new ObservableCollectionEx<IPackageDisplayType>();
+        public IPackageDisplayType Filter { get; set; }
 
-        public PackageManagerViewModel PackageManagerViewModel { get; }
+        public Package SelectedPackage { get; set; }
+        public ObservableCollectionEx<Package> Packages { get; } = new ObservableCollectionEx<Package>();
+        public bool HasSelectedPackage { get; private set; }
 
+        public IAction SelectedAction { get; set; }
+        public SemanticVersion SelectedVersion { get; set; }
+
+        public AwaitableDelegateCommand ActionCommand { get; }
         public AwaitableDelegateCommand RefreshCommand { get; }
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
 
-        bool ProgressIndication.IProgressIndicator.IsInProgress
-        {
-            set
-            {
-                IsUserAllowedToExecuteActions = !value;
-                if (!value)
-                {
-                    SynchronizationContext.Current.Post(async state =>
-                    {
-                        using (new ProgressIndication(PackageManagerViewModel))
-                        {
-                            await Refresh();
-                        }
-                    }, null);
-                }
-            }
-        }
+        public bool IsLogVisible { get; set; }
+        public Diagnostics Diagnostics { get; } = new Diagnostics();
+
+        public bool IsInProgress { get; private set; }
+        public bool IsUserAllowedToExecuteActions { get; set; } = true;
 
         public MainWindowViewModel()
         {
             Log.ResetSettings(true, true, true, Diagnostics);
-            Log.Info("---");
-            Log.Info($"Version:{Assembly.GetCallingAssembly().GetName().Version} MachineName:{Environment.MachineName} OSVersion:{Environment.OSVersion} Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
+            Log.Info($@"---
+Version:{Assembly.GetCallingAssembly().GetName().Version} 
+MachineName:{Environment.MachineName} 
+OSVersion:{Environment.OSVersion} 
+Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
 #if !DEBUG
-            Application.Current.DispatcherUnhandledException += (s, e) => Log.Error("DispatcherUnhandledException: {0}", e.Exception);
+            Application.Current.DispatcherUnhandledException += (s, e) => Log.Error($"DispatcherUnhandledException: {e.Exception}");
 #endif
 
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
 
-            PackageManagerViewModel = new PackageManagerViewModel(this);
-            Packages = new Packages(Controller);
+
+            chocoExecutor = new ChocoExecutor(packageRepo, nugetExecutor);
+            ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
+
+            PropertyChanged += async (s, e) =>
+            {
+                if (e.PropertyName == nameof(Filter))
+                {
+                    await ApplyFilter();
+                }
+
+                if (e.PropertyName == nameof(SelectedPackage))
+                {
+                    HasSelectedPackage = SelectedPackage != null;
+
+                    if (HasSelectedPackage)
+                    {
+                        await nugetExecutor.GetVersion(SelectedPackage);
+                        SelectedAction = SelectedPackage.DefaultAction;
+                    }
+                }
+
+                if (e.PropertyName == nameof(SelectedAction))
+                {
+                    SelectedVersion = SelectedAction?.Versions.First();
+                }
+            };
         }
 
         public async Task Loaded()
         {
-            PackageManagerViewModel.Packages = Packages;
-            PackageManagerViewModel.Load(Controller);
-            PackageManagerViewModel.Searched += OnSearched;
-            PackageManagerViewModel.ScrolledToBottom += OnScrolledToBottom;
+            chocoExecutor.Update();
 
-            try
-            {
-                Log.Info($"Chocolatey version: {await Controller.GetVersion()}");
-            }
-            catch (Win32Exception ex)
-            {
-                Log.Error($"Choco not installed? Message: {ex.Message}");
-                MessageBox.Show("Choco not installed?", "Hot Chocolatey Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
-            }
+            Filters.AddRange(PackageDisplayTypeFactory.BuildDisplayTypes(packageRepo, nugetExecutor, chocoExecutor));
+            Filter = Filters.First();
+        }
 
-            Controller.StartGetInstalled();
+        public async Task ClearSearchText()
+        {
+            await Search(string.Empty);
+        }
+
+        public async Task Search(SearchEventArgs e)
+        {
+            await Search(e.SearchText);
+        }
+
+        public async void OnScrolledToBottom(object sender, EventArgs e)
+        {
+            await GetMorePackages();
+        }
+
+        private async Task Search(string searchFor)
+        {
+            Log.Info($"Searching for: {searchFor}");
+
+            searchText = searchFor;
+            await ApplyFilter();
+        }
+
+        private async Task ApplyFilter()
+        {
+            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            {
+                Packages.Clear();
+                await Filter.ApplySearch(searchText);
+                await Filter.Refresh();
+                await GetMorePackages();
+                if (SelectedPackage == null)
+                {
+                    SelectedPackage = Packages.FirstOrDefault();
+                }
+            }
+        }
+
+        private async Task GetMorePackages()
+        {
+            Packages.AddRange(await Filter.GetMore(10));
+        }
+
+        private async Task ExecuteActionCommand()
+        {
+            await SelectedAction.Execute(chocoExecutor, SelectedVersion);
+            await chocoExecutor.Update();
         }
 
         private async Task ExecuteRefreshCommand()
         {
-            using (new ProgressIndication(PackageManagerViewModel))
+            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
             {
-                await Refresh();
+                await ClearSearchText();
+                await chocoExecutor.Update();
             }
         }
 
         private async Task ExecuteUpgradeAllCommand()
         {
-            using (new ProgressIndication(this))
+             using (new ProgressIndication(() => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
             {
-                await Packages.ApplyFilter(FilterFactory.BuildUpgradeFilter(Controller));
+                Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
+                await ApplyFilter();
 
-                foreach (var package in Packages.Items)
+                foreach (var package in Packages)
                 {
-                    if (!await Controller.Upgrade(package))
-                    {
-                        // TODO : provide some sensible text to the user
-                        Log.Error($"Upgrade failed for package:{package.Title}");
-                    }
+                    await chocoExecutor.Upgrade(package, package.LatestVersion);
                 }
             }
-        }
-
-        private async void OnSearched(object sender, SearchEventArgs e)
-        {
-            Log.Info($"Searching for: {e.SearchText}");
-
-            using (new ProgressIndication(PackageManagerViewModel))
-            {
-                await Packages.ApplySearch(e.SearchText);
-            }
-        }
-
-        private async void OnScrolledToBottom(object sender, EventArgs e)
-        {
-            await Packages.GetMore();
-        }
-
-        private async Task Refresh()
-        {
-            Log.Info(nameof(Refresh));
-            PackageManagerViewModel.ClearSearchText();
-            Packages.Clear();
-            await Packages.GetMore();
         }
 
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));

@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <local:ProgressIndicatorView Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}" />
-            <local:ListViewWithScrollViewerProperty x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages.Items}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <local:ListViewWithScrollViewerProperty x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <local:ListViewWithScrollViewerProperty.Style>
                     <Style TargetType="{x:Type ListView}">
                         <Setter Property="Visibility" Value="Visible" />
@@ -44,14 +44,15 @@
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">
-                            <local:PackageListItem DataContext="{Binding}" />
+                            <local:PackageListItem />
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </local:ListViewWithScrollViewerProperty>
 
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch" />
-            <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" Visibility="{Binding Path=HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" DataContext="{Binding PackageControlViewModel}" />
+            <local:PackageControl x:Name="PackageControl" Grid.Column="2" MinWidth="250" Visibility="{Binding Path=HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" />
         </Grid>
     </DockPanel>
 </UserControl>
+

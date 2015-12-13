@@ -29,23 +29,25 @@ namespace HotChocolatey.View
 
         private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
-            if (PackagesListView.ScrollViewer.VerticalOffset == PackagesListView.ScrollViewer.ScrollableHeight)
+            double offset = PackagesListView.ScrollViewer.VerticalOffset;
+            if (offset == PackagesListView.ScrollViewer.ScrollableHeight)
             {
                 ScrolledToBottom?.Invoke(this, EventArgs.Empty);
+                PackagesListView.ScrollViewer.ScrollToVerticalOffset(offset);
             }
         }
 
-        private void OnSearch(object sender, SearchEventArgs e)
+        private async void OnSearch(object sender, SearchEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            (DataContext as ViewModel.PackageManagerViewModel).Search(e);
+            await (DataContext as ViewModel.MainWindowViewModel).Search(e);
         }
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            (DataContext as ViewModel.PackageManagerViewModel).ClearSearchBox = () => SearchTextBox.Clear();
-            ScrolledToBottom += (DataContext as ViewModel.PackageManagerViewModel).OnScrolledToBottom;
+            (DataContext as ViewModel.MainWindowViewModel).ClearSearchBox = () => SearchTextBox.Clear();
+            ScrolledToBottom += (DataContext as ViewModel.MainWindowViewModel).OnScrolledToBottom;
         }
     }
 }
