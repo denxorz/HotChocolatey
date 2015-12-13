@@ -1,6 +1,7 @@
 ﻿using HotChocolatey.ViewModel;
 using NuGet;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,7 +46,15 @@ namespace HotChocolatey.Model
                 await Task.Run(() =>
                 {
                     var baseQuery = GetBaseQuery();
-                    var includeSearch = string.IsNullOrWhiteSpace(searchFor) ? baseQuery : baseQuery.Where(t => t.Tags.ToLower().Contains(searchFor) || t.Title.ToLower().Contains(searchFor));
+
+                    // Query does not support this
+#pragma warning disable S1449 // Culture should be specified for String operations
+                    var includeSearch = string.IsNullOrWhiteSpace(searchFor)
+                                                ? baseQuery
+                                                : baseQuery.Where(t => t.Tags.ToLower().Contains(searchFor)
+                                                                    || t.Title.ToLower().Contains(searchFor));
+#pragma warning restore S1449 // Culture should be specified for String operations
+
                     query = includeSearch.OrderByDescending(p => p.DownloadCount);
                 }).ContinueWith(task => total = query.Count());
             }
@@ -67,7 +76,7 @@ namespace HotChocolatey.Model
 
             public async Task ApplySearch(string search)
             {
-                searchFor = search.ToLower();
+                searchFor = search.ToLower(CultureInfo.InvariantCulture);
                 await Refresh();
             }
 
@@ -115,7 +124,7 @@ namespace HotChocolatey.Model
 
             public async Task ApplySearch(string search)
             {
-                searchFor = search.ToLower();
+                searchFor = search.ToLower(CultureInfo.InvariantCulture);
                 await Refresh();
             }
         }
@@ -158,7 +167,7 @@ namespace HotChocolatey.Model
 
             public async Task ApplySearch(string search)
             {
-                searchFor = search.ToLower();
+                searchFor = search.ToLower(CultureInfo.InvariantCulture);
                 await Refresh();
             }
         }

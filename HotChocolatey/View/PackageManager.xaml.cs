@@ -19,7 +19,11 @@ namespace HotChocolatey.View
 
         private void PackagesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (done) return;
+            if (done)
+            {
+                return;
+            }
+
             if (PackagesListView.ScrollViewer != null)
             {
                 PackagesListView.ScrollViewer.ScrollChanged += OnScrollChanged;
@@ -30,7 +34,7 @@ namespace HotChocolatey.View
         private void OnScrollChanged(object sender, ScrollChangedEventArgs e)
         {
             double offset = PackagesListView.ScrollViewer.VerticalOffset;
-            if (offset == PackagesListView.ScrollViewer.ScrollableHeight)
+            if (offset >= PackagesListView.ScrollViewer.ScrollableHeight)
             {
                 ScrolledToBottom?.Invoke(this, EventArgs.Empty);
                 PackagesListView.ScrollViewer.ScrollToVerticalOffset(offset);

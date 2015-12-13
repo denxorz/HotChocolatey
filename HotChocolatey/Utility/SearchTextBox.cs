@@ -29,44 +29,44 @@ namespace HotChocolatey.Utility
     /// </summary>
     public class SearchTextBox : TextBox
     {
-        public static DependencyProperty LabelTextProperty =
+        public static readonly DependencyProperty LabelTextProperty =
             DependencyProperty.Register(
                 "LabelText",
                 typeof(string),
                 typeof(SearchTextBox));
 
-        public static DependencyProperty LabelTextColorProperty =
+        public static readonly DependencyProperty LabelTextColorProperty =
             DependencyProperty.Register(
                 "LabelTextColor",
                 typeof(Brush),
                 typeof(SearchTextBox));
 
-        public static DependencyProperty SearchModeProperty =
+        public static readonly DependencyProperty SearchModeProperty =
             DependencyProperty.Register(
                 "SearchMode",
                 typeof(SearchMode),
                 typeof(SearchTextBox),
                 new PropertyMetadata(SearchMode.Instant));
 
-        private static DependencyPropertyKey HasTextPropertyKey =
+        private static readonly DependencyPropertyKey HasTextPropertyKey =
             DependencyProperty.RegisterReadOnly(
                 "HasText",
                 typeof(bool),
                 typeof(SearchTextBox),
                 new PropertyMetadata());
 
-        public static DependencyProperty HasTextProperty = HasTextPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty HasTextProperty = HasTextPropertyKey.DependencyProperty;
 
-        private static DependencyPropertyKey IsMouseLeftButtonDownPropertyKey =
+        private static readonly DependencyPropertyKey IsMouseLeftButtonDownPropertyKey =
             DependencyProperty.RegisterReadOnly(
                 "IsMouseLeftButtonDown",
                 typeof(bool),
                 typeof(SearchTextBox),
                 new PropertyMetadata());
 
-        public static DependencyProperty IsMouseLeftButtonDownProperty = IsMouseLeftButtonDownPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty IsMouseLeftButtonDownProperty = IsMouseLeftButtonDownPropertyKey.DependencyProperty;
 
-        public static DependencyProperty SearchEventTimeDelayProperty =
+        public static readonly DependencyProperty SearchEventTimeDelayProperty =
             DependencyProperty.Register(
                 "SearchEventTimeDelay",
                 typeof(Duration),
@@ -89,7 +89,7 @@ namespace HotChocolatey.Utility
                 new FrameworkPropertyMetadata(typeof(SearchTextBox)));
         }
 
-        private DispatcherTimer searchEventDelayTimer;
+        private readonly DispatcherTimer searchEventDelayTimer;
 
         public SearchTextBox()
             : base()
@@ -148,7 +148,10 @@ namespace HotChocolatey.Utility
 
         private void IconBorder_MouseLeftButtonUp(object obj, MouseButtonEventArgs e)
         {
-            if (!IsMouseLeftButtonDown) return;
+            if (!IsMouseLeftButtonDown)
+            {
+                return;
+            }
 
             if (HasText && SearchMode == SearchMode.Instant)
             {

@@ -6,7 +6,7 @@ namespace HotChocolatey.View
 {
     public partial class LinkTextBlock : UserControl
     {
-        public static DependencyProperty NavigationUrlProperty =
+        public static readonly DependencyProperty NavigationUrlProperty =
         DependencyProperty.Register(
             nameof(NavigationUrl),
             typeof(string),

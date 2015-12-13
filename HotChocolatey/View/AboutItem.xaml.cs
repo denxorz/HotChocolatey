@@ -8,28 +8,28 @@ namespace HotChocolatey.View
 {
     public partial class AboutItem : UserControl
     {
-        public static DependencyProperty IconSourceProperty =
+        public static readonly DependencyProperty IconSourceProperty =
             DependencyProperty.Register(
                 nameof(IconSource),
                 typeof(ImageSource),
                 typeof(AboutItem),
                 new PropertyMetadata(new BitmapImage(new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative))));
 
-        public static DependencyProperty TitleProperty =
+        public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register(
                 nameof(Title),
                 typeof(string),
                 typeof(AboutItem),
                 new PropertyMetadata("Title"));
 
-        public static DependencyProperty WebsiteProperty =
+        public static readonly DependencyProperty WebsiteProperty =
             DependencyProperty.Register(
                 nameof(Website),
                 typeof(string),
                 typeof(AboutItem),
                 new PropertyMetadata("https://gitlab.com/jjb3/HotChocolatey"));
 
-        public static DependencyProperty LicenseProperty =
+        public static readonly DependencyProperty LicenseProperty =
             DependencyProperty.Register(
                 nameof(License),
                 typeof(string),
