@@ -22,7 +22,7 @@
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
-                <Separator/>
+                <Separator />
                 <Button IsEnabled="False">
                     <Image Source="../Images/Settings%203-26.png" Stretch="Uniform" Width="24" />
                 </Button>
@@ -32,13 +32,13 @@
                         <Label Padding="0" VerticalAlignment="Center">Logging</Label>
                     </StackPanel>
                 </ToggleButton>
-                <Separator/>
+                <Separator />
                 <Button Click="OnAboutButtonClick">
                     <Image Source="../Images/About-26.png" Stretch="Uniform" Width="24" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
+        <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}" />
         <local:PackageManager x:Name="PackageManager" Margin="5" />
     </DockPanel>
 </Window>

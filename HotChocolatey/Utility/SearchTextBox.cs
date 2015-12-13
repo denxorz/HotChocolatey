@@ -54,6 +54,7 @@ namespace HotChocolatey.Utility
                 typeof(bool),
                 typeof(SearchTextBox),
                 new PropertyMetadata());
+
         public static DependencyProperty HasTextProperty = HasTextPropertyKey.DependencyProperty;
 
         private static DependencyPropertyKey IsMouseLeftButtonDownPropertyKey =
@@ -62,6 +63,7 @@ namespace HotChocolatey.Utility
                 typeof(bool),
                 typeof(SearchTextBox),
                 new PropertyMetadata());
+
         public static DependencyProperty IsMouseLeftButtonDownProperty = IsMouseLeftButtonDownPropertyKey.DependencyProperty;
 
         public static DependencyProperty SearchEventTimeDelayProperty =
@@ -97,13 +99,13 @@ namespace HotChocolatey.Utility
             searchEventDelayTimer.Tick += new EventHandler(OnSeachEventDelayTimerTick);
         }
 
-        void OnSeachEventDelayTimerTick(object o, EventArgs e)
+        private void OnSeachEventDelayTimerTick(object o, EventArgs e)
         {
             searchEventDelayTimer.Stop();
             RaiseSearchEvent();
         }
 
-        static void OnSearchEventTimeDelayChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        private static void OnSearchEventTimeDelayChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
         {
             SearchTextBox stb = o as SearchTextBox;
             if (stb != null)

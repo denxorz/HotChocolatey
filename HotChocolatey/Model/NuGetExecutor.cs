@@ -35,8 +35,6 @@ namespace HotChocolatey.Model
                 package.Versions.AddRange(versions);
                 package.GenerateActions();
             }
-
         }
     }
-
 }

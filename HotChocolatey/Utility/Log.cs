@@ -8,7 +8,7 @@ using System.IO;
 
 namespace HotChocolatey.Utility
 {
-    static class Log
+    internal static class Log
     {
         private static readonly ILog log = LogManager.GetLogger("default");
 

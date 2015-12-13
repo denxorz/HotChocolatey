@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace HotChocolatey.ViewModel
 {
     [Magic]
-    class MainWindowViewModel : INotifyPropertyChanged
+    internal class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly PackageRepo packageRepo = new PackageRepo();
         private readonly NuGetExecutor nugetExecutor = new NuGetExecutor();
@@ -47,9 +47,9 @@ namespace HotChocolatey.ViewModel
         {
             Log.ResetSettings(true, true, true, Diagnostics);
             Log.Info($@"---
-Version:{Assembly.GetCallingAssembly().GetName().Version} 
-MachineName:{Environment.MachineName} 
-OSVersion:{Environment.OSVersion} 
+Version:{Assembly.GetCallingAssembly().GetName().Version}
+MachineName:{Environment.MachineName}
+OSVersion:{Environment.OSVersion}
 Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
 #if !DEBUG
@@ -58,7 +58,6 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
-
 
             chocoExecutor = new ChocoExecutor(packageRepo, nugetExecutor);
             ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
@@ -156,7 +155,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ExecuteUpgradeAllCommand()
         {
-             using (new ProgressIndication(() => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
+            using (new ProgressIndication(() => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
             {
                 Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
                 await ApplyFilter();

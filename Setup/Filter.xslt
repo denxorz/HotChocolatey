@@ -3,7 +3,7 @@
   <xsl:output method="xml" indent="yes" />
   <xsl:template match="@*|node()">
     <xsl:copy>
-      <xsl:apply-templates select="@*|node()"/>
+      <xsl:apply-templates select="@*|node()" />
     </xsl:copy>
   </xsl:template>
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.pdb')]" use="@Id" />

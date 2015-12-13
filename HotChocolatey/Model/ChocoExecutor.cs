@@ -53,7 +53,6 @@ namespace HotChocolatey.Model
             {
                 Log.Error($"{nameof(Uninstall)} failed for the following package: {package.Id}");
             }
-
         }
 
         public async Task Upgrade(Package package, SemanticVersion specificVersion)

@@ -16,7 +16,7 @@ namespace HotChocolatey.Model
                 new UpgradeablePackageDisplayType(repo, nugetExecutor, chocoExecutor),
             };
 
-        public static IPackageDisplayType BuildUpgradeFilter(PackageRepo repo, NuGetExecutor nugetExecutor, ChocoExecutor chocoExecutor) 
+        public static IPackageDisplayType BuildUpgradeFilter(PackageRepo repo, NuGetExecutor nugetExecutor, ChocoExecutor chocoExecutor)
             => new UpgradeablePackageDisplayType(repo, nugetExecutor, chocoExecutor);
 
         private class AllPackageDisplayType : IPackageDisplayType

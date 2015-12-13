@@ -17,6 +17,7 @@ namespace HotChocolatey.Model
         public string Id { get; }
 
         private IPackage nugetPackage;
+
         public IPackage NugetPackage
         {
             get { return nugetPackage; }
@@ -42,6 +43,7 @@ namespace HotChocolatey.Model
                 }
             }
         }
+
         public SemanticVersion InstalledVersion { get; set; }
         public SemanticVersion LatestVersion { get; private set; }
         public bool IsUpgradable { get; set; }
@@ -164,4 +166,3 @@ namespace HotChocolatey.Model
         }
     }
 }
-

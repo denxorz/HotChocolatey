@@ -16,7 +16,9 @@ namespace HotChocolatey.ViewModel
 
         string IAppender.Name { get; set; }
 
-        void IAppender.Close() { }
+        void IAppender.Close()
+        {
+        }
 
         void IAppender.DoAppend(LoggingEvent loggingEvent)
         {

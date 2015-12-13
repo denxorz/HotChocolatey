@@ -4,6 +4,5 @@
              xmlns:local="clr-namespace:HotChocolatey.View"
              Startup="OnStartup">
     <Application.Resources>
-         
     </Application.Resources>
 </Application>
