@@ -111,6 +111,7 @@
     <Compile Include="Model\ChocoExecutor.cs" />
     <Compile Include="Model\NuGetExecutor.cs" />
     <Compile Include="Model\PackageRepo.cs" />
+    <Compile Include="Utility\ListBoxBehavior.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\CommandExtensions.cs" />
@@ -131,6 +132,12 @@
     </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
+    <Compile Include="View\PackageInfoView.xaml.cs">
+      <DependentUpon>PackageInfoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PackageInstallingView.xaml.cs">
+      <DependentUpon>PackageInstallingView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +173,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\PackageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PackageInfoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PackageInstallingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -42,6 +42,7 @@ namespace HotChocolatey.ViewModel
 
         public bool IsInProgress { get; private set; }
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
+        public ObservableCollectionEx<string> ActionProcessOutput { get; } = new ObservableCollectionEx<string>();
 
         public MainWindowViewModel()
         {
@@ -140,8 +141,12 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ExecuteActionCommand()
         {
-            await SelectedAction.Execute(chocoExecutor, SelectedVersion);
-            await chocoExecutor.Update();
+            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            {
+                ActionProcessOutput.Clear();
+                await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
+                await chocoExecutor.Update();
+            }
         }
 
         private async Task ExecuteRefreshCommand()
@@ -157,12 +162,13 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         {
             using (new ProgressIndication(() => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
             {
+                ActionProcessOutput.Clear();
                 Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
                 await ApplyFilter();
 
                 foreach (var package in Packages)
                 {
-                    await chocoExecutor.Upgrade(package, package.LatestVersion);
+                    await chocoExecutor.Upgrade(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
                 }
             }
         }

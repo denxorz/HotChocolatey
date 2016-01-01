@@ -30,12 +30,12 @@ namespace HotChocolatey.Model
             await UpdateNuGetInfo();
         }
 
-        public async Task Install(Package package, SemanticVersion specificVersion)
+        public async Task Install(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
             Log.Info($"{nameof(Install)}: {package.Id} version:{specificVersion}");
 
             var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
-            var result = await Execute($"install -r -y {package.Id} {version}", output => { });
+            var result = await Execute($"install -r -y {package.Id} {version}", outputLineCallback);
 
             if (!result)
             {
@@ -43,11 +43,11 @@ namespace HotChocolatey.Model
             }
         }
 
-        public async Task Uninstall(Package package)
+        public async Task Uninstall(Package package, Action<string> outputLineCallback)
         {
             Log.Info($"{nameof(Uninstall)}: {package.Id}");
 
-            var result = await Execute($"uninstall -r -y {package.Id}", output => { });
+            var result = await Execute($"uninstall -r -y {package.Id}", outputLineCallback);
 
             if (!result)
             {
@@ -55,12 +55,12 @@ namespace HotChocolatey.Model
             }
         }
 
-        public async Task Upgrade(Package package, SemanticVersion specificVersion)
+        public async Task Upgrade(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
             Log.Info($"{nameof(Upgrade)}: {package.Id} version:{specificVersion}");
 
             var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
-            var result = await Execute($"upgrade -r -y {package.Id} {version}", output => { });
+            var result = await Execute($"upgrade -r -y {package.Id} {version}", outputLineCallback);
 
             if (!result)
             {
@@ -97,7 +97,7 @@ namespace HotChocolatey.Model
             await Task.WhenAll(LocalPackages.Select(t => Task.Run(() => nuGetExecutor.Update(t))));
         }
 
-        private async Task<bool> Execute(string arguments, Action<string> callback)
+        private async Task<bool> Execute(string arguments, Action<string> outputLineCallback)
         {
             Log.Info($">> choco {arguments}");
 
@@ -115,7 +115,7 @@ namespace HotChocolatey.Model
                 {
                     string line = await choco.StandardOutput.ReadLineAsync();
                     Log.Info($"> {line}");
-                    callback(line);
+                    outputLineCallback(line);
 
                     await Task.Run(() => endOfStream = choco.StandardOutput.EndOfStream);
                 }

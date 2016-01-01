@@ -106,9 +106,9 @@ namespace HotChocolatey.Model
             public string Name { get; } = "Install";
             public List<SemanticVersion> Versions { get; }
 
-            public async Task Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion)
+            public async Task Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
             {
-                await chocoExecutor.Install(package, specificVersion);
+                await chocoExecutor.Install(package, specificVersion, outputLineCallback);
             }
 
             public override string ToString()
@@ -130,9 +130,9 @@ namespace HotChocolatey.Model
             public string Name { get; } = "Uninstall";
             public List<SemanticVersion> Versions { get; }
 
-            public async Task Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion)
+            public async Task Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
             {
-                await chocoExecutor.Uninstall(package);
+                await chocoExecutor.Uninstall(package, outputLineCallback);
             }
 
             public override string ToString()
@@ -154,9 +154,9 @@ namespace HotChocolatey.Model
             public string Name { get; } = "Upgrade";
             public List<SemanticVersion> Versions { get; }
 
-            public async Task Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion)
+            public async Task Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
             {
-                await chocoExecutor.Upgrade(package, specificVersion);
+                await chocoExecutor.Upgrade(package, specificVersion, outputLineCallback);
             }
 
             public override string ToString()
