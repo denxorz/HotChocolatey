@@ -41,8 +41,11 @@ namespace HotChocolatey.ViewModel
         public Diagnostics Diagnostics { get; } = new Diagnostics();
 
         public bool IsInProgress { get; private set; }
+        public bool IsInstalling { get; private set; }
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
         public ObservableCollectionEx<string> ActionProcessOutput { get; } = new ObservableCollectionEx<string>();
+
+        public bool HasSelectedPackageAndIsNotInstalling { get { return HasSelectedPackage && !IsInstalling; } }
 
         public MainWindowViewModel()
         {
@@ -141,7 +144,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ExecuteActionCommand()
         {
-            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            using (new ProgressIndication(() => IsInProgress = IsInstalling = true, () => IsInProgress = IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
                 await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));

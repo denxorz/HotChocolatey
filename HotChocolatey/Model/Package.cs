@@ -12,7 +12,7 @@ namespace HotChocolatey.Model
     [Magic]
     public class Package
     {
-        private readonly Uri noIconUri = new Uri("/HotChocolatey2;component/Images/chocolateyicon.gif", UriKind.Relative);
+        private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative);
 
         public string Id { get; }
 
@@ -46,6 +46,7 @@ namespace HotChocolatey.Model
 
         public SemanticVersion InstalledVersion { get; set; }
         public SemanticVersion LatestVersion { get; private set; }
+        public SemanticVersion CurrentVersion => IsInstalled ? InstalledVersion : LatestVersion;
         public bool IsUpgradable { get; set; }
         public List<SemanticVersion> Versions { get; } = new List<SemanticVersion>();
         public ObservableCollectionEx<IAction> Actions { get; set; } = new ObservableCollectionEx<IAction>();
@@ -75,7 +76,7 @@ namespace HotChocolatey.Model
         public void GenerateActions()
         {
             var actions = new List<IAction>();
-
+            
             if (IsInstalled)
             {
                 if (IsUpgradable)
@@ -91,6 +92,11 @@ namespace HotChocolatey.Model
             }
 
             Actions.ClearAndAddRange(actions);
+        }
+
+        public void UpdateLatestVersion()
+        {
+            LatestVersion = Versions.LastOrDefault();
         }
 
         private class InstallAction : IAction

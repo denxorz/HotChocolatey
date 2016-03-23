@@ -21,8 +21,8 @@
             <TextBlock HorizontalAlignment="Left" Margin="112,116,0,0" TextWrapping="Wrap" Text="{Binding SelectedPackage.InstalledVersion}" VerticalAlignment="Top" Visibility="{Binding Path=SelectedPackage.IsInstalled, Converter={StaticResource Bool2Visibility}}" />
             <Button Content="{Binding SelectedAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Command="{Binding ActionCommand}" />
             <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
-            <local:PackageInstallingView Margin="10,194,10,10" Visibility="{Binding IsInProgress, Converter={StaticResource Bool2Visibility}}" />
-            <local:PackageInfoView Margin="10,194,10,10" Visibility="{Binding HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" />
+            <local:PackageInstallingView Margin="10,194,10,10" Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
+            <local:PackageInfoView Margin="10,194,10,10" Visibility="{Binding HasSelectedPackageAndIsNotInstalling, Converter={StaticResource Bool2Visibility}}" />
         </Grid>
     </ScrollViewer>
 </UserControl>

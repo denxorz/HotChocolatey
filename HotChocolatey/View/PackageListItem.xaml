@@ -8,22 +8,54 @@
              Height="80" d:DesignWidth="400">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
+        <local:DesignTimeContext x:Key="DesignViewModel"/>
     </UserControl.Resources>
-    <Grid>
+    <Grid d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
         <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico}" />
-        <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top" FontSize="9.333" FontStyle="Italic" Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
-        <TextBlock Margin="82,10,40,0" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top" FontWeight="Bold" TextTrimming="WordEllipsis" />
+        <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top" 
+                   FontSize="9.333" FontStyle="Italic" 
+                   Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
+        <StackPanel Orientation="Horizontal" Margin="82,10,85,54" ClipToBounds="True" >
+            <TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontWeight="Bold" TextTrimming="WordEllipsis" />
+            <TextBlock TextWrapping="Wrap" Text=" by " TextTrimming="WordEllipsis" />
+            <TextBlock TextWrapping="Wrap" Text="{Binding Authors}" TextTrimming="WordEllipsis" />
+            <TextBlock TextWrapping="Wrap" Text=", " TextTrimming="WordEllipsis" />
+            <TextBlock TextWrapping="Wrap" Text="{Binding DownloadCount}" TextTrimming="WordEllipsis" FontWeight="Bold" />
+            <TextBlock TextWrapping="Wrap" Text=" downloads" TextTrimming="WordEllipsis" />
+        </StackPanel>
+
+        <Image Height="10" Margin="0,12,65,0" VerticalAlignment="Top" Source="../Images/Color/Ok-48.png" HorizontalAlignment="Right" Width="10" Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"/>
+        <Label Content="{Binding CurrentVersion}" Margin="0,5,20,0" VerticalAlignment="Top" FontSize="9.333" HorizontalAlignment="Right" Width="46"/>
+        <Image Height="12" Margin="0,10,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="12">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Source" Value="../Images/Color/Download-48.png" />
+                    <Setter Property="Visibility" Value="Hidden" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsInstalled}" Value="True">
+                            <Setter Property="Source" Value="../Images/Color/Delete-48.png" />
+                        </DataTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label Content="{Binding LatestVersion}" Margin="0,29,20,0" VerticalAlignment="Top" FontSize="9.333" HorizontalAlignment="Right" Width="46" Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}"/>
+        <Image Height="12" Margin="0,37,10,0" VerticalAlignment="Top" Source="../Images/Color/Circled Up-48.png" HorizontalAlignment="Right" Width="12" Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}"/>
+
         <TextBlock Margin="82,31,40,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
-        <Image Height="16" Margin="0,22,19,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="16">
+        <Image Height="16" Margin="47,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="16">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="{x:Null}" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsInstalled}" Value="True">
-                            <Setter Property="Source" Value="../Images/Ok-26.png" />
+                            <Setter Property="Source" Value="../Images/Color/Ok-48.png" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsUpgradable}" Value="True">
-                            <Setter Property="Source" Value="../Images/Download-26.png" />
+                            <Setter Property="Source" Value="../Images/Color/Circled Up-48.png" />
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>

@@ -14,27 +14,27 @@
         <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar Loaded="OnToolBarLoaded">
                 <Button Command="{Binding RefreshCommand}">
-                    <Image Source="../Images/Refresh-26.png" Stretch="Uniform" Width="24" />
+                    <Image Source="../Images/Windows10/Refresh-32.png" Stretch="Uniform" Width="24" />
                 </Button>
                 <Button Command="{Binding UpgradeAllCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Multiple%20Inputs-26.png" Stretch="Uniform" Width="24" />
+                        <Image Source="../Images/Windows10/Multiple%20Inputs-32.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
                 <Separator />
                 <Button IsEnabled="False">
-                    <Image Source="../Images/Settings%203-26.png" Stretch="Uniform" Width="24" />
+                    <Image Source="../Images/Windows10/Services-32.png" Stretch="Uniform" Width="24" />
                 </Button>
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Page%20Overview%20-26.png" Stretch="Uniform" Width="24" />
+                        <Image Source="../Images/Windows10/Page%20Overview%202-32.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Logging</Label>
                     </StackPanel>
                 </ToggleButton>
                 <Separator />
                 <Button Click="OnAboutButtonClick">
-                    <Image Source="../Images/About-26.png" Stretch="Uniform" Width="24" />
+                    <Image Source="../Images/Windows10/About-32.png" Stretch="Uniform" Width="24" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
