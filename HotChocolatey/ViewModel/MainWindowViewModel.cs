@@ -1,12 +1,12 @@
-﻿using HotChocolatey.Model;
-using HotChocolatey.Utility;
-using HotChocolatey.ViewModel.Ginnivan;
-using NuGet;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using HotChocolatey.Model;
+using HotChocolatey.Utility;
+using HotChocolatey.ViewModel.Ginnivan;
+using NuGet;
 
 namespace HotChocolatey.ViewModel
 {
@@ -57,7 +57,7 @@ OSVersion:{Environment.OSVersion}
 Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
 #if !DEBUG
-            Application.Current.DispatcherUnhandledException += (s, e) => Log.Error($"DispatcherUnhandledException: {e.Exception}");
+            System.Windows.Application.Current.DispatcherUnhandledException += (s, e) => Log.Error($"DispatcherUnhandledException: {e.Exception}");
 #endif
 
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
