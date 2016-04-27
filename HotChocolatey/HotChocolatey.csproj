@@ -143,6 +143,9 @@
     <Compile Include="View\ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\VersionInfo.xaml.cs">
+      <DependentUpon>VersionInfo.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProgressIndicatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\VersionInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
