@@ -1,12 +1,12 @@
-﻿using System;
+﻿using HotChocolatey.Model;
+using HotChocolatey.Utility;
+using HotChocolatey.ViewModel.Ginnivan;
+using NuGet;
+using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using HotChocolatey.Model;
-using HotChocolatey.Utility;
-using HotChocolatey.ViewModel.Ginnivan;
-using NuGet;
 
 namespace HotChocolatey.ViewModel
 {
@@ -44,8 +44,6 @@ namespace HotChocolatey.ViewModel
         public bool IsInstalling { get; private set; }
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
         public ObservableCollectionEx<string> ActionProcessOutput { get; } = new ObservableCollectionEx<string>();
-
-        public bool HasSelectedPackageAndIsNotInstalling { get { return HasSelectedPackage && !IsInstalling; } }
 
         public MainWindowViewModel()
         {

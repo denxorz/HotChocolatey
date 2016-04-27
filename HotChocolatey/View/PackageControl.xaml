@@ -22,7 +22,22 @@
             <Button Content="{Binding SelectedAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Command="{Binding ActionCommand}" />
             <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
             <local:PackageInstallingView Margin="10,194,10,10" Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
-            <local:PackageInfoView Margin="10,194,10,10" Visibility="{Binding HasSelectedPackageAndIsNotInstalling, Converter={StaticResource Bool2Visibility}}" />
+            <local:PackageInfoView Margin="10,194,10,10">
+                <local:PackageInfoView.Style>
+                    <Style TargetType="{x:Type local:PackageInfoView}">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding HasSelectedPackage}" Value="True" />
+                                    <Condition Binding="{Binding IsInstalling}" Value="False" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </local:PackageInfoView.Style>
+            </local:PackageInfoView>
         </Grid>
     </ScrollViewer>
 </UserControl>
