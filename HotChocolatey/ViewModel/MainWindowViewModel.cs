@@ -146,7 +146,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             {
                 ActionProcessOutput.Clear();
                 await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                await chocoExecutor.Update();
+                chocoExecutor.Update();
             }
         }
 
@@ -174,6 +174,10 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             }
         }
 
+#pragma warning disable S1144 // Unused private types or members should be removed
+
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+#pragma warning restore S1144 // Unused private types or members should be removed
     }
 }
