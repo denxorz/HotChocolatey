@@ -8,7 +8,7 @@ job:
   stage: build
   script:
   - echo "Release build..."
-  - "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "build.proj"
+  - cmd.exe /C " "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet "build.proj" " && exit %%ERRORLEVEL%%
   tags: 
   except:
   - tags
