@@ -12,7 +12,7 @@ namespace HotChocolatey.Model
     [Magic]
     public class Package
     {
-        private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative);
+        private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/Windows10/Packaging-32.png", UriKind.Relative);
 
         public string Id { get; }
 
@@ -76,7 +76,7 @@ namespace HotChocolatey.Model
         public void GenerateActions()
         {
             var actions = new List<IAction>();
-            
+
             if (IsInstalled)
             {
                 if (IsUpgradable)

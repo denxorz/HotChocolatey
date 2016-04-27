@@ -302,6 +302,9 @@
   <ItemGroup>
     <Resource Include="Images\Color\Delete-48.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Windows10\Packaging-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
