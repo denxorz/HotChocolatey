@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:HotChocolatey.View"
              xmlns:utility="clr-namespace:HotChocolatey.Utility"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="500"
+             d:DesignHeight="500" d:DesignWidth="600"
              BorderThickness="1" BorderBrush="#4C808080" DataContextChanged="OnDataContextChanged">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
