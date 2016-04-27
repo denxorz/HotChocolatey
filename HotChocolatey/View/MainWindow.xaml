@@ -22,7 +22,7 @@
                 </Button>
                 <Button Command="{Binding UpgradeAllCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Windows10/Multiple%20Inputs-32.png" Stretch="Uniform" Width="24" />
+                        <Image Source="../Images/Windows10/Multiple Inputs-32.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
@@ -32,7 +32,7 @@
                 </Button>
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Windows10/Page%20Overview%202-32.png" Stretch="Uniform" Width="24" />
+                        <Image Source="../Images/Windows10/Page Overview 2-32.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Logging</Label>
                     </StackPanel>
                 </ToggleButton>

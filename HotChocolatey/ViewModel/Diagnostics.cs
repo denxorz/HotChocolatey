@@ -37,6 +37,10 @@ namespace HotChocolatey.ViewModel
             });
         }
 
+#pragma warning disable S1144 // Unused private types or members should be removed
+
         private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+#pragma warning restore S1144 // Unused private types or members should be removed
     }
 }

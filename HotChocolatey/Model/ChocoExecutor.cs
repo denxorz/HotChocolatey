@@ -14,6 +14,7 @@ namespace HotChocolatey.Model
         private readonly NuGetExecutor nuGetExecutor;
 
         public List<Package> LocalPackages { get; } = new List<Package>();
+        public bool IncludePreReleases { get; set; }
 
         public ChocoExecutor(PackageRepo repo, NuGetExecutor nuGetExecutor)
         {
@@ -35,7 +36,8 @@ namespace HotChocolatey.Model
             Log.Info($"{nameof(Install)}: {package.Id} version:{specificVersion}");
 
             var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
-            var result = await Execute($"install -r -y {package.Id} {version}", outputLineCallback);
+            var includePreRelease = IncludePreReleases ? "--prerelease" : string.Empty;
+            var result = await Execute($"install --limitoutput --yes {package.Id} {version} {includePreRelease}", outputLineCallback);
 
             if (!result)
             {
@@ -47,7 +49,7 @@ namespace HotChocolatey.Model
         {
             Log.Info($"{nameof(Uninstall)}: {package.Id}");
 
-            var result = await Execute($"uninstall -r -y {package.Id}", outputLineCallback);
+            var result = await Execute($"uninstall --limitoutput --yes {package.Id}", outputLineCallback);
 
             if (!result)
             {
@@ -60,7 +62,8 @@ namespace HotChocolatey.Model
             Log.Info($"{nameof(Upgrade)}: {package.Id} version:{specificVersion}");
 
             var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
-            var result = await Execute($"upgrade -r -y {package.Id} {version}", outputLineCallback);
+            var includePreRelease = IncludePreReleases ? "--prerelease" : string.Empty;
+            var result = await Execute($"upgrade --limitoutput --yes {package.Id} {version} {includePreRelease}", outputLineCallback);
 
             if (!result)
             {
@@ -70,7 +73,8 @@ namespace HotChocolatey.Model
 
         private async Task UpdateLocal()
         {
-            await Execute("list -r -l", UpdateLocalPackage);
+            var includePreRelease = IncludePreReleases ? "--prerelease" : string.Empty;
+            await Execute($"list --limitoutput --localonly {includePreRelease}", UpdateLocalPackage);
         }
 
         private void UpdateLocalPackage(string chocoOutput)
@@ -83,7 +87,7 @@ namespace HotChocolatey.Model
 
         private async Task UpdateOutdated()
         {
-            await Execute("outdated -r", UpdateOutdatedFlag);
+            await Execute("outdated --limitoutput", UpdateOutdatedFlag);
         }
 
         private void UpdateOutdatedFlag(string chocoOutput)

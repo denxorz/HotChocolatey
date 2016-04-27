@@ -46,6 +46,8 @@ namespace HotChocolatey.ViewModel
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
         public ObservableCollectionEx<string> ActionProcessOutput { get; } = new ObservableCollectionEx<string>();
 
+        public bool IncludePreReleases { get; set; }
+
         public MainWindowViewModel()
         {
             Log.ResetSettings(true, true, true, Diagnostics);
@@ -67,7 +69,12 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
             PropertyChanged += async (s, e) =>
             {
-                if (e.PropertyName == nameof(Filter))
+                if (e.PropertyName == nameof(IncludePreReleases))
+                {
+                    chocoExecutor.IncludePreReleases = IncludePreReleases;
+                }
+
+                if (e.PropertyName == nameof(Filter) || e.PropertyName == nameof(IncludePreReleases))
                 {
                     await ApplyFilter();
                 }
