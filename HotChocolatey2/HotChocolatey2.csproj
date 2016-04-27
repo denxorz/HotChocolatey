@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D295FC4F-2B22-4019-809F-4208435A2820}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HotChocolatey2</RootNamespace>
+    <AssemblyName>HotChocolatey2</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>View\Hot Chocolate-50.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlRenderer, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="HtmlRenderer.WPF, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.WPF.1.5.0.6\lib\net45\HtmlRenderer.WPF.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MarkdownSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.XmlTransform, Version=2.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MyToolkit, Version=2.4.2.0, Culture=neutral, PublicKeyToken=3e349a1360994d26, processorArchitecture=MSIL">
+      <HintPath>..\packages\MyToolkit.2.4.2.0\lib\portable-net45+wp8+win8+wpa81\MyToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=2.9.0.729, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\NuGet.Core.2.9.0\lib\net40-Client\NuGet.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Log.cs" />
+    <Compile Include="Utility\ObservableCollectionEx.cs" />
+    <Compile Include="Utility\SearchTextBox.cs" />
+    <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
+    <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
+    <Compile Include="ViewModel\Ginnivan\CommandExtensions.cs" />
+    <Compile Include="ViewModel\Ginnivan\DelegateCommand.cs" />
+    <Compile Include="ViewModel\Ginnivan\DelegateCommand{T}.cs" />
+    <Compile Include="ViewModel\Ginnivan\IAsyncCommand.cs" />
+    <Compile Include="ViewModel\Ginnivan\IAsyncCommand{T}.cs" />
+    <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
+    <Compile Include="ViewModel\KindOfMagic\MagicAttribute.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="View\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AboutItem.xaml.cs">
+      <DependentUpon>AboutItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LinkTextBlock.xaml.cs">
+      <DependentUpon>LinkTextBlock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
+    <Compile Include="View\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PackageControl.xaml.cs">
+      <DependentUpon>PackageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PackageListItem.xaml.cs">
+      <DependentUpon>PackageListItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PackageManager.xaml.cs">
+      <DependentUpon>PackageManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProgressIndicatorView.xaml.cs">
+      <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AboutItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LinkTextBlock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PackageControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PackageListItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\PackageManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ProgressIndicatorView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Hot Chocolate-50.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\About-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\chocolateyicon.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Delete Sign-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Download-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\Hot Chocolate-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\I Love Icons8-100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\Log4net.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\nugetlogo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\visualstudiologo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\wixlogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Multiple Inputs-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Ok-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Page Overview -26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Refresh-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Search-26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Settings 3-26.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets" Condition="Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\KindOfMagic.1.2.6\build\KindOfMagic.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

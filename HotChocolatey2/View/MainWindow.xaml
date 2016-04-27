@@ -9,40 +9,36 @@
         Height="600" Width="800" Loaded="OnLoaded">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
-        <local:BooleanToTaskbarStateConverter x:Key="Bool2TaskbarState" />
     </Window.Resources>
-    <Window.TaskbarItemInfo>
-        <TaskbarItemInfo ProgressState="{Binding Path=IsInstalling, Converter={StaticResource Bool2TaskbarState}}" />
-    </Window.TaskbarItemInfo>
     <DockPanel IsEnabled="{Binding IsUserAllowedToExecuteActions}">
-        <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
+        <ToolBarTray DockPanel.Dock="Top" ToolBarTray.IsLocked="True">
             <ToolBar Loaded="OnToolBarLoaded">
                 <Button Command="{Binding RefreshCommand}">
-                    <Image Source="../Images/Windows10/Refresh-32.png" Stretch="Uniform" Width="24" />
+                    <Image Source="../Images/Refresh-26.png" Stretch="Uniform" Width="24" />
                 </Button>
                 <Button Command="{Binding UpgradeAllCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Windows10/Multiple%20Inputs-32.png" Stretch="Uniform" Width="24" />
+                        <Image Source="../Images/Multiple%20Inputs-26.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
-                <Separator />
+                <Separator/>
                 <Button IsEnabled="False">
-                    <Image Source="../Images/Windows10/Services-32.png" Stretch="Uniform" Width="24" />
+                    <Image Source="../Images/Settings%203-26.png" Stretch="Uniform" Width="24" />
                 </Button>
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="../Images/Windows10/Page%20Overview%202-32.png" Stretch="Uniform" Width="24" />
+                        <Image Source="../Images/Page%20Overview%20-26.png" Stretch="Uniform" Width="24" />
                         <Label Padding="0" VerticalAlignment="Center">Logging</Label>
                     </StackPanel>
                 </ToggleButton>
-                <Separator />
+                <Separator/>
                 <Button Click="OnAboutButtonClick">
-                    <Image Source="../Images/Windows10/About-32.png" Stretch="Uniform" Width="24" />
+                    <Image Source="../Images/About-26.png" Stretch="Uniform" Width="24" />
                 </Button>
             </ToolBar>
         </ToolBarTray>
-        <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}" />
+        <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}"/>
         <local:PackageManager x:Name="PackageManager" Margin="5" />
     </DockPanel>
 </Window>
