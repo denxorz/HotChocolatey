@@ -142,7 +142,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ExecuteActionCommand()
         {
-            using (new ProgressIndication(() => IsInProgress = IsInstalling = true, () => IsInProgress = IsInstalling = false))
+            using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
                 await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
