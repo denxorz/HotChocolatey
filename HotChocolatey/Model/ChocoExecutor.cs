@@ -79,7 +79,7 @@ namespace HotChocolatey.Model
 
         private void UpdateLocalPackage(string chocoOutput)
         {
-            var tmp = chocoOutput.Split(' ');
+            var tmp = chocoOutput.Split('|', ' ');
             var p = repo.GetPackage(tmp[0]);
             p.InstalledVersion = new SemanticVersion(tmp[1]);
             LocalPackages.Add(p);
