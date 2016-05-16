@@ -1,3 +1,7 @@
+Changes in 3.2.0
+* Update chocolatey installer script
+* Made image loading async
+
 Changes in 3.1.0
 * Speed improvements
 * Installation/Update/uninstall progress reporting
