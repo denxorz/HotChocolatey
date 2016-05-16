@@ -11,7 +11,7 @@
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding HasSelectedPackage, Converter={StaticResource Bool2Visibility}}">
         <Grid>
-            <Image HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="32" Source="{Binding SelectedPackage.Ico}" />
+            <Image HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="32" Source="{Binding SelectedPackage.Ico, IsAsync=true}" />
             <TextBlock Margin="47,16,10,0" TextWrapping="Wrap" Text="{Binding SelectedPackage.Title}" VerticalAlignment="Top" FontSize="18.667" TextTrimming="WordEllipsis" />
             <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Action:" VerticalAlignment="Top" FontWeight="Bold" />
             <TextBlock HorizontalAlignment="Left" Margin="147,59,0,0" TextWrapping="Wrap" Text="Version:" VerticalAlignment="Top" FontWeight="Bold" />

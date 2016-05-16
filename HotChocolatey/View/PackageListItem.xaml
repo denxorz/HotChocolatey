@@ -11,7 +11,7 @@
         <local:DesignTimeContext x:Key="DesignViewModel" />
     </UserControl.Resources>
     <Grid d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
-        <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico}" />
+        <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico, IsAsync=true}" />
         <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top"
                    FontSize="9.333" FontStyle="Italic"
                    Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
