@@ -22,7 +22,7 @@ The source code can be found here: `https://gitlab.com/jjb3/HotChocolatey`
 
 3.2.0.516
 
-[Direct MSI](http://hotchocolatey.jjb3.nl/releases/3.2.0.516/Setup%20Hot%20Chocolatey.msi)
+[Direct MSI](http://hotchocolatey.jjb3.nl/releases/3.2.1.516/Setup%20Hot%20Chocolatey.msi)
 
 [Chocolatey package](https://chocolatey.org/packages/hot-chocolatey/)
 

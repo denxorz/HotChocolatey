@@ -1,4 +1,4 @@
-Changes in 3.2.0
+Changes in 3.2.1
 * Update chocolatey installer script
 * Made image loading async
 
