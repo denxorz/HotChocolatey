@@ -1,17 +1,5 @@
-﻿$ErrorActionPreference = 'Stop'; # stop on all errors
-
-$packageName = 'hot-chocolatey'
-$toolsDir = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
+﻿$name   = 'hot-chocolatey'
 $url = 'http://hotchocolatey.jjb3.nl/releases/__version__/Setup%20Hot%20Chocolatey.msi'
+$silent = '/quiet'
 
-$packageArgs = @{
-  packageName   = $packageName
-  unzipLocation = $toolsDir
-  fileType      = 'msi'
-  url           = $url
-  silentArgs    = "/qn /norestart /l*v `"$env:TEMP\chocolatey\$packageName\install.log`""
-  validExitCodes= @(0, 3010, 1641)
-  registryUninstallerKey = 'hot-chocolatey'
-}
-
-Install-ChocolateyPackage @packageArgs
+Install-ChocolateyPackage $name 'msi' $silent $url
