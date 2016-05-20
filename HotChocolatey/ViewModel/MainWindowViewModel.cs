@@ -6,6 +6,7 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Shell;
 
@@ -97,9 +98,9 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             };
         }
 
-        public async Task Loaded()
+        public void Loaded()
         {
-            chocoExecutor.Update();
+            Task.Run(() => chocoExecutor.Update());
 
             Filters.AddRange(PackageDisplayTypeFactory.BuildDisplayTypes(packageRepo, nugetExecutor, chocoExecutor));
             Filter = Filters.First();
