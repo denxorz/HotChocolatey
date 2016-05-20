@@ -12,15 +12,13 @@
         <wpf:HtmlPanel Margin="10,20,10,151" Text="{Binding SelectedPackage.DescriptionAsHtml}" SnapsToDevicePixels="True" BaseStylesheet="*{font-family:&quot;Segoe UI&quot;;font-size:9pt;} p{margin-top:0;}; h3{font-family:&quot;Segoe UI&quot;;font-size:9pt;}" />
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,120" TextWrapping="Wrap" Text="Author(s):" FontWeight="Bold" Height="16" VerticalAlignment="Bottom" />
         <TextBlock HorizontalAlignment="Left" Margin="10,0,0,99" TextWrapping="Wrap" Text="License:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,78" TextWrapping="Wrap" Text="Downloads:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,57" TextWrapping="Wrap" Text="Project URL:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,36" TextWrapping="Wrap" Text="Tags:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,15" TextWrapping="Wrap" Text="Dependencies:" VerticalAlignment="Bottom" FontWeight="Bold" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,78" TextWrapping="Wrap" Text="Project URL:" VerticalAlignment="Bottom" FontWeight="Bold" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,57" TextWrapping="Wrap" Text="Tags:" VerticalAlignment="Bottom" FontWeight="Bold" />
+        <TextBlock HorizontalAlignment="Left" Margin="10,0,0,36" TextWrapping="Wrap" Text="Dependencies:" VerticalAlignment="Bottom" FontWeight="Bold" />
         <TextBlock HorizontalAlignment="Left" Margin="97,0,0,120" Text="{Binding SelectedPackage.Authors}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
         <local:LinkTextBlock HorizontalAlignment="Left" Margin="97,0,0,93" NavigationUrl="{Binding SelectedPackage.LicenseUrl}" VerticalAlignment="Bottom" />
-        <TextBlock HorizontalAlignment="Left" Margin="97,0,0,78" Text="{Binding SelectedPackage.DownloadCount}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
-        <local:LinkTextBlock HorizontalAlignment="Left" Margin="97,0,0,51" NavigationUrl="{Binding SelectedPackage.ProjectUrl}" VerticalAlignment="Bottom" />
-        <TextBlock HorizontalAlignment="Left" Margin="97,0,0,36" Text="{Binding SelectedPackage.Tags}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
-        <TextBlock HorizontalAlignment="Left" Margin="97,0,0,15" Text="{Binding SelectedPackage.Dependencies}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
+        <local:LinkTextBlock HorizontalAlignment="Left" Margin="97,0,0,78" NavigationUrl="{Binding SelectedPackage.ProjectUrl}" VerticalAlignment="Bottom" />
+        <TextBlock HorizontalAlignment="Left" Margin="97,0,0,51" Text="{Binding SelectedPackage.Tags}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
+        <TextBlock HorizontalAlignment="Left" Margin="97,0,0,36" Text="{Binding SelectedPackage.Dependencies}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
     </Grid>
 </UserControl>
