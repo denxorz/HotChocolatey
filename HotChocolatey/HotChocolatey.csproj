@@ -142,6 +142,7 @@
     </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
+    <Compile Include="View\LongToNumberWithPrefixMultiplierConverter.cs" />
     <Compile Include="View\PackageInfoView.xaml.cs">
       <DependentUpon>PackageInfoView.xaml</DependentUpon>
     </Compile>

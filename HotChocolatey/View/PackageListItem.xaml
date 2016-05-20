@@ -8,6 +8,7 @@
              Height="80" d:DesignWidth="400">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
+        <local:LongToNumberWithPrefixMultiplierConverter x:Key="LongToNumberWithPrefixMultiplierConverter" />
         <local:DesignTimeContext x:Key="DesignViewModel" />
     </UserControl.Resources>
     <Grid d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
@@ -20,7 +21,7 @@
             <TextBlock TextWrapping="Wrap" Text=" by " TextTrimming="WordEllipsis" />
             <TextBlock TextWrapping="Wrap" Text="{Binding Authors}" TextTrimming="WordEllipsis" />
             <TextBlock TextWrapping="Wrap" Text=", " TextTrimming="WordEllipsis" />
-            <TextBlock TextWrapping="Wrap" Text="{Binding DownloadCount}" TextTrimming="WordEllipsis" FontWeight="Bold" />
+            <TextBlock TextWrapping="Wrap" Text="{Binding DownloadCount, Converter={StaticResource LongToNumberWithPrefixMultiplierConverter}}" TextTrimming="WordEllipsis" FontWeight="Bold" />
             <TextBlock TextWrapping="Wrap" Text=" downloads" TextTrimming="WordEllipsis" />
         </StackPanel>
 
