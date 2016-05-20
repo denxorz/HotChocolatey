@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:HotChocolatey.View"
         mc:Ignorable="d"
         Title="Hot Chocolatey" Icon="Hot Chocolate-50.ico"
-        Height="600" Width="800" Loaded="OnLoaded">
+        Height="800" Width="1024" WindowState="Maximized"
+        Loaded="OnLoaded">
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
         <local:BooleanToTaskbarStateConverter x:Key="Bool2TaskbarState" />

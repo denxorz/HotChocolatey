@@ -24,9 +24,9 @@
         </Border>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="1*" />
                 <ColumnDefinition Width="5" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
             <local:ProgressIndicatorView Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}" />
             <local:ListViewWithScrollViewerProperty x:Name="PackagesListView" MinWidth="250" ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage}" BorderThickness="0" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
