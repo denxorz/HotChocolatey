@@ -44,14 +44,14 @@ namespace HotChocolatey.View
         private async void OnSearch(object sender, SearchEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            await (DataContext as ViewModel.MainWindowViewModel).Search(e);
+            await ((ViewModel.MainWindowViewModel)DataContext).Search(e);
         }
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            (DataContext as ViewModel.MainWindowViewModel).ClearSearchBox = () => SearchTextBox.Clear();
-            ScrolledToBottom += (DataContext as ViewModel.MainWindowViewModel).OnScrolledToBottom;
+            ((ViewModel.MainWindowViewModel)DataContext).ClearSearchBox = () => SearchTextBox.Clear();
+            ScrolledToBottom += ((ViewModel.MainWindowViewModel)DataContext).OnScrolledToBottom;
         }
     }
 }

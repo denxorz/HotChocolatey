@@ -1,5 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace HotChocolatey.View
@@ -12,7 +11,7 @@ namespace HotChocolatey.View
             {
                 try
                 {
-                    Decorator border = VisualTreeHelper.GetChild(this, 0) as Decorator;
+                    Decorator border = (Decorator)VisualTreeHelper.GetChild(this, 0);
                     return border.Child as ScrollViewer;
                 }
                 catch
@@ -20,24 +19,6 @@ namespace HotChocolatey.View
                     return null;
                 }
             }
-        }
-
-        private ScrollViewer FindScrollViewer(DependencyObject d)
-        {
-            if (d is ScrollViewer)
-            {
-                return d as ScrollViewer;
-            }
-
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(d); i++)
-            {
-                var sw = FindScrollViewer(VisualTreeHelper.GetChild(d, i));
-                if (sw != null)
-                {
-                    return sw;
-                }
-            }
-            return null;
         }
     }
 }

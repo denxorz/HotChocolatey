@@ -266,9 +266,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Hot Chocolate-50.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Windows10\Delete-32.png" />
     <Resource Include="Images\Windows10\Search-32.png" />
   </ItemGroup>

@@ -15,7 +15,7 @@ namespace HotChocolatey.View
 
         private void OnToolBarLoaded(object sender, RoutedEventArgs e)
         {
-            ToolBar toolBar = sender as ToolBar;
+            ToolBar toolBar = (ToolBar)sender;
             var overflowGrid = toolBar.Template.FindName("OverflowGrid", toolBar) as FrameworkElement;
             if (overflowGrid != null)
             {
@@ -38,15 +38,14 @@ namespace HotChocolatey.View
 
         private void OnAboutButtonClick(object sender, RoutedEventArgs e)
         {
-            var about = new About();
-            about.Owner = this;
+            var about = new About { Owner = this };
             about.ShowDialog();
         }
 
-        private async void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            await (DataContext as ViewModel.MainWindowViewModel).Loaded();
+            ((ViewModel.MainWindowViewModel)DataContext).Loaded();
         }
     }
 }
