@@ -22,7 +22,9 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Source="../Images/Color/Ok-48.png"
-            Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}" />
+            Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"
+            RenderOptions.BitmapScalingMode="HighQuality"
+            RenderOptions.EdgeMode="Unspecified" />
 
         <Label
             Margin="15,0,12,0"
@@ -36,7 +38,9 @@
             Height="12"
             Margin="0,2,0,0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Top">
+            VerticalAlignment="Top"
+            RenderOptions.BitmapScalingMode="HighQuality"
+            RenderOptions.EdgeMode="Unspecified" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="../Images/Color/Download-48.png" />
@@ -68,6 +72,8 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Source="../Images/Color/Circled Up-48.png"
-            Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}" />
+            Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}"
+            RenderOptions.BitmapScalingMode="HighQuality" 
+            RenderOptions.EdgeMode="Unspecified" />
     </Grid>
 </UserControl>
