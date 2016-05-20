@@ -22,7 +22,7 @@
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
 
-    <Icon Id="icon.ico" SourceFile="Resources\Hot Chocolate-50.ico"/>
+    <Icon Id="icon.ico" SourceFile="Resources\Hot Chocolate-96.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
     <WixVariable Id="WixUIBannerBmp" Value="Resources\WixUIBannerBmp.bmp" />

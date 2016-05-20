@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
-using System.Windows;
+using MahApps.Metro.Controls;
 
 namespace HotChocolatey.View
 {
-    public partial class About : Window
+    public partial class About : MetroWindow
     {
         public About()
         {
