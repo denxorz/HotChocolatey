@@ -30,7 +30,6 @@ namespace HotChocolatey.Model
         {
             if (!package.Versions.Any())
             {
-                // TODO : filtering pre-releases
                 var versions = await Task.Run(() => Repo.FindPackagesById(package.Id).Where(p => p.IsReleaseVersion()).Select(p => p.Version).ToList());
                 package.Versions.AddRange(versions);
                 package.UpdateLatestVersion();
