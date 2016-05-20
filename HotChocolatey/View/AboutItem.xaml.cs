@@ -13,7 +13,7 @@ namespace HotChocolatey.View
                 nameof(IconSource),
                 typeof(ImageSource),
                 typeof(AboutItem),
-                new PropertyMetadata(new BitmapImage(new Uri("/HotChocolatey;component/Images/chocolateyicon.gif", UriKind.Relative))));
+                new PropertyMetadata(new BitmapImage(new Uri("/HotChocolatey;component/Images/Logos/Hot Chocolate-100.png", UriKind.Relative))));
 
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register(
