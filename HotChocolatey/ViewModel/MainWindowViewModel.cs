@@ -153,7 +153,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             {
                 ActionProcessOutput.Clear();
                 await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                chocoExecutor.Update();
+                Task.Run(() => chocoExecutor.Update());
             }
         }
 
@@ -162,7 +162,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
             {
                 await ClearSearchText();
-                await chocoExecutor.Update();
+                Task.Run(() => chocoExecutor.Update());
             }
         }
 
