@@ -165,7 +165,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
             {
                 await ClearSearchText();
-                Task.Run(() => chocoExecutor.Update());
+                await Task.Run(() => chocoExecutor.Update());
             }
         }
 
