@@ -133,7 +133,6 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             {
                 Packages.Clear();
                 await Filter.ApplySearch(searchText);
-                await Filter.Refresh();
                 await GetMorePackages();
                 if (SelectedPackage == null)
                 {
