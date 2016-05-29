@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using HotChocolatey.Model.ChocoTask;
 
 namespace HotChocolatey.Model
 {
@@ -26,55 +27,24 @@ namespace HotChocolatey.Model
         {
             LocalPackages.Clear();
             repo.ClearLocalVersions();
-            await UpdateLocal();
-            await UpdateOutdated();
+            await new UpdateLocalChocoTask(IncludePreReleases).Execute(this, UpdateLocalPackage);
+            await new UpdateOutdatedFlagsChocoTask().Execute(this, UpdateOutdatedFlag);
             await UpdateNuGetInfo();
         }
 
         public async Task Install(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            Log.Info($"{nameof(Install)}: {package.Id} version:{specificVersion}");
-
-            var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
-            var includePreRelease = IncludePreReleases ? "--prerelease" : string.Empty;
-            var result = await Execute($"install --limitoutput --yes {package.Id} {version} {includePreRelease}", outputLineCallback);
-
-            if (!result)
-            {
-                Log.Error($"{nameof(Install)} failed for the following package: {package.Id}");
-            }
+            await new InstallChocoTask(IncludePreReleases, package, specificVersion).Execute(this, outputLineCallback);
         }
 
         public async Task Uninstall(Package package, Action<string> outputLineCallback)
         {
-            Log.Info($"{nameof(Uninstall)}: {package.Id}");
-
-            var result = await Execute($"uninstall --limitoutput --yes {package.Id}", outputLineCallback);
-
-            if (!result)
-            {
-                Log.Error($"{nameof(Uninstall)} failed for the following package: {package.Id}");
-            }
+            await new UninstallChocoTask(package).Execute(this, outputLineCallback);
         }
 
         public async Task Upgrade(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            Log.Info($"{nameof(Upgrade)}: {package.Id} version:{specificVersion}");
-
-            var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
-            var includePreRelease = IncludePreReleases ? "--prerelease" : string.Empty;
-            var result = await Execute($"upgrade --limitoutput --yes {package.Id} {version} {includePreRelease}", outputLineCallback);
-
-            if (!result)
-            {
-                Log.Error($"{nameof(Upgrade)} failed for the following package: {package.Id}");
-            }
-        }
-
-        private async Task UpdateLocal()
-        {
-            var includePreRelease = IncludePreReleases ? "--prerelease" : string.Empty;
-            await Execute($"list --limitoutput --localonly {includePreRelease}", UpdateLocalPackage);
+            await new UpgradeChocoTask(IncludePreReleases, package, specificVersion).Execute(this, outputLineCallback);
         }
 
         private void UpdateLocalPackage(string chocoOutput)
@@ -83,11 +53,6 @@ namespace HotChocolatey.Model
             var p = repo.GetPackage(tmp[0]);
             p.InstalledVersion = new SemanticVersion(tmp[1]);
             LocalPackages.Add(p);
-        }
-
-        private async Task UpdateOutdated()
-        {
-            await Execute("outdated --limitoutput", UpdateOutdatedFlag);
         }
 
         private void UpdateOutdatedFlag(string chocoOutput)
@@ -101,7 +66,7 @@ namespace HotChocolatey.Model
             await Task.WhenAll(LocalPackages.Select(t => Task.Run(() => nuGetExecutor.Update(t))));
         }
 
-        private async Task<bool> Execute(string arguments, Action<string> outputLineCallback)
+        public async Task<bool> Execute(string arguments, Action<string> outputLineCallback)
         {
             Log.Info($">> choco {arguments}");
 

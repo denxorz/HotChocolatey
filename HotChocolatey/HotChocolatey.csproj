@@ -117,9 +117,15 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Model\ChocoTask\BaseChocoTask.cs" />
     <Compile Include="Model\ChocoExecutor.cs" />
+    <Compile Include="Model\ChocoTask\InstallChocoTask.cs" />
     <Compile Include="Model\NuGetExecutor.cs" />
     <Compile Include="Model\PackageRepo.cs" />
+    <Compile Include="Model\ChocoTask\UninstallChocoTask.cs" />
+    <Compile Include="Model\ChocoTask\UpdateLocalChocoTask.cs" />
+    <Compile Include="Model\ChocoTask\UpdateOutdatedFlagsChocoTask.cs" />
+    <Compile Include="Model\ChocoTask\UpgradeChocoTask.cs" />
     <Compile Include="Utility\ListBoxBehavior.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
