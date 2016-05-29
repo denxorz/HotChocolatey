@@ -149,12 +149,15 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ExecuteActionCommand()
         {
+            Task actionTask;
             using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
                 await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                Task.Run(() => chocoExecutor.Update());
+                actionTask = Task.Run(() => chocoExecutor.Update());
             }
+
+            await actionTask;
         }
 
         private async Task ExecuteRefreshCommand()
@@ -179,6 +182,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                     await chocoExecutor.Upgrade(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
                 }
             }
+
+            await ExecuteRefreshCommand();
         }
 
 #pragma warning disable S1144 // Unused private types or members should be removed
