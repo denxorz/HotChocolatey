@@ -11,57 +11,34 @@ namespace HotChocolatey.Model
 {
     public class ChocoExecutor
     {
-        private readonly PackageRepo repo;
-        private readonly NuGetExecutor nuGetExecutor;
-
         public List<Package> LocalPackages { get; } = new List<Package>();
         public bool IncludePreReleases { get; set; }
 
-        public ChocoExecutor(PackageRepo repo, NuGetExecutor nuGetExecutor)
-        {
-            this.repo = repo;
-            this.nuGetExecutor = nuGetExecutor;
-        }
-
-        public async Task Update()
+        public async Task Update(PackageRepo repo, NuGetExecutor nuGetExecutor)
         {
             LocalPackages.Clear();
             repo.ClearLocalVersions();
-            await new UpdateLocalChocoTask(IncludePreReleases).Execute(this, UpdateLocalPackage);
-            await new UpdateOutdatedFlagsChocoTask().Execute(this, UpdateOutdatedFlag);
-            await UpdateNuGetInfo();
+            await new UpdateLocalChocoTask(IncludePreReleases, repo, LocalPackages.Add).Execute(this);
+            await new UpdateOutdatedFlagsChocoTask(repo).Execute(this);
+            await UpdateNuGetInfo(nuGetExecutor);
         }
 
         public async Task Install(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            await new InstallChocoTask(IncludePreReleases, package, specificVersion).Execute(this, outputLineCallback);
+            await new InstallChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).Execute(this);
         }
 
         public async Task Uninstall(Package package, Action<string> outputLineCallback)
         {
-            await new UninstallChocoTask(package).Execute(this, outputLineCallback);
+            await new UninstallChocoTask(outputLineCallback, package).Execute(this);
         }
 
         public async Task Upgrade(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            await new UpgradeChocoTask(IncludePreReleases, package, specificVersion).Execute(this, outputLineCallback);
+            await new UpgradeChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).Execute(this);
         }
 
-        private void UpdateLocalPackage(string chocoOutput)
-        {
-            var tmp = chocoOutput.Split('|', ' ');
-            var p = repo.GetPackage(tmp[0]);
-            p.InstalledVersion = new SemanticVersion(tmp[1]);
-            LocalPackages.Add(p);
-        }
-
-        private void UpdateOutdatedFlag(string chocoOutput)
-        {
-            var tmp = chocoOutput.Split('|');
-            repo.GetPackage(tmp[0]).IsUpgradable = true;
-        }
-
-        private async Task UpdateNuGetInfo()
+        private async Task UpdateNuGetInfo(NuGetExecutor nuGetExecutor)
         {
             await Task.WhenAll(LocalPackages.Select(t => Task.Run(() => nuGetExecutor.Update(t))));
         }

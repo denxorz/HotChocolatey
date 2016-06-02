@@ -16,7 +16,7 @@ namespace HotChocolatey.ViewModel
 
         public void Closing()
         {
-            Save();
+            //Save();
         }
     }
 }

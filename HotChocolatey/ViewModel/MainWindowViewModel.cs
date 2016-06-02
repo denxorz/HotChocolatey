@@ -15,7 +15,7 @@ namespace HotChocolatey.ViewModel
     {
         private readonly PackageRepo packageRepo = new PackageRepo();
         private readonly NuGetExecutor nugetExecutor = new NuGetExecutor();
-        private readonly ChocoExecutor chocoExecutor;
+        private readonly ChocoExecutor chocoExecutor= new ChocoExecutor();
 
         private string searchText = string.Empty;
 
@@ -62,8 +62,6 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
-
-            chocoExecutor = new ChocoExecutor(packageRepo, nugetExecutor);
             ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
 
             PropertyChanged += async (s, e) =>
@@ -98,7 +96,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         public void Loaded()
         {
-            Task.Run(() => chocoExecutor.Update());
+            Task.Run(() => chocoExecutor.Update(packageRepo, nugetExecutor));
 
             Filters.AddRange(PackageDisplayTypeFactory.BuildDisplayTypes(packageRepo, nugetExecutor, chocoExecutor));
             Filter = Filters.First();
@@ -153,7 +151,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             {
                 ActionProcessOutput.Clear();
                 await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                actionTask = Task.Run(() => chocoExecutor.Update());
+                actionTask = Task.Run(() => chocoExecutor.Update(packageRepo, nugetExecutor));
             }
 
             await actionTask;
@@ -164,7 +162,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
             {
                 await ClearSearchText();
-                await Task.Run(() => chocoExecutor.Update());
+                await Task.Run(() => chocoExecutor.Update(packageRepo, nugetExecutor));
             }
         }
 

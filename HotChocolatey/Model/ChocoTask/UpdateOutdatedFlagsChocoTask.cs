@@ -1,15 +1,26 @@
-﻿namespace HotChocolatey.Model.ChocoTask
+﻿using System;
+
+namespace HotChocolatey.Model.ChocoTask
 {
     internal class UpdateOutdatedFlagsChocoTask : BaseChocoTask
     {
-        protected override string GetCommand()
+        private readonly PackageRepo repo;
+
+        public UpdateOutdatedFlagsChocoTask(PackageRepo repo)
         {
-            return "outdated";
+            this.repo = repo;
         }
 
-        protected override string GetParameters()
+        protected override string GetCommand() => "outdated";
+
+        protected override string GetParameters() => string.Empty;
+
+        protected override Action<string> GetOutputLineCallback() => UpdateOutdatedFlag;
+        
+        private void UpdateOutdatedFlag(string chocoOutput)
         {
-            return string.Empty;
+            var tmp = chocoOutput.Split('|');
+            repo.GetPackage(tmp[0]).IsUpgradable = true;
         }
     }
 }
