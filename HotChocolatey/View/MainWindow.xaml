@@ -11,6 +11,16 @@
         Loaded="OnLoaded"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1">
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <Button Click="OnSettingsButtonClick" IsEnabled="{Binding IsUserAllowedToExecuteActions}">
+                <Image Source="../Images/Windows10/Services-32.png" Stretch="Uniform" Width="24" />
+            </Button>
+            <Button Click="OnAboutButtonClick" IsEnabled="{Binding IsUserAllowedToExecuteActions}">
+                <Image Source="../Images/Windows10/About-32.png" Stretch="Uniform" Width="24" />
+            </Button>
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
         <local:BooleanToTaskbarStateConverter x:Key="Bool2TaskbarState" />
@@ -31,9 +41,6 @@
                     </StackPanel>
                 </Button>
                 <Separator />
-                <Button IsEnabled="False">
-                    <Image Source="../Images/Windows10/Services-32.png" Stretch="Uniform" Width="24" />
-                </Button>
                 <ToggleButton IsChecked="{Binding IsLogVisible}">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Images/Windows10/Page Overview 2-32.png" Stretch="Uniform" Width="24" />
@@ -41,9 +48,6 @@
                     </StackPanel>
                 </ToggleButton>
                 <Separator />
-                <Button Click="OnAboutButtonClick">
-                    <Image Source="../Images/Windows10/About-32.png" Stretch="Uniform" Width="24" />
-                </Button>
             </ToolBar>
         </ToolBarTray>
         <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}" />

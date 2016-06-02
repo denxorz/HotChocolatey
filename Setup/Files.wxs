@@ -55,6 +55,54 @@
             <Component Id="System.Windows.Interactivity.dll" Guid="*">
                 <File Id="System.Windows.Interactivity.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\System.Windows.Interactivity.dll" />
             </Component>
+            <Component Id="Xceed.Wpf.AvalonDock.dll" Guid="*">
+                <File Id="Xceed.Wpf.AvalonDock.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Xceed.Wpf.AvalonDock.dll" />
+            </Component>
+            <Component Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" Guid="*">
+                <File Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+            </Component>
+            <Component Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" Guid="*">
+                <File Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+            </Component>
+            <Component Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" Guid="*">
+                <File Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+            </Component>
+            <Component Id="Xceed.Wpf.DataGrid.dll" Guid="*">
+                <File Id="Xceed.Wpf.DataGrid.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Xceed.Wpf.DataGrid.dll" />
+            </Component>
+            <Component Id="Xceed.Wpf.Toolkit.dll" Guid="*">
+                <File Id="Xceed.Wpf.Toolkit.dll" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Xceed.Wpf.Toolkit.dll" />
+            </Component>
+            <Directory Id="de" Name="de">
+                
+            </Directory>
+            <Directory Id="es" Name="es">
+                
+            </Directory>
+            <Directory Id="fr" Name="fr">
+                
+            </Directory>
+            <Directory Id="hu" Name="hu">
+                
+            </Directory>
+            <Directory Id="it" Name="it">
+                
+            </Directory>
+            <Directory Id="pt_BR" Name="pt-BR">
+                
+            </Directory>
+            <Directory Id="ro" Name="ro">
+                
+            </Directory>
+            <Directory Id="ru" Name="ru">
+                
+            </Directory>
+            <Directory Id="sv" Name="sv">
+                
+            </Directory>
+            <Directory Id="zh_Hans" Name="zh-Hans">
+                
+            </Directory>
         </DirectoryRef>
     </Fragment>
     <Fragment>
@@ -86,6 +134,22 @@
             <ComponentRef Id="System.Net.Http.Primitives.dll" />
             
             <ComponentRef Id="System.Windows.Interactivity.dll" />
+            <ComponentRef Id="Xceed.Wpf.AvalonDock.dll" />
+            <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.Aero.dll" />
+            <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.Metro.dll" />
+            <ComponentRef Id="Xceed.Wpf.AvalonDock.Themes.VS2010.dll" />
+            <ComponentRef Id="Xceed.Wpf.DataGrid.dll" />
+            <ComponentRef Id="Xceed.Wpf.Toolkit.dll" />
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
         </ComponentGroup>
     </Fragment>
 </Wix>

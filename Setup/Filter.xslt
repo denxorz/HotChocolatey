@@ -11,6 +11,7 @@
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.dll.config')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.vshost.exe')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, 'app.config')]" use="@Id" />
+  <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, 'Xceed.Wpf.AvalonDock.resources.dll')]" use="@Id" />
   <xsl:template match="wix:Component[key('service-search', @Id)]" />
   <xsl:template match="wix:ComponentRef[key('service-search', @Id)]" />
 </xsl:stylesheet>

@@ -47,5 +47,12 @@ namespace HotChocolatey.View
             // TODO : Not really neat, but good enough for now
             ((ViewModel.MainWindowViewModel)DataContext).Loaded();
         }
+
+        private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
+        {
+            var settingsWindow = new SettingsWindow { Owner = this };
+
+            settingsWindow.ShowDialog();
+        }
     }
 }
