@@ -18,7 +18,7 @@ namespace HotChocolatey.Model.ChocoTask
 
         protected override string GetCommand() => "uninstall";
 
-        protected override string GetParameters()=>$"--yes {package.Id}";
+        protected override string GetParameters() => $"--yes {package.Id}";
 
         protected override Action<string> GetOutputLineCallback() => outputLineCallback;
         

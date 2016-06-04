@@ -16,7 +16,7 @@ namespace HotChocolatey.Model.ChocoTask
             this.addPackageCallback = addPackageCallback;
         }
 
-        protected override string GetCommand()=>"list";
+        protected override string GetCommand() => "list";
 
         protected override string GetParameters()
         {

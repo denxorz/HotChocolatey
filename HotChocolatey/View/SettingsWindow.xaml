@@ -5,17 +5,31 @@
     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+    xmlns:view="clr-namespace:HotChocolatey.View"
     xmlns:viewModel="clr-namespace:HotChocolatey.ViewModel"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Title="Settings"
     Width="500"
     Height="500"
-    mc:Ignorable="d" 
-    Closing="MetroWindow_Closing">
-    <controls:MetroWindow.Resources>
-        <viewModel:SettingsWindowsViewModel x:Key="ViewModel" />
-    </controls:MetroWindow.Resources>
-    <Grid DataContext="{Binding Source={StaticResource ViewModel}}">
+    Closing="OnClosing"
+    Loaded="OnLoaded"
+    mc:Ignorable="d">
+    <controls:MetroWindow.DataContext>
+        <viewModel:SettingsWindowsViewModel />
+    </controls:MetroWindow.DataContext>
+    <Grid>
+        <view:ProgressIndicatorView>
+            <view:ProgressIndicatorView.Style>
+                <Style TargetType="{x:Type view:ProgressIndicatorView}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLoading}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </view:ProgressIndicatorView.Style>
+        </view:ProgressIndicatorView>
         <xctk:PropertyGrid
             IsCategorized="False"
             NameColumnWidth="250"
@@ -23,6 +37,17 @@
             ShowSearchBox="False"
             ShowSortOptions="False"
             ShowSummary="False"
-            ShowTitle="True" />
+            ShowTitle="True">
+            <xctk:PropertyGrid.Style>
+                <Style TargetType="{x:Type xctk:PropertyGrid}">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsLoading}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </xctk:PropertyGrid.Style>
+        </xctk:PropertyGrid>
     </Grid>
 </controls:MetroWindow>

@@ -1,22 +1,34 @@
-﻿using HotChocolatey.Model;
+﻿using System.ComponentModel;
+using System.Threading.Tasks;
+using HotChocolatey.Model;
 
 namespace HotChocolatey.ViewModel
 {
     [Magic]
-    class SettingsWindowsViewModel
+    public class SettingsWindowsViewModel : INotifyPropertyChanged
     {
-        public ChocoSettings Settings { get; set; }
-        private readonly ChocoExecutor chocoExecutor;
+        public ChocoSettings Settings { get; private set; } = new ChocoSettings();
+        public bool IsLoading { get; private set; }
+        private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
 
-
-        public SettingsWindowsViewModel()
+        public event PropertyChangedEventHandler PropertyChanged;
+        
+        public async Task Loaded()
         {
-            Settings = new ChocoSettings();
+            IsLoading = true;
+            Settings = await chocoExecutor.LoadSettings();
+            IsLoading = false;
         }
 
-        public void Closing()
+        public async Task Closing()
         {
-            //Save();
+            await chocoExecutor.SaveSettings(Settings);
         }
+
+#pragma warning disable S1144 // Unused private types or members should be removed
+
+        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+#pragma warning restore S1144 // Unused private types or members should be removed
     }
 }

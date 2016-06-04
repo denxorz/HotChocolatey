@@ -1,4 +1,6 @@
-﻿using MahApps.Metro.Controls;
+﻿using System.ComponentModel;
+using System.Windows;
+using MahApps.Metro.Controls;
 
 namespace HotChocolatey.View
 {
@@ -9,10 +11,16 @@ namespace HotChocolatey.View
             InitializeComponent();
         }
 
-        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private async void OnLoaded(object sender, RoutedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            ((ViewModel.SettingsWindowsViewModel)DataContext).Closing();
+            await ((ViewModel.SettingsWindowsViewModel)DataContext).Loaded();
+        }
+
+        private async void OnClosing(object sender, CancelEventArgs e)
+        {
+            // TODO : Not really neat, but good enough for now
+            await ((ViewModel.SettingsWindowsViewModel)DataContext).Closing();
         }
     }
 }

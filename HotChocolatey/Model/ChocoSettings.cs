@@ -4,7 +4,7 @@ using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 namespace HotChocolatey.Model
 {
     [DisplayName("Chocolatey Settings")]
-    class ChocoSettings
+    public class ChocoSettings
     {
         public ChocoSettings()
         {
@@ -36,7 +36,7 @@ namespace HotChocolatey.Model
         public ProxySettings Proxy { get; set; }
     }
 
-    class ProxySettings
+    public class ProxySettings
     {
         public string Address { get; set; }
         public string User { get; set; }
