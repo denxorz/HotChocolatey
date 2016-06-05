@@ -1,12 +1,18 @@
-Changes in 3.2.2
+v 4.0.0
+* Update GUI manager
+* Fixed some freezes
+* Added settings screen
+* Display download count in Ks and Ms
+
+v 3.2.2
 * Update chocolatey installer script
 * Made image loading async
 
-Changes in 3.1.0
+v 3.1.0
 * Speed improvements
 * Installation/Update/uninstall progress reporting
 
-Changes in 2.0.0
+v 2.0.0
 * All-filter is now working
 * Improved progress information
 * Markdown support in description
