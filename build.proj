@@ -75,7 +75,7 @@
            Namespace="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd"
            XmlFileName="$(PackageDirectory)\$(NuspecFileName)"
            XPath="/nu:package/nu:metadata/nu:releaseNotes"
-           Value="$([System.IO.File]::ReadAllText(releasenotes.txt))" />
+           Value="$([System.IO.File]::ReadAllText(CHANGELOG.md))" />
   </Target>
 
 </Project>
