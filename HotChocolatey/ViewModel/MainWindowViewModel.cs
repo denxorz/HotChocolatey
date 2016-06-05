@@ -7,10 +7,11 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
 {
-    [Magic]
+    [ImplementPropertyChanged]
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
         private readonly PackageRepo packageRepo = new PackageRepo();
@@ -182,11 +183,5 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
             await ExecuteRefreshCommand();
         }
-
-#pragma warning disable S1144 // Unused private types or members should be removed
-
-        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-#pragma warning restore S1144 // Unused private types or members should be removed
     }
 }

@@ -1,16 +1,14 @@
 ﻿using log4net.Appender;
 using log4net.Core;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Threading;
+using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
 {
-    [Magic]
+    [ImplementPropertyChanged]
     public class Diagnostics : IAppender
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public ObservableCollection<string> Logging { get; } = new ObservableCollection<string>();
         private readonly Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
 
@@ -36,11 +34,5 @@ namespace HotChocolatey.ViewModel
                 }
             });
         }
-
-#pragma warning disable S1144 // Unused private types or members should be removed
-
-        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
-#pragma warning restore S1144 // Unused private types or members should be removed
     }
 }
