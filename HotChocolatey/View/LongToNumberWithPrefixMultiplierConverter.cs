@@ -8,7 +8,7 @@ namespace HotChocolatey.View
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var number = (int)value;
+            var number = System.Convert.ToInt64(value ?? 0);
             return HumanReadableNumber(number);
         }
 
@@ -28,8 +28,8 @@ namespace HotChocolatey.View
             }
 
             int exp = (int)(Math.Log(number) / Math.Log(1000));
-            char pre = "KMGTPE"[(exp - 1)];
-            return $"{(number / Math.Pow(1000, exp)):#}{pre}";
+            char pre = "KMGTPE"[exp - 1];
+            return $"{number / Math.Pow(1000, exp):#}{pre}";
         }
     }
 }

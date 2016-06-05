@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HotChocolatey.View"
              mc:Ignorable="d"
-             Height="80" d:DesignWidth="400">
+             Height="80" d:DesignWidth="600">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
         <local:LongToNumberWithPrefixMultiplierConverter x:Key="LongToNumberWithPrefixMultiplierConverter" />
@@ -16,7 +16,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top"
                    FontSize="9.333" FontStyle="Italic"
                    Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
-        <StackPanel Orientation="Horizontal" Margin="82,10,100,54" ClipToBounds="True">
+        <StackPanel Orientation="Horizontal" Margin="82,10,105,54" ClipToBounds="True">
             <TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontWeight="Bold" TextTrimming="WordEllipsis" />
             <TextBlock TextWrapping="Wrap" Text=" by " TextTrimming="WordEllipsis" />
             <TextBlock TextWrapping="Wrap" Text="{Binding Authors}" TextTrimming="WordEllipsis" />
@@ -25,7 +25,7 @@
             <TextBlock TextWrapping="Wrap" Text=" downloads" TextTrimming="WordEllipsis" />
         </StackPanel>
 
-        <TextBlock Margin="82,31,40,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
+        <TextBlock Margin="82,31,105,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
         <Image Height="16" Margin="47,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="16" RenderOptions.BitmapScalingMode="HighQuality">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">

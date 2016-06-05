@@ -166,6 +166,7 @@
     <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
     <Compile Include="ViewModel\SettingsWindowsViewModel.cs" />
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
+    <Compile Include="View\DesignTimeContext.cs" />
     <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
     <Compile Include="View\About.xaml.cs">
       <DependentUpon>About.xaml</DependentUpon>
