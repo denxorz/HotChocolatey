@@ -383,6 +383,9 @@
   <ItemGroup>
     <Resource Include="Images\Logos\Fody.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\LogoXCEED.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
