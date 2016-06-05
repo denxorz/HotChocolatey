@@ -3,6 +3,7 @@ using HotChocolatey.ViewModel;
 using NuGet;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,12 +11,14 @@ using System.Threading.Tasks;
 namespace HotChocolatey.Model
 {
     [Magic]
-    public class Package
+    public class Package : INotifyPropertyChanged
     {
         private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/Windows10/Packaging-32.png", UriKind.Relative);
 
         public string Id { get; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        
         private IPackage nugetPackage;
 
         public IPackage NugetPackage
@@ -170,5 +173,11 @@ namespace HotChocolatey.Model
                 return Name;
             }
         }
+
+#pragma warning disable S1144 // Unused private types or members should be removed
+
+        private void RaisePropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+
+#pragma warning restore S1144 // Unused private types or members should be removed
     }
 }

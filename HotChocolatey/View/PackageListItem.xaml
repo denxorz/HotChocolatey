@@ -5,13 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HotChocolatey.View"
              mc:Ignorable="d"
-             Height="80" d:DesignWidth="600">
+             Height="80" d:DesignWidth="600"
+             d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
         <local:LongToNumberWithPrefixMultiplierConverter x:Key="LongToNumberWithPrefixMultiplierConverter" />
         <local:DesignTimeContext x:Key="DesignViewModel" />
     </UserControl.Resources>
-    <Grid d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
+    <Grid>
         <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico, IsAsync=true}"  RenderOptions.BitmapScalingMode="HighQuality" />
         <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top"
                    FontSize="9.333" FontStyle="Italic"
