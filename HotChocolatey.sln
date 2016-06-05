@@ -7,13 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolatey", "HotChocola
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{ED35BB7C-3750-4115-BEEA-C049FBFEA69D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Package", "Package", "{5845255E-C121-4EAC-9343-BF22EC9AAD26}"
-	ProjectSection(SolutionItems) = preProject
-		ChocolateyPackage\hot-chocolatey\tools\chocolateyinstall.ps1 = ChocolateyPackage\hot-chocolatey\tools\chocolateyinstall.ps1
-		ChocolateyPackage\hot-chocolatey\tools\chocolateyuninstall.ps1 = ChocolateyPackage\hot-chocolatey\tools\chocolateyuninstall.ps1
-		ChocolateyPackage\hot-chocolatey\hot-chocolatey.nuspec = ChocolateyPackage\hot-chocolatey\hot-chocolatey.nuspec
-		ChocolateyPackage\hot-chocolatey\tools\ReadMe.md = ChocolateyPackage\hot-chocolatey\tools\ReadMe.md
-	EndProjectSection
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ChocolateyPackage", "ChocolateyPackage", "{5845255E-C121-4EAC-9343-BF22EC9AAD26}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{72630F17-F132-4698-9F05-E02AA60A2887}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,6 +20,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		LICENSE.txt = LICENSE.txt
 		README.md = README.md
 		version.txt = version.txt
+		VersionInfo.cs = VersionInfo.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hot-chocolatey", "hot-chocolatey", "{48B4786D-3539-48FC-968C-9D1BD1C763F2}"
+	ProjectSection(SolutionItems) = preProject
+		ChocolateyPackage\hot-chocolatey\hot-chocolatey.nuspec = ChocolateyPackage\hot-chocolatey\hot-chocolatey.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{0020A7D7-09F9-46B8-80AF-FA9998C42B95}"
+	ProjectSection(SolutionItems) = preProject
+		ChocolateyPackage\hot-chocolatey\tools\chocolateyinstall.ps1 = ChocolateyPackage\hot-chocolatey\tools\chocolateyinstall.ps1
+		ChocolateyPackage\hot-chocolatey\tools\chocolateyuninstall.ps1 = ChocolateyPackage\hot-chocolatey\tools\chocolateyuninstall.ps1
+		ChocolateyPackage\hot-chocolatey\tools\ReadMe.md = ChocolateyPackage\hot-chocolatey\tools\ReadMe.md
 	EndProjectSection
 EndProject
 Global
@@ -54,5 +61,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{48B4786D-3539-48FC-968C-9D1BD1C763F2} = {5845255E-C121-4EAC-9343-BF22EC9AAD26}
+		{0020A7D7-09F9-46B8-80AF-FA9998C42B95} = {48B4786D-3539-48FC-968C-9D1BD1C763F2}
 	EndGlobalSection
 EndGlobal
