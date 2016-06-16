@@ -29,7 +29,7 @@ namespace HotChocolatey.Model
                 if (nugetPackage != null)
                 {
                     Title = string.IsNullOrWhiteSpace(NugetPackage.Title) ? NugetPackage.Id : NugetPackage.Title;
-                    Ico = NugetPackage.IconUrl == null || Path.GetExtension(NugetPackage.IconUrl.ToString()) == ".svg" ? noIconUri : NugetPackage.IconUrl;
+                    Ico = CanDisplayThisIcon() ? NugetPackage.IconUrl : noIconUri;
                     IsPreRelease = !NugetPackage.IsReleaseVersion();
                     Summary = NugetPackage.Summary;
                     Description = NugetPackage.Description;
@@ -98,6 +98,13 @@ namespace HotChocolatey.Model
         public void UpdateLatestVersion()
         {
             LatestVersion = Versions.LastOrDefault();
+        }
+
+        private bool CanDisplayThisIcon()
+        {
+            return NugetPackage.IconUrl != null
+                && !string.IsNullOrWhiteSpace(NugetPackage.IconUrl.ToString())
+                && Path.GetExtension(NugetPackage.IconUrl.ToString()) != ".svg";
         }
 
         private class InstallAction : IAction
