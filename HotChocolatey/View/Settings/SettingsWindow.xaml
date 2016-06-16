@@ -11,6 +11,8 @@
     Title="Settings"
     Width="500"
     Height="500"
+    BorderBrush="{DynamicResource AccentColorBrush}"
+    BorderThickness="1"
     Closing="OnClosing"
     Loaded="OnLoaded"
     mc:Ignorable="d">

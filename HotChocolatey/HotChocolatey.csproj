@@ -152,6 +152,7 @@
     <Compile Include="Model\ChocoTask\LoadFeaturesChocoTask.cs" />
     <Compile Include="Model\ChocoTask\LoadSettingChocoTask.cs" />
     <Compile Include="Model\ChocoTask\SaveFeatureChocoTask.cs" />
+    <Compile Include="Model\CommunicationDirection.cs" />
     <Compile Include="Model\NuGetExecutor.cs" />
     <Compile Include="Model\PackageRepo.cs" />
     <Compile Include="Model\ChocoTask\UninstallChocoTask.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Model\ChocoTask\UpgradeChocoTask.cs" />
     <Compile Include="Model\ChocoTask\SaveSettingsChocoTask.cs" />
     <Compile Include="Utility\ListBoxBehavior.cs" />
+    <Compile Include="ViewModel\ChocoCommunicationViewModel.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\CommandExtensions.cs" />
@@ -170,6 +172,9 @@
     <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
     <Compile Include="ViewModel\SettingsWindowsViewModel.cs" />
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
+    <Compile Include="View\ChocoCommunication\ChocoCommunicationWindow.xaml.cs">
+      <DependentUpon>ChocoCommunicationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DesignTimeContext.cs" />
     <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
     <Compile Include="View\About\AboutWindow.xaml.cs">
@@ -207,6 +212,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ChocoCommunication\ChocoCommunicationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LinkTextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,7 +229,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Package.cs" />
-    <Compile Include="ViewModel\Diagnostics.cs" />
+    <Compile Include="Model\ChocoCommunication.cs" />
     <Compile Include="Model\PackageDisplayTypeFactory.cs" />
     <Compile Include="Model\IPackageDisplayType.cs" />
     <Compile Include="Model\IAction.cs" />

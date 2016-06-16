@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
@@ -40,9 +41,6 @@ namespace HotChocolatey.ViewModel
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
         public DelegateCommand OpenCommandPromptCommand { get; }
 
-        public bool IsLogVisible { get; set; }
-        public Diagnostics Diagnostics { get; } = new Diagnostics();
-
         public bool IsInProgress { get; private set; }
         public bool IsInstalling { get; private set; }
         public bool IsUserAllowedToExecuteActions { get; set; } = true;
@@ -52,7 +50,8 @@ namespace HotChocolatey.ViewModel
 
         public MainWindowViewModel()
         {
-            Log.ResetSettings(true, true, true, Diagnostics);
+            Log.ResetSettings(true, true);
+            ChocoCommunication.SetDispatcher(Dispatcher.CurrentDispatcher);
             Log.Info($@"---
 Version:{Assembly.GetCallingAssembly().GetName().Version}
 MachineName:{Environment.MachineName}

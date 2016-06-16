@@ -14,6 +14,9 @@
         BorderThickness="1">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
+            <Button Click="OnChocoCommunicationButtonClick">
+                <Image Source="pack://application:,,,/Images/Windows10/Page Overview 2-32.png" Stretch="Uniform" Width="24" />
+            </Button>
             <Button Command="{Binding OpenCommandPromptCommand}">
                 <Image Source="pack://application:,,,/Images/Windows10/Command Line-32.png" Stretch="Uniform" Width="24" />
             </Button>
@@ -26,7 +29,6 @@
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
         <local:BooleanToTaskbarStateConverter x:Key="Bool2TaskbarState" />
     </Window.Resources>
     <Window.TaskbarItemInfo>
@@ -45,16 +47,8 @@
                     </StackPanel>
                 </Button>
                 <Separator />
-                <ToggleButton IsChecked="{Binding IsLogVisible}">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/Images/Windows10/Page Overview 2-32.png" Stretch="Uniform" Width="24" />
-                        <Label Padding="0" VerticalAlignment="Center">Logging</Label>
-                    </StackPanel>
-                </ToggleButton>
-                <Separator />
             </ToolBar>
         </ToolBarTray>
-        <ListBox x:Name="loggingListBox" Height="200" DockPanel.Dock="Bottom" ItemsSource="{Binding Diagnostics.Logging}" Visibility="{Binding Path=IsLogVisible, Converter={StaticResource Bool2Visibility}}" />
         <main:PackageManager x:Name="PackageManager" Margin="5" />
     </DockPanel>
 </controls:MetroWindow>

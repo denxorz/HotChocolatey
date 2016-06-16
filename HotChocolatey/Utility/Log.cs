@@ -16,7 +16,7 @@ namespace HotChocolatey.Utility
         /// http://stackoverflow.com/questions/16336917/can-you-configure-log4net-in-code-instead-of-using-a-config-file
         /// http://stackoverflow.com/questions/885378/log4net-pure-code-configuration-with-filter-in-c-sharp
         /// </summary>
-        public static void ResetSettings(bool toLog, bool toConsole, bool toDiagnostics, ViewModel.Diagnostics diagnostics)
+        public static void ResetSettings(bool toLog, bool toConsole)
         {
             List<IAppender> appenders = new List<IAppender>();
 
@@ -43,11 +43,6 @@ namespace HotChocolatey.Utility
                 var console = new ConsoleAppender();
                 console.Layout = patternLayout;
                 appenders.Add(console);
-            }
-
-            if (toDiagnostics)
-            {
-                appenders.Add(diagnostics);
             }
 
             BasicConfigurator.Configure(appenders.ToArray());

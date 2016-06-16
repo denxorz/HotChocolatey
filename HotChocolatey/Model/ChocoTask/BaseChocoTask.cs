@@ -20,6 +20,7 @@ namespace HotChocolatey.Model.ChocoTask
         private async Task<bool> Execute(string arguments, Action<string> outputLineCallback)
         {
             Log.Info($">> choco {arguments}");
+            ChocoCommunication.Log($"choco {arguments}", CommunicationDirection.ToChoco);
 
             using (Process choco = new Process())
             {
@@ -34,7 +35,8 @@ namespace HotChocolatey.Model.ChocoTask
                 while (!endOfStream)
                 {
                     string line = await choco.StandardOutput.ReadLineAsync();
-                    Log.Info($"> {line}");
+                    Log.Info(line);
+                    ChocoCommunication.Log(line, CommunicationDirection.FromChoco);
                     outputLineCallback(line);
 
                     await Task.Run(() => endOfStream = choco.StandardOutput.EndOfStream);
@@ -44,6 +46,9 @@ namespace HotChocolatey.Model.ChocoTask
                 {
                     Log.Error($">> choco {arguments} exited with code {choco.ExitCode}");
                 }
+
+                ChocoCommunication.Log($"exited with code {choco.ExitCode}", CommunicationDirection.FromChoco);
+
                 return choco.ExitCode == 0;
             }
         }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using HotChocolatey.View.About;
 using MahApps.Metro.Controls;
@@ -11,7 +10,6 @@ namespace HotChocolatey.View.Main
         public MainWindow()
         {
             InitializeComponent();
-            ((INotifyCollectionChanged)loggingListBox.Items).CollectionChanged += OnLoggingListViewCollectionChanged;
         }
 
         private void OnToolBarLoaded(object sender, RoutedEventArgs e)
@@ -29,14 +27,6 @@ namespace HotChocolatey.View.Main
             }
         }
 
-        private void OnLoggingListViewCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Add)
-            {
-                loggingListBox.ScrollIntoView(e.NewItems[0]);
-            }
-        }
-
         private void OnAboutButtonClick(object sender, RoutedEventArgs e)
         {
             var about = new AboutWindow { Owner = this };
@@ -51,9 +41,15 @@ namespace HotChocolatey.View.Main
 
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new Settings.SettingsWindow { Owner = this };
+            var window = new Settings.SettingsWindow { Owner = this };
 
-            settingsWindow.ShowDialog();
+            window.ShowDialog();
+        }
+
+        private void OnChocoCommunicationButtonClick(object sender, RoutedEventArgs e)
+        {
+            var window = new ChocoCommunication.ChocoCommunicationWindow { Owner = this };
+            window.Show();
         }
     }
 }
