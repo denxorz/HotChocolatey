@@ -172,10 +172,10 @@
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
     <Compile Include="View\DesignTimeContext.cs" />
     <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
-    <Compile Include="View\About.xaml.cs">
-      <DependentUpon>About.xaml</DependentUpon>
+    <Compile Include="View\About\AboutWindow.xaml.cs">
+      <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AboutItem.xaml.cs">
+    <Compile Include="View\About\AboutItem.xaml.cs">
       <DependentUpon>AboutItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LinkTextBlock.xaml.cs">
@@ -184,26 +184,26 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="Utility\SearchTextBox.cs" />
     <Compile Include="View\LongToNumberWithPrefixMultiplierConverter.cs" />
-    <Compile Include="View\PackageInfoView.xaml.cs">
+    <Compile Include="View\Main\PackageInfoView.xaml.cs">
       <DependentUpon>PackageInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PackageInstallingView.xaml.cs">
+    <Compile Include="View\Main\PackageInstallingView.xaml.cs">
       <DependentUpon>PackageInstallingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\SettingsWindow.xaml.cs">
+    <Compile Include="View\Settings\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\VersionInfo.xaml.cs">
+    <Compile Include="View\Main\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\About.xaml">
+    <Page Include="View\About\AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AboutItem.xaml">
+    <Page Include="View\About\AboutItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -211,7 +211,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\MainWindow.xaml">
+    <Page Include="View\Main\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -225,27 +225,27 @@
     <Compile Include="Model\IPackageDisplayType.cs" />
     <Compile Include="Model\IAction.cs" />
     <Compile Include="Utility\Log.cs" />
-    <Compile Include="View\MainWindow.xaml.cs">
+    <Compile Include="View\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\PackageControl.xaml">
+    <Page Include="View\Main\PackageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageInfoView.xaml">
+    <Page Include="View\Main\PackageInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageInstallingView.xaml">
+    <Page Include="View\Main\PackageInstallingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageListItem.xaml">
+    <Page Include="View\Main\PackageListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\PackageManager.xaml">
+    <Page Include="View\Main\PackageManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -257,24 +257,24 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\SettingsWindow.xaml">
+    <Page Include="View\Settings\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\VersionInfo.xaml">
+    <Page Include="View\Main\VersionInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Utility\ObservableCollectionEx.cs" />
-    <Compile Include="View\PackageControl.xaml.cs">
+    <Compile Include="View\Main\PackageControl.xaml.cs">
       <DependentUpon>PackageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PackageListItem.xaml.cs">
+    <Compile Include="View\Main\PackageListItem.xaml.cs">
       <DependentUpon>PackageListItem.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\PackageManager.xaml.cs">
+    <Compile Include="View\Main\PackageManager.xaml.cs">
       <DependentUpon>PackageManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\ProgressIndication.cs" />

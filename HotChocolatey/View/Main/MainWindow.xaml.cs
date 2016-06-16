@@ -1,9 +1,10 @@
 ﻿using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
+using HotChocolatey.View.About;
 using MahApps.Metro.Controls;
 
-namespace HotChocolatey.View
+namespace HotChocolatey.View.Main
 {
     public partial class MainWindow : MetroWindow
     {
@@ -38,7 +39,7 @@ namespace HotChocolatey.View
 
         private void OnAboutButtonClick(object sender, RoutedEventArgs e)
         {
-            var about = new About { Owner = this };
+            var about = new AboutWindow { Owner = this };
             about.ShowDialog();
         }
 
@@ -50,7 +51,7 @@ namespace HotChocolatey.View
 
         private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
         {
-            var settingsWindow = new SettingsWindow { Owner = this };
+            var settingsWindow = new Settings.SettingsWindow { Owner = this };
 
             settingsWindow.ShowDialog();
         }

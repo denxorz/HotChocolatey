@@ -1,6 +1,7 @@
 ﻿using HotChocolatey.View;
 using HotChocolatey.ViewModel;
 using System.Windows;
+using MainWindow = HotChocolatey.View.Main.MainWindow;
 
 namespace HotChocolatey
 {

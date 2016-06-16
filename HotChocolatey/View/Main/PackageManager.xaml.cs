@@ -1,9 +1,9 @@
-﻿using HotChocolatey.Utility;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using HotChocolatey.Utility;
 
-namespace HotChocolatey.View
+namespace HotChocolatey.View.Main
 {
     public partial class PackageManager : UserControl
     {
@@ -41,11 +41,14 @@ namespace HotChocolatey.View
             }
         }
 
+        // False positive, needed for Search component
+#pragma warning disable S1144 // Unused private types or members should be removed
         private async void OnSearch(object sender, SearchEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
             await ((ViewModel.MainWindowViewModel)DataContext).Search(e);
         }
+#pragma warning restore S1144 // Unused private types or members should be removed
 
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {

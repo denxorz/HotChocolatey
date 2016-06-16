@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="HotChocolatey.View.VersionInfo"
+    x:Class="HotChocolatey.View.Main.VersionInfo"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -21,7 +21,7 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Source="../Images/Color/Ok-48.png"
+            Source="pack://application:,,,/Images/Color/Ok-48.png"
             Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"
             RenderOptions.BitmapScalingMode="HighQuality"
             RenderOptions.EdgeMode="Unspecified" />
@@ -43,11 +43,11 @@
             RenderOptions.EdgeMode="Unspecified" >
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
-                    <Setter Property="Source" Value="../Images/Color/Download-48.png" />
+                    <Setter Property="Source" Value="pack://application:,,,/Images/Color/Download-48.png" />
                     <Setter Property="Visibility" Value="Hidden" />
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding IsInstalled}" Value="True">
-                            <Setter Property="Source" Value="../Images/Color/Delete-48.png" />
+                            <Setter Property="Source" Value="pack://application:,,,/Images/Color/Delete-48.png" />
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Visibility" Value="Visible" />
@@ -71,7 +71,7 @@
             Margin="0,12,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Source="../Images/Color/Circled Up-48.png"
+            Source="pack://application:,,,/Images/Color/Circled Up-48.png"
             Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}"
             RenderOptions.BitmapScalingMode="HighQuality" 
             RenderOptions.EdgeMode="Unspecified" />

@@ -1,11 +1,11 @@
 ﻿using System.Reflection;
 using MahApps.Metro.Controls;
 
-namespace HotChocolatey.View
+namespace HotChocolatey.View.About
 {
-    public partial class About : MetroWindow
+    public partial class AboutWindow : MetroWindow
     {
-        public About()
+        public AboutWindow()
         {
             InitializeComponent();
             versionTextBlock.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();

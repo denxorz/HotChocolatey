@@ -2,7 +2,7 @@
 using System.Windows;
 using MahApps.Metro.Controls;
 
-namespace HotChocolatey.View
+namespace HotChocolatey.View.Settings
 {
     public partial class SettingsWindow : MetroWindow
     {

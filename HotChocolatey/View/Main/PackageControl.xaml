@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="HotChocolatey.View.PackageControl"
+﻿<UserControl x:Class="HotChocolatey.View.Main.PackageControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:HotChocolatey.View"
+             xmlns:main="clr-namespace:HotChocolatey.View.Main"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="400">
     <UserControl.Resources>
@@ -21,10 +21,10 @@
             <TextBlock HorizontalAlignment="Left" Margin="112,116,0,0" TextWrapping="Wrap" Text="{Binding SelectedPackage.InstalledVersion}" VerticalAlignment="Top" Visibility="{Binding Path=SelectedPackage.IsInstalled, Converter={StaticResource Bool2Visibility}}" />
             <Button Content="{Binding SelectedAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Command="{Binding ActionCommand}" />
             <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
-            <local:PackageInstallingView Margin="10,194,10,10" Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
-            <local:PackageInfoView Margin="10,194,10,10">
-                <local:PackageInfoView.Style>
-                    <Style TargetType="{x:Type local:PackageInfoView}">
+            <main:PackageInstallingView Margin="10,194,10,10" Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
+            <main:PackageInfoView Margin="10,194,10,10">
+                <main:PackageInfoView.Style>
+                    <Style TargetType="{x:Type main:PackageInfoView}">
                         <Setter Property="Visibility" Value="Hidden" />
                         <Style.Triggers>
                             <MultiDataTrigger>
@@ -36,8 +36,11 @@
                             </MultiDataTrigger>
                         </Style.Triggers>
                     </Style>
-                </local:PackageInfoView.Style>
-            </local:PackageInfoView>
+                </main:PackageInfoView.Style>
+            </main:PackageInfoView>
         </Grid>
     </ScrollViewer>
 </UserControl>
+
+
+
