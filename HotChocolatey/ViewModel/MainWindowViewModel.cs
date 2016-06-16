@@ -4,6 +4,7 @@ using HotChocolatey.ViewModel.Ginnivan;
 using NuGet;
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace HotChocolatey.ViewModel
     {
         private readonly PackageRepo packageRepo = new PackageRepo();
         private readonly NuGetExecutor nugetExecutor = new NuGetExecutor();
-        private readonly ChocoExecutor chocoExecutor= new ChocoExecutor();
+        private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
 
         private string searchText = string.Empty;
 
@@ -37,6 +38,7 @@ namespace HotChocolatey.ViewModel
         public AwaitableDelegateCommand ActionCommand { get; }
         public AwaitableDelegateCommand RefreshCommand { get; }
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
+        public DelegateCommand OpenCommandPromptCommand { get; }
 
         public bool IsLogVisible { get; set; }
         public Diagnostics Diagnostics { get; } = new Diagnostics();
@@ -64,6 +66,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
             ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
+            OpenCommandPromptCommand = new DelegateCommand(ExecuteOpenCommandPromptCommand);
 
             PropertyChanged += async (s, e) =>
             {
@@ -182,6 +185,12 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             }
 
             await ExecuteRefreshCommand();
+        }
+
+
+        private void ExecuteOpenCommandPromptCommand()
+        {
+            Process.Start("cmd");
         }
     }
 }

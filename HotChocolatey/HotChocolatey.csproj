@@ -389,6 +389,9 @@
   <ItemGroup>
     <Resource Include="Images\Logos\packageReSharper.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Windows10\Command Line-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

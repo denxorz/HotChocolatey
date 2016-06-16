@@ -14,6 +14,9 @@
         BorderThickness="1">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
+            <Button Command="{Binding OpenCommandPromptCommand}">
+                <Image Source="pack://application:,,,/Images/Windows10/Command Line-32.png" Stretch="Uniform" Width="24" />
+            </Button>
             <Button Click="OnSettingsButtonClick" IsEnabled="{Binding IsUserAllowedToExecuteActions}">
                 <Image Source="pack://application:,,,/Images/Windows10/Services-32.png" Stretch="Uniform" Width="24" />
             </Button>
