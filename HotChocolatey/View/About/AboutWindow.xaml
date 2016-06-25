@@ -7,7 +7,7 @@
         xmlns:about="clr-namespace:HotChocolatey.View.About"
         mc:Ignorable="d"
         Title="About" Icon="pack://application:,,,/View/Hot Chocolate-96.ico"
-        Height="690" Width="830" ResizeMode="NoResize"
+        Height="690" Width="1134.301" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1">
@@ -20,6 +20,7 @@
 
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,130,0,0"  IconSource="pack://application:,,,/Images/Logos/Hot Chocolate-96.png" Title="Hot chocolatey" Website="https://gitlab.com/jjb3/HotChocolatey/" License="" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,225,0,0"  IconSource="pack://application:,,,/Images/Logos/chocolateyicon.png" Title="Chocolatey" Website="https://chocolatey.org/" License="http://www.apache.org/licenses/LICENSE-2.0" />
+        <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="808,225,0,0"  IconSource="pack://application:,,,/Images/Logos/svg-logo-v.png" Title="SharpVectors" Website="http://sharpvectors.codeplex.com/" License="http://sharpvectors.codeplex.com/license" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,225,0,0" IconSource="pack://application:,,,/Images/Logos/I Love Icons8-100.png" Title="Icons8" Website="https://icons8.com/" License="https://icons8.com/good-boy-license/" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,295,0,0"  IconSource="pack://application:,,,/Images/Logos/nugetlogo.jpg" Title="NuGet" Website="https://www.nuget.org/" License="https://github.com/NuGet/Home/blob/dev/LICENSE.txt" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,295,0,0" IconSource="pack://application:,,,/Images/Logos/visualstudiologo.png" Title="Visual Studio 2015" Website="https://www.visualstudio.com/" License="https://www.visualstudio.com/support/legal/mt171547" />

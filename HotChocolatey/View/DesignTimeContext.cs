@@ -6,6 +6,8 @@ namespace HotChocolatey.View
     public class DesignTimeContext
     {
         public Uri Ico { get; } = new Uri("https://gitlab.com/uploads/project/avatar/331561/Hot_Chocolate-100.png");
+        public Uri SvgIco { get; } = new Uri("https://upload.wikimedia.org/wikipedia/commons/0/02/SVG_logo.svg");
+        public bool IsIcoSvg { get; } = false;
         public string Title { get; } = "Lorem ipsum dolor sit amet.";
         public string Summary { get; } = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis rutrum venenatis mattis. Morbi euismod risus vel pharetra ornare. Ut vel velit et odio dignissim ullamcorper at at eros.";
         public bool IsInstalled { get; } = true;

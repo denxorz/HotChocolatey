@@ -29,7 +29,6 @@ namespace HotChocolatey.Model
                 if (nugetPackage != null)
                 {
                     Title = string.IsNullOrWhiteSpace(NugetPackage.Title) ? NugetPackage.Id : NugetPackage.Title;
-                    Ico = CanDisplayThisIcon() ? NugetPackage.IconUrl : noIconUri;
                     IsPreRelease = !NugetPackage.IsReleaseVersion();
                     Summary = NugetPackage.Summary;
                     Description = NugetPackage.Description;
@@ -39,6 +38,8 @@ namespace HotChocolatey.Model
                     ProjectUrl = NugetPackage.ProjectUrl?.ToString();
                     Tags = NugetPackage.Tags;
                     Dependencies = string.Empty; // TODO : issue #27
+
+                    DetermineIconUri();
 
                     DescriptionAsHtml = new MarkdownSharp.Markdown().Transform(NugetPackage.Description);
                 }
@@ -56,6 +57,8 @@ namespace HotChocolatey.Model
 
         public string Title { get; private set; }
         public Uri Ico { get; private set; }
+        public Uri SvgIco { get; private set; }
+        public bool IsIcoSvg { get; private set; }
         public bool IsPreRelease { get; private set; }
         public string Summary { get; private set; }
         public string Description { get; private set; }
@@ -100,11 +103,31 @@ namespace HotChocolatey.Model
             LatestVersion = Versions.LastOrDefault();
         }
 
-        private bool CanDisplayThisIcon()
+        private void DetermineIconUri()
         {
-            return NugetPackage.IconUrl != null
-                && !string.IsNullOrWhiteSpace(NugetPackage.IconUrl.ToString())
-                && Path.GetExtension(NugetPackage.IconUrl.ToString()) != ".svg";
+            if (NugetPackage.IconUrl == null)
+            {
+                Ico = noIconUri;
+                return;
+            }
+
+            var stringUri = NugetPackage.IconUrl.ToString();
+
+            if (string.IsNullOrWhiteSpace(stringUri))
+            {
+                Ico = noIconUri;
+                return;
+            }
+
+            if (Path.GetExtension(stringUri) == ".svg")
+            {
+                Ico = noIconUri;
+                IsIcoSvg = true;
+                SvgIco = NugetPackage.IconUrl;
+                return;
+            }
+
+            Ico = NugetPackage.IconUrl;
         }
 
         private class InstallAction : IAction

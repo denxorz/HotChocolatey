@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HotChocolatey.View"
              xmlns:main="clr-namespace:HotChocolatey.View.Main"
+             xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d"
              Height="80" d:DesignWidth="600"
              d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
@@ -14,7 +15,30 @@
         <local:DesignTimeContext x:Key="DesignViewModel" />
     </UserControl.Resources>
     <Grid>
-        <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" Width="32" Source="{Binding Ico, IsAsync=true}"  RenderOptions.BitmapScalingMode="HighQuality" />
+        <Image HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" Source="{Binding Ico, IsAsync=True}" VerticalAlignment="Top" Width="32" RenderOptions.BitmapScalingMode="HighQuality">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIcoSvg}" Value="True">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <svgc:SvgViewbox HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" main:SvgViewboxAttachedProperties.Source="{Binding SvgIco}" Width="32">
+            <svgc:SvgViewbox.Style>
+                <Style TargetType="{x:Type svgc:SvgViewbox}">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsIcoSvg}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </svgc:SvgViewbox.Style>
+        </svgc:SvgViewbox>
         <TextBlock HorizontalAlignment="Left" Margin="22,49,0,0" TextWrapping="Wrap" Text="Prerelease" VerticalAlignment="Top"
                    FontSize="9.333" FontStyle="Italic"
                    Visibility="{Binding Path=IsPreRelease, Converter={StaticResource Bool2Visibility}}" />
