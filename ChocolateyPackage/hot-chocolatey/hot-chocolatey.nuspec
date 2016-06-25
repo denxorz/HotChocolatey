@@ -29,13 +29,13 @@ Install location
 Hot Chocolatey will be installed on it's default location %ProgramFiles(x86)%\HotChocolatey\.
     </description>
     <projectUrl>https://gitlab.com/jjb3/HotChocolatey</projectUrl>
-    <packageSourceUrl>https://gitlab.com/jjb3/HotChocolatey</packageSourceUrl>
-    <projectSourceUrl>https://gitlab.com/jjb3/HotChocolatey</projectSourceUrl>
+    <packageSourceUrl>https://gitlab.com/jjb3/HotChocolatey/tree/master</packageSourceUrl>
+    <projectSourceUrl>https://gitlab.com/jjb3/HotChocolatey/tree/master</projectSourceUrl>
     <docsUrl>https://gitlab.com/jjb3/HotChocolatey</docsUrl>
     <bugTrackerUrl>https://gitlab.com/jjb3/HotChocolatey/issues</bugTrackerUrl>
-    <tags>hot-chocolatey admin Hot Chocolatey HotChocolatey GUI</tags>
+    <tags>hot-chocolatey HotChocolatey GUI PackageManager Denxorz</tags>
     <copyright></copyright>
-    <licenseUrl>https://gitlab.com/jjb3/HotChocolatey</licenseUrl>
+    <licenseUrl>https://gitlab.com/jjb3/HotChocolatey/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <iconUrl>https://gitlab.com/jjb3/HotChocolatey/blob/master/HotChocolatey/Images/Logos/Hot%20Chocolate-96.png</iconUrl>
     <dependencies>
