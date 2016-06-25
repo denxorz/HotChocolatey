@@ -27,7 +27,7 @@
                 </Style>
             </Image.Style>
         </Image>
-        <svgc:SvgViewbox HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" main:SvgViewboxAttachedProperties.Source="{Binding SvgIco}" Width="32">
+        <svgc:SvgViewbox HorizontalAlignment="Left" Height="32" Margin="22,12,0,0" VerticalAlignment="Top" main:SvgViewboxAttachedProperties.Source="{Binding SvgIco, IsAsync=True}" Width="32">
             <svgc:SvgViewbox.Style>
                 <Style TargetType="{x:Type svgc:SvgViewbox}">
                     <Setter Property="Visibility" Value="Collapsed" />

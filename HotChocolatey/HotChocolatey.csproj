@@ -219,7 +219,6 @@
       <DependentUpon>LinkTextBlock.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="Utility\SearchTextBox.cs" />
     <Compile Include="View\LongToNumberWithPrefixMultiplierConverter.cs" />
     <Compile Include="View\Main\PackageInfoView.xaml.cs">
       <DependentUpon>PackageInfoView.xaml</DependentUpon>
@@ -291,10 +290,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Themes\Generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="View\ProgressIndicatorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -353,10 +348,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Windows10\Delete-32.png" />
-    <Resource Include="Images\Windows10\Search-32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logos\I Love Icons8-100.png" />

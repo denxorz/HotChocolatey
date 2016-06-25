@@ -40,6 +40,7 @@ namespace HotChocolatey.ViewModel
         public AwaitableDelegateCommand RefreshCommand { get; }
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
         public DelegateCommand OpenCommandPromptCommand { get; }
+        public DelegateCommand SearchStartedCommand { get; }
 
         public bool IsInProgress { get; private set; }
         public bool IsInstalling { get; private set; }
@@ -66,6 +67,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
             ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
             OpenCommandPromptCommand = new DelegateCommand(ExecuteOpenCommandPromptCommand);
+            SearchStartedCommand = new DelegateCommand(ExecuteSearchStartedCommand);
 
             PropertyChanged += async (s, e) =>
             {
@@ -110,17 +112,12 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             await Search(string.Empty);
         }
 
-        public async Task Search(SearchEventArgs e)
-        {
-            await Search(e.SearchText);
-        }
-
         public async void OnScrolledToBottom(object sender, EventArgs e)
         {
             await GetMorePackages();
         }
 
-        private async Task Search(string searchFor)
+        public async Task Search(string searchFor)
         {
             Log.Info($"Searching for: {searchFor}");
 
@@ -190,6 +187,11 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         private void ExecuteOpenCommandPromptCommand()
         {
             Process.Start("cmd");
+        }
+
+        private async void ExecuteSearchStartedCommand()
+        {
+            await ClearSearchText();
         }
     }
 }

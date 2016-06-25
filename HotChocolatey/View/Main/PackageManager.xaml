@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:HotChocolatey.View"
-             xmlns:utility="clr-namespace:HotChocolatey.Utility"
              xmlns:main="clr-namespace:HotChocolatey.View.Main"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d"
              d:DesignHeight="500" d:DesignWidth="600"
              BorderThickness="1" BorderBrush="#4C808080" DataContextChanged="OnDataContextChanged">
@@ -20,7 +20,12 @@
                     <ComboBox Margin="2" Width="150" ItemsSource="{Binding Filters}" SelectedItem="{Binding Filter}" />
                 </StackPanel>
                 <CheckBox Margin="2" VerticalAlignment="Center" HorizontalAlignment="Center" IsChecked="{Binding IncludePreReleases}">Include prerelease</CheckBox>
-                <utility:SearchTextBox x:Name="SearchTextBox" Margin="2" Width="150" Search="OnSearch" SearchMode="Delayed"/>
+                <TextBox x:Name="SearchTextBox" Margin="2" Width="150" 
+                         controls:TextBoxHelper.Watermark="search" 
+                         controls:TextBoxHelper.ClearTextButton="True" 
+                         controls:TextBoxHelper.SelectAllOnFocus="True"
+                         controls:TextBoxHelper.ButtonCommand="{Binding SearchStartedCommand}"
+                         KeyUp="SearchTextbox_OnKeyUp"/>
             </UniformGrid>
         </Border>
         <Grid>

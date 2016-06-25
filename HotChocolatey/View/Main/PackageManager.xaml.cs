@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using HotChocolatey.Utility;
+using System.Windows.Input;
 
 namespace HotChocolatey.View.Main
 {
@@ -41,20 +41,19 @@ namespace HotChocolatey.View.Main
             }
         }
 
-        // False positive, needed for Search component
-#pragma warning disable S1144 // Unused private types or members should be removed
-        private async void OnSearch(object sender, SearchEventArgs e)
-        {
-            // TODO : Not really neat, but good enough for now
-            await ((ViewModel.MainWindowViewModel)DataContext).Search(e);
-        }
-#pragma warning restore S1144 // Unused private types or members should be removed
-
         private void OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            ((ViewModel.MainWindowViewModel)DataContext).ClearSearchBox = () => SearchTextBox.Clear();
             ScrolledToBottom += ((ViewModel.MainWindowViewModel)DataContext).OnScrolledToBottom;
+        }
+
+        private async void SearchTextbox_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                // TODO : Not really neat, but good enough for now
+                await ((ViewModel.MainWindowViewModel)DataContext).Search(((TextBox)sender).Text);
+            }
         }
     }
 }
