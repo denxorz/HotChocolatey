@@ -13,9 +13,17 @@ namespace HotChocolatey.View
         public bool IsInstalled { get; } = true;
         public bool IsUpgradable { get; } = true;
         public string Authors { get; } = "By Me Myself and I";
+        public string ProjectUrl { get; } = "http://test.com";
         public long DownloadCount { get; } = 213456546;
         public bool IsPreRelease { get; } = false;
         public SemanticVersion LatestVersion { get; } = new SemanticVersion(4, 3, 2, 1);
         public SemanticVersion CurrentVersion { get; } = new SemanticVersion(1, 2, 3, 4);
+        public string Tags { get; } = "tttt";
+        public string DescriptionAsHtml { get; } = "<b>Descripti</b>on";
+    }
+
+    public class DesignTimeContext2
+    {
+        public DesignTimeContext SelectedPackage { get; } = new DesignTimeContext();
     }
 }

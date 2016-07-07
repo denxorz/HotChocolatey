@@ -6,7 +6,11 @@
              xmlns:local="clr-namespace:HotChocolatey.View"
              xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="400">
+             d:DesignHeight="300" d:DesignWidth="400"
+             d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
+    <UserControl.Resources>
+        <local:DesignTimeContext2 x:Key="DesignViewModel" />
+    </UserControl.Resources>
     <Grid>
         <TextBlock Margin="10,0,10,141" TextWrapping="Wrap" Text="Description" FontWeight="Bold" />
         <wpf:HtmlPanel Margin="10,20,10,151" Text="{Binding SelectedPackage.DescriptionAsHtml}" SnapsToDevicePixels="True" BaseStylesheet="*{font-family:&quot;Segoe UI&quot;;font-size:9pt;} p{margin-top:0;}; h3{font-family:&quot;Segoe UI&quot;;font-size:9pt;}" />

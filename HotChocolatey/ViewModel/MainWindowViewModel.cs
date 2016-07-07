@@ -29,7 +29,7 @@ namespace HotChocolatey.ViewModel
         public ObservableCollectionEx<IPackageDisplayType> Filters { get; } = new ObservableCollectionEx<IPackageDisplayType>();
         public IPackageDisplayType Filter { get; set; }
 
-        public Package SelectedPackage { get; set; }
+        public Package SelectedPackage { get; set; } = Package.Empty;
         public ObservableCollectionEx<Package> Packages { get; } = new ObservableCollectionEx<Package>();
         public bool HasSelectedPackage { get; private set; }
 
@@ -83,7 +83,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
                 if (e.PropertyName == nameof(SelectedPackage))
                 {
-                    HasSelectedPackage = SelectedPackage != null;
+                    HasSelectedPackage = SelectedPackage != Package.Empty;
 
                     if (HasSelectedPackage)
                     {
@@ -132,7 +132,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 Packages.Clear();
                 await Filter.ApplySearch(searchText);
                 await GetMorePackages();
-                if (SelectedPackage == null)
+                if (SelectedPackage == Package.Empty)
                 {
                     SelectedPackage = Packages.FirstOrDefault();
                 }

@@ -2,7 +2,6 @@
 using NuGet;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,6 +12,8 @@ namespace HotChocolatey.Model
     [ImplementPropertyChanged]
     public class Package
     {
+        public static readonly Package Empty = new Package(string.Empty);
+
         private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/Windows10/Packaging-32.png", UriKind.Relative);
 
         public string Id { get; }

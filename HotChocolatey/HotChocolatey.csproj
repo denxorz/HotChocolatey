@@ -45,6 +45,10 @@
     <ApplicationIcon>View\Hot Chocolate-96.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoDependencyPropertyMarker, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoDependencyProperty.Fody.1.2.2.0\lib\net40\AutoDependencyPropertyMarker.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="HtmlRenderer, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
       <Private>True</Private>
