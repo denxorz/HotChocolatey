@@ -7,7 +7,7 @@
         xmlns:about="clr-namespace:HotChocolatey.View.About"
         mc:Ignorable="d"
         Title="About" Icon="pack://application:,,,/View/Hot Chocolate-96.ico"
-        Height="690" Width="1134.301" ResizeMode="NoResize"
+        Height="690" Width="1200" ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
         BorderBrush="{DynamicResource AccentColorBrush}"
         BorderThickness="1">
@@ -24,8 +24,10 @@
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,225,0,0" IconSource="pack://application:,,,/Images/Logos/I Love Icons8-100.png" Title="Icons8" Website="https://icons8.com/" License="https://icons8.com/good-boy-license/" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,295,0,0"  IconSource="pack://application:,,,/Images/Logos/nugetlogo.jpg" Title="NuGet" Website="https://www.nuget.org/" License="https://github.com/NuGet/Home/blob/dev/LICENSE.txt" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,295,0,0" IconSource="pack://application:,,,/Images/Logos/visualstudiologo.png" Title="Visual Studio 2015" Website="https://www.visualstudio.com/" License="https://www.visualstudio.com/support/legal/mt171547" />
+        <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="808,295,0,0"  IconSource="pack://application:,,,/Images/Logos/markdig.png" Title="Markdig" Website="https://github.com/lunet-io/markdig" License="https://github.com/lunet-io/markdig/blob/master/license.txt" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,365,0,0"  IconSource="pack://application:,,,/Images/Logos/Log4net.png" Title="Apache log4net" Website="https://logging.apache.org/log4net/" License="http://logging.apache.org/log4net/license.html" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,365,0,0" IconSource="pack://application:,,,/Images/Logos/Fody.png" Title="Fody.PropertyChanged" Website="https://github.com/Fody/PropertyChanged" License="https://github.com/Fody/PropertyChanged/blob/master/license.txt" />
+        <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="808,365,0,0"  IconSource="pack://application:,,,/Images/Logos/fodyweaver.png" Title="Fody.AutoDependencyProperty" Website="https://github.com/Fody/Fody" License="https://opensource.org/licenses/BSD-3-Clause" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,435,0,0"  IconSource="pack://application:,,,/Images/Logos/wixlogo.png" Title="Wix toolset" Website="http://wixtoolset.org/" License="http://wixtoolset.org/about/license/" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="443,435,0,0" IconSource="pack://application:,,,/Images/Logos/nugetlogo.jpg" Title="MarkdownSharp" Website="https://code.google.com/p/markdownsharp/" License="http://www.opensource.org/licenses/mit-license.php" />
         <about:AboutItem Height="65" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Margin="78,505,0,0"  IconSource="pack://application:,,,/Images/Logos/nugetlogo.jpg" Title="HTML-Renderer" Website="https://htmlrenderer.codeplex.com/" License="https://htmlrenderer.codeplex.com/license" />

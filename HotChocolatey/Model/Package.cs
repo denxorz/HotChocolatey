@@ -42,7 +42,7 @@ namespace HotChocolatey.Model
 
                     DetermineIconUri();
 
-                    DescriptionAsHtml = new MarkdownSharp.Markdown().Transform(NugetPackage.Description);
+                    DescriptionAsHtml = Markdig.Markdown.ToHtml(NugetPackage.Description);
                 }
             }
         }
