@@ -438,6 +438,9 @@
   <ItemGroup>
     <Resource Include="Images\Logos\fodyweaver.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\proget.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
