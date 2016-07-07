@@ -83,7 +83,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
                 if (e.PropertyName == nameof(SelectedPackage))
                 {
-                    HasSelectedPackage = SelectedPackage != Package.Empty;
+                    HasSelectedPackage = SelectedPackage != Package.Empty && SelectedPackage != null;
 
                     if (HasSelectedPackage)
                     {
