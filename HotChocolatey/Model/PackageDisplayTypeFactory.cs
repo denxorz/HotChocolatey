@@ -40,7 +40,7 @@ namespace HotChocolatey.Model
 
             public override string ToString() => "All";
 
-            public async Task Refresh()
+            public async Task RefreshAsync()
             {
                 skipped = 0;
                 await Task.Run(() =>
@@ -59,7 +59,7 @@ namespace HotChocolatey.Model
                 }).ContinueWith(task => total = query.Count());
             }
 
-            public async Task<IEnumerable<Package>> GetMore(int numberOfItems)
+            public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
             {
                 var tmp = query.Skip(skipped).Take(numberOfItems).ToList();
                 skipped += numberOfItems;
@@ -74,10 +74,10 @@ namespace HotChocolatey.Model
                 return packages;
             }
 
-            public async Task ApplySearch(string search)
+            public async Task ApplySearchAsync(string search)
             {
                 searchFor = search.ToLower(CultureInfo.InvariantCulture);
-                await Refresh();
+                await RefreshAsync();
             }
 
             private IQueryable<IPackage> GetBaseQuery()
@@ -102,12 +102,12 @@ namespace HotChocolatey.Model
 
             public override string ToString() => "Installed";
 
-            public async Task Refresh()
+            public async Task RefreshAsync()
             {
                 skipped = 0;
             }
 
-            public async Task<IEnumerable<Package>> GetMore(int numberOfItems)
+            public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
             {
                 var searchedPackages = string.IsNullOrWhiteSpace(searchFor)
                     ? chocoExecutor.LocalPackages
@@ -122,10 +122,10 @@ namespace HotChocolatey.Model
                 return package.Tags?.Contains(search) == true || package.Title.Contains(search);
             }
 
-            public async Task ApplySearch(string search)
+            public async Task ApplySearchAsync(string search)
             {
                 searchFor = search.ToLower(CultureInfo.InvariantCulture);
-                await Refresh();
+                await RefreshAsync();
             }
         }
 
@@ -145,12 +145,12 @@ namespace HotChocolatey.Model
 
             public override string ToString() => "Upgrade available";
 
-            public async Task Refresh()
+            public async Task RefreshAsync()
             {
                 skipped = 0;
             }
 
-            public async Task<IEnumerable<Package>> GetMore(int numberOfItems)
+            public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
             {
                 var searchedPackages = string.IsNullOrWhiteSpace(searchFor)
                     ? chocoExecutor.LocalPackages.Where(p => p.IsUpgradable)
@@ -165,10 +165,10 @@ namespace HotChocolatey.Model
                 return package.Tags.Contains(search) || package.Title.Contains(search);
             }
 
-            public async Task ApplySearch(string search)
+            public async Task ApplySearchAsync(string search)
             {
                 searchFor = search.ToLower(CultureInfo.InvariantCulture);
-                await Refresh();
+                await RefreshAsync();
             }
         }
     }

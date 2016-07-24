@@ -52,7 +52,7 @@ namespace HotChocolatey.View.Main
             if (e.Key == Key.Enter)
             {
                 // TODO : Not really neat, but good enough for now
-                await ((ViewModel.MainWindowViewModel)DataContext).Search(((TextBox)sender).Text);
+                await ((ViewModel.MainWindowViewModel)DataContext).SearchAsync(((TextBox)sender).Text);
             }
         }
     }

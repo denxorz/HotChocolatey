@@ -7,9 +7,9 @@ namespace HotChocolatey.Model.ChocoTask
 {
     internal abstract class BaseChocoTask
     {
-        public async Task Execute()
+        public async Task ExecuteAsync()
         {
-            bool result = await Execute($"{GetCommand()} --limitoutput {GetParameters()}", GetOutputLineCallback());
+            bool result = await ExecuteAsync($"{GetCommand()} --limitoutput {GetParameters()}", GetOutputLineCallback());
             AfterExecute(result);
         }
 
@@ -17,7 +17,7 @@ namespace HotChocolatey.Model.ChocoTask
         protected abstract string GetParameters();
         protected abstract Action<string> GetOutputLineCallback();
 
-        private async Task<bool> Execute(string arguments, Action<string> outputLineCallback)
+        private async Task<bool> ExecuteAsync(string arguments, Action<string> outputLineCallback)
         {
             Log.Info($">> choco {arguments}");
             ChocoCommunication.Log($"choco {arguments}", CommunicationDirection.ToChoco);

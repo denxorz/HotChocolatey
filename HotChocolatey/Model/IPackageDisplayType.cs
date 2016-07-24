@@ -8,10 +8,10 @@ namespace HotChocolatey.ViewModel
     {
         bool HasMore { get; }
 
-        Task<IEnumerable<Package>> GetMore(int numberOfItems);
+        Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems);
 
-        Task Refresh();
+        Task RefreshAsync();
 
-        Task ApplySearch(string search);
+        Task ApplySearchAsync(string search);
     }
 }

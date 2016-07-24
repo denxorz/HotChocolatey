@@ -26,7 +26,7 @@ namespace HotChocolatey.Model
             return Repo.GetPackages().Where(predicate);
         }
 
-        public async Task GetVersion(Package package)
+        public async Task GetVersionAsync(Package package)
         {
             if (!package.Versions.Any())
             {

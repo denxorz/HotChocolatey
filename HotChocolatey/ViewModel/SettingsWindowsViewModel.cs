@@ -11,16 +11,16 @@ namespace HotChocolatey.ViewModel
         public bool IsLoading { get; private set; }
         private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
 
-        public async Task Loaded()
+        public async Task LoadedAsync()
         {
             IsLoading = true;
-            Settings = await chocoExecutor.LoadSettings();
+            Settings = await chocoExecutor.LoadSettingsAsync();
             IsLoading = false;
         }
 
-        public async Task Closing()
+        public async Task ClosingAsync()
         {
-            await chocoExecutor.SaveSettings(Settings);
+            await chocoExecutor.SaveSettingsAsync(Settings);
         }
     }
 }

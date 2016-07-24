@@ -12,47 +12,47 @@ namespace HotChocolatey.Model
         public List<Package> LocalPackages { get; } = new List<Package>();
         public bool IncludePreReleases { get; set; }
 
-        public async Task Update(PackageRepo repo, NuGetExecutor nuGetExecutor)
+        public async Task UpdateAsync(PackageRepo repo, NuGetExecutor nuGetExecutor)
         {
             LocalPackages.Clear();
             repo.ClearLocalVersions();
-            await new UpdateLocalChocoTask(IncludePreReleases, repo, LocalPackages.Add).Execute();
-            await new UpdateOutdatedFlagsChocoTask(repo).Execute();
-            await UpdateNuGetInfo(nuGetExecutor);
+            await new UpdateLocalChocoTask(IncludePreReleases, repo, LocalPackages.Add).ExecuteAsync();
+            await new UpdateOutdatedFlagsChocoTask(repo).ExecuteAsync();
+            await UpdateNuGetInfoAsync(nuGetExecutor);
         }
 
-        public async Task Install(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public async Task InstallAsync(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            await new InstallChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).Execute();
+            await new InstallChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).ExecuteAsync();
         }
 
-        public async Task Uninstall(Package package, Action<string> outputLineCallback)
+        public async Task UninstallAsync(Package package, Action<string> outputLineCallback)
         {
-            await new UninstallChocoTask(outputLineCallback, package).Execute();
+            await new UninstallChocoTask(outputLineCallback, package).ExecuteAsync();
         }
 
-        public async Task Upgrade(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public async Task UpgradeAsync(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            await new UpgradeChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).Execute();
+            await new UpgradeChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).ExecuteAsync();
         }
 
-        private async Task UpdateNuGetInfo(NuGetExecutor nuGetExecutor)
+        private async Task UpdateNuGetInfoAsync(NuGetExecutor nuGetExecutor)
         {
             await Task.WhenAll(LocalPackages.Select(t => Task.Run(() => nuGetExecutor.Update(t))));
         }
 
-        public async Task<ChocoSettings> LoadSettings()
+        public async Task<ChocoSettings> LoadSettingsAsync()
         {
             var settings = new ChocoSettings();
-            settings.CacheLocation = await LoadSetting<string>("cacheLocation");
-            settings.CommandExecutionTimeoutSeconds = await LoadSetting<int>("commandExecutionTimeoutSeconds");
-            settings.ContainsLegacyPackageInstalls = await LoadSetting<bool>("containsLegacyPackageInstalls");
-            settings.Proxy.Address = await LoadSetting<string>("proxy");
-            settings.Proxy.User = await LoadSetting<string>("proxyUser");
-            settings.Proxy.Password = await LoadSetting<string>("proxyPassword");
+            settings.CacheLocation = await LoadSettingAsync<string>("cacheLocation");
+            settings.CommandExecutionTimeoutSeconds = await LoadSettingAsync<int>("commandExecutionTimeoutSeconds");
+            settings.ContainsLegacyPackageInstalls = await LoadSettingAsync<bool>("containsLegacyPackageInstalls");
+            settings.Proxy.Address = await LoadSettingAsync<string>("proxy");
+            settings.Proxy.User = await LoadSettingAsync<string>("proxyUser");
+            settings.Proxy.Password = await LoadSettingAsync<string>("proxyPassword");
 
             var chocoTask = new LoadFeaturesChocoTask();
-            await chocoTask.Execute();
+            await chocoTask.ExecuteAsync();
 
             settings.ChecksumFiles = chocoTask.Features["checksumFiles"];
             settings.AutoUninstaller = chocoTask.Features["autoUninstaller"];
@@ -62,33 +62,26 @@ namespace HotChocolatey.Model
             return settings;
         }
 
-        private async Task<T> LoadSetting<T>(string name)
+        private async Task<T> LoadSettingAsync<T>(string name)
         {
             var chocoTask = new LoadSettingChocoTask(name);
-            await chocoTask.Execute();
+            await chocoTask.ExecuteAsync();
             return (T)Convert.ChangeType(chocoTask.Setting, typeof(T));
         }
 
-        public async Task SaveSettings(ChocoSettings settings)
+        public async Task SaveSettingsAsync(ChocoSettings settings)
         {
-            await new SaveSettingsChocoTask("cacheLocation", settings.CacheLocation).Execute();
-            await new SaveSettingsChocoTask("commandExecutionTimeoutSeconds", settings.CommandExecutionTimeoutSeconds).Execute();
-            await new SaveSettingsChocoTask("containsLegacyPackageInstalls", settings.ContainsLegacyPackageInstalls).Execute();
-            await new SaveSettingsChocoTask("proxy", settings.Proxy.Address).Execute();
-            await new SaveSettingsChocoTask("proxyUser", settings.Proxy.User).Execute();
-            await new SaveSettingsChocoTask("proxyPassword", settings.Proxy.Password).Execute();
+            await new SaveSettingsChocoTask("cacheLocation", settings.CacheLocation).ExecuteAsync();
+            await new SaveSettingsChocoTask("commandExecutionTimeoutSeconds", settings.CommandExecutionTimeoutSeconds).ExecuteAsync();
+            await new SaveSettingsChocoTask("containsLegacyPackageInstalls", settings.ContainsLegacyPackageInstalls).ExecuteAsync();
+            await new SaveSettingsChocoTask("proxy", settings.Proxy.Address).ExecuteAsync();
+            await new SaveSettingsChocoTask("proxyUser", settings.Proxy.User).ExecuteAsync();
+            await new SaveSettingsChocoTask("proxyPassword", settings.Proxy.Password).ExecuteAsync();
 
-            await new SaveFeatureChocoTask("checksumFiles", settings.ChecksumFiles).Execute();
-            await new SaveFeatureChocoTask("autoUninstaller", settings.AutoUninstaller).Execute();
-            await new SaveFeatureChocoTask("allowGlobalConfirmation", settings.AllowGlobalConfirmation).Execute();
-            await new SaveFeatureChocoTask("failOnAutoUninstaller", settings.FailOnAutoUninstaller).Execute();
-        }
-
-        private async Task<T> SaveSetting<T>(string name)
-        {
-            var chocoTask = new LoadSettingChocoTask(name);
-            await chocoTask.Execute();
-            return (T)Convert.ChangeType(chocoTask.Setting, typeof(T));
+            await new SaveFeatureChocoTask("checksumFiles", settings.ChecksumFiles).ExecuteAsync();
+            await new SaveFeatureChocoTask("autoUninstaller", settings.AutoUninstaller).ExecuteAsync();
+            await new SaveFeatureChocoTask("allowGlobalConfirmation", settings.AllowGlobalConfirmation).ExecuteAsync();
+            await new SaveFeatureChocoTask("failOnAutoUninstaller", settings.FailOnAutoUninstaller).ExecuteAsync();
         }
     }
 }

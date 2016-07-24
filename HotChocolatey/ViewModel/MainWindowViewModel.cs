@@ -43,7 +43,7 @@ namespace HotChocolatey.ViewModel
         public DelegateCommand ImportCommand { get; }
         public DelegateCommand ExportCommand { get; }
         public DelegateCommand OpenCommandPromptCommand { get; }
-        public DelegateCommand SearchStartedCommand { get; }
+        public AwaitableDelegateCommand SearchStartedCommand { get; }
 
         public bool IsInProgress { get; private set; }
         public bool IsInstalling { get; private set; }
@@ -66,13 +66,13 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             System.Windows.Application.Current.DispatcherUnhandledException += (s, e) => Log.Error($"DispatcherUnhandledException: {e.Exception}");
 #endif
 
-            RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
-            UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
-            ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
+            RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommandAsync);
+            UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommandAsync);
+            ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommandAsync);
             ImportCommand = new DelegateCommand(ExecuteImportCommand);
             ExportCommand = new DelegateCommand(ExecuteExportCommand);
             OpenCommandPromptCommand = new DelegateCommand(ExecuteOpenCommandPromptCommand);
-            SearchStartedCommand = new DelegateCommand(ExecuteSearchStartedCommand);
+            SearchStartedCommand = new AwaitableDelegateCommand(ExecuteSearchStartedCommandAsync);
 
             PropertyChanged += async (s, e) =>
             {
@@ -83,7 +83,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
                 if (e.PropertyName == nameof(Filter) || e.PropertyName == nameof(IncludePreReleases))
                 {
-                    await ApplyFilter();
+                    await ApplyFilterAsync();
                 }
 
                 if (e.PropertyName == nameof(SelectedPackage))
@@ -92,7 +92,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
                     if (HasSelectedPackage)
                     {
-                        await nugetExecutor.GetVersion(SelectedPackage);
+                        await nugetExecutor.GetVersionAsync(SelectedPackage);
                         SelectedAction = SelectedPackage.DefaultAction;
                     }
                 }
@@ -106,37 +106,37 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         public void Loaded()
         {
-            Task.Run(() => chocoExecutor.Update(packageRepo, nugetExecutor));
+            Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
 
             Filters.AddRange(PackageDisplayTypeFactory.BuildDisplayTypes(packageRepo, nugetExecutor, chocoExecutor));
             Filter = Filters.First();
         }
 
-        public async Task ClearSearchText()
+        public async Task ClearSearchTextAsync()
         {
-            await Search(string.Empty);
+            await SearchAsync(string.Empty);
         }
 
         public async void OnScrolledToBottom(object sender, EventArgs e)
         {
-            await GetMorePackages();
+            await GetMorePackagesAsync();
         }
 
-        public async Task Search(string searchFor)
+        public async Task SearchAsync(string searchFor)
         {
             Log.Info($"Searching for: {searchFor}");
 
             searchText = searchFor;
-            await ApplyFilter();
+            await ApplyFilterAsync();
         }
 
-        private async Task ApplyFilter()
+        private async Task ApplyFilterAsync()
         {
             using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
             {
                 Packages.Clear();
-                await Filter.ApplySearch(searchText);
-                await GetMorePackages();
+                await Filter.ApplySearchAsync(searchText);
+                await GetMorePackagesAsync();
                 if (SelectedPackage == Package.Empty || SelectedPackage == null)
                 {
                     SelectedPackage = Packages.FirstOrDefault();
@@ -144,48 +144,48 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             }
         }
 
-        private async Task GetMorePackages()
+        private async Task GetMorePackagesAsync()
         {
-            Packages.AddRange(await Filter.GetMore(10));
+            Packages.AddRange(await Filter.GetMoreAsync(10));
         }
 
-        private async Task ExecuteActionCommand()
+        private async Task ExecuteActionCommandAsync()
         {
             Task actionTask;
             using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
-                await SelectedAction.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                actionTask = Task.Run(() => chocoExecutor.Update(packageRepo, nugetExecutor));
+                await SelectedAction.ExecuteAsync(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
+                actionTask = Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
             }
 
             await actionTask;
         }
 
-        private async Task ExecuteRefreshCommand()
+        private async Task ExecuteRefreshCommandAsync()
         {
             using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
             {
-                await ClearSearchText();
-                await Task.Run(() => chocoExecutor.Update(packageRepo, nugetExecutor));
+                await ClearSearchTextAsync();
+                await Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
             }
         }
 
-        private async Task ExecuteUpgradeAllCommand()
+        private async Task ExecuteUpgradeAllCommandAsync()
         {
             using (new ProgressIndication(() => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
             {
                 ActionProcessOutput.Clear();
                 Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
-                await ApplyFilter();
+                await ApplyFilterAsync();
 
                 foreach (var package in Packages)
                 {
-                    await chocoExecutor.Upgrade(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
+                    await chocoExecutor.UpgradeAsync(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
                 }
             }
 
-            await ExecuteRefreshCommand();
+            await ExecuteRefreshCommandAsync();
         }
 
         private void ExecuteImportCommand()
@@ -241,9 +241,9 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             Process.Start("cmd");
         }
 
-        private async void ExecuteSearchStartedCommand()
+        private async Task ExecuteSearchStartedCommandAsync()
         {
-            await ClearSearchText();
+            await ClearSearchTextAsync();
         }
     }
 }

@@ -29,7 +29,7 @@ namespace HotChocolatey.Model
 
         public override string ToString() => $"[import] {name}";
 
-        public async Task Refresh()
+        public async Task RefreshAsync()
         {
             skipped = 0;
 
@@ -38,7 +38,7 @@ namespace HotChocolatey.Model
                 : importedPackages.Where(p => PackageSearchComparer(p, searchFor));
         }
 
-        public async Task<IEnumerable<Package>> GetMore(int numberOfItems)
+        public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
         {
             var packages = query.Skip(skipped).Take(numberOfItems).ToList();
             packages.ForEach(t => controller.Update(t));
@@ -53,10 +53,10 @@ namespace HotChocolatey.Model
             return package.Tags?.Contains(search) == true || package.Title.Contains(search);
         }
 
-        public async Task ApplySearch(string search)
+        public async Task ApplySearchAsync(string search)
         {
             searchFor = search.ToLower(CultureInfo.InvariantCulture);
-            await Refresh();
+            await RefreshAsync();
         }
     }
 }
