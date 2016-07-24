@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotChocolatey", "HotChocolatey\HotChocolatey.csproj", "{620962C6-EA19-4728-9716-529EA838EA26}"
 EndProject
@@ -32,7 +32,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{0020A7D7
 	ProjectSection(SolutionItems) = preProject
 		ChocolateyPackage\hot-chocolatey\tools\chocolateyinstall.ps1 = ChocolateyPackage\hot-chocolatey\tools\chocolateyinstall.ps1
 		ChocolateyPackage\hot-chocolatey\tools\chocolateyuninstall.ps1 = ChocolateyPackage\hot-chocolatey\tools\chocolateyuninstall.ps1
-		ChocolateyPackage\hot-chocolatey\tools\ReadMe.md = ChocolateyPackage\hot-chocolatey\tools\ReadMe.md
 	EndProjectSection
 EndProject
 Global
