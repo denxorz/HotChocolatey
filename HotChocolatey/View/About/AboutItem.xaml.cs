@@ -1,64 +1,22 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
+using AutoDependencyPropertyMarker;
 
 namespace HotChocolatey.View.About
 {
     public partial class AboutItem : UserControl
     {
-        public static readonly DependencyProperty IconSourceProperty =
-            DependencyProperty.Register(
-                nameof(IconSource),
-                typeof(ImageSource),
-                typeof(AboutItem),
-                new PropertyMetadata(new BitmapImage(new Uri("/HotChocolatey;component/Images/Logos/Hot Chocolate-96.png", UriKind.Relative))));
+        [AutoDependencyProperty]
+        public ImageSource IconSource { get; set; }
 
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register(
-                nameof(Title),
-                typeof(string),
-                typeof(AboutItem),
-                new PropertyMetadata("Title"));
+        [AutoDependencyProperty]
+        public string Title { get; set; }
 
-        public static readonly DependencyProperty WebsiteProperty =
-            DependencyProperty.Register(
-                nameof(Website),
-                typeof(string),
-                typeof(AboutItem),
-                new PropertyMetadata("https://gitlab.com/jjb3/HotChocolatey"));
+        [AutoDependencyProperty]
+        public string Website { get; set; }
 
-        public static readonly DependencyProperty LicenseProperty =
-            DependencyProperty.Register(
-                nameof(License),
-                typeof(string),
-                typeof(AboutItem),
-                new PropertyMetadata("https://gitlab.com/jjb3/HotChocolatey"));
-
-        public ImageSource IconSource
-        {
-            get { return (ImageSource)GetValue(IconSourceProperty); }
-            set { SetValue(IconSourceProperty, value); }
-        }
-
-        public string Title
-        {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
-        }
-
-        public string Website
-        {
-            get { return (string)GetValue(WebsiteProperty); }
-            set { SetValue(WebsiteProperty, value); }
-        }
-
-        public string License
-        {
-            get { return (string)GetValue(LicenseProperty); }
-            set { SetValue(LicenseProperty, value); }
-        }
+        [AutoDependencyProperty]
+        public string License { get; set; }
 
         public AboutItem()
         {
