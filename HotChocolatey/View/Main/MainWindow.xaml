@@ -46,6 +46,18 @@
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
+                <Button Command="{Binding ExportCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Images/Windows10/Export-32.png" Stretch="Uniform" Width="24" />
+                        <Label Padding="0" VerticalAlignment="Center">Export configuration</Label>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ImportCommand}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="pack://application:,,,/Images/Windows10/Import-32.png" Stretch="Uniform" Width="24" />
+                        <Label Padding="0" VerticalAlignment="Center">Import configuration</Label>
+                    </StackPanel>
+                </Button>
                 <Separator />
             </ToolBar>
         </ToolBarTray>

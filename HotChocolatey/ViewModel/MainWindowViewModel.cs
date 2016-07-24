@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using HotChocolatey.Model.Save;
 using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
@@ -39,6 +40,8 @@ namespace HotChocolatey.ViewModel
         public AwaitableDelegateCommand ActionCommand { get; }
         public AwaitableDelegateCommand RefreshCommand { get; }
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
+        public DelegateCommand ImportCommand { get; }
+        public DelegateCommand ExportCommand { get; }
         public DelegateCommand OpenCommandPromptCommand { get; }
         public DelegateCommand SearchStartedCommand { get; }
 
@@ -66,6 +69,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommand);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommand);
             ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommand);
+            ImportCommand = new DelegateCommand(ExecuteImportCommand);
+            ExportCommand = new DelegateCommand(ExecuteExportCommand);
             OpenCommandPromptCommand = new DelegateCommand(ExecuteOpenCommandPromptCommand);
             SearchStartedCommand = new DelegateCommand(ExecuteSearchStartedCommand);
 
@@ -132,7 +137,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 Packages.Clear();
                 await Filter.ApplySearch(searchText);
                 await GetMorePackages();
-                if (SelectedPackage == Package.Empty)
+                if (SelectedPackage == Package.Empty || SelectedPackage == null)
                 {
                     SelectedPackage = Packages.FirstOrDefault();
                 }
@@ -183,6 +188,53 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             await ExecuteRefreshCommand();
         }
 
+        private void ExecuteImportCommand()
+        {
+            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            {
+                Microsoft.Win32.OpenFileDialog openDialog = new Microsoft.Win32.OpenFileDialog
+                {
+                    FileName = "HotChocolateyStorage",
+                    DefaultExt = ".sqlite",
+                    Filter = "Hot Chocolatey Storage (.sqlite)|*.sqlite|All Files|*.*"
+                };
+
+                if (openDialog.ShowDialog() == true)
+                {
+                    foreach (var workStation in new ExportExecutor().Import(openDialog.FileName))
+                    {
+                        var importFilter = new ImportedPackageDisplayType(
+                            workStation.Name,
+                            packageRepo,
+                            nugetExecutor,
+                            chocoExecutor,
+                            workStation.InstalledPackages.Select(p => p.Id));
+                        Filters.Add(importFilter);
+                    }
+                }
+
+                SelectedPackage = Package.Empty;
+                Filter = Filters.Last();
+            }
+        }
+
+        private void ExecuteExportCommand()
+        {
+            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            {
+                Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    FileName = "HotChocolateyStorage",
+                    DefaultExt = ".sqlite",
+                    Filter = "Hot Chocolatey Storage (.sqlite)|*.sqlite|All Files|*.*"
+                };
+
+                if (saveDialog.ShowDialog() == true)
+                {
+                    new ExportExecutor().Export(saveDialog.FileName, chocoExecutor.LocalPackages);
+                }
+            }
+        }
 
         private void ExecuteOpenCommandPromptCommand()
         {
