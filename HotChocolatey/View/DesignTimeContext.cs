@@ -5,6 +5,7 @@ namespace HotChocolatey.View
 {
     public class DesignTimeContext
     {
+        public string Id { get; } = "testpackage";
         public Uri Ico { get; } = new Uri("https://gitlab.com/uploads/project/avatar/331561/Hot_Chocolate-100.png");
         public Uri SvgIco { get; } = new Uri("https://upload.wikimedia.org/wikipedia/commons/0/02/SVG_logo.svg");
         public bool IsIcoSvg { get; } = false;

@@ -50,8 +50,11 @@
             <TextBlock TextWrapping="Wrap" Text="{Binding DownloadCount, Converter={StaticResource LongToNumberWithPrefixMultiplierConverter}}" TextTrimming="WordEllipsis" FontWeight="Bold" />
             <TextBlock TextWrapping="Wrap" Text=" downloads" TextTrimming="WordEllipsis" />
         </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="82,27,105,39" ClipToBounds="True">
+            <TextBlock TextWrapping="Wrap" Text="{Binding Id}" TextTrimming="WordEllipsis" FontSize="10" />
+        </StackPanel>
 
-        <TextBlock Margin="82,31,105,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
+        <TextBlock Margin="82,49,105,10" TextWrapping="Wrap" Text="{Binding Summary}" TextTrimming="WordEllipsis" />
         <Image Height="16" Margin="47,33,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="16" RenderOptions.BitmapScalingMode="HighQuality">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
