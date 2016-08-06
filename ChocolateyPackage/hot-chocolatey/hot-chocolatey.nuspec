@@ -37,7 +37,7 @@ Hot Chocolatey will be installed on it's default location %ProgramFiles(x86)%\Ho
     <copyright></copyright>
     <licenseUrl>https://gitlab.com/jjb3/HotChocolatey/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://gitlab.com/jjb3/HotChocolatey/blob/master/HotChocolatey/Images/Logos/Hot%20Chocolate-96.png</iconUrl>
+    <iconUrl>https://gitlab.com/jjb3/HotChocolatey/raw/master/HotChocolatey/Images/Logos/Hot%20Chocolate-96.png</iconUrl>
     <dependencies>
       <dependency id="chocolatey" version="0.9.9" />
     </dependencies>
