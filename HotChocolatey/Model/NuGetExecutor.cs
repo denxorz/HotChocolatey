@@ -32,6 +32,7 @@ namespace HotChocolatey.Model
             {
                 var versions = await Task.Run(() => Repo.FindPackagesById(package.Id).Where(p => p.IsReleaseVersion()).Select(p => p.Version).ToList());
                 package.Versions.AddRange(versions);
+                package.Versions.Sort();
                 package.UpdateLatestVersion();
                 package.GenerateActions();
             }
