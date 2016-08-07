@@ -18,6 +18,7 @@
     <Media Id="1" Cabinet="Cab1.cab" EmbedCab="yes" />
 
     <Feature Id="ProductFeature" Title="Setup" Level="1">
+      <ComponentRef Id="HotChocolatey.exe" />
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
@@ -65,7 +66,11 @@
   <Fragment>
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="INSTALLFOLDER" Name="$(var.ProductNameNoSpace)" />
+        <Directory Id="INSTALLFOLDER" Name="$(var.ProductNameNoSpace)">
+          <Component Id="HotChocolatey.exe" Guid="*">
+            <File Id="HotChocolatey.exe" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe" />
+          </Component>
+        </Directory>
       </Directory>
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>

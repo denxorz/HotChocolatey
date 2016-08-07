@@ -6,6 +6,7 @@
       <xsl:apply-templates select="@*|node()" />
     </xsl:copy>
   </xsl:template>
+  <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, 'HotChocolatey.exe')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.pdb')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.xml')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.dll.config')]" use="@Id" />
