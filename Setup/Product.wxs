@@ -19,6 +19,7 @@
 
     <Feature Id="ProductFeature" Title="Setup" Level="1">
       <ComponentRef Id="HotChocolatey.exe" />
+      <ComponentRef Id="HotChocolatey.exe.config" />
       <ComponentGroupRef Id="ProductComponents" />
       <ComponentRef Id="ApplicationShortcut" />
     </Feature>
@@ -69,6 +70,9 @@
         <Directory Id="INSTALLFOLDER" Name="$(var.ProductNameNoSpace)">
           <Component Id="HotChocolatey.exe" Guid="*">
             <File Id="HotChocolatey.exe" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe" />
+          </Component>
+          <Component Id="HotChocolatey.exe.config" Guid="*">
+            <File Id="HotChocolatey.exe.config" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HotChocolatey.exe.config" />
           </Component>
         </Directory>
       </Directory>
