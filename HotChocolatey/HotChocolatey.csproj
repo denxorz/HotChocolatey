@@ -479,6 +479,9 @@
     <Resource Include="Images\Logos\ef.jpg" />
     <Resource Include="Images\Logos\sqlite.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logos\fodystamp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

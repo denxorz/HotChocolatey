@@ -40,15 +40,18 @@
     <PropertyGroup>
       <VersionNumber>$([System.IO.File]::ReadAllText(version.txt))</VersionNumber>
       <CurrentMonthDay>$([System.DateTime]::Now.ToString(MMdd))</CurrentMonthDay>
+      <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
     </PropertyGroup>
 
     <AssemblyInfo CodeLanguage="CS"
                   OutputFile="VersionInfo.cs"
                   AssemblyVersion="$(VersionNumber).$(CurrentMonthDay)"
-                  AssemblyFileVersion="$(VersionNumber).$(CurrentMonthDay)" />
+                  AssemblyFileVersion="$(VersionNumber).$(CurrentMonthDay)" 
+                  AssemblyInformationalVersion="%version% hash:%shorthash%"
+                  AssemblyCopyright="Copyright (c) Denxorz, $(CurrentYear)"/>
   </Target>
 
-  
+
   <Target Name="UpdateNuSpecVersion">
     <CreateItem Include="$(BaseDirectory)\ChocolateyPackage\hot-chocolatey\**\*.*">
       <Output TaskParameter="Include" ItemName="NuGetFiles" />
