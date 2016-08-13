@@ -14,10 +14,16 @@ namespace HotChocolatey.Model.Save
                     DataSource = filename,
                     ForeignKeys = true
                 }.ConnectionString
-            }, 
+            },
             true)
         {
 
+        }
+
+        public ListContext()
+            : this("test.sqlite")
+        {
+            // Used for Nuget-Package-Console commands   
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -27,5 +33,6 @@ namespace HotChocolatey.Model.Save
         }
 
         public DbSet<WorkStation> WorkStations { get; set; }
+        public DbSet<InstalledPackage> InstalledPackages { get; set; }
     }
 }

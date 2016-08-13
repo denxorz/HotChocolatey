@@ -206,6 +206,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\ChocoSettings.cs" />
     <Compile Include="Model\ChocoTask\BaseChocoTask.cs" />
     <Compile Include="Model\ChocoExecutor.cs" />

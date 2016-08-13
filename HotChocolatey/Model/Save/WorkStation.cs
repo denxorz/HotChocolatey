@@ -7,7 +7,9 @@ namespace HotChocolatey.Model.Save
     public class WorkStation
     {
         [Key]
-        public Guid Id { get; set; }
+        public int Id { get; set; }
+
+        public Guid UniqueId { get; set; }
 
         public string Name { get; set; }
 
