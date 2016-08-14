@@ -388,9 +388,6 @@
     <Resource Include="Images\Logos\I Love Icons8-100.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Logos\nugetlogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Logos\visualstudiologo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -477,11 +474,12 @@
     <Resource Include="Images\Windows10\Import-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Logos\ef.jpg" />
-    <Resource Include="Images\Logos\sqlite.jpg" />
+    <Resource Include="Images\Logos\fodystamp.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Logos\fodystamp.png" />
+    <Resource Include="Images\Logos\ef.png" />
+    <Resource Include="Images\Logos\nugetlogo.png" />
+    <Resource Include="Images\Logos\sqlite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
