@@ -3,6 +3,7 @@ using HotChocolatey.Utility;
 using HotChocolatey.ViewModel.Ginnivan;
 using NuGet;
 using System;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -92,7 +93,6 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
                     if (HasSelectedPackage)
                     {
-                        await nugetExecutor.GetVersionAsync(SelectedPackage);
                         SelectedAction = SelectedPackage.DefaultAction;
                     }
                 }
@@ -146,7 +146,18 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task GetMorePackagesAsync()
         {
-            Packages.AddRange(await Filter.GetMoreAsync(10));
+            var newPackages = (await Filter.GetMoreAsync(10)).ToList();
+
+            if (newPackages.Any())
+            {
+                await nugetExecutor.GetVersionAsync(newPackages.First());
+                foreach (var item in newPackages.Skip(1))
+                {
+                    nugetExecutor.GetVersionAsync(item);
+                }
+            }
+
+            Packages.AddRange(newPackages);
         }
 
         private async Task ExecuteActionCommandAsync()

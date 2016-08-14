@@ -63,7 +63,7 @@
             VerticalAlignment="Top"
             FontSize="9.333"
             Content="{Binding LatestVersion}"
-            Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}" />
+            Visibility="{Binding IsUpgradable, Converter={StaticResource Bool2Visibility}}" />
 
         <Image
             Width="12"
@@ -72,7 +72,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Source="pack://application:,,,/Images/Color/Circled Up-48.png"
-            Visibility="{Binding Path=IsUpgradable, Converter={StaticResource Bool2Visibility}}"
+            Visibility="{Binding IsUpgradable, Converter={StaticResource Bool2Visibility}}"
             RenderOptions.BitmapScalingMode="HighQuality" 
             RenderOptions.EdgeMode="Unspecified" />
     </Grid>
