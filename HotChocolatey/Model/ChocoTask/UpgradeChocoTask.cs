@@ -27,7 +27,7 @@ namespace HotChocolatey.Model.ChocoTask
         {
             var version = specificVersion != null ? $" --version={specificVersion}" : string.Empty;
             var includePreRelease = includePreReleases ? "--prerelease" : string.Empty;
-            return $"--yes {package.Id} {version} {includePreRelease}";
+            return $"--yes {package.Id} {version} {includePreRelease} --allow-downgrade";
         }
 
         protected override Action<string> GetOutputLineCallback() => outputLineCallback;

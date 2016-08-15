@@ -3,7 +3,6 @@ using HotChocolatey.Utility;
 using HotChocolatey.ViewModel.Ginnivan;
 using NuGet;
 using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -35,10 +34,11 @@ namespace HotChocolatey.ViewModel
         public ObservableCollectionEx<Package> Packages { get; } = new ObservableCollectionEx<Package>();
         public bool HasSelectedPackage { get; private set; }
 
-        public IAction SelectedAction { get; set; }
         public SemanticVersion SelectedVersion { get; set; }
 
-        public AwaitableDelegateCommand ActionCommand { get; }
+        public AwaitableDelegateCommand InstallCommand { get; }
+        public AwaitableDelegateCommand UpdateCommand { get; }
+        public AwaitableDelegateCommand UninstallCommand { get; }
         public AwaitableDelegateCommand RefreshCommand { get; }
         public AwaitableDelegateCommand UpgradeAllCommand { get; }
         public DelegateCommand ImportCommand { get; }
@@ -69,7 +69,9 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommandAsync);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommandAsync);
-            ActionCommand = new AwaitableDelegateCommand(ExecuteActionCommandAsync);
+            InstallCommand = new AwaitableDelegateCommand(ExecuteInstallCommandAsync);
+            UpdateCommand = new AwaitableDelegateCommand(ExecuteUpdateCommandAsync);
+            UninstallCommand = new AwaitableDelegateCommand(ExecuteUninstallCommandAsync);
             ImportCommand = new DelegateCommand(ExecuteImportCommand);
             ExportCommand = new DelegateCommand(ExecuteExportCommand);
             OpenCommandPromptCommand = new DelegateCommand(ExecuteOpenCommandPromptCommand);
@@ -93,13 +95,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
                     if (HasSelectedPackage)
                     {
-                        SelectedAction = SelectedPackage.DefaultAction;
+                        SelectedVersion = SelectedPackage.Versions.First();
                     }
-                }
-
-                if (e.PropertyName == nameof(SelectedAction))
-                {
-                    SelectedVersion = SelectedAction?.Versions.First();
                 }
             };
         }
@@ -160,13 +157,28 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             Packages.AddRange(newPackages);
         }
 
-        private async Task ExecuteActionCommandAsync()
+        private async Task ExecuteInstallCommandAsync()
+        {
+            await ExecuteActionAsync(new InstallAction(SelectedPackage));
+        }
+
+        private async Task ExecuteUpdateCommandAsync()
+        {
+            await ExecuteActionAsync(new UpgradeAction(SelectedPackage));
+        }
+
+        private async Task ExecuteUninstallCommandAsync()
+        {
+            await ExecuteActionAsync(new UninstallAction(SelectedPackage));
+        }
+
+        private async Task ExecuteActionAsync(IAction action)
         {
             Task actionTask;
             using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
-                await SelectedAction.ExecuteAsync(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
+                await action.ExecuteAsync(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
                 actionTask = Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
             }
 

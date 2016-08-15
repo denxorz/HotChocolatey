@@ -215,6 +215,7 @@
     <Compile Include="Model\ChocoTask\LoadSettingChocoTask.cs" />
     <Compile Include="Model\ChocoTask\SaveFeatureChocoTask.cs" />
     <Compile Include="Model\CommunicationDirection.cs" />
+    <Compile Include="Model\InstallAction.cs" />
     <Compile Include="Model\NuGetExecutor.cs" />
     <Compile Include="Model\PackageRepo.cs" />
     <Compile Include="Model\ChocoTask\UninstallChocoTask.cs" />
@@ -226,6 +227,8 @@
     <Compile Include="Model\Save\InstalledPackage.cs" />
     <Compile Include="Model\Save\ListContext.cs" />
     <Compile Include="Model\Save\WorkStation.cs" />
+    <Compile Include="Model\UninstallAction.cs" />
+    <Compile Include="Model\UpgradeAction.cs" />
     <Compile Include="Utility\ListBoxBehavior.cs" />
     <Compile Include="ViewModel\ChocoCommunicationViewModel.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
@@ -258,8 +261,17 @@
     <Compile Include="View\Main\PackageInfoView.xaml.cs">
       <DependentUpon>PackageInfoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Main\PackageInstalledControl.xaml.cs">
+      <DependentUpon>PackageInstalledControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Main\PackageInstallingView.xaml.cs">
       <DependentUpon>PackageInstallingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\PackageNotInstalledControl.xaml.cs">
+      <DependentUpon>PackageNotInstalledControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Main\PackageTitle.xaml.cs">
+      <DependentUpon>PackageTitle.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main\SvgViewboxAttachedProperties.cs" />
     <Compile Include="View\ProgressIndicatorView.xaml.cs">
@@ -313,6 +325,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Main\PackageInstalledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Main\PackageInstallingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,6 +338,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Main\PackageManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\PackageNotInstalledControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\PackageTitle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

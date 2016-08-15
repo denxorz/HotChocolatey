@@ -1,10 +1,8 @@
 ﻿using HotChocolatey.Utility;
 using NuGet;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using PropertyChanged;
 
 namespace HotChocolatey.Model
@@ -51,9 +49,8 @@ namespace HotChocolatey.Model
         public SemanticVersion LatestVersion { get; private set; }
         public SemanticVersion CurrentVersion => IsInstalled ? InstalledVersion : LatestVersion;
         public bool IsUpgradable { get; set; }
-        public List<SemanticVersion> Versions { get; } = new List<SemanticVersion>();
-        public ObservableCollectionEx<IAction> Actions { get; set; } = new ObservableCollectionEx<IAction>();
-        public IAction DefaultAction => Actions.Any() ? Actions.First() : null;
+        public ObservableCollectionEx<SemanticVersion> Versions { get; } = new ObservableCollectionEx<SemanticVersion>();
+        public ObservableCollectionEx<SemanticVersion> NewerVersions { get; } = new ObservableCollectionEx<SemanticVersion>();
         public bool IsInstalled => InstalledVersion != null;
 
         public string Title { get; private set; }
@@ -76,27 +73,6 @@ namespace HotChocolatey.Model
             Id = id;
             Title = id;
             Ico = noIconUri;
-        }
-
-        public void GenerateActions()
-        {
-            var actions = new List<IAction>();
-
-            if (IsInstalled)
-            {
-                if (IsUpgradable)
-                {
-                    actions.Add(new UpgradeAction(this));
-                }
-
-                actions.Add(new UninstallAction(this));
-            }
-            else
-            {
-                actions.Add(new InstallAction(this));
-            }
-
-            Actions.ClearAndAddRange(actions);
         }
 
         public void UpdateLatestVersion()
@@ -129,78 +105,6 @@ namespace HotChocolatey.Model
             }
 
             Ico = NugetPackage.IconUrl;
-        }
-
-        private class InstallAction : IAction
-        {
-            private readonly Package package;
-
-            public InstallAction(Package package)
-            {
-                this.package = package;
-                Versions = package.Versions.OrderByDescending(t => t).ToList();
-            }
-
-            public string Name { get; } = "Install";
-            public List<SemanticVersion> Versions { get; }
-
-            public async Task ExecuteAsync(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
-            {
-                await chocoExecutor.InstallAsync(package, specificVersion, outputLineCallback);
-            }
-
-            public override string ToString()
-            {
-                return Name;
-            }
-        }
-
-        private class UninstallAction : IAction
-        {
-            private readonly Package package;
-
-            public UninstallAction(Package package)
-            {
-                this.package = package;
-                Versions = new List<SemanticVersion> { package.InstalledVersion };
-            }
-
-            public string Name { get; } = "Uninstall";
-            public List<SemanticVersion> Versions { get; }
-
-            public async Task ExecuteAsync(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
-            {
-                await chocoExecutor.UninstallAsync(package, outputLineCallback);
-            }
-
-            public override string ToString()
-            {
-                return Name;
-            }
-        }
-
-        private class UpgradeAction : IAction
-        {
-            private readonly Package package;
-
-            public UpgradeAction(Package package)
-            {
-                this.package = package;
-                Versions = package.Versions.Where(t => t > package.InstalledVersion).OrderByDescending(t => t).ToList();
-            }
-
-            public string Name { get; } = "Upgrade";
-            public List<SemanticVersion> Versions { get; }
-
-            public async Task ExecuteAsync(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
-            {
-                await chocoExecutor.UpgradeAsync(package, specificVersion, outputLineCallback);
-            }
-
-            public override string ToString()
-            {
-                return Name;
-            }
         }
     }
 }

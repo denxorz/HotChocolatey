@@ -1,28 +1,55 @@
-﻿<UserControl x:Class="HotChocolatey.View.Main.PackageControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:main="clr-namespace:HotChocolatey.View.Main"
-             mc:Ignorable="d"
-             d:DesignHeight="500" d:DesignWidth="400">
+﻿<UserControl
+    x:Class="HotChocolatey.View.Main.PackageControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:main="clr-namespace:HotChocolatey.View.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="500"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </UserControl.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding HasSelectedPackage, Converter={StaticResource Bool2Visibility}}">
-        <Grid>
-            <Image HorizontalAlignment="Left" Height="32" Margin="10,10,0,0" VerticalAlignment="Top" Width="32" Source="{Binding SelectedPackage.Ico, IsAsync=true}"  RenderOptions.BitmapScalingMode="HighQuality" />
-            <TextBlock Margin="47,16,10,0" TextWrapping="Wrap" Text="{Binding SelectedPackage.Title}" VerticalAlignment="Top" FontSize="18.667" TextTrimming="WordEllipsis" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,59,0,0" TextWrapping="Wrap" Text="Action:" VerticalAlignment="Top" FontWeight="Bold" />
-            <TextBlock HorizontalAlignment="Left" Margin="147,59,0,0" TextWrapping="Wrap" Text="Version:" VerticalAlignment="Top" FontWeight="Bold" />
-            <ComboBox HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding SelectedPackage.Actions}" SelectedItem="{Binding SelectedAction}" />
-            <ComboBox HorizontalAlignment="Left" Margin="147,80,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding SelectedAction.Versions}" SelectedItem="{Binding SelectedVersion}" />
-            <TextBlock HorizontalAlignment="Left" Margin="10,116,0,0" TextWrapping="Wrap" Text="Installed version:" VerticalAlignment="Top" Visibility="{Binding Path=SelectedPackage.IsInstalled, Converter={StaticResource Bool2Visibility}}" />
-            <TextBlock HorizontalAlignment="Left" Margin="112,116,0,0" TextWrapping="Wrap" Text="{Binding SelectedPackage.InstalledVersion}" VerticalAlignment="Top" Visibility="{Binding Path=SelectedPackage.IsInstalled, Converter={StaticResource Bool2Visibility}}" />
-            <Button Content="{Binding SelectedAction.Name}" HorizontalAlignment="Left" Margin="10,146,0,0" VerticalAlignment="Top" Width="90" Height="23" Command="{Binding ActionCommand}" />
-            <Separator Height="10" Margin="10,184,10,0" VerticalAlignment="Top" />
-            <main:PackageInstallingView Margin="10,194,10,10" Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
-            <main:PackageInfoView Margin="10,194,10,10">
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="38" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <main:PackageTitle Height="32" Margin="8,3" />
+            <main:PackageInstalledControl Grid.Row="1" Margin="8,3">
+                <main:PackageInstalledControl.Style>
+                    <Style TargetType="{x:Type main:PackageInstalledControl}">
+                        <Setter Property="Visibility" Value="Visible" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedPackage.IsInstalled}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </main:PackageInstalledControl.Style>
+            </main:PackageInstalledControl>
+            <main:PackageNotInstalledControl Grid.Row="1" Margin="8,3">
+                <main:PackageNotInstalledControl.Style>
+                    <Style TargetType="{x:Type main:PackageNotInstalledControl}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedPackage.IsInstalled}" Value="False">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </main:PackageNotInstalledControl.Style>
+            </main:PackageNotInstalledControl>
+            <Separator Grid.Row="2" Margin="3" />
+            <main:PackageInstallingView
+                Grid.Row="3"
+                Margin="8,3"
+                Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
+            <main:PackageInfoView Grid.Row="3" Margin="3">
                 <main:PackageInfoView.Style>
                     <Style TargetType="{x:Type main:PackageInfoView}">
                         <Setter Property="Visibility" Value="Hidden" />

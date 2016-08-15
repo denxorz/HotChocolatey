@@ -30,11 +30,12 @@ namespace HotChocolatey.Model
         {
             if (!package.Versions.Any())
             {
+                // TODO: Smells like inappropriate intimacy
                 var versions = await Task.Run(() => Repo.FindPackagesById(package.Id).Where(p => p.IsReleaseVersion()).Select(p => p.Version).ToList());
-                package.Versions.AddRange(versions);
-                package.Versions.Sort();
+                versions.Sort();
+                versions.Reverse();
+                package.Versions.ClearAndAddRange(versions);
                 package.UpdateLatestVersion();
-                package.GenerateActions();
             }
         }
     }
