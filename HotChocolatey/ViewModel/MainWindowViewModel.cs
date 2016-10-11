@@ -202,7 +202,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
                 await ApplyFilterAsync();
 
-                foreach (var package in Packages)
+                var packagesToUpdate = Packages.ToList(); // The list is copied, because the updated packages can be filtered away.
+                foreach (var package in packagesToUpdate)
                 {
                     await chocoExecutor.UpgradeAsync(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
                 }
