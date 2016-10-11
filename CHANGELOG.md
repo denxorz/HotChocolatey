@@ -1,3 +1,9 @@
+v 5.0.0
+* Added ability to share which programs are installed
+* Filter on shared programs
+* Added button to directly open de command prompt
+* Fixed #54: crash when using "Upgrade all" 
+
 v 4.0.0
 * Update GUI manager
 * Added settings screen

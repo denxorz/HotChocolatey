@@ -13,8 +13,6 @@
             
             
             
-            
-            
             <Component Id="cmpCB784F93F92665CEA5307B0EDF2F0F55" Guid="*">
                 <File Id="fil7ECEC0CBB856EF44F128B0709FBBFB3D" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\HtmlRenderer.dll" />
             </Component>
@@ -158,8 +156,6 @@
         <ComponentGroup Id="ProductComponents">
             <ComponentRef Id="cmp0BFABD100B4065787B40AA6B05938DF7" />
             <ComponentRef Id="cmpB8E7B130B6B78399B39307530A3D65B2" />
-            
-            
             
             
             

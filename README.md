@@ -12,6 +12,7 @@ Hot chocolatey currently has only a few basic features.
 * Search for packages
 * Show package information
 * Install/Update/Uninstall packages
+* Share/filter-on a list of installed programs
 
 
 ### Source code
@@ -23,6 +24,8 @@ The source code can be found here: https://gitlab.com/jjb3/HotChocolatey
 Hot Chocolatey can be found as a package in Chocolatey: https://chocolatey.org/packages/hot-chocolatey/
 
 ### Installer
+
+5.0.0 http://hotchocolatey.jjb3.nl/releases/5.0.0.1011/Setup%20Hot%20Chocolatey.msi
 
 4.0.0 http://hotchocolatey.jjb3.nl/releases/4.0.0.605/Setup%20Hot%20Chocolatey.msi
 
