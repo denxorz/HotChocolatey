@@ -7,11 +7,11 @@
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         xmlns:main="clr-namespace:HotChocolatey.View.Main"
         mc:Ignorable="d"
-        Title="Hot Chocolatey" Icon="pack://application:,,,/View/Hot Chocolate-96.ico"
+        Title="Hot Chocolatey" 
+        Icon="pack://application:,,,/View/Hot Chocolate-96.ico" IconScalingMode="NoScaleSmallerFrame"
         Height="800" Width="1024" WindowState="Maximized"
         Loaded="OnLoaded"
-        BorderBrush="{DynamicResource AccentColorBrush}"
-        BorderThickness="1">
+        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Click="OnChocoCommunicationButtonClick">
