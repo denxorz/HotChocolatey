@@ -14,6 +14,7 @@
   </PropertyGroup>
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+  <Import Project="$(MSBuildExtensionsPath)\ExtensionPack\4.0\MSBuild.ExtensionPack.tasks"/>
 
   <Target Name="Clean">
     <MSBuild Projects="$(SolutionFile)" Targets="Clean" />
@@ -31,8 +32,8 @@
 
 
   <Target Name="BuildChocolateyPackage">
-    <CallTarget Targets="Clean;UpdateVersion;Build;UpdateNuSpecVersion" />
-    <Exec Command="cpack" WorkingDirectory="$(PackageDirectory)" />
+    <CallTarget Targets="Clean;UpdateVersion;Build;UpdateNuSpec" />
+    <Exec Command="choco pack" WorkingDirectory="$(PackageDirectory)" />
   </Target>
 
 
@@ -52,7 +53,7 @@
   </Target>
 
 
-  <Target Name="UpdateNuSpecVersion">
+  <Target Name="UpdateNuSpec">
     <CreateItem Include="$(BaseDirectory)\ChocolateyPackage\hot-chocolatey\**\*.*">
       <Output TaskParameter="Include" ItemName="NuGetFiles" />
     </CreateItem>
@@ -64,9 +65,17 @@
       <Output TaskParameter="Assemblies" ItemName="AsmInfo" />
     </GetAssemblyIdentity>
 
+    <Exec Command="checksum -f=&quot;$(BuildDirectory)\x86\Release\Setup Hot Chocolatey.msi&quot; -t=sha512" ConsoleToMSBuild="true">
+      <Output TaskParameter="ConsoleOutput" PropertyName="OutputOfExec" />
+    </Exec>
+
     <FileUpdate Files="$(PackageDirectory)\tools\chocolateyinstall.ps1;$(PackageDirectory)\tools\chocolateyuninstall.ps1"
                 Regex="__version__"
                 ReplacementText="%(AsmInfo.Version)" />
+
+    <FileUpdate Files="$(PackageDirectory)\tools\chocolateyinstall.ps1;$(PackageDirectory)\tools\chocolateyuninstall.ps1"
+                Regex="__checksum__"
+                ReplacementText="$(OutputOfExec)" />
 
     <XmlUpdate Prefix="nu"
                Namespace="http://schemas.microsoft.com/packaging/2015/06/nuspec.xsd"
