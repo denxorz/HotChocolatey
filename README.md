@@ -25,7 +25,7 @@ Hot Chocolatey can be found as a package in Chocolatey: https://chocolatey.org/p
 
 ### Installer
 
-5.0.0 http://hotchocolatey.jjb3.nl/releases/5.0.0.1011/Setup%20Hot%20Chocolatey.msi
+5.0.0 http://hotchocolatey.jjb3.nl/releases/5.0.0.1016/Setup%20Hot%20Chocolatey.msi
 
 4.0.0 http://hotchocolatey.jjb3.nl/releases/4.0.0.605/Setup%20Hot%20Chocolatey.msi
 
