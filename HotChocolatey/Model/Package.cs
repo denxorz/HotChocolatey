@@ -77,7 +77,7 @@ namespace HotChocolatey.Model
 
         public void UpdateLatestVersion()
         {
-            LatestVersion = Versions.LastOrDefault();
+            LatestVersion = Versions.FirstOrDefault();
         }
 
         private void DetermineIconUri()
