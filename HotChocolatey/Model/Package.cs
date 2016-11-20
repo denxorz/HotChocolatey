@@ -36,7 +36,9 @@ namespace HotChocolatey.Model
                     DownloadCount = NugetPackage.DownloadCount;
                     ProjectUrl = NugetPackage.ProjectUrl?.ToString();
                     Tags = NugetPackage.Tags;
-                    Dependencies = string.Empty; // TODO : issue #27
+                    Dependencies = NugetPackage.DependencySets.Any()
+                        ? NugetPackage.DependencySets.SelectMany(p => p.Dependencies).Distinct().Select(p => p.Id).Aggregate((working, next) => $"{working}, {next}")
+                        : "<none>";
 
                     DetermineIconUri();
 
