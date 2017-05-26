@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using NuGet;
 
 namespace HotChocolatey.Model
@@ -13,9 +12,9 @@ namespace HotChocolatey.Model
             this.package = package;
         }
 
-        public async Task ExecuteAsync(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public void Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            await chocoExecutor.InstallAsync(package, specificVersion, outputLineCallback);
+            chocoExecutor.Install(package, specificVersion, outputLineCallback);
         }
     }
 }

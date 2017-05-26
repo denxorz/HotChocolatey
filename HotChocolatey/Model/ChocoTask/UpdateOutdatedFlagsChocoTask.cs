@@ -9,14 +9,12 @@ namespace HotChocolatey.Model.ChocoTask
         public UpdateOutdatedFlagsChocoTask(PackageRepo repo)
         {
             this.repo = repo;
+
+            Config.CommandName = "outdated";
         }
 
-        protected override string GetCommand() => "outdated";
-
-        protected override string GetParameters() => string.Empty;
-
         protected override Action<string> GetOutputLineCallback() => UpdateOutdatedFlag;
-        
+
         private void UpdateOutdatedFlag(string chocoOutput)
         {
             var tmp = chocoOutput.Split('|');

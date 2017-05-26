@@ -1,4 +1,5 @@
 using System;
+using chocolatey.infrastructure.app.domain;
 
 namespace HotChocolatey.Model.ChocoTask
 {
@@ -6,15 +7,13 @@ namespace HotChocolatey.Model.ChocoTask
     {
         public string Setting { get; private set; }
 
-        private readonly string name;
-
         public LoadSettingChocoTask(string name)
         {
-            this.name = name;
+            Config.CommandName = "config";
+            Config.ConfigCommand.Name = name;
+            Config.ConfigCommand.Command = ConfigCommandType.get;
         }
 
-        protected override string GetCommand() => "config get";
         protected override Action<string> GetOutputLineCallback() => outputLineCallback => Setting = outputLineCallback;
-        protected override string GetParameters() => $"--name {name}";
     }
 }

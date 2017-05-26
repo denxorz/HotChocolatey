@@ -1,61 +1,42 @@
 using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
-using HotChocolatey.Utility;
+using chocolatey.infrastructure.app.configuration;
+using chocolatey.infrastructure.app.runners;
+using chocolatey.infrastructure.commands;
+using chocolatey.infrastructure.registration;
 
 namespace HotChocolatey.Model.ChocoTask
 {
     internal abstract class BaseChocoTask
     {
-        public async Task ExecuteAsync()
+        protected readonly ChocolateyConfiguration Config = new ChocolateyConfiguration();
+
+        public void Execute()
         {
-            bool result = await ExecuteAsync($"{GetCommand()} --limitoutput {GetParameters()}", GetOutputLineCallback());
+            bool result = Execute(GetOutputLineCallback());
             AfterExecute(result);
         }
 
-        protected abstract string GetCommand();
-        protected abstract string GetParameters();
         protected abstract Action<string> GetOutputLineCallback();
 
-        private async Task<bool> ExecuteAsync(string arguments, Action<string> outputLineCallback)
+        private bool Execute(Action<string> outputLineCallback)
         {
-            Log.Info($">> choco {arguments}");
-            ChocoCommunication.Log($"choco {arguments}", CommunicationDirection.ToChoco);
+            var console = new GenericRunner();
+            var container = SimpleInjectorContainer.Container;
 
-            using (Process choco = new Process())
-            {
-                choco.StartInfo.FileName = "choco";
-                choco.StartInfo.Arguments = arguments;
-                choco.StartInfo.UseShellExecute = false;
-                choco.StartInfo.RedirectStandardOutput = true;
-                choco.StartInfo.CreateNoWindow = true;
-                choco.Start();
+            Config.RegularOutput = false;
+            Config.Sources = "https://chocolatey.org/api/v2/";
 
-                bool endOfStream = false;
-                while (!endOfStream)
-                {
-                    string line = await choco.StandardOutput.ReadLineAsync();
-                    Log.Info(line);
-                    ChocoCommunication.Log(line, CommunicationDirection.FromChoco);
-                    outputLineCallback(line);
+            var chocoCommunication = new ChocoCommunication(outputLineCallback);
+            chocolatey.infrastructure.logging.Log.InitializeWith(chocoCommunication);
+            console.run(Config, container, false, command => { });
 
-                    await Task.Run(() => endOfStream = choco.StandardOutput.EndOfStream);
-                }
-
-                if (choco.ExitCode != 0)
-                {
-                    Log.Error($">> choco {arguments} exited with code {choco.ExitCode}");
-                }
-
-                ChocoCommunication.Log($"exited with code {choco.ExitCode}", CommunicationDirection.FromChoco);
-
-                return choco.ExitCode == 0;
-            }
+            return chocoCommunication.IsSuccess;
         }
+
 
         protected virtual void AfterExecute(bool result)
         {
-            // 
+            //
         }
     }
 }

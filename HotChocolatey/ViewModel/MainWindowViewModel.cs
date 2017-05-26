@@ -8,7 +8,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using System.Windows.Threading;
 using HotChocolatey.Model.Save;
 using PropertyChanged;
 
@@ -56,7 +55,6 @@ namespace HotChocolatey.ViewModel
         public MainWindowViewModel()
         {
             Log.ResetSettings(true, true);
-            ChocoCommunication.SetDispatcher(Dispatcher.CurrentDispatcher);
             Log.Info($@"---
 Version:{Assembly.GetCallingAssembly().GetName().Version}
 MachineName:{Environment.MachineName}
@@ -178,8 +176,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
-                await action.ExecuteAsync(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                actionTask = Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
+                action.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
+                actionTask = chocoExecutor.UpdateAsync(packageRepo, nugetExecutor);
             }
 
             await actionTask;
@@ -205,7 +203,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 var packagesToUpdate = Packages.ToList(); // The list is copied, because the updated packages can be filtered away.
                 foreach (var package in packagesToUpdate)
                 {
-                    await chocoExecutor.UpgradeAsync(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
+                    chocoExecutor.Upgrade(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
                 }
             }
 

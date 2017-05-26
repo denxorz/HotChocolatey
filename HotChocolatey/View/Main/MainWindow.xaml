@@ -14,9 +14,6 @@
         BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
-            <Button Click="OnChocoCommunicationButtonClick">
-                <Image Source="pack://application:,,,/Images/Windows10/Page Overview 2-32.png" Stretch="Uniform" Width="24" />
-            </Button>
             <Button Command="{Binding OpenCommandPromptCommand}">
                 <Image Source="pack://application:,,,/Images/Windows10/Command Line-32.png" Stretch="Uniform" Width="24" />
             </Button>

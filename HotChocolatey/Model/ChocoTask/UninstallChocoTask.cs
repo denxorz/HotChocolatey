@@ -14,14 +14,14 @@ namespace HotChocolatey.Model.ChocoTask
 
             this.outputLineCallback = outputLineCallback;
             this.package = package;
+
+            Config.CommandName = "uninstall";
+            Config.PromptForConfirmation = false;
+            Config.PackageNames = package.Id;
         }
 
-        protected override string GetCommand() => "uninstall";
-
-        protected override string GetParameters() => $"--yes {package.Id}";
-
         protected override Action<string> GetOutputLineCallback() => outputLineCallback;
-        
+
         protected override void AfterExecute(bool result)
         {
             if (!result)

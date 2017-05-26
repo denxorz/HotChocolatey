@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using chocolatey.infrastructure.app.domain;
 
 namespace HotChocolatey.Model.ChocoTask
 {
@@ -7,9 +8,13 @@ namespace HotChocolatey.Model.ChocoTask
     {
         public Dictionary<string, bool> Features { get; } = new Dictionary<string, bool>();
 
-        protected override string GetCommand() => "features";
+        public LoadFeaturesChocoTask()
+        {
+            Config.CommandName = "feature";
+            Config.FeatureCommand.Command = FeatureCommandType.list;
+        }
+
         protected override Action<string> GetOutputLineCallback() => ParseFeature;
-        protected override string GetParameters() => string.Empty;
 
         private void ParseFeature(string outputLine)
         {

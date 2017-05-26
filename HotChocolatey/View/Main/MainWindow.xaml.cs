@@ -45,11 +45,5 @@ namespace HotChocolatey.View.Main
 
             window.ShowDialog();
         }
-
-        private void OnChocoCommunicationButtonClick(object sender, RoutedEventArgs e)
-        {
-            var window = new ChocoCommunication.ChocoCommunicationWindow { Owner = this };
-            window.Show();
-        }
     }
 }

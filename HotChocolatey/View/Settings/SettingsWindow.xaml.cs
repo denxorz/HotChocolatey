@@ -11,16 +11,16 @@ namespace HotChocolatey.View.Settings
             InitializeComponent();
         }
 
-        private async void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnLoaded(object sender, RoutedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            await ((ViewModel.SettingsWindowsViewModel)DataContext).LoadedAsync();
+            ((ViewModel.SettingsWindowsViewModel)DataContext).Loaded();
         }
 
-        private async void OnClosing(object sender, CancelEventArgs e)
+        private void OnClosing(object sender, CancelEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            await ((ViewModel.SettingsWindowsViewModel)DataContext).ClosingAsync();
+            ((ViewModel.SettingsWindowsViewModel)DataContext).Closing();
         }
     }
 }

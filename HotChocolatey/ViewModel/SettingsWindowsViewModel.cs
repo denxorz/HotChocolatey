@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using HotChocolatey.Model;
+﻿using HotChocolatey.Model;
 using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
@@ -11,16 +10,16 @@ namespace HotChocolatey.ViewModel
         public bool IsLoading { get; private set; }
         private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
 
-        public async Task LoadedAsync()
+        public void Loaded()
         {
             IsLoading = true;
-            Settings = await chocoExecutor.LoadSettingsAsync();
+            Settings = chocoExecutor.LoadSettings();
             IsLoading = false;
         }
 
-        public async Task ClosingAsync()
+        public void Closing()
         {
-            await chocoExecutor.SaveSettingsAsync(Settings);
+            chocoExecutor.SaveSettings(Settings);
         }
     }
 }
