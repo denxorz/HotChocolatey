@@ -23,8 +23,8 @@
       <Output TaskParameter="Include" ItemName="FilesToClean" />
     </CreateItem>
     <Delete Files="@(FilesToClean)" TreatErrorsAsWarnings="true" />
-  </Target> 
-  
+  </Target>
+
   <Target Name="Build">
     <Message Importance="High" Text="Building $(Configuration)|$(Platform)" />
     <MSBuild Projects="$(SolutionFile)" Targets="Build" />
@@ -39,16 +39,12 @@
 
   <Target Name="UpdateVersion">
     <PropertyGroup>
-      <VersionNumber>$([System.IO.File]::ReadAllText(version.txt))</VersionNumber>
       <CurrentMonthDay>$([System.DateTime]::Now.ToString(MMdd))</CurrentMonthDay>
       <CurrentYear>$([System.DateTime]::Now.ToString(yyyy))</CurrentYear>
     </PropertyGroup>
 
     <AssemblyInfo CodeLanguage="CS"
                   OutputFile="VersionInfo.cs"
-                  AssemblyVersion="$(VersionNumber).$(CurrentMonthDay)"
-                  AssemblyFileVersion="$(VersionNumber).$(CurrentMonthDay)" 
-                  AssemblyInformationalVersion="%version% hash:%shorthash%"
                   AssemblyCopyright="Copyright (c) Denxorz, $(CurrentYear)"/>
   </Target>
 

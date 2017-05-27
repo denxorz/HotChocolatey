@@ -8,9 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Reflection.AssemblyVersion("5.0.0.1011")]
-[assembly: System.Reflection.AssemblyFileVersion("5.0.0.1011")]
-[assembly: System.Reflection.AssemblyInformationalVersion("%version% hash:%shorthash%")]
-[assembly: System.Reflection.AssemblyCopyright("Copyright (c) Denxorz, 2016")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright (c) Denxorz, 2017")]
 
 
