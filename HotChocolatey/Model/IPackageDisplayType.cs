@@ -8,7 +8,7 @@ namespace HotChocolatey.ViewModel
     {
         bool HasMore { get; }
 
-        Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems);
+        IEnumerable<Package> GetMore(int numberOfItems);
 
         Task RefreshAsync();
 

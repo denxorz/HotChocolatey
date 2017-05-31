@@ -142,7 +142,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task GetMorePackagesAsync()
         {
-            var newPackages = (await Filter.GetMoreAsync(10)).ToList();
+            var newPackages = Filter.GetMore(10).ToList();
 
             if (newPackages.Any())
             {

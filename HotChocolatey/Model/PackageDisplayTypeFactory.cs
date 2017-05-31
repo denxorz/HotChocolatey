@@ -59,7 +59,7 @@ namespace HotChocolatey.Model
                 }).ContinueWith(task => total = query.Count());
             }
 
-            public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
+            public IEnumerable<Package> GetMore(int numberOfItems)
             {
                 var tmp = query.Skip(skipped).Take(numberOfItems).ToList();
                 skipped += numberOfItems;
@@ -107,7 +107,7 @@ namespace HotChocolatey.Model
                 skipped = 0;
             }
 
-            public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
+            public IEnumerable<Package> GetMore(int numberOfItems)
             {
                 var searchedPackages = string.IsNullOrWhiteSpace(searchFor)
                     ? chocoExecutor.LocalPackages
@@ -150,7 +150,7 @@ namespace HotChocolatey.Model
                 skipped = 0;
             }
 
-            public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
+            public IEnumerable<Package> GetMore(int numberOfItems)
             {
                 var searchedPackages = string.IsNullOrWhiteSpace(searchFor)
                     ? chocoExecutor.LocalPackages.Where(p => p.IsUpgradable)

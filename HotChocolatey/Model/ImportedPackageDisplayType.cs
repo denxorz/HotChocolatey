@@ -38,7 +38,7 @@ namespace HotChocolatey.Model
                 : importedPackages.Where(p => PackageSearchComparer(p, searchFor));
         }
 
-        public async Task<IEnumerable<Package>> GetMoreAsync(int numberOfItems)
+        public IEnumerable<Package> GetMore(int numberOfItems)
         {
             var packages = query.Skip(skipped).Take(numberOfItems).ToList();
             packages.ForEach(t => controller.Update(t));
