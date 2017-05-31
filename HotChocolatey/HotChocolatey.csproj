@@ -52,6 +52,9 @@
     <Reference Include="chocolatey, Version=0.10.5.0, Culture=neutral, PublicKeyToken=79d02ea9cad655eb, processorArchitecture=MSIL">
       <HintPath>..\packages\chocolatey.lib.0.10.5\lib\chocolatey.dll</HintPath>
     </Reference>
+    <Reference Include="Denxorz.ObservableCollectionWithAddRange, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Denxorz.ObservableCollectionWithAddRange.1.0.0\lib\net452\Denxorz.ObservableCollectionWithAddRange.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -339,7 +342,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utility\ObservableCollectionEx.cs" />
     <Compile Include="View\Main\PackageControl.xaml.cs">
       <DependentUpon>PackageControl.xaml</DependentUpon>
     </Compile>

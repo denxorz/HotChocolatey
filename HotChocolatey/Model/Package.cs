@@ -3,6 +3,7 @@ using NuGet;
 using System;
 using System.IO;
 using System.Linq;
+using Denxorz.ObservableCollectionWithAddRange;
 using PropertyChanged;
 
 namespace HotChocolatey.Model
