@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace HotChocolatey.View
+﻿namespace HotChocolatey.View
 {
-    public partial class ProgressIndicatorView : UserControl
+    public partial class ProgressIndicatorView
     {
         public ProgressIndicatorView()
         {

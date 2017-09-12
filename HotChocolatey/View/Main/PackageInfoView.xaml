@@ -22,7 +22,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="0,0,0,36" TextWrapping="Wrap" Text="Dependencies:" VerticalAlignment="Bottom" FontWeight="Bold" />
         <TextBlock HorizontalAlignment="Left" Margin="87,0,0,120" Text="{Binding SelectedPackage.Authors}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
         <TextBlock HorizontalAlignment="Left" Margin="87,0,0,141" Text="{Binding SelectedPackage.Id}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
-        <local:LinkTextBlock HorizontalAlignment="Left" Margin="87,0,0,93" NavigationUrl="{Binding SelectedPackage.LicenseUrl}" VerticalAlignment="Bottom" />
+        <local:LinkTextBlock HorizontalAlignment="Left" Margin="87,0,0,99" NavigationUrl="{Binding SelectedPackage.LicenseUrl}" VerticalAlignment="Bottom" />
         <local:LinkTextBlock HorizontalAlignment="Left" Margin="87,0,0,78" NavigationUrl="{Binding SelectedPackage.ProjectUrl}" VerticalAlignment="Bottom" />
         <TextBlock HorizontalAlignment="Left" Margin="87,0,0,51" Text="{Binding SelectedPackage.Tags}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
         <TextBlock HorizontalAlignment="Left" Margin="87,0,0,36" Text="{Binding SelectedPackage.Dependencies}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />

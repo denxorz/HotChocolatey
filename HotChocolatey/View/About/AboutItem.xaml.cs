@@ -1,10 +1,9 @@
-﻿using System.Windows.Controls;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 using AutoDependencyPropertyMarker;
 
 namespace HotChocolatey.View.About
 {
-    public partial class AboutItem : UserControl
+    public partial class AboutItem
     {
         [AutoDependencyProperty]
         public ImageSource IconSource { get; set; }
@@ -21,7 +20,6 @@ namespace HotChocolatey.View.About
         public AboutItem()
         {
             InitializeComponent();
-            DataContext = this;
         }
     }
 }
