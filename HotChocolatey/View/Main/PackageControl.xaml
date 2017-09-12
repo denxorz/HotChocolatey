@@ -18,6 +18,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
+                <RowDefinition Height="200" />
             </Grid.RowDefinitions>
             <main:PackageTitle Height="32" Margin="8,3" />
             <main:PackageInstalledControl Grid.Row="1" Margin="8,3">
@@ -46,8 +47,9 @@
             </main:PackageNotInstalledControl>
             <Separator Grid.Row="2" Margin="3" />
             <main:PackageInstallingView
-                Grid.Row="3"
+                Grid.Row="4"
                 Margin="8,3"
+                ActionProcessOutput="{Binding ActionProcessOutput}"
                 Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
             <main:PackageInfoView Grid.Row="3" Margin="3">
                 <main:PackageInfoView.Style>

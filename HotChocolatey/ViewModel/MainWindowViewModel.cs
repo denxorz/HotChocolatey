@@ -156,32 +156,29 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             Packages.AddRange(newPackages);
         }
 
-        private async Task ExecuteInstallCommandAsync()
+        private Task ExecuteInstallCommandAsync()
         {
-            await ExecuteActionAsync(new InstallAction(SelectedPackage));
+            return ExecuteActionAsync(new InstallAction(SelectedPackage));
         }
 
-        private async Task ExecuteUpdateCommandAsync()
+        private Task ExecuteUpdateCommandAsync()
         {
-            await ExecuteActionAsync(new UpgradeAction(SelectedPackage));
+            return ExecuteActionAsync(new UpgradeAction(SelectedPackage));
         }
 
-        private async Task ExecuteUninstallCommandAsync()
+        private Task ExecuteUninstallCommandAsync()
         {
-            await ExecuteActionAsync(new UninstallAction(SelectedPackage));
+            return ExecuteActionAsync(new UninstallAction(SelectedPackage));
         }
 
-        private async Task ExecuteActionAsync(IAction action)
+        private Task ExecuteActionAsync(IAction action)
         {
-            Task actionTask;
             using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
                 action.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                actionTask = chocoExecutor.UpdateAsync(packageRepo, nugetExecutor);
+                return chocoExecutor.UpdateAsync(packageRepo, nugetExecutor);
             }
-
-            await actionTask;
         }
 
         private async Task ExecuteRefreshCommandAsync()
