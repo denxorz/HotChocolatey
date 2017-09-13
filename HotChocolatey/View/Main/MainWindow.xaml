@@ -1,27 +1,41 @@
-﻿<controls:MetroWindow x:Class="HotChocolatey.View.Main.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HotChocolatey.View"
-        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:main="clr-namespace:HotChocolatey.View.Main"
-        mc:Ignorable="d"
-        Title="Hot Chocolatey" 
-        Icon="pack://application:,,,/View/Hot Chocolate-96.ico" IconScalingMode="NoScaleSmallerFrame"
-        Height="800" Width="1024" WindowState="Maximized"
-        Loaded="OnLoaded"
-        BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1">
+﻿<controls:MetroWindow
+    x:Class="HotChocolatey.View.Main.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HotChocolatey.View"
+    xmlns:main="clr-namespace:HotChocolatey.View.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Hot Chocolatey"
+    Width="1024"
+    Height="800"
+    BorderBrush="{DynamicResource AccentColorBrush}"
+    BorderThickness="1"
+    Icon="pack://application:,,,/View/Hot Chocolate-96.ico"
+    IconScalingMode="NoScaleSmallerFrame"
+    Loaded="OnLoaded"
+    WindowState="Maximized"
+    mc:Ignorable="d">
     <controls:MetroWindow.RightWindowCommands>
         <controls:WindowCommands>
             <Button Command="{Binding OpenCommandPromptCommand}">
-                <Image Source="pack://application:,,,/Images/Windows10/Command Line-32.png" Stretch="Uniform" Width="24" />
+                <Image
+                    Width="24"
+                    Source="pack://application:,,,/Images/Windows10/Command Line-32.png"
+                    Stretch="Uniform" />
             </Button>
             <Button Click="OnSettingsButtonClick" IsEnabled="{Binding IsUserAllowedToExecuteActions}">
-                <Image Source="pack://application:,,,/Images/Windows10/Services-32.png" Stretch="Uniform" Width="24" />
+                <Image
+                    Width="24"
+                    Source="pack://application:,,,/Images/Windows10/Services-32.png"
+                    Stretch="Uniform" />
             </Button>
             <Button Click="OnAboutButtonClick" IsEnabled="{Binding IsUserAllowedToExecuteActions}">
-                <Image Source="pack://application:,,,/Images/Windows10/About-32.png" Stretch="Uniform" Width="24" />
+                <Image
+                    Width="24"
+                    Source="pack://application:,,,/Images/Windows10/About-32.png"
+                    Stretch="Uniform" />
             </Button>
         </controls:WindowCommands>
     </controls:MetroWindow.RightWindowCommands>
@@ -35,23 +49,35 @@
         <ToolBarTray DockPanel.Dock="Top" IsLocked="True">
             <ToolBar Loaded="OnToolBarLoaded">
                 <Button Command="{Binding RefreshCommand}">
-                    <Image Source="pack://application:,,,/Images/Windows10/Refresh-32.png" Stretch="Uniform" Width="24" />
+                    <Image
+                        Width="24"
+                        Source="pack://application:,,,/Images/Windows10/Refresh-32.png"
+                        Stretch="Uniform" />
                 </Button>
                 <Button Command="{Binding UpgradeAllCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/Images/Windows10/Multiple Inputs-32.png" Stretch="Uniform" Width="24" />
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Images/Windows10/Multiple Inputs-32.png"
+                            Stretch="Uniform" />
                         <Label Padding="0" VerticalAlignment="Center">Upgrade all</Label>
                     </StackPanel>
                 </Button>
                 <Button Command="{Binding ExportCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/Images/Windows10/Export-32.png" Stretch="Uniform" Width="24" />
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Images/Windows10/Export-32.png"
+                            Stretch="Uniform" />
                         <Label Padding="0" VerticalAlignment="Center">Export configuration</Label>
                     </StackPanel>
                 </Button>
                 <Button Command="{Binding ImportCommand}">
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="pack://application:,,,/Images/Windows10/Import-32.png" Stretch="Uniform" Width="24" />
+                        <Image
+                            Width="24"
+                            Source="pack://application:,,,/Images/Windows10/Import-32.png"
+                            Stretch="Uniform" />
                         <Label Padding="0" VerticalAlignment="Center">Import configuration</Label>
                     </StackPanel>
                 </Button>

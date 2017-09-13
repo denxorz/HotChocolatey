@@ -1,30 +1,108 @@
-﻿<UserControl x:Class="HotChocolatey.View.Main.PackageInfoView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:HotChocolatey.View"
-             xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
-             mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="400"
-             d:DataContext="{Binding Source={StaticResource DesignViewModel}}">
+﻿<UserControl
+    x:Class="HotChocolatey.View.Main.PackageInfoView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:HotChocolatey.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
+    d:DataContext="{Binding Source={StaticResource DesignViewModel}}"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    mc:Ignorable="d">
     <UserControl.Resources>
         <local:DesignTimeContext2 x:Key="DesignViewModel" />
     </UserControl.Resources>
     <Grid>
-        <TextBlock Margin="0" TextWrapping="Wrap" Text="Description" FontWeight="Bold" Height="15" VerticalAlignment="Top" />
-        <wpf:HtmlPanel Margin="0,20,10,162" Text="{Binding SelectedPackage.DescriptionAsHtml}" SnapsToDevicePixels="True" BaseStylesheet="*{font-family:&quot;Segoe UI&quot;;font-size:9pt;} p{margin-top:0;}; h3{font-family:&quot;Segoe UI&quot;;font-size:9pt;}" />
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,120" TextWrapping="Wrap" Text="Author(s):" FontWeight="Bold" Height="16" VerticalAlignment="Bottom" />
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,141" TextWrapping="Wrap" Text="Package:" FontWeight="Bold" Height="16" VerticalAlignment="Bottom" />
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,99" TextWrapping="Wrap" Text="License:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,78" TextWrapping="Wrap" Text="Project URL:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,57" TextWrapping="Wrap" Text="Tags:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="0,0,0,36" TextWrapping="Wrap" Text="Dependencies:" VerticalAlignment="Bottom" FontWeight="Bold" />
-        <TextBlock HorizontalAlignment="Left" Margin="87,0,0,120" Text="{Binding SelectedPackage.Authors}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
-        <TextBlock HorizontalAlignment="Left" Margin="87,0,0,141" Text="{Binding SelectedPackage.Id}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
-        <local:LinkTextBlock HorizontalAlignment="Left" Margin="87,0,0,99" NavigationUrl="{Binding SelectedPackage.LicenseUrl}" VerticalAlignment="Bottom" />
-        <local:LinkTextBlock HorizontalAlignment="Left" Margin="87,0,0,78" NavigationUrl="{Binding SelectedPackage.ProjectUrl}" VerticalAlignment="Bottom" />
-        <TextBlock HorizontalAlignment="Left" Margin="87,0,0,51" Text="{Binding SelectedPackage.Tags}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
-        <TextBlock HorizontalAlignment="Left" Margin="87,0,0,36" Text="{Binding SelectedPackage.Dependencies}" VerticalAlignment="Bottom" TextTrimming="CharacterEllipsis" />
+        <TextBlock
+            Height="15"
+            Margin="0"
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            Text="Description"
+            TextWrapping="Wrap" />
+        <wpf:HtmlPanel
+            Margin="0,20,10,162"
+            BaseStylesheet="*{font-family:&quot;Segoe UI&quot;;font-size:9pt;} p{margin-top:0;}; h3{font-family:&quot;Segoe UI&quot;;font-size:9pt;}"
+            SnapsToDevicePixels="True"
+            Text="{Binding SelectedPackage.DescriptionAsHtml}" />
+        <TextBlock
+            Height="16"
+            Margin="0,0,0,120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontWeight="Bold"
+            Text="Author(s):"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Height="16"
+            Margin="0,0,0,141"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontWeight="Bold"
+            Text="Package:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="0,0,0,99"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontWeight="Bold"
+            Text="License:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="0,0,0,78"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontWeight="Bold"
+            Text="Project URL:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="0,0,0,57"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontWeight="Bold"
+            Text="Tags:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="0,0,0,36"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            FontWeight="Bold"
+            Text="Dependencies:"
+            TextWrapping="Wrap" />
+        <TextBlock
+            Margin="87,0,0,120"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Text="{Binding SelectedPackage.Authors}"
+            TextTrimming="CharacterEllipsis" />
+        <TextBlock
+            Margin="87,0,0,141"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Text="{Binding SelectedPackage.Id}"
+            TextTrimming="CharacterEllipsis" />
+        <local:LinkTextBlock
+            Margin="87,0,0,99"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            NavigationUrl="{Binding SelectedPackage.LicenseUrl}" />
+        <local:LinkTextBlock
+            Margin="87,0,0,78"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            NavigationUrl="{Binding SelectedPackage.ProjectUrl}" />
+        <TextBlock
+            Margin="87,0,0,51"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Text="{Binding SelectedPackage.Tags}"
+            TextTrimming="CharacterEllipsis" />
+        <TextBlock
+            Margin="87,0,0,36"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Text="{Binding SelectedPackage.Dependencies}"
+            TextTrimming="CharacterEllipsis" />
     </Grid>
 </UserControl>

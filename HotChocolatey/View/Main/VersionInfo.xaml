@@ -21,17 +21,17 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Source="pack://application:,,,/Images/Color/Ok-48.png"
-            Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}"
             RenderOptions.BitmapScalingMode="HighQuality"
-            RenderOptions.EdgeMode="Unspecified" />
+            RenderOptions.EdgeMode="Unspecified"
+            Source="pack://application:,,,/Images/Color/Ok-48.png"
+            Visibility="{Binding Path=IsInstalled, Converter={StaticResource Bool2Visibility}}" />
 
         <Label
             Margin="15,0,12,0"
             Padding="0"
             VerticalAlignment="Top"
-            FontSize="9.333"
-            Content="{Binding CurrentVersion}" />
+            Content="{Binding CurrentVersion}"
+            FontSize="9.333" />
 
         <Image
             Width="12"
@@ -40,7 +40,7 @@
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             RenderOptions.BitmapScalingMode="HighQuality"
-            RenderOptions.EdgeMode="Unspecified" >
+            RenderOptions.EdgeMode="Unspecified">
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
                     <Setter Property="Source" Value="pack://application:,,,/Images/Color/Download-48.png" />
@@ -61,8 +61,8 @@
             Margin="15,12,12,0"
             Padding="0"
             VerticalAlignment="Top"
-            FontSize="9.333"
             Content="{Binding LatestVersion}"
+            FontSize="9.333"
             Visibility="{Binding IsUpgradable, Converter={StaticResource Bool2Visibility}}" />
 
         <Image
@@ -71,9 +71,9 @@
             Margin="0,12,0,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
+            RenderOptions.BitmapScalingMode="HighQuality"
+            RenderOptions.EdgeMode="Unspecified"
             Source="pack://application:,,,/Images/Color/Circled Up-48.png"
-            Visibility="{Binding IsUpgradable, Converter={StaticResource Bool2Visibility}}"
-            RenderOptions.BitmapScalingMode="HighQuality" 
-            RenderOptions.EdgeMode="Unspecified" />
+            Visibility="{Binding IsUpgradable, Converter={StaticResource Bool2Visibility}}" />
     </Grid>
 </UserControl>

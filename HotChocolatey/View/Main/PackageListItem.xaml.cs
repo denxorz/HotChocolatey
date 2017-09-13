@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace HotChocolatey.View.Main
+﻿namespace HotChocolatey.View.Main
 {
-    public partial class PackageListItem : UserControl
+    public partial class PackageListItem
     {
         public PackageListItem()
         {
