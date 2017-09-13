@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
     Height="55"
     mc:Ignorable="d" d:DesignWidth="290">
     <Grid>
@@ -26,24 +27,24 @@
             Margin="56,0,113,0"
             VerticalAlignment="Top"
             IsEnabled="False"
-            Text="{Binding SelectedPackage.InstalledVersion}"
+            Text="{Binding Package.InstalledVersion, ElementName=UserControl}"
             TextWrapping="Wrap" />
         <ComboBox
             Margin="56,28,113,0"
             VerticalAlignment="Top"
-            ItemsSource="{Binding SelectedPackage.Versions}"
-            SelectedItem="{Binding SelectedVersion}" />
+            ItemsSource="{Binding Package.Versions, ElementName=UserControl}"
+            SelectedItem="{Binding Version, ElementName=UserControl}" />
         <Button
             Height="23"
             Margin="0,0,9,0"
             VerticalAlignment="Top"
-            Command="{Binding UninstallCommand}"
+            Command="{Binding UninstallCommand, ElementName=UserControl}"
             Content="Uninstall" HorizontalAlignment="Right" Width="100" />
         <Button
             Height="22"
             Margin="0,28,9,0"
             VerticalAlignment="Top"
-            Command="{Binding UpdateCommand}"
+            Command="{Binding UpdateCommand, ElementName=UserControl}"
             Content="Update" HorizontalAlignment="Right" Width="100" />
     </Grid>
 </UserControl>

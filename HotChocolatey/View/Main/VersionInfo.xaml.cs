@@ -1,9 +1,13 @@
-﻿using System.Windows.Controls;
+﻿using AutoDependencyPropertyMarker;
+using HotChocolatey.Model;
 
 namespace HotChocolatey.View.Main
 {
-    public partial class VersionInfo : UserControl
+    public partial class VersionInfo
     {
+        [AutoDependencyProperty]
+        public Package Package { get; set; }
+
         public VersionInfo()
         {
             InitializeComponent();

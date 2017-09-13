@@ -6,13 +6,11 @@
     xmlns:local="clr-namespace:HotChocolatey.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:wpf="clr-namespace:TheArtOfDev.HtmlRenderer.WPF;assembly=HtmlRenderer.WPF"
-    d:DataContext="{Binding Source={StaticResource DesignViewModel}}"
+    x:Name="UserControl"
     d:DesignHeight="300"
     d:DesignWidth="400"
     mc:Ignorable="d">
-    <UserControl.Resources>
-        <local:DesignTimeContext2 x:Key="DesignViewModel" />
-    </UserControl.Resources>
+
     <Grid>
         <TextBlock
             Height="15"
@@ -25,7 +23,7 @@
             Margin="0,20,10,162"
             BaseStylesheet="*{font-family:&quot;Segoe UI&quot;;font-size:9pt;} p{margin-top:0;}; h3{font-family:&quot;Segoe UI&quot;;font-size:9pt;}"
             SnapsToDevicePixels="True"
-            Text="{Binding SelectedPackage.DescriptionAsHtml}" />
+            Text="{Binding Package.DescriptionAsHtml, ElementName=UserControl}" />
         <TextBlock
             Height="16"
             Margin="0,0,0,120"
@@ -74,35 +72,35 @@
             Margin="87,0,0,120"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Text="{Binding SelectedPackage.Authors}"
+            Text="{Binding Package.Authors, ElementName=UserControl}"
             TextTrimming="CharacterEllipsis" />
         <TextBlock
             Margin="87,0,0,141"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Text="{Binding SelectedPackage.Id}"
+            Text="{Binding Package.Id, ElementName=UserControl}"
             TextTrimming="CharacterEllipsis" />
         <local:LinkTextBlock
             Margin="87,0,0,99"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            NavigationUrl="{Binding SelectedPackage.LicenseUrl}" />
+            NavigationUrl="{Binding Package.LicenseUrl, ElementName=UserControl}" />
         <local:LinkTextBlock
             Margin="87,0,0,78"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            NavigationUrl="{Binding SelectedPackage.ProjectUrl}" />
+            NavigationUrl="{Binding Package.ProjectUrl, ElementName=UserControl}" />
         <TextBlock
             Margin="87,0,0,51"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Text="{Binding SelectedPackage.Tags}"
+            Text="{Binding Package.Tags, ElementName=UserControl}"
             TextTrimming="CharacterEllipsis" />
         <TextBlock
             Margin="87,0,0,36"
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
-            Text="{Binding SelectedPackage.Dependencies}"
+            Text="{Binding Package.Dependencies, ElementName=UserControl}"
             TextTrimming="CharacterEllipsis" />
     </Grid>
 </UserControl>

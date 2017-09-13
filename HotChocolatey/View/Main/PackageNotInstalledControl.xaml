@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
     Height="30"
     d:DesignWidth="290"
     mc:Ignorable="d">
@@ -18,15 +19,15 @@
         <ComboBox
             Margin="66,0,114,0"
             VerticalAlignment="Top"
-            ItemsSource="{Binding SelectedPackage.Versions}"
-            SelectedItem="{Binding SelectedVersion}" />
+            ItemsSource="{Binding Package.Versions, ElementName=UserControl}"
+            SelectedItem="{Binding Version, ElementName=UserControl}" />
         <Button
             Width="100"
             Height="22"
             Margin="0,0,9,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
-            Command="{Binding InstallCommand}"
+            Command="{Binding InstallCommand, ElementName=UserControl}"
             Content="Install" />
     </Grid>
 </UserControl>

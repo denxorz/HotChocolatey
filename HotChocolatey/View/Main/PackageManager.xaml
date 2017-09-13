@@ -98,7 +98,15 @@
                 x:Name="PackageControl"
                 Grid.Column="2"
                 MinWidth="250"
-                Visibility="{Binding Path=HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" />
+                IsInstalling="{Binding IsInstalling}"
+                HasSelectedPackage="{Binding HasSelectedPackage}"
+                ActionProcessOutput="{Binding ActionProcessOutput}"
+                InstallCommand="{Binding InstallCommand}"
+                Package="{Binding SelectedPackage}"
+                UninstallCommand="{Binding UninstallCommand}"
+                UpdateCommand="{Binding UpdateCommand}"
+                Version="{Binding SelectedVersion}"
+                Visibility="{Binding HasSelectedPackage, Converter={StaticResource Bool2Visibility}}" />
         </Grid>
     </DockPanel>
 </UserControl>

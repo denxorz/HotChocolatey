@@ -6,6 +6,12 @@ namespace HotChocolatey.View.Main
 {
     public class SvgViewboxAttachedProperties : DependencyObject
     {
+        public static readonly DependencyProperty SourceProperty = DependencyProperty.RegisterAttached(
+                "Source",
+                typeof(Uri),
+                typeof(SvgViewboxAttachedProperties),
+                new PropertyMetadata(null, OnSourceChanged));
+
         public static Uri GetSource(DependencyObject obj)
         {
             return (Uri)obj.GetValue(SourceProperty);
@@ -18,17 +24,10 @@ namespace HotChocolatey.View.Main
 
         private static void OnSourceChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
         {
-            var svgControl = obj as SvgViewbox;
-            if (svgControl != null)
+            if (obj is SvgViewbox svgControl)
             {
                 svgControl.Source = (Uri)e.NewValue;
             }
         }
-
-        public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.RegisterAttached("Source",
-                typeof(Uri), typeof(SvgViewboxAttachedProperties),
-                // default value: null
-                new PropertyMetadata(null, OnSourceChanged));
     }
 }

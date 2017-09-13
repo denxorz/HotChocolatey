@@ -5,13 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:main="clr-namespace:HotChocolatey.View.Main"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
     d:DesignHeight="500"
     d:DesignWidth="400"
     mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
     </UserControl.Resources>
-    <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding HasSelectedPackage, Converter={StaticResource Bool2Visibility}}">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Visibility="{Binding HasSelectedPackage, ElementName=UserControl, Converter={StaticResource Bool2Visibility}}">
         <Grid Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="38" />
@@ -20,25 +21,39 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="200" />
             </Grid.RowDefinitions>
-            <main:PackageTitle Height="32" Margin="8,3" />
-            <main:PackageInstalledControl Grid.Row="1" Margin="8,3">
+            <main:PackageTitle
+                Height="32"
+                Margin="8,3"
+                Package="{Binding Package, ElementName=UserControl}" />
+            <main:PackageInstalledControl
+                Grid.Row="1"
+                Margin="8,3"
+                Package="{Binding Package, ElementName=UserControl}"
+                UninstallCommand="{Binding UninstallCommand, ElementName=UserControl}"
+                UpdateCommand="{Binding UpdateCommand, ElementName=UserControl}"
+                Version="{Binding Version, ElementName=UserControl}">
                 <main:PackageInstalledControl.Style>
                     <Style TargetType="{x:Type main:PackageInstalledControl}">
                         <Setter Property="Visibility" Value="Visible" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedPackage.IsInstalled}" Value="False">
+                            <DataTrigger Binding="{Binding Package.IsInstalled, ElementName=UserControl}" Value="False">
                                 <Setter Property="Visibility" Value="Collapsed" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </main:PackageInstalledControl.Style>
             </main:PackageInstalledControl>
-            <main:PackageNotInstalledControl Grid.Row="1" Margin="8,3">
+            <main:PackageNotInstalledControl
+                Grid.Row="1"
+                Margin="8,3"
+                InstallCommand="{Binding InstallCommand, ElementName=UserControl}"
+                Package="{Binding Package, ElementName=UserControl}"
+                Version="{Binding Version, ElementName=UserControl}">
                 <main:PackageNotInstalledControl.Style>
                     <Style TargetType="{x:Type main:PackageNotInstalledControl}">
                         <Setter Property="Visibility" Value="Collapsed" />
                         <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedPackage.IsInstalled}" Value="False">
+                            <DataTrigger Binding="{Binding Package.IsInstalled, ElementName=UserControl}" Value="False">
                                 <Setter Property="Visibility" Value="Visible" />
                             </DataTrigger>
                         </Style.Triggers>
@@ -49,17 +64,20 @@
             <main:PackageInstallingView
                 Grid.Row="4"
                 Margin="8,3"
-                ActionProcessOutput="{Binding ActionProcessOutput}"
-                Visibility="{Binding IsInstalling, Converter={StaticResource Bool2Visibility}}" />
-            <main:PackageInfoView Grid.Row="3" Margin="3">
+                ActionProcessOutput="{Binding ActionProcessOutput, ElementName=UserControl}"
+                Visibility="{Binding IsInstalling, ElementName=UserControl, Converter={StaticResource Bool2Visibility}}" />
+            <main:PackageInfoView
+                Grid.Row="3"
+                Margin="3"
+                Package="{Binding Package, ElementName=UserControl}">
                 <main:PackageInfoView.Style>
                     <Style TargetType="{x:Type main:PackageInfoView}">
                         <Setter Property="Visibility" Value="Hidden" />
                         <Style.Triggers>
                             <MultiDataTrigger>
                                 <MultiDataTrigger.Conditions>
-                                    <Condition Binding="{Binding HasSelectedPackage}" Value="True" />
-                                    <Condition Binding="{Binding IsInstalling}" Value="False" />
+                                    <Condition Binding="{Binding HasSelectedPackage, ElementName=UserControl}" Value="True" />
+                                    <Condition Binding="{Binding IsInstalling, ElementName=UserControl}" Value="False" />
                                 </MultiDataTrigger.Conditions>
                                 <Setter Property="Visibility" Value="Visible" />
                             </MultiDataTrigger>

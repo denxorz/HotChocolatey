@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
     Height="32"
     d:DesignWidth="300"
     mc:Ignorable="d">
@@ -14,12 +15,12 @@
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             RenderOptions.BitmapScalingMode="HighQuality"
-            Source="{Binding SelectedPackage.Ico, IsAsync=true}" />
+            Source="{Binding Package.Ico, ElementName=UserControl, IsAsync=true}" />
         <TextBlock
             Margin="37,0,20,0"
             VerticalAlignment="Top"
             FontSize="18.667"
-            Text="{Binding SelectedPackage.Title}"
+            Text="{Binding Package.Title, ElementName=UserControl}"
             TextTrimming="WordEllipsis"
             TextWrapping="Wrap" />
     </Grid>

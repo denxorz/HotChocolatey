@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace HotChocolatey.View.Main
 {
-    public partial class PackageManager : UserControl
+    public partial class PackageManager
     {
         private bool done;
 
