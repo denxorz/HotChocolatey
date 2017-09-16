@@ -19,7 +19,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="200" />
             </Grid.RowDefinitions>
             <main:PackageTitle
                 Height="32"
@@ -62,7 +61,7 @@
             </main:PackageNotInstalledControl>
             <Separator Grid.Row="2" Margin="3" />
             <main:PackageInstallingView
-                Grid.Row="4"
+                Grid.Row="3"
                 Margin="8,3"
                 ActionProcessOutput="{Binding ActionProcessOutput, ElementName=UserControl}"
                 Visibility="{Binding IsInstalling, ElementName=UserControl, Converter={StaticResource Bool2Visibility}}" />

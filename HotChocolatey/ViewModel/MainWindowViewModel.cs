@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 using Denxorz.ObservableCollectionWithAddRange;
 using HotChocolatey.Model.Save;
 using PropertyChanged;
@@ -52,6 +53,8 @@ namespace HotChocolatey.ViewModel
         public ObservableCollectionEx<string> ActionProcessOutput { get; } = new ObservableCollectionEx<string>();
 
         public bool IncludePreReleases { get; set; }
+
+        private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
 
         public MainWindowViewModel()
         {
@@ -128,7 +131,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ApplyFilterAsync()
         {
-            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            using (new ProgressIndication(dispatcher, () => IsInProgress = true, () => IsInProgress = false))
             {
                 Packages.Clear();
                 await Filter.ApplySearchAsync(searchText);
@@ -171,19 +174,19 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             return ExecuteActionAsync(new UninstallAction(SelectedPackage));
         }
 
-        private Task ExecuteActionAsync(IAction action)
+        private async Task ExecuteActionAsync(IAction action)
         {
-            using (new ProgressIndication(() => IsInstalling = true, () => IsInstalling = false))
+            using (new ProgressIndication(dispatcher, () => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
-                action.Execute(chocoExecutor, SelectedVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                return chocoExecutor.UpdateAsync(packageRepo, nugetExecutor);
+                await Task.Run(() => action.Execute(chocoExecutor, SelectedVersion, outputLineCallback => dispatcher.Invoke(() => ActionProcessOutput.Add(outputLineCallback))));
+                await chocoExecutor.UpdateAsync(packageRepo, nugetExecutor);
             }
         }
 
         private async Task ExecuteRefreshCommandAsync()
         {
-            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            using (new ProgressIndication(dispatcher, () => IsInProgress = true, () => IsInProgress = false))
             {
                 await ClearSearchTextAsync();
                 await Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
@@ -192,7 +195,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private async Task ExecuteUpgradeAllCommandAsync()
         {
-            using (new ProgressIndication(() => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
+            using (new ProgressIndication(dispatcher, () => IsUserAllowedToExecuteActions = false, () => IsUserAllowedToExecuteActions = true))
             {
                 ActionProcessOutput.Clear();
                 Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
@@ -210,7 +213,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private void ExecuteImportCommand()
         {
-            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            using (new ProgressIndication(dispatcher, () => IsInProgress = true, () => IsInProgress = false))
             {
                 Microsoft.Win32.OpenFileDialog openDialog = new Microsoft.Win32.OpenFileDialog
                 {
@@ -240,7 +243,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private void ExecuteExportCommand()
         {
-            using (new ProgressIndication(() => IsInProgress = true, () => IsInProgress = false))
+            using (new ProgressIndication(dispatcher, () => IsInProgress = true, () => IsInProgress = false))
             {
                 Microsoft.Win32.SaveFileDialog saveDialog = new Microsoft.Win32.SaveFileDialog
                 {
