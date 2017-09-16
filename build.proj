@@ -9,6 +9,7 @@
     <BuildDirectoryFull>$(BuildDirectory)\$(Platform)\$(Configuration)</BuildDirectoryFull>
     <PackageDirectory>$(BuildDirectory)\Packages</PackageDirectory>
     <SolutionFile>$(BaseDirectory)\HotChocolatey.sln</SolutionFile>
+	<MSBuildExtensionsPath>C:\Program Files (x86)\MSBuild</MSBuildExtensionsPath>
     <MSBuildCommunityTasksPath>$(MSBuildExtensionsPath)\MSBuildCommunityTasks\</MSBuildCommunityTasksPath>
     <NuSpecFileName>hot-chocolatey.nuspec</NuSpecFileName>
   </PropertyGroup>

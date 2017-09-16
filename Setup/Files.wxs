@@ -2,6 +2,14 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="INSTALLFOLDER">
+            <Component Id="cmp8F4493D622AF8D7BA9C4E0130BB74EDF" Guid="*">
+                <File Id="fil24C9223135FA6C4076D684D8F070DBB3" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\chocolatey.dll" />
+            </Component>
+            
+            
+            <Component Id="cmp29DE3EF3A9E7AA4B86B326EAB205E865" Guid="*">
+                <File Id="fil4921259FC61C9E2677B213A20995EB1A" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Denxorz.ObservableCollectionWithAddRange.dll" />
+            </Component>
             <Component Id="cmp0BFABD100B4065787B40AA6B05938DF7" Guid="*">
                 <File Id="fil1D38723F4A034EDE78B6A3B94EFB99F2" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\EntityFramework.dll" />
             </Component>
@@ -41,9 +49,6 @@
                 <File Id="fil90A8AAD9FC612906D405476D61CEA3F4" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\Newtonsoft.Json.dll" />
             </Component>
             
-            <Component Id="cmpD8ED47FF6591F8F1ED1E985908501E99" Guid="*">
-                <File Id="fil0540360A001828220104A8C4C08B4247" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\NuGet.Core.dll" />
-            </Component>
             <Component Id="cmp500CA3705286FD445CCE30C39680D174" Guid="*">
                 <File Id="filE48D2CB12197FD7CE8FC4808047A3190" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\SharpVectors.Converters.dll" />
             </Component>
@@ -74,6 +79,7 @@
             <Component Id="cmp6B7CE49F5F3A518047B74FB6AC2251C5" Guid="*">
                 <File Id="fil86030949C08D40073D1F77D572C14B0D" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\System.Data.SQLite.dll" />
             </Component>
+            
             <Component Id="cmpF0779F15EC19A57BE1B2F861D7DE696E" Guid="*">
                 <File Id="filFCD462E7D1690B3E0A1EC55BB1B7FE6B" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\System.Data.SQLite.EF6.dll" />
             </Component>
@@ -154,6 +160,10 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="ProductComponents">
+            <ComponentRef Id="cmp8F4493D622AF8D7BA9C4E0130BB74EDF" />
+            
+            
+            <ComponentRef Id="cmp29DE3EF3A9E7AA4B86B326EAB205E865" />
             <ComponentRef Id="cmp0BFABD100B4065787B40AA6B05938DF7" />
             <ComponentRef Id="cmpB8E7B130B6B78399B39307530A3D65B2" />
             
@@ -175,7 +185,6 @@
             <ComponentRef Id="cmp04982E72D3E0ED6FFEAFD6276278CC36" />
             <ComponentRef Id="cmpBC4FC00A26E7D32479D42D3411317FC5" />
             
-            <ComponentRef Id="cmpD8ED47FF6591F8F1ED1E985908501E99" />
             <ComponentRef Id="cmp500CA3705286FD445CCE30C39680D174" />
             <ComponentRef Id="cmp3B4FCC07CAECDB94A069031BC168324E" />
             <ComponentRef Id="cmp08EEC311E7471131DD9C48756161618E" />
@@ -186,6 +195,7 @@
             <ComponentRef Id="cmpC74E4CAB1BA03B4AE3EB7009DFBED55E" />
             <ComponentRef Id="cmp4474F3CCA6E80FA31F0BFA4995A83341" />
             <ComponentRef Id="cmp6B7CE49F5F3A518047B74FB6AC2251C5" />
+            
             <ComponentRef Id="cmpF0779F15EC19A57BE1B2F861D7DE696E" />
             <ComponentRef Id="cmp7CD8A031D36A447486DB78F3F83272E7" />
             

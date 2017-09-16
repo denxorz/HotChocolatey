@@ -1,3 +1,8 @@
+v 6.0.0
+* Speed improvements
+* No longer calling choco as command, but executing the method from chocolatey.lib
+* Links now work
+
 v 5.0.0
 * Added ability to share which programs are installed
 * Filter on shared programs
