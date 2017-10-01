@@ -479,6 +479,9 @@
   <ItemGroup>
     <Resource Include="Hot Chocolate-96.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Hot Chocolate-96_black.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow
+﻿<Window
     x:Class="HotChocolatey.View.Main.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -17,13 +17,12 @@
     Height="720"
     BorderBrush="{DynamicResource AccentColorBrush}"
     BorderThickness="1"
-    Icon="pack://application:,,,/Hot Chocolate-96.ico"
-    IconScalingMode="NoScaleSmallerFrame"
+    Icon="pack://application:,,,/Hot Chocolate-96_black.ico"
     Loaded="OnLoaded"
     mc:Ignorable="d">
-    <controls:MetroWindow.DataContext>
+    <Window.DataContext>
         <viewModel:MainWindowViewModel />
-    </controls:MetroWindow.DataContext>
+    </Window.DataContext>
 
     <Window.Resources>
         <local:BooleanToTaskbarStateConverter x:Key="Bool2TaskbarState" />
@@ -173,4 +172,4 @@
         </controls:HamburgerMenu>
 
     </Grid>
-</controls:MetroWindow>
+</Window>
