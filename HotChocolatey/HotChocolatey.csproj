@@ -42,7 +42,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>View\Hot Chocolate-96.ico</ApplicationIcon>
+    <ApplicationIcon>Hot Chocolate-96.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoDependencyPropertyMarker, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -440,9 +440,6 @@
     <Resource Include="Images\Logos\Hot Chocolate-96.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Hot Chocolate-96.ico" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Logos\mahapps.metro.logo2.png" />
   </ItemGroup>
   <ItemGroup>
@@ -483,6 +480,9 @@
     <Resource Include="Images\Logos\ef.png" />
     <Resource Include="Images\Logos\nugetlogo.png" />
     <Resource Include="Images\Logos\sqlite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Hot Chocolate-96.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

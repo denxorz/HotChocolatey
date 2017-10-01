@@ -12,7 +12,7 @@
     Height="800"
     BorderBrush="{DynamicResource AccentColorBrush}"
     BorderThickness="1"
-    Icon="pack://application:,,,/View/Hot Chocolate-96.ico"
+    Icon="pack://application:,,,/Hot Chocolate-96.ico"
     IconScalingMode="NoScaleSmallerFrame"
     Loaded="OnLoaded"
     WindowState="Maximized"
