@@ -1,15 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using HotChocolatey.View.About;
-using MahApps.Metro.Controls;
 
 namespace HotChocolatey.View.Main
 {
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+            HamburgerMenuControl.SelectedIndex = 0;
         }
 
         private void OnToolBarLoaded(object sender, RoutedEventArgs e)
@@ -27,23 +26,10 @@ namespace HotChocolatey.View.Main
             }
         }
 
-        private void OnAboutButtonClick(object sender, RoutedEventArgs e)
-        {
-            var about = new AboutWindow { Owner = this };
-            about.ShowDialog();
-        }
-
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
             ((ViewModel.MainWindowViewModel)DataContext).Loaded();
-        }
-
-        private void OnSettingsButtonClick(object sender, RoutedEventArgs e)
-        {
-            var window = new Settings.SettingsWindow { Owner = this };
-
-            window.ShowDialog();
         }
     }
 }

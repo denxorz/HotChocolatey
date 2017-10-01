@@ -77,6 +77,9 @@
     <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.1.9.1\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    </Reference>
     <Reference Include="Markdig, Version=0.13.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Markdig.0.13.3\lib\net40\Markdig.dll</HintPath>
     </Reference>
@@ -232,8 +235,8 @@
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
     <Compile Include="View\DesignTimeContext.cs" />
     <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
-    <Compile Include="View\About\AboutWindow.xaml.cs">
-      <DependentUpon>AboutWindow.xaml</DependentUpon>
+    <Compile Include="View\About\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\About\AboutItem.xaml.cs">
       <DependentUpon>AboutItem.xaml</DependentUpon>
@@ -243,6 +246,7 @@
     </Compile>
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\LongToNumberWithPrefixMultiplierConverter.cs" />
+    <Compile Include="View\Main\SelectedItemToContentConverter.cs" />
     <Compile Include="View\Main\PackageInfoView.xaml.cs">
       <DependentUpon>PackageInfoView.xaml</DependentUpon>
     </Compile>
@@ -262,13 +266,13 @@
     <Compile Include="View\ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Settings\SettingsWindow.xaml.cs">
-      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    <Compile Include="View\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Main\VersionInfo.xaml.cs">
       <DependentUpon>VersionInfo.xaml</DependentUpon>
     </Compile>
-    <Page Include="View\About\AboutWindow.xaml">
+    <Page Include="View\About\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -333,7 +337,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Settings\SettingsWindow.xaml">
+    <Page Include="View\Settings\SettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -406,16 +410,10 @@
     <Resource Include="Images\Windows10\Ok-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\Windows10\About-32.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Windows10\Multiple Inputs-32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Windows10\Page Overview 2-32.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Windows10\Services-32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Windows10\Refresh-32.png" />
@@ -453,9 +451,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logos\packageReSharper.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\Windows10\Command Line-32.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Logos\svg-logo-v.png" />

@@ -1,24 +1,18 @@
-﻿<controls:MetroWindow
+﻿<UserControl
     x:Class="HotChocolatey.View.Settings.SettingsWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:view="clr-namespace:HotChocolatey.View"
     xmlns:viewModel="clr-namespace:HotChocolatey.ViewModel"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    Title="Settings"
-    Width="500"
-    Height="500"
-    BorderBrush="{DynamicResource AccentColorBrush}"
-    BorderThickness="1"
-    Closing="OnClosing"
+    Foreground="{DynamicResource TextBrush}"
     Loaded="OnLoaded"
     mc:Ignorable="d">
-    <controls:MetroWindow.DataContext>
+    <UserControl.DataContext>
         <viewModel:SettingsWindowsViewModel />
-    </controls:MetroWindow.DataContext>
+    </UserControl.DataContext>
     <Grid>
         <view:ProgressIndicatorView>
             <view:ProgressIndicatorView.Style>
@@ -52,4 +46,4 @@
             </xctk:PropertyGrid.Style>
         </xctk:PropertyGrid>
     </Grid>
-</controls:MetroWindow>
+</UserControl>

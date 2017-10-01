@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
 using System.Windows;
-using MahApps.Metro.Controls;
 
 namespace HotChocolatey.View.Settings
 {
-    public partial class SettingsWindow : MetroWindow
+    public partial class SettingsWindow
     {
         public SettingsWindow()
         {

@@ -12,6 +12,7 @@
     BorderBrush="#4C808080"
     BorderThickness="1"
     DataContextChanged="OnDataContextChanged"
+    Foreground="{DynamicResource TextBrush}"
     mc:Ignorable="d">
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
@@ -98,10 +99,10 @@
                 x:Name="PackageControl"
                 Grid.Column="2"
                 MinWidth="250"
-                IsInstalling="{Binding IsInstalling}"
-                HasSelectedPackage="{Binding HasSelectedPackage}"
                 ActionProcessOutput="{Binding ActionProcessOutput}"
+                HasSelectedPackage="{Binding HasSelectedPackage}"
                 InstallCommand="{Binding InstallCommand}"
+                IsInstalling="{Binding IsInstalling}"
                 Package="{Binding SelectedPackage}"
                 UninstallCommand="{Binding UninstallCommand}"
                 UpdateCommand="{Binding UpdateCommand}"
