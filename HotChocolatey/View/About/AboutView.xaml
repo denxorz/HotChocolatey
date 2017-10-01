@@ -24,17 +24,17 @@
             Text="Hot chocolatey"
             TextWrapping="Wrap" />
         <TextBlock
-            Width="503"
+            Width="550"
             Margin="78,78,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Visual Studio 2015 inspired, unofficial, interface for the Windows package manager Chocolatey."
+            Text="Visual Studio NuGet inspired, unofficial, interface for the Windows package manager Chocolatey."
             TextWrapping="Wrap" />
         <TextBlock
             Margin="78,99,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Build by Denxorz"
+            Text="By Denxorz"
             TextWrapping="Wrap" />
         <TextBlock
             Margin="78,204,0,0"
@@ -95,7 +95,7 @@
             License="https://github.com/NuGet/Home/blob/dev/LICENSE.txt"
             Website="https://www.nuget.org/" />
         <about:AboutItem
-            Title="Visual Studio 2015"
+            Title="Visual Studio 2017"
             Width="350"
             Height="65"
             Margin="443,295,0,0"
