@@ -1,4 +1,8 @@
-﻿using HotChocolatey.Model;
+﻿using System;
+using System.Linq;
+using Denxorz.ObservableCollectionWithAddRange;
+using HotChocolatey.Model;
+using HotChocolatey.ViewModel.Ginnivan;
 using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
@@ -7,19 +11,42 @@ namespace HotChocolatey.ViewModel
     public class SettingsWindowsViewModel
     {
         public ChocoSettings Settings { get; private set; } = new ChocoSettings();
-        public bool IsLoading { get; private set; }
-        private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
+        public ObservableCollectionWithAddRange<ChocoFeature> Features { get; } = new ObservableCollectionWithAddRange<ChocoFeature>();
 
-        public void Loaded()
+        public DelegateCommand SaveCommand { get; }
+        public DelegateCommand CancelCommand { get; }
+
+        private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
+        private bool[] origionalFeatures;
+
+        public SettingsWindowsViewModel()
         {
-            IsLoading = true;
-            Settings = chocoExecutor.LoadSettings();
-            IsLoading = false;
+            SaveCommand = new DelegateCommand(Save);
+            CancelCommand = new DelegateCommand(Load);
         }
 
-        public void Closing()
+        public void Load()
+        {
+            Settings = chocoExecutor.LoadSettings();
+
+            var features = chocoExecutor.LoadFeatures();
+            origionalFeatures = features.Select(f => f.IsEnabled).ToArray();
+            Features.ClearAndAddRange(features);
+        }
+
+        public void Save()
         {
             chocoExecutor.SaveSettings(Settings);
+
+            if (Features.Count != origionalFeatures.Length) throw new NotSupportedException();
+
+            for (int i = 0; i < Features.Count; i++)
+            {
+                if (origionalFeatures[i] != Features[i].IsEnabled)
+                {
+                    chocoExecutor.SaveFeature(Features[i]);
+                }
+            }
         }
     }
 }

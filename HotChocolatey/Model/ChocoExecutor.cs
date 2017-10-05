@@ -48,19 +48,20 @@ namespace HotChocolatey.Model
             settings.CacheLocation = LoadSetting<string>("cacheLocation");
             settings.CommandExecutionTimeoutSeconds = LoadSetting<int>("commandExecutionTimeoutSeconds");
             settings.ContainsLegacyPackageInstalls = LoadSetting<bool>("containsLegacyPackageInstalls");
-            settings.Proxy.Address = LoadSetting<string>("proxy");
-            settings.Proxy.User = LoadSetting<string>("proxyUser");
-            settings.Proxy.Password = LoadSetting<string>("proxyPassword");
+            settings.Proxy = LoadSetting<string>("proxy");
+            settings.ProxyUser = LoadSetting<string>("proxyUser");
+            settings.ProxyPassword = LoadSetting<string>("proxyPassword");
+            settings.ProxyBypassList = LoadSetting<string>("proxyBypassList");
+            settings.ProxyBypassOnLocal = LoadSetting<bool>("proxyBypassOnLocal");
+            settings.WebRequestTimeoutSeconds = LoadSetting<int>("webRequestTimeoutSeconds");
+            return settings;
+        }
 
+        public List<ChocoFeature> LoadFeatures()
+        {
             var chocoTask = new LoadFeaturesChocoTask();
             chocoTask.Execute();
-
-            settings.ChecksumFiles = chocoTask.Features["checksumFiles"];
-            settings.AutoUninstaller = chocoTask.Features["autoUninstaller"];
-            settings.AllowGlobalConfirmation = chocoTask.Features["allowGlobalConfirmation"];
-            settings.FailOnAutoUninstaller = chocoTask.Features["failOnAutoUninstaller"];
-
-            return settings;
+            return chocoTask.Features;
         }
 
         private T LoadSetting<T>(string name)
@@ -75,14 +76,17 @@ namespace HotChocolatey.Model
             new SaveSettingsChocoTask("cacheLocation", settings.CacheLocation).Execute();
             new SaveSettingsChocoTask("commandExecutionTimeoutSeconds", settings.CommandExecutionTimeoutSeconds).Execute();
             new SaveSettingsChocoTask("containsLegacyPackageInstalls", settings.ContainsLegacyPackageInstalls).Execute();
-            new SaveSettingsChocoTask("proxy", settings.Proxy.Address).Execute();
-            new SaveSettingsChocoTask("proxyUser", settings.Proxy.User).Execute();
-            new SaveSettingsChocoTask("proxyPassword", settings.Proxy.Password).Execute();
+            new SaveSettingsChocoTask("proxy", settings.Proxy).Execute();
+            new SaveSettingsChocoTask("proxyUser", settings.ProxyUser).Execute();
+            new SaveSettingsChocoTask("proxyPassword", settings.ProxyPassword).Execute();
+            new SaveSettingsChocoTask("proxyBypassList", settings.ProxyBypassList).Execute();
+            new SaveSettingsChocoTask("proxyBypassOnLocal", settings.ProxyBypassOnLocal).Execute();
+            new SaveSettingsChocoTask("webRequestTimeoutSeconds", settings.WebRequestTimeoutSeconds).Execute();
+        }
 
-            new SaveFeatureChocoTask("checksumFiles", settings.ChecksumFiles).Execute();
-            new SaveFeatureChocoTask("autoUninstaller", settings.AutoUninstaller).Execute();
-            new SaveFeatureChocoTask("allowGlobalConfirmation", settings.AllowGlobalConfirmation).Execute();
-            new SaveFeatureChocoTask("failOnAutoUninstaller", settings.FailOnAutoUninstaller).Execute();
+        public void SaveFeature(ChocoFeature feature)
+        {
+            new SaveFeatureChocoTask(feature.Name, feature.IsEnabled).Execute();
         }
     }
 }

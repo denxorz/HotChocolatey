@@ -1,7 +1,6 @@
 using System;
 using chocolatey.infrastructure.app.configuration;
 using chocolatey.infrastructure.app.runners;
-using chocolatey.infrastructure.commands;
 using chocolatey.infrastructure.registration;
 
 namespace HotChocolatey.Model.ChocoTask

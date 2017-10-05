@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace HotChocolatey.View.Settings
 {
@@ -13,13 +12,7 @@ namespace HotChocolatey.View.Settings
         private void OnLoaded(object sender, RoutedEventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            ((ViewModel.SettingsWindowsViewModel)DataContext).Loaded();
-        }
-
-        private void OnClosing(object sender, CancelEventArgs e)
-        {
-            // TODO : Not really neat, but good enough for now
-            ((ViewModel.SettingsWindowsViewModel)DataContext).Closing();
+            ((ViewModel.SettingsWindowsViewModel)DataContext).Load();
         }
     }
 }

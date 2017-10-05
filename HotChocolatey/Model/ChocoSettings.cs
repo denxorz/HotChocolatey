@@ -1,16 +1,9 @@
 ﻿using System.ComponentModel;
-using Xceed.Wpf.Toolkit.PropertyGrid.Attributes;
 
 namespace HotChocolatey.Model
 {
-    [DisplayName("Chocolatey Settings")]
     public class ChocoSettings
     {
-        public ChocoSettings()
-        {
-            Proxy = new ProxySettings();
-        }
-
         [DisplayName("Cache location")]
         public string CacheLocation { get; set; }
 
@@ -20,31 +13,11 @@ namespace HotChocolatey.Model
         [DisplayName("Contains legacy package installs")]
         public bool ContainsLegacyPackageInstalls { get; set; }
 
-        [DisplayName("Checksum files")]
-        public bool ChecksumFiles { get; set; }
-
-        [DisplayName("Auto uninstaller")]
-        public bool AutoUninstaller { get; set; }
-
-        [DisplayName("Allow global confirmation")]
-        public bool AllowGlobalConfirmation { get; set; }
-
-        [DisplayName("Fail on auto uninstaller")]
-        public bool FailOnAutoUninstaller { get; set; }
-
-        [ExpandableObject]
-        public ProxySettings Proxy { get; set; }
-    }
-
-    public class ProxySettings
-    {
-        public string Address { get; set; }
-        public string User { get; set; }
-        public string Password { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Address} - {User}";
-        }
+        public int WebRequestTimeoutSeconds { get; set; }
+        public string Proxy { get; set; }
+        public string ProxyUser { get; set; }
+        public string ProxyPassword { get; set; }
+        public string ProxyBypassList { get; set; }
+        public bool ProxyBypassOnLocal { get; set; }
     }
 }

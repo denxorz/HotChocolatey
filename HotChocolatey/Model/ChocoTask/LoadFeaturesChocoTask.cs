@@ -6,7 +6,7 @@ namespace HotChocolatey.Model.ChocoTask
 {
     internal class LoadFeaturesChocoTask : BaseChocoTask
     {
-        public Dictionary<string, bool> Features { get; } = new Dictionary<string, bool>();
+        public List<ChocoFeature> Features { get; } = new List<ChocoFeature>();
 
         public LoadFeaturesChocoTask()
         {
@@ -18,8 +18,8 @@ namespace HotChocolatey.Model.ChocoTask
 
         private void ParseFeature(string outputLine)
         {
-            var feature = outputLine.Split('|', '-');
-            Features[feature[0].Trim()] = feature[1].Trim() == "[Enabled]";
+            var feature = outputLine.Split('|');
+            Features.Add(new ChocoFeature(feature[0].Trim(), feature[2].Trim(), feature[1].Trim() == "Enabled"));
         }
     }
 }

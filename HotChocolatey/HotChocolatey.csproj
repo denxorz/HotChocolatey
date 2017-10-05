@@ -203,6 +203,7 @@
     <Compile Include="Model\ChocoTask\BaseChocoTask.cs" />
     <Compile Include="Model\ChocoExecutor.cs" />
     <Compile Include="Model\ChocoTask\ChocoCommunication.cs" />
+    <Compile Include="Model\ChocoFeature.cs" />
     <Compile Include="Model\ChocoTask\InstallChocoTask.cs" />
     <Compile Include="Model\ChocoTask\LoadFeaturesChocoTask.cs" />
     <Compile Include="Model\ChocoTask\LoadSettingChocoTask.cs" />
@@ -265,6 +266,9 @@
     <Compile Include="View\Main\SvgViewboxAttachedProperties.cs" />
     <Compile Include="View\ProgressIndicatorView.xaml.cs">
       <DependentUpon>ProgressIndicatorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Settings\SettingsFeatureListItem.xaml.cs">
+      <DependentUpon>SettingsFeatureListItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Settings\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
@@ -334,6 +338,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ProgressIndicatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Settings\SettingsFeatureListItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

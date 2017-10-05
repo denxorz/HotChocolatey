@@ -1,0 +1,32 @@
+﻿<UserControl
+    x:Class="HotChocolatey.View.Settings.SettingsFeatureListItem"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
+    Height="80"
+    mc:Ignorable="d">
+
+    <Grid DataContext="{Binding Feature, ElementName=UserControl}">
+        <TextBlock
+            Height="19"
+            Margin="82,10,10,0"
+            VerticalAlignment="Top"
+            FontWeight="Bold"
+            Text="{Binding Name}" />
+
+        <TextBlock
+            Margin="82,29,10,10"
+            Text="{Binding Description}"
+            TextWrapping="Wrap" />
+
+        <controls:ToggleSwitch
+            Height="26"
+            Margin="5,11,211,0"
+            VerticalAlignment="Top"
+            IsChecked="{Binding IsEnabled}"
+            Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
+    </Grid>
+</UserControl>
