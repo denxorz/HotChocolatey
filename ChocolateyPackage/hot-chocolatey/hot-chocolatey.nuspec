@@ -28,16 +28,16 @@ Install location
 
 Hot Chocolatey will be installed on it's default location %ProgramFiles(x86)%\HotChocolatey\.
     </description>
-    <projectUrl>https://gitlab.com/jjb3/HotChocolatey</projectUrl>
-    <packageSourceUrl>https://gitlab.com/jjb3/HotChocolatey/tree/master</packageSourceUrl>
-    <projectSourceUrl>https://gitlab.com/jjb3/HotChocolatey/tree/master</projectSourceUrl>
-    <docsUrl>https://gitlab.com/jjb3/HotChocolatey</docsUrl>
-    <bugTrackerUrl>https://gitlab.com/jjb3/HotChocolatey/issues</bugTrackerUrl>
+    <projectUrl>https://github.com/denxorz/HotChocolatey</projectUrl>
+    <packageSourceUrl>https://github.com/denxorz/HotChocolatey</packageSourceUrl>
+    <projectSourceUrl>https://github.com/denxorz/HotChocolatey</projectSourceUrl>
+    <docsUrl>https://github.com/denxorz/HotChocolatey</docsUrl>
+    <bugTrackerUrl>https://github.com/denxorz/HotChocolatey/issues</bugTrackerUrl>
     <tags>admin hot-chocolatey HotChocolatey GUI PackageManager interface Denxorz</tags>
     <copyright></copyright>
-    <licenseUrl>https://gitlab.com/jjb3/HotChocolatey/blob/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/denxorz/HotChocolatey/blob/master/LICENSE.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <iconUrl>https://gitlab.com/jjb3/HotChocolatey/raw/master/HotChocolatey/Images/Logos/Hot%20Chocolate-96.png</iconUrl>
+    <iconUrl>https://github.com/denxorz/HotChocolatey/raw/master/HotChocolatey/Images/Logos/Hot%20Chocolate-96.png</iconUrl>
     <dependencies>
       <dependency id="chocolatey" version="0.9.9" />
     </dependencies>

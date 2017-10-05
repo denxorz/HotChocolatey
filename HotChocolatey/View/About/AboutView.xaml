@@ -53,7 +53,7 @@
             VerticalAlignment="Top"
             IconSource="pack://application:,,,/Images/Logos/Hot Chocolate-96.png"
             License=""
-            Website="https://gitlab.com/jjb3/HotChocolatey/" />
+            Website="https://github.com/denxorz/HotChocolatey" />
         <about:AboutItem
             Title="Chocolatey"
             Width="350"
