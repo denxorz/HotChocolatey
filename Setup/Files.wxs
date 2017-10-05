@@ -36,6 +36,11 @@
             <Component Id="cmp223D4754378C01052DA8253A843FD297" Guid="*">
                 <File Id="filBC562C5B3D9848A2114F0AF7275FF1E6" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\MahApps.Metro.dll" />
             </Component>
+            <Component Id="cmp4C14B76F9B61832734CB583BE75D62F3" Guid="*">
+                <File Id="filDD48E7D6642DB50D7244AD380D7CCEF3" KeyPath="yes" Source="$(var.HotChocolatey.TargetDir)\MahApps.Metro.IconPacks.Material.dll" />
+            </Component>
+            
+            
             
             
             <Component Id="cmp6C36974A0EA2E9B5CFE90BF192DD9FEC" Guid="*">
@@ -178,6 +183,9 @@
             <ComponentRef Id="cmp13D58469BCB864EB53214ED46E622188" />
             
             <ComponentRef Id="cmp223D4754378C01052DA8253A843FD297" />
+            <ComponentRef Id="cmp4C14B76F9B61832734CB583BE75D62F3" />
+            
+            
             
             
             <ComponentRef Id="cmp6C36974A0EA2E9B5CFE90BF192DD9FEC" />
