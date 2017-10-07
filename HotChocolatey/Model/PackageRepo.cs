@@ -8,6 +8,17 @@ namespace HotChocolatey.Model
         private readonly object installedPackagesLock = new object();
         private readonly Dictionary<string, Package> installedPackages = new Dictionary<string, Package>();
 
+        public int NumberOfUpgradesAvailable
+        {
+            get
+            {
+                lock (installedPackagesLock)
+                {
+                    return installedPackages.Values.Count(p => p.IsUpgradable);
+                }
+            }
+        }
+
         public Package GetPackage(string id)
         {
             lock (installedPackagesLock)

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Threading;
+using Windows.UI.Notifications;
 using Denxorz.ObservableCollectionWithAddRange;
 using HotChocolatey.Model.Save;
 using PropertyChanged;
@@ -24,6 +25,7 @@ namespace HotChocolatey.ViewModel
 
         private string searchText = string.Empty;
 
+        public event EventHandler RequestBringToFront;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Action ClearSearchBox { get; internal set; }
@@ -105,10 +107,34 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         public void Loaded()
         {
-            Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor));
+            Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor))
+                .ContinueWith(t => NotifyNumberOfUpdates());
 
             Filters.AddRange(PackageDisplayTypeFactory.BuildDisplayTypes(packageRepo, nugetExecutor, chocoExecutor));
             Filter = Filters.First();
+        }
+
+        private void NotifyNumberOfUpdates()
+        {
+            var updates = packageRepo.NumberOfUpgradesAvailable;
+            if (updates > 0)
+            {
+                var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+                var stringElements = toastXml.GetElementsByTagName("text");
+
+                stringElements[0].AppendChild(toastXml.CreateTextNode($"{packageRepo.NumberOfUpgradesAvailable} updates available"));
+                stringElements[1].AppendChild(toastXml.CreateTextNode("Click here to view the updates."));
+
+                var toast = new ToastNotification(toastXml);
+                toast.Activated += ToastActivated;
+
+                ToastNotificationManager.CreateToastNotifier("Denxorz.HotChocolatey").Show(toast);
+            }
+        }
+
+        private void ToastActivated(ToastNotification sender, object e)
+        {
+            dispatcher.Invoke(() => RequestBringToFront?.Invoke(this, EventArgs.Empty));
         }
 
         public async Task ClearSearchTextAsync()
@@ -268,5 +294,6 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         {
             await ClearSearchTextAsync();
         }
+
     }
 }

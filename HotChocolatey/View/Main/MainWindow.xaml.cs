@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace HotChocolatey.View.Main
@@ -30,6 +31,24 @@ namespace HotChocolatey.View.Main
         {
             // TODO : Not really neat, but good enough for now
             ((ViewModel.MainWindowViewModel)DataContext).Loaded();
+            ((ViewModel.MainWindowViewModel) DataContext).RequestBringToFront += RequestBringToFront;
+        }
+
+        private void RequestBringToFront(object sender, EventArgs e)
+        {
+            if (!IsVisible)
+            {
+                Show();
+            }
+
+            if (WindowState == WindowState.Minimized)
+            {
+                WindowState = WindowState.Normal;
+            }
+
+            Activate();
+            Topmost = true;  // important
+            Topmost = false; // important
         }
     }
 }
