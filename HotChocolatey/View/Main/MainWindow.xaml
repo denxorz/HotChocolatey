@@ -17,6 +17,7 @@
     Height="720"
     BorderBrush="{DynamicResource AccentColorBrush}"
     BorderThickness="1"
+    Closing="OnClosing"
     Icon="pack://application:,,,/Hot Chocolate-96_black.ico"
     Loaded="OnLoaded"
     mc:Ignorable="d">
