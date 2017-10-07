@@ -34,7 +34,7 @@
             Margin="78,99,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="By Denxorz"
+            Text="Copyright © 2017 Denxorz"
             TextWrapping="Wrap" />
         <TextBlock
             Margin="78,204,0,0"
@@ -195,15 +195,15 @@
             License="https://opensource.org/licenses/MS-PL"
             Website="http://mahapps.com/" />
         <about:AboutItem
-            Title="Entity Framework"
+            Title="Entity Framework Core Sqlite"
             Width="350"
             Height="65"
             Margin="808,505,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             IconSource="pack://application:,,,/Images/Logos/ef.png"
-            License="https://www.microsoft.com/web/webpi/eula/net_library_eula_enu.htm"
-            Website="https://msdn.microsoft.com/en-us/data/ef" />
+            License="https://raw.githubusercontent.com/aspnet/Home/2.0.0/LICENSE.txt"
+            Website="https://www.asp.net/" />
         <about:AboutItem
             Title="Extended WPF Toolkit"
             Width="350"
@@ -224,16 +224,6 @@
             IconSource="pack://application:,,,/Images/Logos/packageReSharper.png"
             License="https://www.jetbrains.com/buy/opensource/?product=resharper"
             Website="https://www.jetbrains.com/resharper/" />
-        <about:AboutItem
-            Title="System.Data.SQLite"
-            Width="350"
-            Height="65"
-            Margin="808,575,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/sqlite.png"
-            License="https://system.data.sqlite.org/index.html/doc/trunk/www/copyright.wiki"
-            Website="https://system.data.sqlite.org" />
         <TextBlock
             x:Name="versionTextBlock"
             Width="70"

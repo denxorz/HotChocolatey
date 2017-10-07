@@ -13,6 +13,6 @@ namespace HotChocolatey.Model.Save
 
         public string Name { get; set; }
 
-        public virtual ICollection<InstalledPackage> InstalledPackages { get; set; }
+        public List<InstalledPackage> InstalledPackages { get; set; }
     }
 }
