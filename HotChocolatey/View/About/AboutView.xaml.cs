@@ -4,10 +4,11 @@ namespace HotChocolatey.View.About
 {
     public partial class AboutWindow
     {
+        public string Version { get; } = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
         public AboutWindow()
         {
             InitializeComponent();
-            versionTextBlock.Text = Assembly.GetCallingAssembly().GetName().Version.ToString();
         }
     }
 }

@@ -5,6 +5,7 @@
     xmlns:about="clr-namespace:HotChocolatey.View.About"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="UserControl"
     Foreground="{DynamicResource TextBrush}"
     mc:Ignorable="d">
     <Grid>
@@ -225,13 +226,12 @@
             License="https://www.jetbrains.com/buy/opensource/?product=resharper"
             Website="https://www.jetbrains.com/resharper/" />
         <TextBlock
-            x:Name="versionTextBlock"
             Width="70"
             Margin="0,10,10,0"
             HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Foreground="Gray"
-            Text="TextBlock"
+            Text="{Binding Version, ElementName=UserControl}"
             TextWrapping="Wrap" />
     </Grid>
 </UserControl>

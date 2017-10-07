@@ -60,7 +60,7 @@ namespace HotChocolatey.ViewModel
         {
             Log.ResetSettings(true, true);
             Log.Info($@"---
-Version:{Assembly.GetCallingAssembly().GetName().Version}
+Version:{Assembly.GetExecutingAssembly().GetName().Version}
 MachineName:{Environment.MachineName}
 OSVersion:{Environment.OSVersion}
 Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
