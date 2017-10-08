@@ -269,6 +269,7 @@
     <Compile Include="Model\ChocoTask\LoadFeaturesChocoTask.cs" />
     <Compile Include="Model\ChocoTask\LoadSettingChocoTask.cs" />
     <Compile Include="Model\ChocoTask\SaveFeatureChocoTask.cs" />
+    <Compile Include="Model\HotChocolateyFeatures.cs" />
     <Compile Include="Model\InstallAction.cs" />
     <Compile Include="Model\NuGetExecutor.cs" />
     <Compile Include="Model\PackageRepo.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Model\ChocoTask\UpdateOutdatedFlagsChocoTask.cs" />
     <Compile Include="Model\ChocoTask\UpgradeChocoTask.cs" />
     <Compile Include="Model\ChocoTask\SaveSettingsChocoTask.cs" />
+    <Compile Include="Model\WindowsStartup.cs" />
     <Compile Include="Model\Save\ExportExecutor.cs" />
     <Compile Include="Model\Save\InstalledPackage.cs" />
     <Compile Include="Model\Save\ListContext.cs" />

@@ -13,6 +13,7 @@ using Windows.UI.Notifications;
 using Denxorz.ObservableCollectionWithAddRange;
 using HotChocolatey.Model.Save;
 using PropertyChanged;
+using Settings = HotChocolatey.Properties.Settings;
 
 namespace HotChocolatey.ViewModel
 {
@@ -71,6 +72,13 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             System.Windows.Application.Current.DispatcherUnhandledException += (s, e) => Log.Error($"DispatcherUnhandledException: {e.Exception}");
 #endif
 
+            if (Settings.Default.UpdateRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpdateRequired = false;
+                Settings.Default.Save();
+            }
+
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommandAsync);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommandAsync);
             InstallCommand = new AwaitableDelegateCommand(ExecuteInstallCommandAsync);
@@ -116,6 +124,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private void NotifyNumberOfUpdates()
         {
+            if (!Settings.Default.ShowNotifications) return;
+
             var updates = packageRepo.NumberOfUpgradesAvailable;
             if (updates > 0)
             {

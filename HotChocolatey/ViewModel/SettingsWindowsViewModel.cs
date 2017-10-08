@@ -11,13 +11,16 @@ namespace HotChocolatey.ViewModel
     public class SettingsWindowsViewModel
     {
         public ChocoSettings Settings { get; private set; } = new ChocoSettings();
-        public ObservableCollectionWithAddRange<ChocoFeature> Features { get; } = new ObservableCollectionWithAddRange<ChocoFeature>();
+        public ObservableCollectionWithAddRange<ChocoFeature> ChocolateyFeatures { get; } = new ObservableCollectionWithAddRange<ChocoFeature>();
+        public ObservableCollectionWithAddRange<ChocoFeature> HotChocolateyFeatures { get; } = new ObservableCollectionWithAddRange<ChocoFeature>();
 
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
 
         private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
-        private bool[] origionalFeatures;
+        private readonly HotChocolateyFeatures hotChocolateyFeatures = new HotChocolateyFeatures();
+        private bool[] origionalChocolateyFeatures;
+        private bool[] origionalHotChocolateyFeatures;
 
         public SettingsWindowsViewModel()
         {
@@ -29,24 +32,38 @@ namespace HotChocolatey.ViewModel
         {
             Settings = chocoExecutor.LoadSettings();
 
-            var features = chocoExecutor.LoadFeatures();
-            origionalFeatures = features.Select(f => f.IsEnabled).ToArray();
-            Features.ClearAndAddRange(features);
+            var chocolateyFeatures = chocoExecutor.LoadFeatures();
+            origionalChocolateyFeatures = chocolateyFeatures.Select(f => f.IsEnabled).ToArray();
+            ChocolateyFeatures.ClearAndAddRange(chocolateyFeatures);
+
+            var loadedHotChocolateyFeatures = hotChocolateyFeatures.LoadFeatures();
+            origionalHotChocolateyFeatures = loadedHotChocolateyFeatures.Select(f => f.IsEnabled).ToArray();
+            HotChocolateyFeatures.ClearAndAddRange(loadedHotChocolateyFeatures);
         }
 
         public void Save()
         {
             chocoExecutor.SaveSettings(Settings);
 
-            if (Features.Count != origionalFeatures.Length) throw new NotSupportedException();
+            if (ChocolateyFeatures.Count != origionalChocolateyFeatures.Length) throw new NotSupportedException();
 
-            for (int i = 0; i < Features.Count; i++)
+            for (int i = 0; i < ChocolateyFeatures.Count; i++)
             {
-                if (origionalFeatures[i] != Features[i].IsEnabled)
+                if (origionalChocolateyFeatures[i] != ChocolateyFeatures[i].IsEnabled)
                 {
-                    chocoExecutor.SaveFeature(Features[i]);
+                    chocoExecutor.SaveFeature(ChocolateyFeatures[i]);
                 }
             }
+            origionalChocolateyFeatures = ChocolateyFeatures.Select(f => f.IsEnabled).ToArray();
+
+            for (int i = 0; i < HotChocolateyFeatures.Count; i++)
+            {
+                if (origionalHotChocolateyFeatures[i] != HotChocolateyFeatures[i].IsEnabled)
+                {
+                    hotChocolateyFeatures.SaveFeature(HotChocolateyFeatures[i]);
+                }
+            }
+            origionalHotChocolateyFeatures = HotChocolateyFeatures.Select(f => f.IsEnabled).ToArray();
         }
     }
 }

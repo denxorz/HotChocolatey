@@ -7,8 +7,8 @@
     xmlns:settings="clr-namespace:HotChocolatey.View.Settings"
     xmlns:viewModel="clr-namespace:HotChocolatey.ViewModel"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    d:DesignHeight="400"
-    d:DesignWidth="790"
+    d:DesignHeight="700"
+    d:DesignWidth="600"
     Foreground="{DynamicResource TextBrush}"
     Loaded="OnLoaded"
     mc:Ignorable="d">
@@ -20,9 +20,34 @@
     <Grid Name="Grid">
         <GroupBox
             Width="{Binding ElementName=Grid, Path=ActualWidth}"
+            Height="185"
+            MaxWidth="780"
+            Margin="5,5,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Header="Hot Chocolatey settings">
+            <ScrollViewer
+                Margin="-5"
+                BorderBrush="#4C808080"
+                BorderThickness="1"
+                VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding HotChocolateyFeatures}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">
+                                <settings:SettingsFeatureListItem Feature="{Binding}" />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </GroupBox>
+
+        <GroupBox
+            Width="{Binding ElementName=Grid, Path=ActualWidth}"
             Height="250"
             MaxWidth="780"
-            Margin="5"
+            Margin="5,195,-5,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
             Header="Chocolatey config">
@@ -40,7 +65,7 @@
         <GroupBox
             Width="{Binding ElementName=Grid, Path=ActualWidth}"
             MaxWidth="780"
-            Margin="5,260,5,40"
+            Margin="5,450,-5,40"
             HorizontalAlignment="Left"
             Header="Chocolatey features">
             <ScrollViewer
@@ -48,7 +73,7 @@
                 BorderBrush="#4C808080"
                 BorderThickness="1"
                 VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Features}">
+                <ItemsControl ItemsSource="{Binding ChocolateyFeatures}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">

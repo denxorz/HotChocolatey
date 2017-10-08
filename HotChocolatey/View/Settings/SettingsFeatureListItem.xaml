@@ -6,27 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="UserControl"
-    Height="80"
+    Height="50"
     mc:Ignorable="d">
 
     <Grid DataContext="{Binding Feature, ElementName=UserControl}">
+        <controls:ToggleSwitch
+            Height="26"
+            Margin="5,10,211,0"
+            VerticalAlignment="Top"
+            IsChecked="{Binding IsEnabled}"
+            Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
+
         <TextBlock
             Height="19"
-            Margin="82,10,10,0"
+            Margin="82,5,10,0"
             VerticalAlignment="Top"
             FontWeight="Bold"
             Text="{Binding Name}" />
 
         <TextBlock
-            Margin="82,29,10,10"
+            Margin="82,24,10,6"
             Text="{Binding Description}"
-            TextWrapping="Wrap" />
-
-        <controls:ToggleSwitch
-            Height="26"
-            Margin="5,11,211,0"
-            VerticalAlignment="Top"
-            IsChecked="{Binding IsEnabled}"
-            Style="{StaticResource MahApps.Metro.Styles.ToggleSwitch.Win10}" />
+            TextWrapping="Wrap"
+            ToolTip="{Binding Description}" />
     </Grid>
 </UserControl>

@@ -110,7 +110,13 @@ namespace HotChocolatey.View.Main
 
         private void OnClosing(object sender, CancelEventArgs e)
         {
-            if (!actualClose)
+            actualClose = actualClose || !Properties.Settings.Default.ExitToTray;
+            if (actualClose)
+            {
+                notifyIcon.Visible = false;
+                notifyIcon.Dispose();
+            }
+            else
             {
                 Hide();
                 e.Cancel = true;
