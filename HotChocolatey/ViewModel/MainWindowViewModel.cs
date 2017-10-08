@@ -57,7 +57,10 @@ namespace HotChocolatey.ViewModel
 
         public bool IncludePreReleases { get; set; }
 
-        private Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+        private readonly Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+
+        private readonly DispatcherTimer updateCheckTimer = new DispatcherTimer();
+        private int numberOfUpdatesLastCheck;
 
         public MainWindowViewModel()
         {
@@ -78,6 +81,10 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 Settings.Default.UpdateRequired = false;
                 Settings.Default.Save();
             }
+
+            updateCheckTimer.Interval = TimeSpan.FromHours(2);
+            updateCheckTimer.Tick += UpdateCheckTimer_Tick;
+            updateCheckTimer.Start();
 
             RefreshCommand = new AwaitableDelegateCommand(ExecuteRefreshCommandAsync);
             UpgradeAllCommand = new AwaitableDelegateCommand(ExecuteUpgradeAllCommandAsync);
@@ -115,36 +122,9 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         public void Initialized()
         {
-            Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor))
-                .ContinueWith(t => NotifyNumberOfUpdates());
-
+            UpdatePacakgeStates();
             Filters.AddRange(PackageDisplayTypeFactory.BuildDisplayTypes(packageRepo, nugetExecutor, chocoExecutor));
             Filter = Filters.First();
-        }
-
-        private void NotifyNumberOfUpdates()
-        {
-            if (!Settings.Default.ShowNotifications) return;
-
-            var updates = packageRepo.NumberOfUpgradesAvailable;
-            if (updates > 0)
-            {
-                var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-                var stringElements = toastXml.GetElementsByTagName("text");
-
-                stringElements[0].AppendChild(toastXml.CreateTextNode($"{packageRepo.NumberOfUpgradesAvailable} updates available"));
-                stringElements[1].AppendChild(toastXml.CreateTextNode("Click here to view the updates."));
-
-                var toast = new ToastNotification(toastXml);
-                toast.Activated += ToastActivated;
-
-                ToastNotificationManager.CreateToastNotifier("Denxorz.HotChocolatey").Show(toast);
-            }
-        }
-
-        private void ToastActivated(ToastNotification sender, object e)
-        {
-            dispatcher.Invoke(() => RequestBringToFront?.Invoke(this, EventArgs.Empty));
         }
 
         public async Task ClearSearchTextAsync()
@@ -305,5 +285,44 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             await ClearSearchTextAsync();
         }
 
+        private void UpdateCheckTimer_Tick(object sender, EventArgs e)
+        {
+            if (!Settings.Default.ShowNotifications) return;
+
+            UpdatePacakgeStates();
+        }
+
+        private void UpdatePacakgeStates()
+        {
+            Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor))
+                .ContinueWith(t => NotifyNumberOfUpdates());
+        }
+
+        private void NotifyNumberOfUpdates()
+        {
+            if (!Settings.Default.ShowNotifications) return;
+
+            var updates = packageRepo.NumberOfUpgradesAvailable;
+            if (updates > numberOfUpdatesLastCheck)
+            {
+                numberOfUpdatesLastCheck = updates;
+
+                var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+                var stringElements = toastXml.GetElementsByTagName("text");
+
+                stringElements[0].AppendChild(toastXml.CreateTextNode($"{packageRepo.NumberOfUpgradesAvailable} updates available"));
+                stringElements[1].AppendChild(toastXml.CreateTextNode("Hot Chocolatey found updates. Click here to view the updates."));
+
+                var toast = new ToastNotification(toastXml);
+                toast.Activated += ToastActivated;
+
+                ToastNotificationManager.CreateToastNotifier("Denxorz.HotChocolatey").Show(toast);
+            }
+        }
+
+        private void ToastActivated(ToastNotification sender, object e)
+        {
+            dispatcher.Invoke(() => RequestBringToFront?.Invoke(this, EventArgs.Empty));
+        }
     }
 }
