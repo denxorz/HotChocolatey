@@ -19,7 +19,7 @@
     BorderThickness="1"
     Closing="OnClosing"
     Icon="pack://application:,,,/Hot Chocolate-96_black.ico"
-    Loaded="OnLoaded"
+    Initialized="OnInitialized"
     mc:Ignorable="d">
     <Window.DataContext>
         <viewModel:MainWindowViewModel />

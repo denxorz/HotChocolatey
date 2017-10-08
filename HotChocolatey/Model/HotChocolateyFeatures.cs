@@ -36,7 +36,7 @@ namespace HotChocolatey.Model
                 Properties.Settings.Default.StartWithWindows = feature.IsEnabled;
                 Properties.Settings.Default.Save();
 
-                WindowsStartup.ChangeStartup("HotChocolatey", Assembly.GetExecutingAssembly().Location, feature.IsEnabled);
+                WindowsStartup.ChangeStartup("HotChocolatey", $"\"{Assembly.GetExecutingAssembly().Location}\" --trayOnly", feature.IsEnabled);
             }
         }
     }

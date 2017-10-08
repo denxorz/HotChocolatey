@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using Application = System.Windows.Application;
@@ -17,6 +18,16 @@ namespace HotChocolatey.View.Main
         {
             InitializeComponent();
             HamburgerMenuControl.SelectedIndex = 0;
+
+            CheckSilentMode();
+        }
+
+        private void CheckSilentMode()
+        {
+            if (Environment.GetCommandLineArgs().Contains("--trayOnly"))
+            {
+                Visibility = Visibility.Hidden;
+            }
         }
 
         private void OnToolBarLoaded(object sender, RoutedEventArgs e)
@@ -34,10 +45,10 @@ namespace HotChocolatey.View.Main
             }
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        private void OnInitialized(object sender, EventArgs e)
         {
             // TODO : Not really neat, but good enough for now
-            ((ViewModel.MainWindowViewModel)DataContext).Loaded();
+            ((ViewModel.MainWindowViewModel)DataContext).Initialized();
             ((ViewModel.MainWindowViewModel)DataContext).RequestBringToFront += RequestBringToFront;
 
             StartTrayTool();

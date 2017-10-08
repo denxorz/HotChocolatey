@@ -113,7 +113,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             };
         }
 
-        public void Loaded()
+        public void Initialized()
         {
             Task.Run(() => chocoExecutor.UpdateAsync(packageRepo, nugetExecutor))
                 .ContinueWith(t => NotifyNumberOfUpdates());
