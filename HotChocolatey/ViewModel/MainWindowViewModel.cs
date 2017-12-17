@@ -328,6 +328,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         public void Closing()
         {
             chocoExecutor.Close();
+            Settings.Default.Save();
         }
     }
 }

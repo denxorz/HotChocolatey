@@ -313,6 +313,7 @@
     <Compile Include="Administrative\IAdministrativeCommandAcceptorCallback.cs" />
     <Compile Include="ViewModel\SettingsWindowsViewModel.cs" />
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
+    <Compile Include="View\SettingBindingExtension.cs" />
     <Compile Include="View\DesignTimeContext.cs" />
     <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
     <Compile Include="View\About\AboutView.xaml.cs">
