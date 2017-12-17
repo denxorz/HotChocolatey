@@ -324,5 +324,10 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         {
             dispatcher.Invoke(() => RequestBringToFront?.Invoke(this, EventArgs.Empty));
         }
+
+        public void Closing()
+        {
+            chocoExecutor.Close();
+        }
     }
 }

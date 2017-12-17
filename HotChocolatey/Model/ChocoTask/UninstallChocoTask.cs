@@ -6,18 +6,18 @@ namespace HotChocolatey.Model.ChocoTask
     internal class UninstallChocoTask : BaseChocoTask
     {
         private readonly Action<string> outputLineCallback;
-        private readonly Package package;
+        private readonly string packageId;
 
-        public UninstallChocoTask(Action<string> outputLineCallback, Package package)
+        public UninstallChocoTask(Action<string> outputLineCallback, string packageId)
         {
-            Log.Info($"{nameof(UninstallChocoTask)}: {package.Id}");
+            Log.Info($"{nameof(UninstallChocoTask)}: {packageId}");
 
             this.outputLineCallback = outputLineCallback;
-            this.package = package;
+            this.packageId = packageId;
 
             Config.CommandName = "uninstall";
             Config.PromptForConfirmation = false;
-            Config.PackageNames = package.Id;
+            Config.PackageNames = packageId;
         }
 
         protected override Action<string> GetOutputLineCallback() => outputLineCallback;
@@ -26,7 +26,7 @@ namespace HotChocolatey.Model.ChocoTask
         {
             if (!result)
             {
-                Log.Error($"{nameof(UninstallChocoTask)} failed for the following package: {package.Id}");
+                Log.Error($"{nameof(UninstallChocoTask)} failed for the following package: {packageId}");
             }
         }
     }

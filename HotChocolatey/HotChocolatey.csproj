@@ -17,7 +17,7 @@
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
     <TargetPlatformVersion>10.0.10586</TargetPlatformVersion>
-	<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+    <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,9 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <ApplicationIcon>Hot Chocolate-96.ico</ApplicationIcon>
   </PropertyGroup>
@@ -208,6 +206,11 @@
       <HintPath>..\packages\System.Runtime.Extensions.4.1.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -261,6 +264,7 @@
       <DependentUpon>20171005201406_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ListContextModelSnapshot.cs" />
+    <Compile Include="Administrative\AdministrativeCommanderProvider.cs" />
     <Compile Include="Model\ChocoSettings.cs" />
     <Compile Include="Model\ChocoTask\BaseChocoTask.cs" />
     <Compile Include="Model\ChocoExecutor.cs" />
@@ -287,6 +291,9 @@
     <Compile Include="Model\UninstallAction.cs" />
     <Compile Include="Model\UpgradeAction.cs" />
     <Compile Include="Utility\ListBoxBehavior.cs" />
+    <Compile Include="Administrative\AdministrativeCommandAcceptor.cs" />
+    <Compile Include="Administrative\AdministrativeCommandAcceptorService.cs" />
+    <Compile Include="Administrative\AdministrativeCommander.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\CommandExtensions.cs" />
@@ -296,6 +303,8 @@
     <Compile Include="ViewModel\Ginnivan\IAsyncCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
     <Compile Include="Model\ImportedPackageDisplayType.cs" />
+    <Compile Include="Administrative\IAdministrativeCommandAcceptor.cs" />
+    <Compile Include="Administrative\IAdministrativeCommandAcceptorCallback.cs" />
     <Compile Include="ViewModel\SettingsWindowsViewModel.cs" />
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
     <Compile Include="View\DesignTimeContext.cs" />
@@ -446,9 +455,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.manifest">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="packages.config">
       <SubType>Designer</SubType>
     </None>

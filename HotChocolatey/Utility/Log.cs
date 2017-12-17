@@ -8,7 +8,7 @@ using System.IO;
 
 namespace HotChocolatey.Utility
 {
-    internal static class Log
+    public static class Log
     {
         private static readonly ILog log = LogManager.GetLogger("default");
 
@@ -26,9 +26,15 @@ namespace HotChocolatey.Utility
 
             if (toLog)
             {
+                string processName;
+                using (var process = System.Diagnostics.Process.GetCurrentProcess())
+                {
+                    processName = process.ProcessName;
+                }
+
                 var roller = new RollingFileAppender();
                 roller.AppendToFile = true;
-                roller.File = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "HotChocolatey", "log.txt");
+                roller.File = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "HotChocolatey", $"{processName}.txt");
                 roller.Layout = patternLayout;
                 roller.MaxSizeRollBackups = 5;
                 roller.MaximumFileSize = "10MB";

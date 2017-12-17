@@ -27,7 +27,7 @@ namespace HotChocolatey.Model.ChocoTask
 
             var chocoCommunication = new ChocoCommunication(outputLineCallback);
             chocolatey.infrastructure.logging.Log.InitializeWith(chocoCommunication);
-            console.run(Config, container, false, command => { });
+            console.run(Config, container, false, command => { System.Diagnostics.Debug.WriteLine($"Command {Config.CommandName} requires admin: {command.may_require_admin_access()}"); });
 
             return chocoCommunication.IsSuccess;
         }

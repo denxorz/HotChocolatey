@@ -7,19 +7,19 @@ namespace HotChocolatey.Model.ChocoTask
     internal class UpgradeChocoTask : BaseChocoTask
     {
         private readonly Action<string> outputLineCallback;
-        private readonly Package package;
+        private readonly string packageId;
 
-        public UpgradeChocoTask(Action<string> outputLineCallback, bool includePreReleases, Package package, SemanticVersion specificVersion)
+        public UpgradeChocoTask(Action<string> outputLineCallback, bool includePreReleases, string packageId, SemanticVersion specificVersion)
         {
-            Log.Info($"{nameof(UpgradeChocoTask)}: {package.Id} version:{specificVersion}");
+            Log.Info($"{nameof(UpgradeChocoTask)}: {packageId} version:{specificVersion}");
 
             this.outputLineCallback = outputLineCallback;
-            this.package = package;
+            this.packageId = packageId;
 
             Config.CommandName = "upgrade";
             Config.Version = specificVersion != null ? $"{specificVersion}" : string.Empty;
             Config.Prerelease = includePreReleases;
-            Config.PackageNames = package.Id;
+            Config.PackageNames = packageId;
             Config.PromptForConfirmation = false;
             Config.AllowDowngrade = true;
         }
@@ -30,7 +30,7 @@ namespace HotChocolatey.Model.ChocoTask
         {
             if (!result)
             {
-                Log.Error($"{nameof(UpgradeChocoTask)} failed for the following package: {package.Id}");
+                Log.Error($"{nameof(UpgradeChocoTask)} failed for the following package: {packageId}");
             }
         }
     }

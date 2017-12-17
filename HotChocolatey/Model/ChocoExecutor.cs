@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HotChocolatey.Administrative;
 using HotChocolatey.Model.ChocoTask;
 
 namespace HotChocolatey.Model
@@ -11,6 +12,8 @@ namespace HotChocolatey.Model
     {
         public List<Package> LocalPackages { get; } = new List<Package>();
         public bool IncludePreReleases { get; set; }
+
+        private readonly AdministrativeCommanderProvider administrativeCommanderProvider = new AdministrativeCommanderProvider();
 
         public async Task UpdateAsync(PackageRepo repo, NuGetExecutor nuGetExecutor)
         {
@@ -24,17 +27,16 @@ namespace HotChocolatey.Model
 
         public void Install(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            new InstallChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).Execute();
+            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Install(IncludePreReleases, package, specificVersion));
         }
-
         public void Uninstall(Package package, Action<string> outputLineCallback)
         {
-            new UninstallChocoTask(outputLineCallback, package).Execute();
+            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Uninstall(package));
         }
 
         public void Upgrade(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            new UpgradeChocoTask(outputLineCallback, IncludePreReleases, package, specificVersion).Execute();
+            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Update(IncludePreReleases, package, specificVersion));
         }
 
         private async Task UpdateNuGetInfoAsync(NuGetExecutor nuGetExecutor)
@@ -87,6 +89,11 @@ namespace HotChocolatey.Model
         public void SaveFeature(ChocoFeature feature)
         {
             new SaveFeatureChocoTask(feature.Name, feature.IsEnabled).Execute();
+        }
+
+        public void Close()
+        {
+            administrativeCommanderProvider.Close();
         }
     }
 }

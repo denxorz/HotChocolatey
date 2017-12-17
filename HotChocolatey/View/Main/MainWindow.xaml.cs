@@ -126,6 +126,8 @@ namespace HotChocolatey.View.Main
             {
                 notifyIcon.Visible = false;
                 notifyIcon.Dispose();
+
+                ((ViewModel.MainWindowViewModel) DataContext).Closing();
             }
             else
             {
