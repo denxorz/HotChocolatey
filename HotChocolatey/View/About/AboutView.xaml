@@ -55,186 +55,103 @@
             IconSource="pack://application:,,,/Images/Logos/Hot Chocolate-96.png"
             License=""
             Website="https://github.com/denxorz/HotChocolatey" />
-        <about:AboutItem
-            Title="Chocolatey"
-            Width="350"
-            Height="65"
-            Margin="78,225,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/chocolateyicon.png"
-            License="http://www.apache.org/licenses/LICENSE-2.0"
-            Website="https://chocolatey.org/" />
-        <about:AboutItem
-            Title="SharpVectors"
-            Width="350"
-            Height="65"
-            Margin="808,225,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/svg-logo-v.png"
-            License="http://sharpvectors.codeplex.com/license"
-            Website="http://sharpvectors.codeplex.com/" />
-        <about:AboutItem
-            Title="Icons8"
-            Width="350"
-            Height="65"
-            Margin="443,225,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/I Love Icons8-100.png"
-            License="https://icons8.com/good-boy-license/"
-            Website="https://icons8.com/" />
-        <about:AboutItem
-            Title="NuGet"
-            Width="350"
-            Height="65"
-            Margin="78,295,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
-            License="https://github.com/NuGet/Home/blob/dev/LICENSE.txt"
-            Website="https://www.nuget.org/" />
-        <about:AboutItem
-            Title="Visual Studio 2017"
-            Width="350"
-            Height="65"
-            Margin="443,295,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/visualstudiologo.png"
-            License="https://www.visualstudio.com/support/legal/mt171547"
-            Website="https://www.visualstudio.com/" />
-        <about:AboutItem
-            Title="Markdig"
-            Width="350"
-            Height="65"
-            Margin="808,295,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/markdig.png"
-            License="https://github.com/lunet-io/markdig/blob/master/license.txt"
-            Website="https://github.com/lunet-io/markdig" />
-        <about:AboutItem
-            Title="Apache log4net"
-            Width="350"
-            Height="65"
-            Margin="78,365,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/Log4net.png"
-            License="http://logging.apache.org/log4net/license.html"
-            Website="https://logging.apache.org/log4net/" />
-        <about:AboutItem
-            Title="Fody.PropertyChanged"
-            Width="350"
-            Height="65"
-            Margin="443,365,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/Fody.png"
-            License="https://github.com/Fody/PropertyChanged/blob/master/license.txt"
-            Website="https://github.com/Fody/PropertyChanged" />
-        <about:AboutItem
-            Title="Fody.AutoDependencyProperty"
-            Width="350"
-            Height="65"
-            Margin="808,365,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/fodyweaver.png"
-            License="https://opensource.org/licenses/BSD-3-Clause"
-            Website="https://github.com/Fody/Fody" />
-        <about:AboutItem
-            Title="Wix toolset"
-            Width="350"
-            Height="65"
-            Margin="78,435,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/wixlogo.png"
-            License="http://wixtoolset.org/about/license/"
-            Website="http://wixtoolset.org/" />
-        <about:AboutItem
-            Title="Fody.Stamp"
-            Width="350"
-            Height="65"
-            Margin="443,435,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/fodystamp.png"
-            License="https://opensource.org/licenses/mit-license.php"
-            Website="https://github.com/Fody/Stamp" />
-        <about:AboutItem
-            Title="ProGet"
-            Width="350"
-            Height="65"
-            Margin="808,435,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/proget.png"
-            License="http://inedo.com/proget/license-agreement"
-            Website="http://inedo.com/proget" />
-        <about:AboutItem
-            Title="HTML-Renderer"
-            Width="350"
-            Height="65"
-            Margin="78,505,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
-            License="https://htmlrenderer.codeplex.com/license"
-            Website="https://htmlrenderer.codeplex.com/" />
-        <about:AboutItem
-            Title="mahapps.metro"
-            Width="350"
-            Height="65"
-            Margin="443,505,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/mahapps.metro.logo2.png"
-            License="https://opensource.org/licenses/MS-PL"
-            Website="http://mahapps.com/" />
-        <about:AboutItem
-            Title="Entity Framework Core Sqlite"
-            Width="350"
-            Height="65"
-            Margin="808,505,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/ef.png"
-            License="https://raw.githubusercontent.com/aspnet/Home/2.0.0/LICENSE.txt"
-            Website="https://www.asp.net/" />
-        <about:AboutItem
-            Title="Extended WPF Toolkit"
-            Width="350"
-            Height="65"
-            Margin="78,575,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/LogoXCEED.png"
-            License="http://wpftoolkit.codeplex.com/license"
-            Website="http://wpftoolkit.codeplex.com/" />
-        <about:AboutItem
-            Title="JetBrains Resharper"
-            Width="350"
-            Height="65"
-            Margin="443,575,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/packageReSharper.png"
-            License="https://www.jetbrains.com/buy/opensource/?product=resharper"
-            Website="https://www.jetbrains.com/resharper/" />
-        <about:AboutItem
-            Title="SingleInstanceApp"
-            Width="350"
-            Height="65"
-            Margin="808,575,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
-            License=""
-            Website="https://github.com/taylorjonl/SingleInstanceApp" />
+
+        <WrapPanel
+            Width="1100"
+            Margin="78,225,0,10"
+            ItemHeight="65"
+            ItemWidth="350">
+            <about:AboutItem
+                Title="Chocolatey"
+                IconSource="pack://application:,,,/Images/Logos/chocolateyicon.png"
+                License="http://www.apache.org/licenses/LICENSE-2.0"
+                Website="https://chocolatey.org/" />
+            <about:AboutItem
+                Title="SharpVectors"
+                IconSource="pack://application:,,,/Images/Logos/svg-logo-v.png"
+                License="http://sharpvectors.codeplex.com/license"
+                Website="http://sharpvectors.codeplex.com/" />
+            <about:AboutItem
+                Title="Icons8"
+                IconSource="pack://application:,,,/Images/Logos/I Love Icons8-100.png"
+                License="https://icons8.com/good-boy-license/"
+                Website="https://icons8.com/" />
+            <about:AboutItem
+                Title="NuGet"
+                IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
+                License="https://github.com/NuGet/Home/blob/dev/LICENSE.txt"
+                Website="https://www.nuget.org/" />
+            <about:AboutItem
+                Title="Visual Studio 2017"
+                IconSource="pack://application:,,,/Images/Logos/visualstudiologo.png"
+                License="https://www.visualstudio.com/support/legal/mt171547"
+                Website="https://www.visualstudio.com/" />
+            <about:AboutItem
+                Title="Markdig"
+                IconSource="pack://application:,,,/Images/Logos/markdig.png"
+                License="https://github.com/lunet-io/markdig/blob/master/license.txt"
+                Website="https://github.com/lunet-io/markdig" />
+            <about:AboutItem
+                Title="Apache log4net"
+                IconSource="pack://application:,,,/Images/Logos/Log4net.png"
+                License="http://logging.apache.org/log4net/license.html"
+                Website="https://logging.apache.org/log4net/" />
+            <about:AboutItem
+                Title="Fody.PropertyChanged"
+                IconSource="pack://application:,,,/Images/Logos/Fody.png"
+                License="https://github.com/Fody/PropertyChanged/blob/master/license.txt"
+                Website="https://github.com/Fody/PropertyChanged" />
+            <about:AboutItem
+                Title="Fody.AutoDependencyProperty"
+                IconSource="pack://application:,,,/Images/Logos/fodyweaver.png"
+                License="https://opensource.org/licenses/BSD-3-Clause"
+                Website="https://github.com/Fody/Fody" />
+            <about:AboutItem
+                Title="Wix toolset"
+                IconSource="pack://application:,,,/Images/Logos/wixlogo.png"
+                License="http://wixtoolset.org/about/license/"
+                Website="http://wixtoolset.org/" />
+            <about:AboutItem
+                Title="Fody.Stamp"
+                IconSource="pack://application:,,,/Images/Logos/fodystamp.png"
+                License="https://opensource.org/licenses/mit-license.php"
+                Website="https://github.com/Fody/Stamp" />
+            <about:AboutItem
+                Title="ProGet"
+                IconSource="pack://application:,,,/Images/Logos/proget.png"
+                License="http://inedo.com/proget/license-agreement"
+                Website="http://inedo.com/proget" />
+            <about:AboutItem
+                Title="HTML-Renderer"
+                IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
+                License="https://htmlrenderer.codeplex.com/license"
+                Website="https://htmlrenderer.codeplex.com/" />
+            <about:AboutItem
+                Title="mahapps.metro"
+                IconSource="pack://application:,,,/Images/Logos/mahapps.metro.logo2.png"
+                License="https://opensource.org/licenses/MS-PL"
+                Website="http://mahapps.com/" />
+            <about:AboutItem
+                Title="Entity Framework Core Sqlite"
+                IconSource="pack://application:,,,/Images/Logos/ef.png"
+                License="https://raw.githubusercontent.com/aspnet/Home/2.0.0/LICENSE.txt"
+                Website="https://www.asp.net/" />
+            <about:AboutItem
+                Title="Extended WPF Toolkit"
+                IconSource="pack://application:,,,/Images/Logos/LogoXCEED.png"
+                License="http://wpftoolkit.codeplex.com/license"
+                Website="http://wpftoolkit.codeplex.com/" />
+            <about:AboutItem
+                Title="JetBrains Resharper"
+                IconSource="pack://application:,,,/Images/Logos/packageReSharper.png"
+                License="https://www.jetbrains.com/buy/opensource/?product=resharper"
+                Website="https://www.jetbrains.com/resharper/" />
+            <about:AboutItem
+                Title="SingleInstanceApp"
+                IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
+                License=""
+                Website="https://github.com/taylorjonl/SingleInstanceApp" />
+        </WrapPanel>
         <TextBlock
             Width="70"
             Margin="0,10,10,0"
