@@ -225,6 +225,16 @@
             IconSource="pack://application:,,,/Images/Logos/packageReSharper.png"
             License="https://www.jetbrains.com/buy/opensource/?product=resharper"
             Website="https://www.jetbrains.com/resharper/" />
+        <about:AboutItem
+            Title="SingleInstanceApp"
+            Width="350"
+            Height="65"
+            Margin="808,575,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            IconSource="pack://application:,,,/Images/Logos/nugetlogo.png"
+            License=""
+            Website="https://github.com/taylorjonl/SingleInstanceApp" />
         <TextBlock
             Width="70"
             Margin="0,10,10,0"

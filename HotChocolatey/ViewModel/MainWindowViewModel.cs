@@ -82,6 +82,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 Settings.Default.Save();
             }
 
+            App.SecondInstanceStarted += App_SecondInstanceStarted;
+
             updateCheckTimer.Interval = TimeSpan.FromHours(2);
             updateCheckTimer.Tick += UpdateCheckTimer_Tick;
             updateCheckTimer.Start();
@@ -321,6 +323,11 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         }
 
         private void ToastActivated(ToastNotification sender, object e)
+        {
+            dispatcher.Invoke(() => RequestBringToFront?.Invoke(this, EventArgs.Empty));
+        }
+
+        private void App_SecondInstanceStarted(object sender, EventArgs e)
         {
             dispatcher.Invoke(() => RequestBringToFront?.Invoke(this, EventArgs.Empty));
         }
