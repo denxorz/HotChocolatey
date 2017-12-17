@@ -6,7 +6,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     x:Name="UserControl"
     Height="55"
-    mc:Ignorable="d" d:DesignWidth="290">
+    d:DesignWidth="290"
+    mc:Ignorable="d">
     <Grid>
         <TextBlock
             Margin="0,4,0,0"
@@ -35,16 +36,20 @@
             ItemsSource="{Binding Package.Versions, ElementName=UserControl}"
             SelectedItem="{Binding Version, ElementName=UserControl}" />
         <Button
+            Width="100"
             Height="23"
             Margin="0,0,9,0"
+            HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Command="{Binding UninstallCommand, ElementName=UserControl}"
-            Content="Uninstall" HorizontalAlignment="Right" Width="100" />
+            Content="Uninstall" />
         <Button
+            Width="100"
             Height="22"
             Margin="0,28,9,0"
+            HorizontalAlignment="Right"
             VerticalAlignment="Top"
             Command="{Binding UpdateCommand, ElementName=UserControl}"
-            Content="Update" HorizontalAlignment="Right" Width="100" />
+            Content="Update" />
     </Grid>
 </UserControl>
