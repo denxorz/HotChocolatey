@@ -3,7 +3,7 @@ using chocolatey.infrastructure.app.domain;
 
 namespace HotChocolatey.Model.ChocoTask
 {
-    internal class SaveSettingsChocoTask : BaseChocoTask
+    public class SaveSettingsChocoTask : BaseChocoTask
     {
         public SaveSettingsChocoTask(string name, object value)
         {

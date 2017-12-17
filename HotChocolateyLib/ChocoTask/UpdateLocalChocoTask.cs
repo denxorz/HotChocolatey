@@ -3,7 +3,7 @@ using NuGet;
 
 namespace HotChocolatey.Model.ChocoTask
 {
-    internal class UpdateLocalChocoTask : BaseChocoTask
+    public class UpdateLocalChocoTask : BaseChocoTask
     {
         private readonly PackageRepo repo;
         private readonly Action<Package> addPackageCallback;

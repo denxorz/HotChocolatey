@@ -4,7 +4,7 @@ using chocolatey.infrastructure.app.domain;
 
 namespace HotChocolatey.Model.ChocoTask
 {
-    internal class LoadFeaturesChocoTask : BaseChocoTask
+    public class LoadFeaturesChocoTask : BaseChocoTask
     {
         public List<ChocoFeature> Features { get; } = new List<ChocoFeature>();
 

@@ -72,9 +72,6 @@
     <Reference Include="MahApps.Metro.IconPacks.Material, Version=1.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MahApps.Metro.IconPacks.Material.1.9.1\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
-    <Reference Include="Markdig, Version=0.14.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Markdig.0.14.8\lib\net40\Markdig.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Data.Sqlite, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Data.Sqlite.Core.2.0.0\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
     </Reference>
@@ -213,10 +210,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net461\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -270,25 +263,11 @@
       <DependentUpon>20171005201406_MyFirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ListContextModelSnapshot.cs" />
-    <Compile Include="Administrative\AdministrativeCommanderProvider.cs" />
     <Compile Include="Model\ChocoSettings.cs" />
-    <Compile Include="Model\ChocoTask\BaseChocoTask.cs" />
     <Compile Include="Model\ChocoExecutor.cs" />
-    <Compile Include="Model\ChocoTask\ChocoCommunication.cs" />
-    <Compile Include="Model\ChocoFeature.cs" />
-    <Compile Include="Model\ChocoTask\InstallChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\LoadFeaturesChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\LoadSettingChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\SaveFeatureChocoTask.cs" />
     <Compile Include="Model\HotChocolateyFeatures.cs" />
     <Compile Include="Model\InstallAction.cs" />
     <Compile Include="Model\NuGetExecutor.cs" />
-    <Compile Include="Model\PackageRepo.cs" />
-    <Compile Include="Model\ChocoTask\UninstallChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\UpdateLocalChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\UpdateOutdatedFlagsChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\UpgradeChocoTask.cs" />
-    <Compile Include="Model\ChocoTask\SaveSettingsChocoTask.cs" />
     <Compile Include="Model\WindowsStartup.cs" />
     <Compile Include="Model\Save\ExportExecutor.cs" />
     <Compile Include="Model\Save\InstalledPackage.cs" />
@@ -297,9 +276,6 @@
     <Compile Include="Model\UninstallAction.cs" />
     <Compile Include="Model\UpgradeAction.cs" />
     <Compile Include="Utility\ListBoxBehavior.cs" />
-    <Compile Include="Administrative\AdministrativeCommandAcceptor.cs" />
-    <Compile Include="Administrative\AdministrativeCommandAcceptorService.cs" />
-    <Compile Include="Administrative\AdministrativeCommander.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand.cs" />
     <Compile Include="ViewModel\Ginnivan\AwaitableDelegateCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\CommandExtensions.cs" />
@@ -309,8 +285,6 @@
     <Compile Include="ViewModel\Ginnivan\IAsyncCommand{T}.cs" />
     <Compile Include="ViewModel\Ginnivan\IRaiseCanExecuteChanged.cs" />
     <Compile Include="Model\ImportedPackageDisplayType.cs" />
-    <Compile Include="Administrative\IAdministrativeCommandAcceptor.cs" />
-    <Compile Include="Administrative\IAdministrativeCommandAcceptorCallback.cs" />
     <Compile Include="ViewModel\SettingsWindowsViewModel.cs" />
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
     <Compile Include="View\SettingBindingExtension.cs" />
@@ -376,11 +350,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Package.cs" />
     <Compile Include="Model\PackageDisplayTypeFactory.cs" />
     <Compile Include="Model\IPackageDisplayType.cs" />
     <Compile Include="Model\IAction.cs" />
-    <Compile Include="Utility\Log.cs" />
     <Compile Include="View\Main\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -565,6 +537,16 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Hot Chocolate-96_black.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HotChocolateyLib\HotChocolateyLib.csproj">
+      <Project>{C51CB487-F566-417B-8DB3-7164A7AB21C9}</Project>
+      <Name>HotChocolateyLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HotChocolateyAdministrator\HotChocolateyAdministrator.csproj">
+      <Project>{cc7e05ff-e55e-4571-aab1-4867a94ded44}</Project>
+      <Name>HotChocolateyAdministrator</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

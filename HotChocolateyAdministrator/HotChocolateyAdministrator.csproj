@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CC7E05FF-E55E-4571-AAB1-4867A94DED44}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HotChocolateyAdministrator</RootNamespace>
-    <AssemblyName>HotChocolateyAdministrator</AssemblyName>
+    <RootNamespace>HotChocolatey.Administrator</RootNamespace>
+    <AssemblyName>HotChocolatey.Administrator</AssemblyName>
     <OutputPath>$(SolutionDir)\.build\$(Platform)\$(Configuration)\</OutputPath>
     <BaseIntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(AssemblyName)\</BaseIntermediateOutputPath>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
@@ -42,6 +42,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\VersionInfo.cs">
+      <Link>Properties\VersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -50,13 +53,13 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HotChocolatey\HotChocolatey.csproj">
-      <Project>{620962C6-EA19-4728-9716-529EA838EA26}</Project>
-      <Name>HotChocolatey</Name>
-    </ProjectReference>
+    <Content Include="Hot Chocolate-96_black.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Hot Chocolate-96_black.ico" />
+    <ProjectReference Include="..\HotChocolateyLib\HotChocolateyLib.csproj">
+      <Project>{C51CB487-F566-417B-8DB3-7164A7AB21C9}</Project>
+      <Name>HotChocolateyLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

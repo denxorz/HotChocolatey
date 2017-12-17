@@ -2,7 +2,7 @@
 
 namespace HotChocolatey.Model.ChocoTask
 {
-    internal class UpdateOutdatedFlagsChocoTask : BaseChocoTask
+    public class UpdateOutdatedFlagsChocoTask : BaseChocoTask
     {
         private readonly PackageRepo repo;
 

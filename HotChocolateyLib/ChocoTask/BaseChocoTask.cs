@@ -5,7 +5,7 @@ using chocolatey.infrastructure.registration;
 
 namespace HotChocolatey.Model.ChocoTask
 {
-    internal abstract class BaseChocoTask
+    public abstract class BaseChocoTask
     {
         protected readonly ChocolateyConfiguration Config = new ChocolateyConfiguration();
 
