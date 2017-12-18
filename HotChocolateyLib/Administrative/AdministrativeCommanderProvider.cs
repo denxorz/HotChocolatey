@@ -49,7 +49,7 @@ namespace HotChocolatey.Administrative
         {
             return Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                "HotChocolateyAdministrator.exe");
+                "HotChocolatey.Administrator.exe");
         }
     }
 }
