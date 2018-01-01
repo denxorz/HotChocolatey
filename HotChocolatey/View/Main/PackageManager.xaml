@@ -46,11 +46,12 @@
                     x:Name="SearchTextBox"
                     Width="150"
                     Margin="2"
-                    controls:TextBoxHelper.ButtonCommand="{Binding SearchStartedCommand}"
+                    controls:TextBoxHelper.ButtonCommand="{Binding SearchStartedCommand, Mode=OneWay}"
                     controls:TextBoxHelper.ClearTextButton="True"
-                    controls:TextBoxHelper.SelectAllOnFocus="True"
-                    controls:TextBoxHelper.Watermark="search"
-                    KeyUp="SearchTextbox_OnKeyUp" />
+                    controls:TextBoxHelper.UseFloatingWatermark="True"
+                    controls:TextBoxHelper.Watermark="Search..."
+                    KeyUp="SearchTextbox_OnKeyUp"
+                    Style="{DynamicResource SearchMetroTextBox}" />
             </UniformGrid>
         </Border>
         <Grid>

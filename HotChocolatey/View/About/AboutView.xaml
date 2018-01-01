@@ -35,7 +35,7 @@
             Margin="78,99,0,0"
             HorizontalAlignment="Left"
             VerticalAlignment="Top"
-            Text="Copyright © 2017 Denxorz"
+            Text="Copyright © 2018 Denxorz"
             TextWrapping="Wrap" />
         <TextBlock
             Margin="78,204,0,0"

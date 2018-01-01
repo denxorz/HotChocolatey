@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Reflection.AssemblyCopyright("Copyright (c) Denxorz, 2017")]
+[assembly: System.Reflection.AssemblyCopyright("Copyright (c) Denxorz, 2018")]
 
 
