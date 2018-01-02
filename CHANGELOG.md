@@ -1,10 +1,10 @@
-v 7
+v 7 "Green Giraffe"
 * Improved menu
 * Improved settings window, now using a hamburger menu.
 * Settings window now includes features
-* Will now run from tray (can be disabled in the settings)
-* Will give notifications when updates are found (can be disabled in the settings)
-* Will now start with Windows (can be disabled in the settings)
+* Can run from tray (can be enabled from settings)
+* Can give notifications when updates are found (can be enabled from settings)
+* Can start with Windows (can be enabled from settings)
 * Will no longer ask for Administrator permissions (UAC) on startup, only when install is started
 * Will remember window size and position
 
