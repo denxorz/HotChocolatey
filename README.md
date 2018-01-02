@@ -30,7 +30,7 @@ Hot Chocolatey can be found as a package in Chocolatey: https://chocolatey.org/p
 
 ### Installer
 
-7.0.0 http://hotchocolatey.jjb3.nl/releases/7.0.0.0/Setup%20Hot%20Chocolatey.msi
+7.0.1 http://hotchocolatey.jjb3.nl/releases/7.0.1.0/Setup%20Hot%20Chocolatey.msi
 
 6.0.0 http://hotchocolatey.jjb3.nl/releases/6.0.0.0/Setup%20Hot%20Chocolatey.msi
 
