@@ -5,12 +5,12 @@
     xmlns:about="clr-namespace:HotChocolatey.View.About"
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:HotChocolatey.View"
     xmlns:main="clr-namespace:HotChocolatey.View.Main"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:settings="clr-namespace:HotChocolatey.View.Settings"
     xmlns:viewModel="clr-namespace:HotChocolatey.ViewModel"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     x:Name="MyWindow"
     Title="Hot Chocolatey"
     Width="1280"
@@ -129,7 +129,7 @@
             <!--  Items  -->
             <controls:HamburgerMenu.ItemsSource>
                 <controls:HamburgerMenuItemCollection>
-                    <controls:HamburgerMenuIconItem Icon="{iconPacks:PackIconMaterial Kind=PackageUp}" Label="Apps">
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=PackageUp}" Label="Apps">
                         <controls:HamburgerMenuIconItem.Tag>
                             <StaticResource ResourceKey="PackagesView" />
                         </controls:HamburgerMenuIconItem.Tag>
@@ -137,7 +137,7 @@
 
                     <controls:HamburgerMenuIconItem
                         Command="{Binding OpenCommandPromptCommand}"
-                        Icon="{iconPacks:PackIconMaterial Kind=Console}"
+                        Icon="{iconPacks:Material Kind=Console}"
                         Label="Console" />
                 </controls:HamburgerMenuItemCollection>
             </controls:HamburgerMenu.ItemsSource>
@@ -145,13 +145,13 @@
             <!--  Options  -->
             <controls:HamburgerMenu.OptionsItemsSource>
                 <controls:HamburgerMenuItemCollection>
-                    <controls:HamburgerMenuIconItem Icon="{iconPacks:PackIconMaterial Kind=Settings}" Label="Settings">
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=Settings}" Label="Settings">
                         <controls:HamburgerMenuIconItem.Tag>
                             <settings:SettingsWindow />
                         </controls:HamburgerMenuIconItem.Tag>
                     </controls:HamburgerMenuIconItem>
 
-                    <controls:HamburgerMenuIconItem Icon="{iconPacks:PackIconMaterial Kind=InformationOutline}" Label="About">
+                    <controls:HamburgerMenuIconItem Icon="{iconPacks:Material Kind=InformationOutline}" Label="About">
                         <controls:HamburgerMenuIconItem.Tag>
                             <about:AboutWindow />
                         </controls:HamburgerMenuIconItem.Tag>
