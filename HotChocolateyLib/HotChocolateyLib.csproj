@@ -80,6 +80,7 @@
     <Compile Include="ChocoTask\InstallChocoTask.cs" />
     <Compile Include="Package.cs" />
     <Compile Include="PackageRepo.cs" />
+    <Compile Include="ChocoTask\SourcesChocoTask.cs" />
     <Compile Include="Utility\Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ChocoTask\UninstallChocoTask.cs" />

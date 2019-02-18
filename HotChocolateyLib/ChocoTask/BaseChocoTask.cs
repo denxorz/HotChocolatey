@@ -9,6 +9,8 @@ namespace HotChocolatey.Model.ChocoTask
     {
         protected readonly ChocolateyConfiguration Config = new ChocolateyConfiguration();
 
+        private string cachedSources;
+
         public void Execute()
         {
             bool result = Execute(GetOutputLineCallback());
@@ -23,7 +25,7 @@ namespace HotChocolatey.Model.ChocoTask
             var container = SimpleInjectorContainer.Container;
 
             Config.RegularOutput = false;
-            Config.Sources = "https://chocolatey.org/api/v2/";
+            this.Config.Sources = GetSourcesString();
 
             var chocoCommunication = new ChocoCommunication(outputLineCallback);
             chocolatey.infrastructure.logging.Log.InitializeWith(chocoCommunication);
@@ -36,6 +38,17 @@ namespace HotChocolatey.Model.ChocoTask
         protected virtual void AfterExecute(bool result)
         {
             //
+        }
+
+        private string GetSourcesString()
+        {
+            if (this is SourcesChocoTask) return string.Empty; // TODO: Ugly hack, should not need a type check
+            if (!string.IsNullOrWhiteSpace(cachedSources)) return cachedSources; // TODO: Ugly hack, sources could change...
+
+            var sourcesChocoTask = new SourcesChocoTask();
+            sourcesChocoTask.Execute();
+
+            return string.Join(";", sourcesChocoTask.Sources);
         }
     }
 }
