@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>winexe</OutputType>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <PackageId>HotChocolatey</PackageId>
     <Company>Denxorz</Company>
     

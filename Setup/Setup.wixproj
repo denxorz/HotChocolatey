@@ -52,7 +52,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir).build\AnyCPU\$(ConfigurationName)\net462" -t "$(ProjectDir)Filter.xslt" -var var.HotChocolatey.TargetDir -cg ProductComponents -template fragment -ag -scom -sfrag -sreg -srd -out "$(ProjectDir)Files.wxs" -dr INSTALLFOLDER</PreBuildEvent>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir).build\AnyCPU\$(ConfigurationName)\net48" -t "$(ProjectDir)Filter.xslt" -var var.HotChocolatey.TargetDir -cg ProductComponents -template fragment -ag -scom -sfrag -sreg -srd -out "$(ProjectDir)Files.wxs" -dr INSTALLFOLDER</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
