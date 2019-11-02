@@ -312,6 +312,9 @@
     <Compile Include="Model\ImportedPackageDisplayType.cs" />
     <Compile Include="ViewModel\SettingsWindowsViewModel.cs" />
     <Compile Include="View\BooleanToTaskbarStateConverter.cs" />
+    <Compile Include="View\Main\ActionBarForMultiSelect.xaml.cs">
+      <DependentUpon>ActionBarForMultiSelect.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\SettingBindingExtension.cs" />
     <Compile Include="View\DesignTimeContext.cs" />
     <Compile Include="View\ListViewWithScrollViewerProperty.cs" />
@@ -364,6 +367,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LinkTextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Main\ActionBarForMultiSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
