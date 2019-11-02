@@ -102,10 +102,10 @@
                 License="https://github.com/Fody/PropertyChanged/blob/master/license.txt"
                 Website="https://github.com/Fody/PropertyChanged" />
             <about:AboutItem
-                Title="Fody.AutoDependencyProperty"
-                IconSource="pack://application:,,,/Images/Logos/fodyweaver.png"
-                License="https://opensource.org/licenses/BSD-3-Clause"
-                Website="https://github.com/Fody/Fody" />
+                Title="Fody.Bindables"
+                IconSource="pack://application:,,,/Images/Logos/bindables.png"
+                License="https://github.com/yusuf-gunaydin/Bindables/blob/master/LICENSE"
+                Website="https://github.com/yusuf-gunaydin/Bindables" />
             <about:AboutItem
                 Title="Wix toolset"
                 IconSource="pack://application:,,,/Images/Logos/wixlogo.png"
