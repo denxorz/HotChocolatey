@@ -17,9 +17,10 @@ using Settings = HotChocolatey.Properties.Settings;
 
 namespace HotChocolatey.ViewModel
 {
-    [ImplementPropertyChanged]
     internal class MainWindowViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly PackageRepo packageRepo = new PackageRepo();
         private readonly NuGetExecutor nugetExecutor = new NuGetExecutor();
         private readonly ChocoExecutor chocoExecutor = new ChocoExecutor();
@@ -27,7 +28,6 @@ namespace HotChocolatey.ViewModel
         private string searchText = string.Empty;
 
         public event EventHandler RequestBringToFront;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public Action ClearSearchBox { get; internal set; }
 

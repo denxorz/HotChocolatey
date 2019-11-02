@@ -1,20 +1,14 @@
 ﻿using System.Windows.Media;
-using AutoDependencyPropertyMarker;
+using Bindables;
 
 namespace HotChocolatey.View.About
 {
+    [DependencyProperty]
     public partial class AboutItem
     {
-        [AutoDependencyProperty]
         public ImageSource IconSource { get; set; }
-
-        [AutoDependencyProperty]
         public string Title { get; set; }
-
-        [AutoDependencyProperty]
         public string Website { get; set; }
-
-        [AutoDependencyProperty]
         public string License { get; set; }
 
         public AboutItem()

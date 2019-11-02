@@ -1,16 +1,16 @@
-﻿using HotChocolatey.Utility;
-using NuGet;
+﻿using NuGet;
 using System;
 using System.IO;
 using System.Linq;
 using Denxorz.ObservableCollectionWithAddRange;
-using PropertyChanged;
+using System.ComponentModel;
 
 namespace HotChocolatey.Model
 {
-    [ImplementPropertyChanged]
-    public class Package
+    public class Package : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public static readonly Package Empty = new Package(string.Empty);
 
         private readonly Uri noIconUri = new Uri("/HotChocolatey;component/Images/Windows10/Packaging-32.png", UriKind.Relative);

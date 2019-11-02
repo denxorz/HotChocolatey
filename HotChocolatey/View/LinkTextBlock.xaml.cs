@@ -1,12 +1,12 @@
-﻿using System.Diagnostics;
+﻿using Bindables;
+using System.Diagnostics;
 using System.Windows;
-using AutoDependencyPropertyMarker;
 
 namespace HotChocolatey.View
 {
+    [DependencyProperty]
     public partial class LinkTextBlock
     {
-        [AutoDependencyProperty]
         public string NavigationUrl { get; set; }
 
         public LinkTextBlock()

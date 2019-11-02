@@ -41,7 +41,7 @@ namespace HotChocolatey.Administrative
                 };
                 administrativeProcess.Start();
 
-                Thread.Sleep(100);
+                Thread.Sleep(300);
             }
         }
 

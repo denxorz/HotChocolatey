@@ -1,15 +1,16 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using Denxorz.ObservableCollectionWithAddRange;
 using HotChocolatey.Model;
 using HotChocolatey.ViewModel.Ginnivan;
-using PropertyChanged;
 
 namespace HotChocolatey.ViewModel
 {
-    [ImplementPropertyChanged]
-    public class SettingsWindowsViewModel
+    public class SettingsWindowsViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public ChocoSettings Settings { get; private set; } = new ChocoSettings();
         public ObservableCollectionWithAddRange<ChocoFeature> ChocolateyFeatures { get; } = new ObservableCollectionWithAddRange<ChocoFeature>();
         public ObservableCollectionWithAddRange<ChocoFeature> HotChocolateyFeatures { get; } = new ObservableCollectionWithAddRange<ChocoFeature>();

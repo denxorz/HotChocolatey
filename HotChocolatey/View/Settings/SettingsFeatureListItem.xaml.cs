@@ -1,12 +1,12 @@
-﻿using AutoDependencyPropertyMarker;
+﻿using Bindables;
 using HotChocolatey.Model;
 
 namespace HotChocolatey.View.Settings
 {
+    [DependencyProperty]
     public partial class SettingsFeatureListItem
     {
-        [AutoDependencyProperty]
-        public ChocoFeature Feature { get; set; }
+       public ChocoFeature Feature { get; set; }
 
         public SettingsFeatureListItem()
         {

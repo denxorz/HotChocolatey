@@ -1,11 +1,11 @@
-﻿using AutoDependencyPropertyMarker;
+﻿using Bindables;
 using Denxorz.ObservableCollectionWithAddRange;
 
 namespace HotChocolatey.View.Main
 {
+    [DependencyProperty]
     public partial class PackageInstallingView
     {
-        [AutoDependencyProperty]
         public ObservableCollectionEx<string> ActionProcessOutput { get; set; }
 
         public PackageInstallingView()
