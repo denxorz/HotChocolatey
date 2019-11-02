@@ -60,37 +60,51 @@
                 <ColumnDefinition Width="5" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-            <local:ProgressIndicatorView Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}" />
-            <local:ListViewWithScrollViewerProperty
-                x:Name="PackagesListView"
-                MinWidth="250"
-                HorizontalContentAlignment="Stretch"
-                BorderThickness="0"
-                ItemsSource="{Binding Packages}"
-                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                SelectedItem="{Binding SelectedPackage}">
-                <local:ListViewWithScrollViewerProperty.Style>
-                    <Style TargetType="{x:Type ListView}">
-                        <Setter Property="Visibility" Value="Visible" />
-                        <Setter Property="IsEnabled" Value="True" />
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsInProgress}" Value="True">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                            <DataTrigger Binding="{Binding IsInstalling}" Value="True">
-                                <Setter Property="IsEnabled" Value="False" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </local:ListViewWithScrollViewerProperty.Style>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">
-                            <main:PackageListItem />
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </local:ListViewWithScrollViewerProperty>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
+                <Border
+                    Grid.Row="0"
+                    BorderBrush="#4C808080"
+                    BorderThickness="0,0,0,1"
+                    Visibility="{Binding Path=Filter.AllowsMultiSelect, Converter={StaticResource Bool2Visibility}}">
+                    <main:ActionBarForMultiSelect Margin="5" />
+                </Border>
+                <local:ProgressIndicatorView Grid.Row="1" Visibility="{Binding Path=IsInProgress, Converter={StaticResource Bool2Visibility}}" />
+                <local:ListViewWithScrollViewerProperty
+                    x:Name="PackagesListView"
+                    Grid.Row="1"
+                    MinWidth="250"
+                    HorizontalContentAlignment="Stretch"
+                    BorderThickness="0"
+                    ItemsSource="{Binding Packages}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    SelectedItem="{Binding SelectedPackage}">
+                    <local:ListViewWithScrollViewerProperty.Style>
+                        <Style TargetType="{x:Type ListView}">
+                            <Setter Property="Visibility" Value="Visible" />
+                            <Setter Property="IsEnabled" Value="True" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsInProgress}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsInstalling}" Value="True">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </local:ListViewWithScrollViewerProperty.Style>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="#4C808080" BorderThickness="0,0,0,1">
+                                <main:PackageListItem />
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </local:ListViewWithScrollViewerProperty>
+            </Grid>
 
             <GridSplitter
                 Grid.Column="1"

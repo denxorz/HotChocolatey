@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
 using HotChocolatey.Model;
@@ -20,24 +21,24 @@ namespace HotChocolatey.Administrative
             callback.Invoke(line);
         }
 
-        public async Task Install(bool includePreReleases, Package package, SemanticVersion specificVersion)
+        public async Task Install(bool includePreReleases, Package[] packages, SemanticVersion specificVersion)
         {
             (var factory, var proxy) = CreateClient();
-            await Task<bool>.Factory.FromAsync(proxy.BeginInstall, proxy.EndInstall, includePreReleases, package.Id, specificVersion, null).ConfigureAwait(false);
+            await Task<bool>.Factory.FromAsync(proxy.BeginInstall, proxy.EndInstall, includePreReleases, packages.Select(p => p.Id).ToArray(), specificVersion, null).ConfigureAwait(false);
             factory.Close();
         }
 
-        public async Task Uninstall(Package package)
+        public async Task Uninstall(Package[] packages)
         {
             (var factory, var proxy) = CreateClient();
-            await Task<bool>.Factory.FromAsync(proxy.BeginUninstall, proxy.EndUninstall, package.Id, null).ConfigureAwait(false);
+            await Task<bool>.Factory.FromAsync(proxy.BeginUninstall, proxy.EndUninstall, packages.Select(p => p.Id).ToArray(), null).ConfigureAwait(false);
             factory.Close();
         }
 
-        public async Task Update(bool includePreReleases, Package package, SemanticVersion specificVersion)
+        public async Task Update(bool includePreReleases, Package[] packages, SemanticVersion specificVersion)
         {
             (var factory, var proxy) = CreateClient();
-            await Task<bool>.Factory.FromAsync(proxy.BeginUpdate, proxy.EndUpdate, includePreReleases, package.Id, specificVersion, null).ConfigureAwait(false);
+            await Task<bool>.Factory.FromAsync(proxy.BeginUpdate, proxy.EndUpdate, includePreReleases, packages.Select(p => p.Id).ToArray(), specificVersion, null).ConfigureAwait(false);
             factory.Close();
         }
 

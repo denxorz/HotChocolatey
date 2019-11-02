@@ -13,5 +13,11 @@ namespace HotChocolatey.ViewModel
         Task RefreshAsync();
 
         Task ApplySearchAsync(string search);
+
+
+        bool AllowsMultiSelect { get; }
+        bool AllowsMultiSelectInstall { get; }
+        bool AllowsMultiSelectUpdate { get; }
+        bool AllowsMultiSelectUninstall { get; }
     }
 }

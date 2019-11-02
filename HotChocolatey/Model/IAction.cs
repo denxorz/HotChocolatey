@@ -5,6 +5,6 @@ namespace HotChocolatey.Model
 {
     public interface IAction
     {
-        void Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback);
+        void Execute(ChocoExecutor chocoExecutor, Action<string> outputLineCallback);
     }
 }

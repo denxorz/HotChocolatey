@@ -5,16 +5,21 @@ namespace HotChocolatey.Model
 {
     public class UninstallAction : IAction
     {
-        private readonly Package package;
+        private readonly Package[] packages;
 
         public UninstallAction(Package package)
         {
-            this.package = package;
+            this.packages = new[] { package };
         }
 
-        public void Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public UninstallAction(Package[] packages)
         {
-            chocoExecutor.Uninstall(package, outputLineCallback);
+            this.packages = packages;
+        }
+
+        public void Execute(ChocoExecutor chocoExecutor, Action<string> outputLineCallback)
+        {
+            chocoExecutor.Uninstall(packages, outputLineCallback);
         }
     }
 }

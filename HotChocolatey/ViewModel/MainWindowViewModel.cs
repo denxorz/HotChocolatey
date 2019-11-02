@@ -49,6 +49,11 @@ namespace HotChocolatey.ViewModel
         public DelegateCommand ExportCommand { get; }
         public DelegateCommand OpenCommandPromptCommand { get; }
         public AwaitableDelegateCommand SearchStartedCommand { get; }
+        public DelegateCommand<bool> SelectAllPackagesCommand { get; }
+        public AwaitableDelegateCommand UninstallCheckedCommand { get; }
+        public AwaitableDelegateCommand InstallCheckedCommand { get; }
+        public AwaitableDelegateCommand UpdateCheckedCommand { get; }
+
 
         public bool IsInProgress { get; private set; }
         public bool IsInstalling { get; private set; }
@@ -97,6 +102,10 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             ExportCommand = new DelegateCommand(ExecuteExportCommand);
             OpenCommandPromptCommand = new DelegateCommand(ExecuteOpenCommandPromptCommand);
             SearchStartedCommand = new AwaitableDelegateCommand(ExecuteSearchStartedCommandAsync);
+            SelectAllPackagesCommand = new DelegateCommand<bool>(ExecuteSelectAllPackagesCommand);
+            UninstallCheckedCommand = new AwaitableDelegateCommand(ExecuteUninstallCheckedCommand);
+            InstallCheckedCommand = new AwaitableDelegateCommand(ExecuteInstallCheckedCommand);
+            UpdateCheckedCommand = new AwaitableDelegateCommand(ExecuteUpdateCheckedCommand);
 
             PropertyChanged += async (s, e) =>
             {
@@ -179,12 +188,12 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
 
         private Task ExecuteInstallCommandAsync()
         {
-            return ExecuteActionAsync(new InstallAction(SelectedPackage));
+            return ExecuteActionAsync(new InstallAction(SelectedPackage, SelectedVersion));
         }
 
         private Task ExecuteUpdateCommandAsync()
         {
-            return ExecuteActionAsync(new UpgradeAction(SelectedPackage));
+            return ExecuteActionAsync(new UpgradeAction(SelectedPackage, SelectedVersion));
         }
 
         private Task ExecuteUninstallCommandAsync()
@@ -197,7 +206,7 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
             using (new ProgressIndication(dispatcher, () => IsInstalling = true, () => IsInstalling = false))
             {
                 ActionProcessOutput.Clear();
-                await Task.Run(() => action.Execute(chocoExecutor, SelectedVersion, outputLineCallback => dispatcher.Invoke(() => ActionProcessOutput.Add(outputLineCallback))));
+                await Task.Run(() => action.Execute(chocoExecutor, outputLineCallback => dispatcher.Invoke(() => ActionProcessOutput.Add(outputLineCallback))));
                 await chocoExecutor.UpdateAsync(packageRepo, nugetExecutor);
             }
         }
@@ -219,11 +228,8 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
                 Filter = PackageDisplayTypeFactory.BuildUpgradeFilter(packageRepo, nugetExecutor, chocoExecutor);
                 await ApplyFilterAsync();
 
-                var packagesToUpdate = Packages.ToList(); // The list is copied, because the updated packages can be filtered away.
-                foreach (var package in packagesToUpdate)
-                {
-                    chocoExecutor.Upgrade(package, package.LatestVersion, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
-                }
+                var packagesToUpdate = Packages.ToArray(); // The list is copied, because the updated packages can be filtered away.
+                chocoExecutor.Upgrade(packagesToUpdate, null, outputLineCallback => ActionProcessOutput.Add(outputLineCallback));
             }
 
             await ExecuteRefreshCommandAsync();
@@ -285,6 +291,29 @@ Is64BitOperatingSystem:{Environment.Is64BitOperatingSystem}");
         private async Task ExecuteSearchStartedCommandAsync()
         {
             await ClearSearchTextAsync();
+        }
+
+        private void ExecuteSelectAllPackagesCommand(bool isSelected)
+        {
+            foreach (var package in Packages)
+            {
+                package.IsChecked = isSelected;
+            }
+        }
+
+        private Task ExecuteUninstallCheckedCommand()
+        {
+            return ExecuteActionAsync(new UninstallAction(Packages.Where(p => p.IsChecked).ToArray()));
+        }
+
+        private Task ExecuteInstallCheckedCommand()
+        {
+            return ExecuteActionAsync(new InstallAction(Packages.Where(p => p.IsChecked).ToArray()));
+        }
+
+        private Task ExecuteUpdateCheckedCommand()
+        {
+            return ExecuteActionAsync(new UpgradeAction(Packages.Where(p => p.IsChecked).ToArray()));
         }
 
         private void UpdateCheckTimer_Tick(object sender, EventArgs e)

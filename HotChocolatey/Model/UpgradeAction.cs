@@ -5,16 +5,23 @@ namespace HotChocolatey.Model
 {
     public class UpgradeAction : IAction
     {
-        private readonly Package package;
+        private readonly Package[] packages;
+        private readonly SemanticVersion specificVersion;
 
-        public UpgradeAction(Package package)
+        public UpgradeAction(Package package, SemanticVersion specificVersion)
         {
-            this.package = package;
+            this.packages = new[] { package };
+            this.specificVersion = specificVersion;
         }
 
-        public void Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public UpgradeAction(Package[] packages)
         {
-            chocoExecutor.Upgrade(package, specificVersion, outputLineCallback);
+            this.packages = packages;
+        }
+
+        public void Execute(ChocoExecutor chocoExecutor, Action<string> outputLineCallback)
+        {
+            chocoExecutor.Upgrade(packages, specificVersion, outputLineCallback);
         }
     }
 }

@@ -5,16 +5,23 @@ namespace HotChocolatey.Model
 {
     public class InstallAction : IAction
     {
-        private readonly Package package;
+        private readonly Package[] packages;
+        private readonly SemanticVersion specificVersion;
 
-        public InstallAction(Package package)
+        public InstallAction(Package package, SemanticVersion specificVersion)
         {
-            this.package = package;
+            this.packages = new[] { package };
+            this.specificVersion = specificVersion;
         }
 
-        public void Execute(ChocoExecutor chocoExecutor, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public InstallAction(Package[] packages)
         {
-            chocoExecutor.Install(package, specificVersion, outputLineCallback);
+            this.packages = packages;
+        }
+
+        public void Execute(ChocoExecutor chocoExecutor, Action<string> outputLineCallback)
+        {
+            chocoExecutor.Install(packages, specificVersion, outputLineCallback);
         }
     }
 }

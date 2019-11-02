@@ -25,18 +25,18 @@ namespace HotChocolatey.Model
             await updateNuGetInfoAsync;
         }
 
-        public void Install(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public void Install(Package[] packages, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Install(IncludePreReleases, package, specificVersion));
+            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Install(IncludePreReleases, packages, specificVersion));
         }
-        public void Uninstall(Package package, Action<string> outputLineCallback)
+        public void Uninstall(Package[] packages, Action<string> outputLineCallback)
         {
-            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Uninstall(package));
+            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Uninstall(packages));
         }
 
-        public void Upgrade(Package package, SemanticVersion specificVersion, Action<string> outputLineCallback)
+        public void Upgrade(Package[] packages, SemanticVersion specificVersion, Action<string> outputLineCallback)
         {
-            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Update(IncludePreReleases, package, specificVersion));
+            Task.WaitAll(administrativeCommanderProvider.Create(outputLineCallback).Update(IncludePreReleases, packages, specificVersion));
         }
 
         private async Task UpdateNuGetInfoAsync(NuGetExecutor nuGetExecutor)

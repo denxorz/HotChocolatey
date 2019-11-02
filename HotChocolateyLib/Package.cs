@@ -56,6 +56,7 @@ namespace HotChocolatey.Model
         public ObservableCollectionEx<SemanticVersion> NewerVersions { get; } = new ObservableCollectionEx<SemanticVersion>();
         public bool IsInstalled => InstalledVersion != null;
 
+        public bool IsChecked { get; set; }
         public string Title { get; private set; }
         public Uri Ico { get; private set; }
         public Uri SvgIco { get; private set; }

@@ -1,0 +1,45 @@
+﻿<UserControl
+    x:Class="HotChocolatey.View.Main.ActionBarForMultiSelect"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:local="clr-namespace:HotChocolatey.View.Main"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="40"
+    d:DesignWidth="500"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="Bool2Visibility" />
+    </UserControl.Resources>
+    <Grid>
+        <CheckBox
+            Margin="16,0,0,0"
+            Command="{Binding SelectAllPackagesCommand}"
+            CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}"
+            Content="Select all packages" />
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <Button
+                Width="100"
+                Height="23"
+                Margin="0,0,9,0"
+                Command="{Binding UninstallCheckedCommand}"
+                Content="Uninstall"
+                Visibility="{Binding Filter.AllowsMultiSelectUninstall, Converter={StaticResource Bool2Visibility}}" />
+            <Button
+                Width="100"
+                Height="23"
+                Margin="0,0,9,0"
+                Command="{Binding UpdateCheckedCommand}"
+                Content="Update"
+                Visibility="{Binding Filter.AllowsMultiSelectUpdate, Converter={StaticResource Bool2Visibility}}" />
+            <Button
+                Width="100"
+                Height="23"
+                Margin="0,0,9,0"
+                Command="{Binding InstallCheckedCommand}"
+                Content="Install"
+                Visibility="{Binding Filter.AllowsMultiSelectInstall, Converter={StaticResource Bool2Visibility}}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -19,6 +19,11 @@ namespace HotChocolatey.Model
 
         public bool HasMore => chocoExecutor.LocalPackages.Count > skipped;
 
+        public bool AllowsMultiSelect { get; } = true;
+        public bool AllowsMultiSelectInstall { get; } = true;
+        public bool AllowsMultiSelectUpdate { get; } = false;
+        public bool AllowsMultiSelectUninstall { get; } = false;
+        
         public ImportedPackageDisplayType(string name, PackageRepo repo, NuGetExecutor controller, ChocoExecutor chocoExecutor, IEnumerable<string> importedPackageIds)
         {
             this.name = name;

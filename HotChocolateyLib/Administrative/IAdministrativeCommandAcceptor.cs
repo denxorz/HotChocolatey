@@ -8,17 +8,17 @@ namespace HotChocolatey.Administrative
     public interface IAdministrativeCommandAcceptor
     {
         [OperationContract(AsyncPattern = true)]
-        IAsyncResult BeginInstall(bool includePreReleases, string packageId, SemanticVersion specificVersion, AsyncCallback callback, object state);
+        IAsyncResult BeginInstall(bool includePreReleases, string[] packageIds, SemanticVersion specificVersion, AsyncCallback callback, object state);
 
         bool EndInstall(IAsyncResult result);
 
         [OperationContract(AsyncPattern = true)]
-        IAsyncResult BeginUninstall(string packageId, AsyncCallback callback, object state);
+        IAsyncResult BeginUninstall(string[] packageIds, AsyncCallback callback, object state);
 
         bool EndUninstall(IAsyncResult result);
 
         [OperationContract(AsyncPattern = true)]
-        IAsyncResult BeginUpdate(bool includePreReleases, string packageId, SemanticVersion specificVersion, AsyncCallback callback, object state);
+        IAsyncResult BeginUpdate(bool includePreReleases, string[] packageIds, SemanticVersion specificVersion, AsyncCallback callback, object state);
 
         bool EndUpdate(IAsyncResult result);
 

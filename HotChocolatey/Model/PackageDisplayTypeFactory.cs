@@ -32,6 +32,11 @@ namespace HotChocolatey.Model
 
             public bool HasMore => total > skipped;
 
+            public bool AllowsMultiSelect { get; } = false;
+            public bool AllowsMultiSelectInstall { get; } = false;
+            public bool AllowsMultiSelectUpdate { get; } = false;
+            public bool AllowsMultiSelectUninstall { get; } = false;
+
             public AllPackageDisplayType(PackageRepo repo, NuGetExecutor nugetExecutor, ChocoExecutor chocoExecutor)
             {
                 this.repo = repo;
@@ -95,6 +100,11 @@ namespace HotChocolatey.Model
 
             public bool HasMore => chocoExecutor.LocalPackages.Count > skipped;
 
+            public bool AllowsMultiSelect { get; } = true;
+            public bool AllowsMultiSelectInstall { get; } = false;
+            public bool AllowsMultiSelectUpdate { get; } = false;
+            public bool AllowsMultiSelectUninstall { get; } = true;
+
             public InstalledPackageDisplayType(PackageRepo repo, NuGetExecutor controller, ChocoExecutor chocoExecutor)
             {
                 this.chocoExecutor = chocoExecutor;
@@ -137,6 +147,11 @@ namespace HotChocolatey.Model
             private string searchFor;
 
             public bool HasMore => chocoExecutor.LocalPackages.Count > skipped;
+
+            public bool AllowsMultiSelect { get; } = true;
+            public bool AllowsMultiSelectInstall { get; } = false;
+            public bool AllowsMultiSelectUpdate { get; } = true;
+            public bool AllowsMultiSelectUninstall { get; } = false;
 
             public UpgradeablePackageDisplayType(PackageRepo repo, NuGetExecutor controller, ChocoExecutor chocoExecutor)
             {
