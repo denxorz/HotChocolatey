@@ -5,12 +5,12 @@
     xmlns:about="clr-namespace:HotChocolatey.View.About"
     xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:HotChocolatey.View"
     xmlns:main="clr-namespace:HotChocolatey.View.Main"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:settings="clr-namespace:HotChocolatey.View.Settings"
     xmlns:viewModel="clr-namespace:HotChocolatey.ViewModel"
-    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     x:Name="MyWindow"
     Title="Hot Chocolatey"
     Width="1280"
@@ -18,7 +18,7 @@
     BorderBrush="{DynamicResource AccentColorBrush}"
     BorderThickness="1"
     Closing="OnClosing"
-    Icon="pack://application:,,,/Hot Chocolate-96_black.ico"
+    Icon="/Hot Chocolate-96_black.ico"
     Initialized="OnInitialized"
     mc:Ignorable="d">
     <Window.DataContext>

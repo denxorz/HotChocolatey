@@ -12,7 +12,6 @@ using System.Windows.Threading;
 using Windows.UI.Notifications;
 using Denxorz.ObservableCollectionWithAddRange;
 using HotChocolatey.Model.Save;
-using PropertyChanged;
 using Settings = HotChocolatey.Properties.Settings;
 
 namespace HotChocolatey.ViewModel

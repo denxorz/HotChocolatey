@@ -1,94 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C51CB487-F566-417B-8DB3-7164A7AB21C9}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HotChocolatey.Lib</RootNamespace>
-    <AssemblyName>HotChocolatey.Lib</AssemblyName>
+    <TargetFramework>net462</TargetFramework>
+    <Company>Denxorz</Company>
+    
     <OutputPath>$(SolutionDir)\.build\$(Platform)\$(Configuration)\</OutputPath>
-    <BaseIntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(AssemblyName)\</BaseIntermediateOutputPath>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <IntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(AssemblyName)\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="chocolatey, Version=0.10.15.0, Culture=neutral, PublicKeyToken=79d02ea9cad655eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\chocolatey.lib.0.10.15\lib\chocolatey.dll</HintPath>
-    </Reference>
-    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
-    <Reference Include="Markdig, Version=0.18.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Markdig.0.18.0\lib\net40\Markdig.dll</HintPath>
-    </Reference>
-    <Reference Include="ObservableCollectionWithAddRange, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Denxorz.ObservableCollectionWithAddRange.2.1.0\lib\net452\ObservableCollectionWithAddRange.dll</HintPath>
-    </Reference>
-    <Reference Include="PropertyChanged">
-      <HintPath>..\packages\PropertyChanged.Fody.1.52.1\lib\netstandard10\PropertyChanged.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="chocolatey.lib" version="0.10.15" />
+    <PackageReference Include="Denxorz.ObservableCollectionWithAddRange" version="2.1.0" />
+    <PackageReference Include="log4net" version="2.0.8" />
+    <PackageReference Include="Markdig" version="0.18.0" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Administrative\AdministrativeCommandAcceptor.cs" />
-    <Compile Include="Administrative\AdministrativeCommandAcceptorService.cs" />
-    <Compile Include="Administrative\AdministrativeCommander.cs" />
-    <Compile Include="Administrative\AdministrativeCommanderProvider.cs" />
-    <Compile Include="Administrative\IAdministrativeCommandAcceptor.cs" />
-    <Compile Include="Administrative\IAdministrativeCommandAcceptorCallback.cs" />
-    <Compile Include="ChocoFeature.cs" />
-    <Compile Include="ChocoTask\BaseChocoTask.cs" />
-    <Compile Include="ChocoTask\ChocoCommunication.cs" />
-    <Compile Include="ChocoTask\LoadFeaturesChocoTask.cs" />
-    <Compile Include="ChocoTask\LoadSettingChocoTask.cs" />
-    <Compile Include="ChocoTask\SaveFeatureChocoTask.cs" />
-    <Compile Include="ChocoTask\SaveSettingsChocoTask.cs" />
-    <Compile Include="ChocoTask\UpdateLocalChocoTask.cs" />
-    <Compile Include="ChocoTask\UpdateOutdatedFlagsChocoTask.cs" />
-    <Compile Include="ChocoTask\InstallChocoTask.cs" />
-    <Compile Include="Package.cs" />
-    <Compile Include="PackageRepo.cs" />
-    <Compile Include="ChocoTask\SourcesChocoTask.cs" />
-    <Compile Include="Utility\Log.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ChocoTask\UninstallChocoTask.cs" />
-    <Compile Include="ChocoTask\UpgradeChocoTask.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

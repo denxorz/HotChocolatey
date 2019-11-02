@@ -1,65 +1,28 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CC7E05FF-E55E-4571-AAB1-4867A94DED44}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>HotChocolatey.Administrator</RootNamespace>
-    <AssemblyName>HotChocolatey.Administrator</AssemblyName>
+    <TargetFramework>net462</TargetFramework>
+    <Company>Denxorz</Company>
+    
     <OutputPath>$(SolutionDir)\.build\$(Platform)\$(Configuration)\</OutputPath>
-    <BaseIntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(AssemblyName)\</BaseIntermediateOutputPath>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
+    <IntermediateOutputPath>$(SolutionDir)\.build\.intermediate\$(AssemblyName)\</IntermediateOutputPath>
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Hot Chocolate-96_black.ico</ApplicationIcon>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <None Remove="**\*.ico" />
+    <Resource Include="**\*.ico" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="..\VersionInfo.cs">
-      <Link>Properties\VersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\VersionInfo.cs" Link="VersionInfo.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="app.manifest" />
+    <ProjectReference Include="..\HotChocolateyLib\HotChocolateyLib.csproj" />
   </ItemGroup>
+
   <ItemGroup>
-    <Content Include="Hot Chocolate-96_black.ico" />
+    <Reference Include="System.ServiceModel" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HotChocolateyLib\HotChocolateyLib.csproj">
-      <Project>{C51CB487-F566-417B-8DB3-7164A7AB21C9}</Project>
-      <Name>HotChocolateyLib</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
