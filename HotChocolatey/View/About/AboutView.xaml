@@ -82,7 +82,7 @@
                 License="https://github.com/NuGet/Home/blob/dev/LICENSE.txt"
                 Website="https://www.nuget.org/" />
             <about:AboutItem
-                Title="Visual Studio 2017"
+                Title="Visual Studio"
                 IconSource="pack://application:,,,/Images/Logos/visualstudiologo.png"
                 License="https://www.visualstudio.com/support/legal/mt171547"
                 Website="https://www.visualstudio.com/" />
