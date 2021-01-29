@@ -37,7 +37,7 @@
     <PackageReference Include="Denxorz.ObservableCollectionWithAddRange" Version="2.1.0" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="3.6.0" />
     <PackageReference Include="HtmlRenderer.WPF" Version="1.5.1-beta1" />
-    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="log4net" Version="2.0.10" />
     <PackageReference Include="MahApps.Metro" Version="1.6.5" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="2.2.6" />

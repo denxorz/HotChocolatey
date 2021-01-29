@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="chocolatey.lib" version="0.10.15" />
     <PackageReference Include="Denxorz.ObservableCollectionWithAddRange" version="2.1.0" />
-    <PackageReference Include="log4net" version="2.0.8" />
+    <PackageReference Include="log4net" version="2.0.10" />
     <PackageReference Include="Markdig" version="0.18.0" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
   </ItemGroup>
